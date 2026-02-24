@@ -90,6 +90,12 @@ Rails.application.routes.draw do
         patch :update_status
       end
     end
+
+    resources :knowledge_documents do
+      member do
+        post :analyze
+      end
+    end
   end
 
   # SEO

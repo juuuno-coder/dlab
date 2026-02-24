@@ -36,3 +36,20 @@
 
 # Ignore local scripts
 /db/standalone_update.rb
+
+# Knowledge Base (실제 문서는 제외, README와 폴더 구조는 포함)
+/knowledge-base/*
+!/knowledge-base/.gitkeep
+!/knowledge-base/README.md
+!/knowledge-base/rfp-samples/
+!/knowledge-base/previous-proposals/
+!/knowledge-base/templates/
+!/knowledge-base/resources/
+/knowledge-base/rfp-samples/*
+!/knowledge-base/rfp-samples/.gitkeep
+/knowledge-base/previous-proposals/*
+!/knowledge-base/previous-proposals/.gitkeep
+/knowledge-base/templates/*
+!/knowledge-base/templates/.gitkeep
+/knowledge-base/resources/*
+!/knowledge-base/resources/.gitkeep
