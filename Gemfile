@@ -115,5 +115,5 @@ gem "aws-sdk-s3", "~> 1.211", require: false
 
 gem "instagram_basic_display", "~> 0.2.3"
 
-# Gemini AI for proposal analysis
-gem "gemini-ai"
+# Gemini AI for proposal analysis (manually added to Gemfile.lock)
+# gem "gemini-ai"

@@ -1,19 +1,17 @@
 # frozen_string_literal: true
 
-require 'gemini-ai'
+require 'net/http'
+require 'json'
+require 'base64'
 
 # RFP (Request for Proposal) 분석 서비스
 # Gemini 2.0 Flash를 사용하여 공고서를 자동 분석합니다
 class RfpAnalyzerService
+  GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent'
+
   def initialize(bidding)
     @bidding = bidding
-    @client = Gemini.new(
-      credentials: {
-        service: 'generative-language-api',
-        api_key: ENV['GOOGLE_GENERATIVE_AI_API_KEY']
-      },
-      options: { model: 'gemini-2.0-flash-exp', server_sent_events: true }
-    )
+    @api_key = ENV['GOOGLE_GENERATIVE_AI_API_KEY']
   end
 
   # 공고서 자동 분석 (텍스트 기반)
@@ -23,11 +21,8 @@ class RfpAnalyzerService
     prompt = build_analysis_prompt
 
     begin
-      result = @client.stream_generate_content({
-        contents: { role: 'user', parts: { text: prompt } }
-      })
-
-      analysis_text = extract_text_from_stream(result)
+      response = call_gemini_api(prompt)
+      analysis_text = extract_text_from_response(response)
       parse_and_save_analysis(analysis_text)
 
       { success: true, analysis: analysis_text }
@@ -48,22 +43,8 @@ class RfpAnalyzerService
     prompt = build_image_analysis_prompt
 
     begin
-      result = @client.stream_generate_content({
-        contents: {
-          role: 'user',
-          parts: [
-            { text: prompt },
-            {
-              inline_data: {
-                mime_type: document.content_type,
-                data: base64_image
-              }
-            }
-          ]
-        }
-      })
-
-      analysis_text = extract_text_from_stream(result)
+      response = call_gemini_api_with_image(prompt, base64_image, document.content_type)
+      analysis_text = extract_text_from_response(response)
       parse_and_save_analysis(analysis_text)
 
       { success: true, analysis: analysis_text }
@@ -73,6 +54,82 @@ class RfpAnalyzerService
   end
 
   private
+
+  def call_gemini_api(prompt)
+    uri = URI("#{GEMINI_API_URL}?key=#{@api_key}")
+
+    request_body = {
+      contents: [
+        {
+          parts: [
+            { text: prompt }
+          ]
+        }
+      ],
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 2048
+      }
+    }
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(uri)
+    request['Content-Type'] = 'application/json'
+    request.body = request_body.to_json
+
+    response = http.request(request)
+    JSON.parse(response.body)
+  end
+
+  def call_gemini_api_with_image(prompt, base64_image, mime_type)
+    uri = URI("#{GEMINI_API_URL}?key=#{@api_key}")
+
+    request_body = {
+      contents: [
+        {
+          parts: [
+            { text: prompt },
+            {
+              inline_data: {
+                mime_type: mime_type,
+                data: base64_image
+              }
+            }
+          ]
+        }
+      ],
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 2048
+      }
+    }
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(uri)
+    request['Content-Type'] = 'application/json'
+    request.body = request_body.to_json
+
+    response = http.request(request)
+    JSON.parse(response.body)
+  end
+
+  def extract_text_from_response(response)
+    return '' unless response['candidates']&.any?
+
+    text = ''
+    response['candidates'].each do |candidate|
+      if candidate.dig('content', 'parts')
+        candidate.dig('content', 'parts').each do |part|
+          text += part['text'] if part['text']
+        end
+      end
+    end
+    text
+  end
 
   def build_analysis_prompt
     <<~PROMPT
@@ -119,32 +176,31 @@ class RfpAnalyzerService
     PROMPT
   end
 
-  def extract_text_from_stream(result)
-    text = ''
-    result.each do |event|
-      if event.dig('candidates', 0, 'content', 'parts')
-        event.dig('candidates', 0, 'content', 'parts').each do |part|
-          text += part['text'] if part['text']
-        end
-      end
-    end
-    text
-  end
-
   def parse_and_save_analysis(analysis_text)
     # JSON 파싱 시도
     begin
-      data = JSON.parse(analysis_text)
+      # ```json ... ``` 블록에서 JSON 추출
+      json_match = analysis_text.match(/```json\s*(.*?)\s*```/m) || analysis_text.match(/\{.*\}/m)
+      json_text = json_match ? json_match[1] || json_match[0] : analysis_text
+
+      data = JSON.parse(json_text)
 
       # analysis_notes에 KPI + 필수 과업 저장
-      notes = "## 핵심 KPI\n"
+      notes = "## 🎯 핵심 KPI\n"
       data['kpis']&.each_with_index do |kpi, i|
         notes += "#{i + 1}. #{kpi}\n"
       end
 
-      notes += "\n## 필수 과업\n"
+      notes += "\n## 📋 필수 과업\n"
       data['required_tasks']&.each do |task|
         notes += "- #{task}\n"
+      end
+
+      if data['target_metrics']
+        notes += "\n## 📊 목표 지표\n"
+        data['target_metrics'].each do |key, value|
+          notes += "- #{key}: #{value}\n"
+        end
       end
 
       # winning_strategy에 차별화 전략 저장
@@ -157,9 +213,11 @@ class RfpAnalyzerService
         analysis_notes: notes,
         winning_strategy: strategies
       )
-    rescue JSON::ParserError
+    rescue JSON::ParserError => e
       # JSON 파싱 실패 시 원문 그대로 저장
-      @bidding.update(analysis_notes: analysis_text)
+      @bidding.update(
+        analysis_notes: "## AI 분석 결과\n\n#{analysis_text}\n\n(JSON 파싱 실패: #{e.message})"
+      )
     end
   end
 end
