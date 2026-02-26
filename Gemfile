@@ -111,7 +111,7 @@ gem "dockerfile-rails", ">= 1.7", group: :development
 
 gem "litestream", "~> 0.14.0"
 
-gem "aws-sdk-s3", "~> 1.211", require: false
+gem "aws-sdk-s3", "~> 1.213", require: false
 
 gem "instagram_basic_display", "~> 0.2.3"
 
