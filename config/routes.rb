@@ -82,6 +82,7 @@ Rails.application.routes.draw do
         post :generate_diagnosis
         post :generate_slides
         post :analyze_with_gemini
+        post :generate_presentation_script
       end
     end
 

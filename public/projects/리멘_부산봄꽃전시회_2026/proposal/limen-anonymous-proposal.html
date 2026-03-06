@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026년 제6회 부산 봄꽃 전시회 제안서 - 제안사</title>
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #F3F4F6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding: 40px 0;
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    }
+
+    .slide {
+      width: 1920px;
+      height: 1080px;
+      background: #FFFFFF;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* 페이지 번호 */
+    .slide-number {
+      position: absolute;
+      bottom: 32px;
+      right: 120px;
+      font-size: 14px;
+      color: #6B7280;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* 하단 로고 바 */
+    .slide-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #1E3A8A, #3B82F6);
+    }
+  
+
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 120px;
+      text-align: center;
+    }
+    .cover .accent-line {
+      width: 80px;
+      height: 4px;
+      background: #1E3A8A;
+      margin-bottom: 48px;
+    }
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 700;
+      color: #1E3A8A;
+      line-height: 1.3;
+      margin-bottom: 24px;
+      max-width: 1400px;
+    }
+    .cover .subtitle {
+      font-size: 24px;
+      color: #6B7280;
+      margin-bottom: 64px;
+    }
+    .cover .company {
+      font-size: 28px;
+      font-weight: 600;
+      color: #1F2937;
+      margin-bottom: 12px;
+    }
+    .cover .date {
+      font-size: 20px;
+      color: #6B7280;
+      font-family: 'Poppins', sans-serif;
+    }
+    .cover .left-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: #1E3A8A;
+    }
+  
+
+    .toc {
+      padding: 80px 120px;
+    }
+    .toc h2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #1E3A8A;
+      margin-bottom: 48px;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #1E3A8A;
+      display: inline-block;
+    }
+    .toc-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 80px;
+      list-style: none;
+    }
+    .toc-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    .toc-number {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1E3A8A;
+      font-family: 'Poppins', sans-serif;
+      min-width: 32px;
+    }
+    .toc-title {
+      font-size: 22px;
+      color: #1F2937;
+    }
+  
+
+    .chapter {
+      display: flex;
+      align-items: center;
+      padding: 80px 120px;
+    }
+    .chapter-content {
+      flex: 1;
+    }
+    .chapter-number {
+      font-size: 120px;
+      font-weight: 700;
+      color: #BFDBFE;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .chapter h2 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #1E3A8A;
+      line-height: 1.3;
+    }
+    .chapter .chapter-desc {
+      font-size: 22px;
+      color: #6B7280;
+      margin-top: 16px;
+    }
+    .chapter .side-accent {
+      width: 320px;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: #EFF6FF;
+    }
+  
+
+    .content {
+      padding: 80px 120px;
+    }
+    .content .header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #E5E7EB;
+    }
+    .content .header-number {
+      font-size: 16px;
+      font-weight: 600;
+      color: #FFFFFF;
+      background: #1E3A8A;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .content h3 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1F2937;
+    }
+    .content .body-text {
+      font-size: 20px;
+      line-height: 1.8;
+      color: #1F2937;
+      max-width: 1600px;
+    }
+    .content .body-text p {
+      margin-bottom: 16px;
+    }
+
+    /* 불릿 리스트 */
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+    }
+    .bullet-list li {
+      font-size: 22px;
+      line-height: 1.6;
+      color: #1F2937;
+      padding: 12px 0 12px 32px;
+      position: relative;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    .bullet-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 22px;
+      width: 10px;
+      height: 10px;
+      background: #3B82F6;
+      border-radius: 2px;
+    }
+
+    /* 강조 박스 */
+    .highlight-box {
+      background: #EFF6FF;
+      border-left: 4px solid #1E3A8A;
+      padding: 24px 32px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+      font-size: 20px;
+      color: #1F2937;
+    }
+
+    /* 테이블 */
+    .slide-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      font-size: 18px;
+    }
+    .slide-table thead {
+      background: #1E3A8A;
+      color: #FFFFFF;
+    }
+    .slide-table th {
+      padding: 14px 20px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .slide-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid #E5E7EB;
+      color: #1F2937;
+    }
+    .slide-table tbody tr:nth-child(even) {
+      background: #EFF6FF;
+    }
+
+    /* 다이어그램 플레이스홀더 */
+    .diagram-placeholder {
+      width: 100%;
+      height: 500px;
+      background: #EFF6FF;
+      border: 2px dashed #BFDBFE;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 32px;
+      font-size: 20px;
+      color: #6B7280;
+    }
+  </style>
+</head>
+<body>
+
+    <section class="slide cover">
+      <div class="left-bar"></div>
+      <div class="accent-line"></div>
+      <h1>2026년 제6회 부산 봄꽃 전시회</h1>
+      <div class="subtitle">제안서</div>
+      <div class="company">제안사</div>
+      <div class="date">2026.02.26</div>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide toc">
+      <h2>목차</h2>
+      <ul class="toc-list">
+      <li class="toc-item">
+        <span class="toc-number">01</span>
+        <span class="toc-title">Ⅰ. 제안개요</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-number">02</span>
+        <span class="toc-title">Ⅰ. 제안개요</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-number">03</span>
+        <span class="toc-title">Ⅱ. 추진계획</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-number">04</span>
+        <span class="toc-title">Ⅲ. 사업관리</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-number">05</span>
+        <span class="toc-title">Ⅳ. 기타</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-number">06</span>
+        <span class="toc-title">일상의</span>
+      </li></ul>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide chapter">
+      <div class="chapter-content">
+        <div class="chapter-number">01</div>
+        <h2>Ⅰ. 제안개요</h2>
+      </div>
+      <div class="side-accent"></div>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide chapter">
+      <div class="chapter-content">
+        <div class="chapter-number">02</div>
+        <h2>Ⅰ. 제안개요</h2>
+      </div>
+      <div class="side-accent"></div>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>부산대표화훼힐링페스타</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">부산대표화훼힐링페스타</strong></p><p><strong style="font-weight:700">도심속가든페스티벌</strong></p><p><strong style="font-weight:700">Part Ⅰ. 제안개요</strong></p></div>
+      <ul class="bullet-list"><li>부산시대표야외화훼전시회</li><li>화훼문화의일상화, 정원예술과시민의만남</li><li>1. 제안의목적</li><li>1) 제안의목적및배경</li></ul>
+      <span class="slide-number">3</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>사업기간착수일~ 2026. 5. 8.(금)</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">사업기간착수일~ 2026. 5. 8.(금)</strong></p><p><strong style="font-weight:700">행사장소부산시민공원다솜광장일원</strong></p><p><strong style="font-weight:700">주요과업1) 행사계획수립및실행2) 행사구성에관한사항3) 장비확보및시설설치4) 안전관리에관한사항5) 홍보및마케팅에관한사항6) 예산계획7) 행사결과보고, 정산등사후처리8) 기타제안</strong></p><p><strong style="font-weight:700">1.과업개요</strong></p><p><strong style="font-weight:700">Part Ⅰ. 제안개요</strong></p></div>
+      <ul class="bullet-list"><li>2. 제안의범위</li><li>1) 과업개요</li><li>2026년제6회부산봄꽃전시회화훼작품전시·체험행사대행용역과업명</li></ul>
+      <span class="slide-number">4</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>01행사기획의차별화</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">01행사기획의차별화</strong></p><p><strong style="font-weight:700">03지역을위한프로그램04시그니처축제로브랜딩</strong></p><p><strong style="font-weight:700">02쾌적한관람환경</strong></p><p><strong style="font-weight:700">전문성</strong></p><p><strong style="font-weight:700">부산봄꽃전시회</strong></p><p><strong style="font-weight:700">안전편의</strong></p><p><strong style="font-weight:700">상생비전</strong></p><p><strong style="font-weight:700">Part Ⅰ. 제안개요</strong></p></div>
+      <ul class="bullet-list"><li>3. 제안의특징및장점</li><li>1) 제안의특징및장점</li><li>- 공간테마의입체화: 스토리가있는테마가든</li><li>- 콘텐츠융복합: 경진대회및시민참여클래스</li><li>- 시각, 청각, 후각이어우러진오감만족전시</li><li>- 40개화훼단체와협력ㆍ소통하는파트너십</li><li>- 실질적매출증대를돕는로컬화훼마켓</li><li>- 시민참여거버넌스</li><li>- 도심형가든콘텐츠로브랜딩</li><li>- 밀집지역병목현상방지를위한동선설계</li><li>- 시민공원다수행사경험으로특화관리</li><li>ㆍ안전요원/ 안내사인의최적화배치</li><li>- 세대를아우르는디지털아카이빙</li></ul>
+      <span class="slide-number">5</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅰ. 제안개요</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅰ. 제안개요</strong></p></div>
+      <ul class="bullet-list"><li>4. 제안업체일반현황</li></ul>
+      <span class="slide-number">6</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅰ. 제안개요</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅰ. 제안개요</strong></p><p><strong style="font-weight:700">개</strong></p><p><strong style="font-weight:700">키워드</strong></p><p><strong style="font-weight:700">, 4</strong></p><p><strong style="font-weight:700">개</strong></p><p><strong style="font-weight:700">섹션</strong></p><p><strong style="font-weight:700">, 15</strong></p><p><strong style="font-weight:700">개</strong></p><p><strong style="font-weight:700">종목</strong></p><p><strong style="font-weight:700">91</strong></p><p><strong style="font-weight:700">개</strong></p><p><strong style="font-weight:700">프로그램</strong></p><p><strong style="font-weight:700">총</strong></p><p><strong style="font-weight:700">6</strong></p><p><strong style="font-weight:700">개월간</strong></p><p><strong style="font-weight:700">수행</strong></p><p><strong style="font-weight:700">68,551(</strong></p><p><strong style="font-weight:700">천원</strong></p><p><strong style="font-weight:700">재</strong></p><p><strong style="font-weight:700">부산문화재단</strong></p><p><strong style="font-weight:700">2024~2025•</strong></p><p><strong style="font-weight:700">지역문화참여사업</strong></p><p><strong style="font-weight:700">예술상상놀이터</strong></p><p><strong style="font-weight:700">기획</strong></p><p><strong style="font-weight:700">및</strong></p><p><strong style="font-weight:700">연출</strong></p><p><strong style="font-weight:700">재</strong></p><p><strong style="font-weight:700">부산진문화재단</strong></p><p><strong style="font-weight:700">64,641(</strong></p><p><strong style="font-weight:700">천원</strong></p><p><strong style="font-weight:700">2024.5~11•</strong></p><p><strong style="font-weight:700">2024</strong></p><p><strong style="font-weight:700">부산</strong></p><p><strong style="font-weight:700">거리예술축제</strong></p><p><strong style="font-weight:700">기획</strong></p><p><strong style="font-weight:700">및</strong></p><p><strong style="font-weight:700">연출</strong></p><p><strong style="font-weight:700">공동수급</strong></p><p><strong style="font-weight:700">재</strong></p><p><strong style="font-weight:700">부산문화재단</strong></p><p><strong style="font-weight:700">161,057(</strong></p><p><strong style="font-weight:700">천원</strong></p><p><strong style="font-weight:700">장소불문</strong></p><p><strong style="font-weight:700">시민</strong></p><p><strong style="font-weight:700">대상</strong></p><p><strong style="font-weight:700">문화</strong></p><p><strong style="font-weight:700">향유</strong></p><p><strong style="font-weight:700">프로그램</strong></p><p><strong style="font-weight:700">기획</strong></p><p><strong style="font-weight:700">및</strong></p><p><strong style="font-weight:700">운영</strong></p><p><strong style="font-weight:700">경력</strong></p><p><strong style="font-weight:700">다수</strong></p><p><strong style="font-weight:700">~2025.11.•</strong></p><p><strong style="font-weight:700">2025</strong></p><p><strong style="font-weight:700">부산광역시</strong></p><p><strong style="font-weight:700">공원</strong></p><p><strong style="font-weight:700">문화공연</strong></p><p><strong style="font-weight:700">아카데</strong></p><p><strong style="font-weight:700">부산광역시</strong></p><p><strong style="font-weight:700">공원여가정책과•</strong></p><p><strong style="font-weight:700">184,000(</strong></p><p><strong style="font-weight:700">천원</strong></p><p><strong style="font-weight:700">재</strong></p><p><strong style="font-weight:700">부산문화재단</strong></p><p><strong style="font-weight:700">2025</strong></p><p><strong style="font-weight:700">청년아트페어</strong></p><p><strong style="font-weight:700">&lt;UNDER39&gt;</strong></p><p><strong style="font-weight:700">78,000(</strong></p><p><strong style="font-weight:700">천원</strong></p><p><strong style="font-weight:700">부산</strong></p><p><strong style="font-weight:700">기반</strong></p><p><strong style="font-weight:700">활동중인</strong></p><p><strong style="font-weight:700">39</strong></p><p><strong style="font-weight:700">세</strong></p><p><strong style="font-weight:700">이하</strong></p><p><strong style="font-weight:700">청년</strong></p><p><strong style="font-weight:700">작가들의</strong></p><p><strong style="font-weight:700">작품을</strong></p><p><strong style="font-weight:700">전시</strong></p><p><strong style="font-weight:700">판</strong></p></div>
+      <ul class="bullet-list"><li>•</li><li>&lt;</li><li>&gt;</li><li>•</li><li>(</li><li>)</li><li>)</li><li>•</li><li>(</li><li>)</li><li>•</li><li>(</li><li>)</li><li>)</li><li>•</li><li>·</li><li>•</li><li>)</li><li>4. 제안업체일반현황</li><li>)</li></ul>
+      <span class="slide-number">7</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅰ. 제안개요</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅰ. 제안개요</strong></p><p><strong style="font-weight:700">부산시</strong></p><p><strong style="font-weight:700">청년문화공간</strong></p><p><strong style="font-weight:700">청년작당소</strong></p><p><strong style="font-weight:700">2020</strong></p><p><strong style="font-weight:700">년</strong></p><p><strong style="font-weight:700">~</strong></p><p><strong style="font-weight:700">현재</strong></p><p><strong style="font-weight:700">부산광역시</strong></p><p><strong style="font-weight:700">청년희망정책과</strong></p><p><strong style="font-weight:700">한국신발</strong></p></div>
+      <ul class="bullet-list"><li>4. 제안업체일반현황</li></ul>
+      <span class="slide-number">8</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅰ. 제안개요</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅰ. 제안개요</strong></p><p><strong style="font-weight:700">행사</strong></p><p><strong style="font-weight:700">기획</strong></p><p><strong style="font-weight:700">및</strong></p><p><strong style="font-weight:700">운영</strong></p><p><strong style="font-weight:700">청년들의</strong></p><p><strong style="font-weight:700">삶을</strong></p><p><strong style="font-weight:700">위한</strong></p><p><strong style="font-weight:700">특강</strong></p><p><strong style="font-weight:700">2020</strong></p><p><strong style="font-weight:700">년</strong></p><p><strong style="font-weight:700">부산광역시</strong></p><p><strong style="font-weight:700">부산인재평생교육진흥원</strong></p><p><strong style="font-weight:700">썸머웹툰</strong></p><p><strong style="font-weight:700">페스</strong></p></div>
+      <ul class="bullet-list"><li>4. 제안업체일반현황</li></ul>
+      <span class="slide-number">9</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅰ. 제안개요</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅰ. 제안개요</strong></p><p><strong style="font-weight:700">행사</strong></p><p><strong style="font-weight:700">기획</strong></p><p><strong style="font-weight:700">및</strong></p><p><strong style="font-weight:700">운영</strong></p></div>
+      <ul class="bullet-list"><li>부산여성일자리정책포럼</li><li>2021년</li><li>부산광역시/ 부산시의회</li><li>/ 부산진여성인력개발센터/</li><li>부산시여성인력개발센터협의</li><li>회</li><li>영도낭만버스킹</li><li>2021년</li><li>영도구/ 영도문화원</li><li>국제신문독자콘퍼런스</li><li>2020년~ 2023년</li><li>국제신문</li><li>샤이니스타를찾아라</li><li>2020년~ 2021년</li><li>문화체육관광부/ 한국문화</li><li>원연합회</li><li>문화로논DAY</li><li>2021년</li><li>문화체육관광부/</li><li>금정구/ 금정문화재단</li><li>해다정어린이·청소년영화제</li><li>2021년~ 2023년</li><li>부산광역시해운대교육지원청</li><li>4. 제안업체일반현황</li></ul>
+      <span class="slide-number">10</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide chapter">
+      <div class="chapter-content">
+        <div class="chapter-number">03</div>
+        <h2>Ⅱ. 추진계획</h2>
+      </div>
+      <div class="side-accent"></div>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅱ. 추진계획</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅱ. 추진계획</strong></p><p><strong style="font-weight:700">도심형가든디자인스마트한화훼체험관광명소화지속가능한상생</strong></p><p><strong style="font-weight:700">일상의설렘, 부산을피우다– 2026 로컬가든라이프의시작&quot;</strong></p><p><strong style="font-weight:700">“</strong></p><p><strong style="font-weight:700">”</strong></p><p><strong style="font-weight:700">부산의</strong></p><p><strong style="font-weight:700">매력을</strong></p><p><strong style="font-weight:700">꽃으로</strong></p><p><strong style="font-weight:700">브랜딩하는</strong></p><p><strong style="font-weight:700">2026</strong></p><p><strong style="font-weight:700">부산</strong></p><p><strong style="font-weight:700">봄꽃</strong></p><p><strong style="font-weight:700">페스타</strong></p></div>
+      <ul class="bullet-list"><li>1) 비전</li><li>1. 사업총괄계획</li><li>랜드마크조형물을넘어선공간큐레이션으로도심속감성정원</li><li>구현</li><li>관람객이주인공이되는참여형프로그램의고도화로'</li><li>즐길거리' 극대화</li><li>부산시민공원을세계적인'K-</li><li>가든'의발신지로브랜딩하</li><li>여관광객유입촉진</li><li>40여개단체및지역농가와함께</li><li>하는실질적비즈니스플랫폼구</li><li>축</li></ul>
+      <span class="slide-number">12</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅱ. 사업추진계획</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅱ. 사업추진계획</strong></p><p><strong style="font-weight:700">평면적인꽃전시를넘어부산의이야기를담은'스토리텔링형테마가든' 조성</strong></p><p><strong style="font-weight:700">일상의감각을깨우고부산봄의향기를만끽하는정원</strong></p><p><strong style="font-weight:700">단순히'보는' 전시에서'체험하고소유하는' 라이프스타일페스티벌로확장</strong></p><p><strong style="font-weight:700">일상의설렘, 부산을피우다– 2026 로컬가든라이프의시작</strong></p><p><strong style="font-weight:700">[ 기획/연출]</strong></p><p><strong style="font-weight:700">입체적가든</strong></p><p><strong style="font-weight:700">시노그래피</strong></p><p><strong style="font-weight:700">[ 운영/소통]</strong></p><p><strong style="font-weight:700">오감만족큐레이션</strong></p><p><strong style="font-weight:700">[ 시스템/기술]</strong></p><p><strong style="font-weight:700">스마트가든도슨트/인파밀집안전관리시스템</strong></p><p><strong style="font-weight:700">성공전략</strong></p></div>
+      <ul class="bullet-list"><li>1. 사업총괄계획</li><li>2) 사업추진전략</li></ul>
+      <span class="slide-number">13</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅱ. 사업추진계획</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅱ. 사업추진계획</strong></p><p><strong style="font-weight:700">구분프로그램명주요내용및규격수량/규모</strong></p><p><strong style="font-weight:700">필수</strong></p><p><strong style="font-weight:700">과</strong></p></div>
+      <ul class="bullet-list"><li>1. 사업총괄계획</li><li>3) 프로그램총괄표</li><li>전시</li><li>주제/예술전시압화(40점), 화훼조형작품(35점), 플로리스트작품(30점)105점</li><li>생활/전통전시일반·야생화분재(150점), 꽃꽂이작품(50점)200점</li><li>상생/참여전시사계장미(30점), 고등학생화훼창작품(35점)65점</li><li>체험</li><li>랜드마크존높이300cm 이상의대형화훼조형포토존2개소</li><li>힐링체험꽃다발/꽃바구니(일50명), 하바리움볼펜(일30명)3일간운영</li><li>창의체험봄꽃화관만들기, 생활꽃꽂이, 공기정화식물화분8개부스</li><li>이벤트</li><li>프로포즈10커플내외대상감동이벤트및꽃다발증정10커플</li><li>개막행사식전공연, 개막식, 전시장투어및미디어퍼포먼스4/17(금)</li><li>홍보/운영</li><li>디지털홍보유튜브채널구축, Full-HD 이상홍보영상제작/송출상시</li></ul>
+      <span class="slide-number">14</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>부산의봄, 가락으로피어나다봄꽃처럼화사한퓨전국악테마공연</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">부산의봄, 가락으로피어나다봄꽃처럼화사한퓨전국악테마공연</strong></p><p><strong style="font-weight:700">식전공연</strong></p><p><strong style="font-weight:700">프로그램</strong></p><p><strong style="font-weight:700">1</strong></p><p><strong style="font-weight:700">안</strong></p><p><strong style="font-weight:700">프로그램</strong></p><p><strong style="font-weight:700">1</strong></p><p><strong style="font-weight:700">안</strong></p><p><strong style="font-weight:700">국악그룹</strong></p><p><strong style="font-weight:700">오름달</strong></p><p><strong style="font-weight:700">“세상</strong></p></div>
+      <ul class="bullet-list"><li>2. 세부실행계획</li><li>1) 식전공연</li><li>일시2026. 4. 17.(금) 13:30~14:00장소부산시민공원다솜광장특설무대</li></ul>
+      <span class="slide-number">15</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>부산의봄을열다, 브라스하모니도심정원속꽃과함께울려퍼지는따뜻한금관의울림</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">부산의봄을열다, 브라스하모니도심정원속꽃과함께울려퍼지는따뜻한금관의울림</strong></p><p><strong style="font-weight:700">식전공연</strong></p><p><strong style="font-weight:700">프로그램</strong></p><p><strong style="font-weight:700">2</strong></p><p><strong style="font-weight:700">안</strong></p><p><strong style="font-weight:700">동행금관오중주</strong></p><p><strong style="font-weight:700">브이브라스</strong></p><p><strong style="font-weight:700">금관악</strong></p></div>
+      <ul class="bullet-list"><li>2. 세부실행계획</li><li>1) 식전공연</li><li>일시2026. 4. 17.(금) 13:30~14:00장소부산시민공원다솜광장특설무대</li></ul>
+      <span class="slide-number">16</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>부산, 봄꽃으로피어나다과업지시서(p.5) 기준을상회하는15Kw급고사양음향및중계시스템을투입하여,</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">부산, 봄꽃으로피어나다과업지시서(p.5) 기준을상회하는15Kw급고사양음향및중계시스템을투입하여,</strong></p><p><strong style="font-weight:700">개막식</strong></p><p><strong style="font-weight:700">구분참여팀비고</strong></p></div>
+      <ul class="bullet-list"><li>2. 세부실행계획</li><li>1) 개막식</li><li>일시2026. 4. 17.(금) 14:00~15:00장소부산시민공원다솜광장특설무대</li><li>현장의생동감을실시간송출하며,관객참여형개막세레머니개막식으로진행</li><li>13:30~14:00부산지역청년아티스트의봄꽃테마공연공연팀</li><li>14:00~14:05개막공식선언및내빈소개</li><li>14:05~14:15주요내빈축사및환영</li><li>출연및대상</li><li>운영사항</li><li>시스템</li><li>홍보/마케팅</li><li>사회자,공연팀,주요내빈, 화훼관련단체, 부산시민및관람객등</li><li>사회/ 의전/공연/ 관객사연송출(LED)</li><li>현장스크린송출(중계)</li><li>행사장전역에고른음압을전달(15Kw급입체음향)</li><li>부산시홈페이지/블로그/SNS</li></ul>
+      <span class="slide-number">17</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>봄꽃과어울리는공연시민들이안전한동선을따라(밀집방지)화훼문화를즐길수있도록, 테마별로차별화된전시공간(zone)을운영합니다.</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">봄꽃과어울리는공연시민들이안전한동선을따라(밀집방지)화훼문화를즐길수있도록, 테마별로차별화된전시공간(zone)을운영합니다.</strong></p><p><strong style="font-weight:700">공연</strong></p><p><strong style="font-weight:700">프로그램</strong></p><p><strong style="font-weight:700">1</strong></p><p><strong style="font-weight:700">안</strong></p><p><strong style="font-weight:700">프로그램</strong></p><p><strong style="font-weight:700">2</strong></p><p><strong style="font-weight:700">안</strong></p><p><strong style="font-weight:700">버블아트</strong></p><p><strong style="font-weight:700">어드벤처</strong></p><p><strong style="font-weight:700">몽환적이고</strong></p><p><strong style="font-weight:700">아름다운</strong></p><p><strong style="font-weight:700">친환경</strong></p><p><strong style="font-weight:700">비누방울의</strong></p><p><strong style="font-weight:700">세계로</strong></p></div>
+      <ul class="bullet-list"><li>2. 세부실행계획</li><li>1) 세부프로그램</li><li>일시2026. 4. 17.(금) ~4.19.(일)장소부산시민공원다솜광장일원</li></ul>
+      <span class="slide-number">18</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>봄꽃, 움직이는미술관으로말하다봄꽃을테마로한세기의명화들이, 명화속의장면들이거리에서살아나와관객들을만나다</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">봄꽃, 움직이는미술관으로말하다봄꽃을테마로한세기의명화들이, 명화속의장면들이거리에서살아나와관객들을만나다</strong></p><p><strong style="font-weight:700">드렁큰씨어</strong></p><p><strong style="font-weight:700">액터</strong></p><p><strong style="font-weight:700">그리고</strong></p><p><strong style="font-weight:700">회화가</strong></p><p><strong style="font-weight:700">함께</strong></p><p><strong style="font-weight:700">어우러지는</strong></p><p><strong style="font-weight:700">퍼레이</strong></p><p><strong style="font-weight:700">정원을</strong></p><p><strong style="font-weight:700">누비며</strong></p><p><strong style="font-weight:700">공연과</strong></p><p><strong style="font-weight:700">포토타임</strong></p><p><strong style="font-weight:700">진행</strong></p></div>
+      <ul class="bullet-list"><li>2. 세부실행계획</li><li>1) 세부프로그램</li><li>일시2026. 4. 17.(금) ~4.19.(일)장소부산시민공원다솜광장일원퍼포먼스</li><li>•</li><li>•</li></ul>
+      <span class="slide-number">19</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>오감만족작품전시시민들이안전한동선을따라(밀집방지)화훼문화를즐길수있도록, 테마별로차별화된전시공간(zone)을운영합니다.</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">오감만족작품전시시민들이안전한동선을따라(밀집방지)화훼문화를즐길수있도록, 테마별로차별화된전시공간(zone)을운영합니다.</strong></p><p><strong style="font-weight:700">전시</strong></p><p><strong style="font-weight:700">구분참여팀수량비고</strong></p></div>
+      <ul class="bullet-list"><li>2. 세부실행계획</li><li>1) 세부프로그램</li><li>일시2026. 4. 17.(금) ~4.19.(일)장소부산시민공원다솜광장일원</li><li>작품전시압화(W33H53), 화훼조형작품(W55H80), 플로리스트작품105점작가의예술성이강조된고품격야외전시</li><li>생활전시일반및야생화분재, 생활꽃꽂이작품200점시민들의일상속꽃문화확산을위한대중적전시</li><li>참여전시사계장미(30점), 고등학생화훼창작품(35점)65점지역화훼단체및미래인재들의협력전시</li><li>출연및대상</li><li>운영사항</li><li>시스템</li><li>비고</li><li>화훼관련단체, 부산시민및관람객등</li><li>작품전시</li><li>작품훼손방지,스마트도슨트</li><li>행사장내개물림사고등안전사고예방전담인력배치및사고발생대비</li></ul>
+      <span class="slide-number">20</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>일상속꽃의재발견시민들이안전한동선을따라(밀집방지)화훼문화를즐길수있도록, 테마별로차별화된전시공간(zone)을운영합니다.</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">일상속꽃의재발견시민들이안전한동선을따라(밀집방지)화훼문화를즐길수있도록, 테마별로차별화된전시공간(zone)을운영합니다.</strong></p><p><strong style="font-weight:700">체험</strong></p><p><strong style="font-weight:700">구분참여팀일일목표비고</strong></p></div>
+      <ul class="bullet-list"><li>2. 세부실행계획</li><li>1) 세부프로그램</li><li>일시2026. 4. 17.(금) ~4.19.(일)장소부산시민공원다솜광장일원</li><li>생활꽃꽂이체험계절생화를활용한핸드타이드제작체험50명</li><li>사전예약+현장예약</li><li>꽃바구니만들기고품질생화를활용한핸드메이드체험50명</li><li>꽃다발만들기계절봄꽃을활용한선물용꽃다발75명</li><li>봄꽃화관만들기축제분위기조성을위한액세서리제작90명</li><li>하바리움볼펜말린꽃을활용한영구보존볼펜제작70명</li><li>에코백/키링만들기봄꽃그리기를통한친환경굿즈제작60명</li><li>공기정화식물화분탄소중립실천을위한반려식물심기60명</li><li>업사이클링화분폐자원을예술로바꾸는캔디자이아트30명</li><li>출연및대상</li><li>운영사항</li><li>화훼관련단체, 부산시민및관람객등</li><li>사전예약통한홍보효과달성및현장에약을통한질서있는체험환경제공</li></ul>
+      <span class="slide-number">21</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>프로포즈이벤트시민들이안전한동선을따라(밀집방지)화훼문화를즐길수있도록, 테마별로차별화된전시공간(zone)을운영합니다.</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">프로포즈이벤트시민들이안전한동선을따라(밀집방지)화훼문화를즐길수있도록, 테마별로차별화된전시공간(zone)을운영합니다.</strong></p><p><strong style="font-weight:700">이벤트</strong></p></div>
+      <ul class="bullet-list"><li>2. 세부실행계획</li><li>1) 세부프로그램</li><li>일시2026. 4. 17.(금) ~4.19.(일)장소부산시민공원다솜광장일원</li><li>출연및대상</li><li>운영사항</li><li>사전신청및현장참여10커플내외</li><li>꽃다발증정및무대연계기념이벤트진행</li></ul>
+      <span class="slide-number">22</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>슬라이드 24</h3>
+      </div>
+      
+      <ul class="bullet-list"><li>3. 행사장구성계획</li><li>체험존</li><li>철쭉분재전시</li><li>화훼단체전시</li><li>안전하고쾌적한공간연출화훼단체전시</li><li>직거래장터</li><li>행사장시설물설치</li><li>플로리스트</li><li>대회진행</li><li>자원봉사자</li><li>작품전시대회진행</li><li>야생화전시</li><li>화훼창작경진대회</li><li>무대</li><li>부산시민공원의인프라를적극활용한공간설계로관람객의편의증대</li><li>- 전시및체험행사를위한TFS/몽골텐트40개, 캐노피10개배치- 관람객휴식및참여를위한의자500개이상설치- 행사장안내및운영을위한각종홍보물및집기류일체확보</li><li>고사양무대시스템운영</li><li>- 가로11.5m x 높이3.5m 대형LED 전광판및무대전식설치- 15Kw급이상의음향설비, 중계카메라투입- 행사장전역공지및비상방송을위한이동식음향시스템배치</li><li>- 밀집지역병목현상방지를위한보행자통로(C) 확보및</li><li>안전유도사인물배치- 시민공원내다수행사수행경험을바탕으로</li><li>안전요원최적화배치및무사고운영실현</li></ul>
+      <span class="slide-number">23</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅱ. 사업추진계획</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅱ. 사업추진계획</strong></p><p><strong style="font-weight:700">행사장관리</strong></p></div>
+      <ul class="bullet-list"><li>3) 행사장운영관리</li><li>4. 행사장운영계획</li><li>철저한인력운영준비및교육으로계획</li><li>수영구청년중심선발/ 안전관리(보조)부산지역인력선발</li><li>행사장관련제반사항지역업체100% 선발</li></ul>
+      <span class="slide-number">24</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅱ. 사업추진계획</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅱ. 사업추진계획</strong></p><p>1. 운영기본•행사진행전문인력구성•철저한참가자중심운영•비상연락망구축•시간별, 상황별상황보고•사전교육을통한행사숙지•참가자의서비스에최대한대응•상황별순발력있는응대•사고예방을위한안전대책수립</p><p><strong style="font-weight:700">기획연출팀예술팀운영팀</strong></p><p><strong style="font-weight:700">제안사</strong></p><p><strong style="font-weight:700">디자인, 홍보마케팅</strong></p><p><strong style="font-weight:700">분야별전문조직체계로효율적인커뮤니케이션및행사운영</strong></p></div>
+      <ul class="bullet-list"><li>1) 참여인력</li><li>4. 인력운영계획</li><li>1.  종합관리•총괄감독구성•진행책임자구성•분야별팀장배치•비상상황대처요원투입•주최측지속적업무협의</li><li>2. 프로그램운영•주메인무대행사진행•전시행사, 부대행사진행•행사별진행팀장구성•전문오퍼레이터팀구성•참가자안전관리</li><li>1.  봄꽃전시장조성•작품배치/ 전시동선기획•전시장구성및연출계획수립•전시연출소품설치및철거•전시장운영</li><li>2. 체험콘텐츠제작•전시장체험프로그램기획및운영</li><li>3. 전시장운영•작품전시관람동선관리•전시품출품관리및전시</li><li>1.  홍보마케팅전략수립•온오프라인통합전략•타깃별집중전략•홍보물디자인•다양한채널확장</li><li>2. 온라인콘텐츠제작•온라인콘텐츠기획•영상및사진촬영•온라인콘텐츠확산</li><li>3. 현장스케치•현장영상촬영및사진촬영</li></ul>
+      <span class="slide-number">25</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide chapter">
+      <div class="chapter-content">
+        <div class="chapter-number">04</div>
+        <h2>Ⅲ. 사업관리</h2>
+      </div>
+      <div class="side-accent"></div>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>종합계획수립</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">종합계획수립</strong></p><p><strong style="font-weight:700">완료보고</strong></p><p><strong style="font-weight:700">사후관리</strong></p><p><strong style="font-weight:700">행사</strong></p><p><strong style="font-weight:700">안전관리</strong></p><p><strong style="font-weight:700">공연</strong></p><p><strong style="font-weight:700">출연</strong></p><p><strong style="font-weight:700">섭외</strong></p><p><strong style="font-weight:700">세부실행계획</strong></p><p><strong style="font-weight:700">계획</strong></p><p><strong style="font-weight:700">수립</strong></p><p><strong style="font-weight:700">착수</strong></p><p><strong style="font-weight:700">준비</strong></p><p><strong style="font-weight:700">실</strong></p><p><strong style="font-weight:700">행</strong></p><p><strong style="font-weight:700">완료</strong></p><p><strong style="font-weight:700">사후</strong></p><p><strong style="font-weight:700">관리</strong></p><p><strong style="font-weight:700">월</strong></p><p><strong style="font-weight:700">월</strong></p><p><strong style="font-weight:700">월</strong></p><p><strong style="font-weight:700">Part Ⅲ. 사업관리</strong></p></div>
+      <ul class="bullet-list"><li>1. 추진일정</li></ul>
+      <span class="slide-number">27</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>원활한커뮤니케이션과체계적인사업관리를위한‘보고프로세스’ 구축및보고</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">원활한커뮤니케이션과체계적인사업관리를위한‘보고프로세스’ 구축및보고</strong></p><p><strong style="font-weight:700">Part Ⅲ. 사업관리</strong></p></div>
+      <ul class="bullet-list"><li>착수보고중간보고&gt;수시보고&gt;성과품납품&gt;결과보고&gt;</li><li>제안사추진사항/ 사업관리보고체계</li><li>- 기본계획서및산출내역서</li><li>- 예정공정표, 참여인력, 보안각서</li><li>- 세부추진일정/ 예산활용세부내역</li><li>등</li><li>- 홍보물기획완료시점</li><li>- 촬영계획(촬영감독/ 일정및기법)</li><li>추진계획작성/ 제출</li><li>- 총괄사업추진계획</li><li>- 유연한수정보완계획</li><li>- 발주처요청또는주요결정사항반</li><li>영</li><li>- 주요이슈별수시보고자료확인</li><li>중간보고</li><li>- 정기보고</li><li>- 진행상황및특이사항보고</li><li>- 월별추진결과/ 향후추진계획</li><li>- 세부과업별추진ㆍ기타사항</li><li>- 기타발주처요구사항수렴결과</li><li>주요이슈별수시보고자료</li><li>- 성과품일체</li><li>ㆍ개발소스및실행파일</li><li>ㆍ행사+홍보물일체</li><li>ㆍ만족도설문조사등</li><li>성과품납품</li><li>-과업수행결과보고및완료보고서</li><li>결과보고</li><li>발주처점검사항</li><li>- 총괄사업추진계획승인- 업무일정조율- 세부추진일정,예산활용세부내역검토</li><li>추진계획서점검</li><li>- 수정보완계획검토- 발주처요청사항반영- 주요이슈별수시보고자료확인</li><li>중요추진사항점검</li><li>- 추진결과/ 계획점검- 세부과업별추진ㆍ애로사항점검- 기타발주처요구사항점검</li><li>세부과업별추진사항점검</li><li>- 결과물점검</li><li>결과물점검</li><li>결과보고점검</li><li>1) 보고프로세스구축</li><li>2. 관리계획</li></ul>
+      <span class="slide-number">28</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅲ. 사업관리</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅲ. 사업관리</strong></p></div>
+      <ul class="bullet-list"><li>2) 보험가입및상황별맞춤대책수립</li><li>2. 관리계획</li><li>구분대처방안</li><li>시설안전관리</li><li>조직구성</li><li>•긴급상황발생시대처할수있는조직구성</li><li>•유관기관비상연락체계구축</li><li>시설안전관리</li><li>담당지정</li><li>•팀장및시설관리요원은위험상황을대비한행동요령반복숙지</li><li>정보관리</li><li>•시설이용중에발생한문제원인에대해공유하고위험관리체계를점검</li><li>•빠른조치와전파를위한문제상황목록작성</li><li>시설안전관리에</li><li>대한</li><li>•행사전까지점검완료</li><li>•구조물점검및장비점검</li><li>구분No항목</li><li>점검사항</li><li>적합부적합지적</li><li>시설물</li><li>1모든시설물의내·외벽에균열은없는가?</li><li>2몽골텐트는잘고정되어있는가?</li><li>3벽체및바닥의누수는없는가?</li><li>4각디딤판은미끄럽지않도록유지되어있는가?</li><li>5행사장주변붕괴위험은없는가?</li><li>이동</li><li>동선</li><li>1주출입구주변장애물은없는가?</li><li>2주출입구의펜스는통행, 피난및방향전환등을하기에용이하게</li><li>설치되었는가?</li><li>3통행및피난을방해할수있는장애물(의자, 자판기,</li><li>공중전화등) 및돌출물(못, 철물)이있지않은가?</li><li>화장실</li><li>1바닥은미끄러운상태인가?</li><li>2화장실에설치된전기설비는양호한가?</li><li>3화장실은깨끗한가?</li><li>관리소</li><li>1상주인원에의한시설관리가이루어지고있는가?</li><li>2상주인원부재시비상연락이가능한연락망은게시되어있는가?</li><li>전기</li><li>1시설관리자의책임아래전기시설을적절히관리하고있는가?</li><li>2소화기가정해진위치에있는가?</li><li>-팀장및시설요원의관리역량강화를위해관련사전교육실시-시설점검일일보고하고결과기록은현장에비치-시설관리팀장은경험이풍부한사람을배치- 주요점검항목LIST에따른점검실시[표1. 참조]  조치계획</li></ul>
+      <span class="slide-number">29</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅲ. 사업관리</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅲ. 사업관리</strong></p><p>행사의영향을줄수있는기상변화에대한세심한관심과사전대비책마련최근5년간의해당일강우량과풍속을참고하고, 우천가능성을3일전까지수시체크우천예상시행사장세팅계획변경(리허설기간은폭우와세우상관없이진행)행사당일폭우가아닌세우경우행사강행풍속에대한시설물상해및안전사고사전예방</p><p>· 참가객: 우천용품지급(우의/ 협의후진행) / 지속적인강수체크· 무대: 무대바닥상태점검(방수비닐&amp; 방수커버)· 시스템: 전시스템방수장비설치(방수비닐, 커버준비)· 전력(발전차) : 감전우려지역철저하게점검및누전방지처리장비사용(방수케이블및누전차단콘센트사용)</p></div>
+      <ul class="bullet-list"><li>3) 비상대책매뉴얼</li><li>2. 관리계획</li><li>강풍예보시무대시설물고정밸트(보조고정장치등) 추가설치강풍예보시시설물낙상대비및고정장치추가천막: 10m/s 이상시웨이트보강작업의자, 테이블: 10m/s 이상철수하여텐트에보관</li><li>· 참가객: 우천주의안내방송/ 관람객주요동선상태점검(미끄럼방지)· 무대: 방수커버설치및무대슬로프, 계단안전점검· 시스템: 각시스템방수커버설치· 전력: 각시스템별전기전력점검</li></ul>
+      <span class="slide-number">30</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅲ. 사업관리</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅲ. 사업관리</strong></p><p><strong style="font-weight:700">01</strong></p><p><strong style="font-weight:700">02</strong></p><p><strong style="font-weight:700">03</strong></p><p><strong style="font-weight:700">04</strong></p><p><strong style="font-weight:700">05</strong></p><p>초동조치사고현장주변의응급조치및신속한지원요청안전관리계획에따라경찰관, 소방관, 안전요원등즉시출동관람객의동요방지및질서유지, 2차사고발생방지, 비상대피요령등안내방송실시외부인의사고현장접근을막고경찰관에게현장관리인계화재발생시인근소화기등으로초동대처후소방차출동요청</p><p><strong style="font-weight:700">ON</strong></p></div>
+      <ul class="bullet-list"><li>4) 안전관리조치매뉴얼</li><li>2. 관리계획</li><li>확인</li><li>신고및보고</li><li>응급조치</li><li>사고처리</li><li>사후관리</li><li>사고현장확인및인명등피해</li><li>상황파악</li><li>상황에따라119/해당팀장에게</li><li>즉시신고&amp;보고</li><li>매뉴얼에따른응급조치심폐소생</li><li>술등</li><li>사고조사원인분석내규, 방침, 매뉴얼등에따라처</li><li>리</li><li>원인조사및분석재발요인검토</li><li>개선</li><li>최초발견자발견자119/해당팀장최초발견자/ 해당팀장안전사고담당자안전사고담당자</li><li>응급구호및지원요청관람객상해시구급․의료반에요청하여신속하게구호실시화상환자의경우사전진료가능병원파악후신속하게후송신속한사고처리를위해상황실에지원을요청, 상호협조체제유지하여신속하게사고처리</li><li>돌발상황발생시, 참가자문의·요구사항응대를위한안전관리전담조직구축재난안전관리기관인고양시재난안전대책본부와협조체계구축종합상황실조직과이를통한신속한대응으로‘안정적인비상-안전관리’확립</li></ul>
+      <span class="slide-number">31</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅲ. 사업관리</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅲ. 사업관리</strong></p></div>
+      <ul class="bullet-list"><li>5)</li><li>2. 관리계획</li><li>구분1단계2단계3단계4단계</li><li>개념지속적억제상태유지지역유행·인원제한권역유행·모임금지대유행·외출금지</li><li>기준전국: 500명미만수도권: 250명미만</li><li>전국: 500명이상수도권: 250명이상</li><li>전국: 1,000명이상수도권: 500명이상</li><li>전국: 2,000명이상수도권: 1,000명이상</li><li>모임방역수칙준수8명까지가능4명까지가능4명까지가능오후6시이후2명까지가능</li><li>정부방역지침(행사, 축제)</li><li>500명이상집회지자체사전신고100인이상금지50인이상금지행사금지</li><li>행사적용기본방역수칙준수,</li><li>지자체사전신고</li><li>비대면행사일부병행검토</li><li>대면행사일부축소,비대면행사병행검토</li><li>대면행사취소비대면행사진행</li><li>행사진행여부</li><li>정상진행<em>공연: 1m 거리두기참석자99인으로제한진행</em>공연: 1m 거리두기/사전예약제참석자49인으로제한진행*공연: 1m 거리두기/사전예약제주최측협의</li><li>공통사항마스크착용, 행사장환기및소독, 손소독제비치, 체온측정및출입명부작성, 거리두기등정부방역수칙준수</li><li>유튜브및홈페이지등을통해온라인현장중계진행</li><li>코로나-19 등전염병대응방역관리계획</li><li>코로나19 등관람객감염병적극대응하기위해안전감독관상시체크및각종전염병등에대한세부실행가이</li><li>드마련사회적거리두기, 손씻기, 마스크착용등정부방역지침을기본으로행사장방역매뉴얼작성코로나19 방역운영팀을별도로구성하여행사전·후로행사장방역및관련조치사항수시체크</li><li>코로나-19 질병정보및행동수칙사전안내방송</li><li>코로나19 방역지침및행동수칙사전안내방송진행</li><li>COVID-19 재유행시통과형에어샤워설치</li><li>관람객이입장할때묻은먼지와세균을알코올로소독서비스실시</li><li>행사전/후현장스텝전원체온측정신속한대처로확산방지가능</li></ul>
+      <span class="slide-number">32</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅲ. 사업관리</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅲ. 사업관리</strong></p></div>
+      <ul class="bullet-list"><li>6)</li><li>2. 관리계획</li></ul>
+      <span class="slide-number">33</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅲ. 사업관리</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅲ. 사업관리</strong></p></div>
+      <ul class="bullet-list"><li>3. 참여인력이력사항</li><li>사업책임자(PM)</li><li>대표성</li><li>연구/개발예술기획경영/관리</li><li>이사황김남</li><li>조직및인원현황</li><li>.</li><li>직책성명업무경력</li><li>대표이사성OO총괄담당25년</li><li>이사황OO연구/개발20년</li><li>본부장김OO예술기획15년</li><li>팀장남OO경영/관리15년</li><li>팀장김OO사업기획10년</li><li>팀장전OO기획/공간7년</li><li>팀장임OO기획/공간10년</li><li>PD우OO사업운영3년</li><li>PD최OO사업운영2년</li></ul>
+      <span class="slide-number">34</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅲ. 사업관리</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅲ. 사업관리</strong></p></div>
+      <ul class="bullet-list"><li>1) 예산배정</li><li>4. 사업비집행내역</li><li>구분내용항목별비중</li><li>부스운영부스참여단체지원55.0%</li><li>행사장조성/운영무대/ 음향/ 조명/ 중계/ 부스/ 캐노피21.8%</li><li>운영인건비총감독, 운영인력, 안전관리자및안내요원배치5.9%</li><li>공연/ 체험프로그램사회자/ 공연/ 프로그램/ 홍보/8.7%</li><li>안전/ 기타안전관리/ 소모품, 행사상해보험료등4.8%</li><li>총사업비대행수수료, 일반관리비를제외한순수사업비기준100.00%</li><li>원활한의사소통체계</li><li>효율성을고려한계획</li></ul>
+      <span class="slide-number">35</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide chapter">
+      <div class="chapter-content">
+        <div class="chapter-number">05</div>
+        <h2>Ⅳ. 기타</h2>
+      </div>
+      <div class="side-accent"></div>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>키비주얼</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">키비주얼</strong></p><p><strong style="font-weight:700">아이덴티티를</strong></p><p><strong style="font-weight:700">매체별</strong></p><p><strong style="font-weight:700">타겟</strong></p><p><strong style="font-weight:700">최적화</strong></p><p><strong style="font-weight:700">콘텐츠로</strong></p><p><strong style="font-weight:700">전개</strong></p><p><strong style="font-weight:700">Part Ⅳ. 기타</strong></p><p><strong style="font-weight:700">키</strong></p><p><strong style="font-weight:700">비주얼</strong></p><p><strong style="font-weight:700">1</strong></p><p><strong style="font-weight:700">안</strong></p><p><strong style="font-weight:700">키</strong></p><p><strong style="font-weight:700">비주얼</strong></p><p><strong style="font-weight:700">2</strong></p><p><strong style="font-weight:700">안</strong></p></div>
+      <ul class="bullet-list"><li>1. 홍보전략수립</li><li>2) 키비주얼</li></ul>
+      <span class="slide-number">37</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Ⅳ</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Ⅳ</strong></p><p><strong style="font-weight:700">.</strong></p><p><strong style="font-weight:700">운영</strong></p><p><strong style="font-weight:700">계획</strong></p><p><strong style="font-weight:700">3.</strong></p><p><strong style="font-weight:700">홍보</strong></p><p><strong style="font-weight:700">계획</strong></p><p><strong style="font-weight:700">오프라인</strong></p><p><strong style="font-weight:700">홍보</strong></p><p><strong style="font-weight:700">온라인</strong></p><p><strong style="font-weight:700">홍보</strong></p><p><strong style="font-weight:700">2026</strong></p><p><strong style="font-weight:700">부산</strong></p><p><strong style="font-weight:700">봄꽃</strong></p><p><strong style="font-weight:700">전시회</strong></p><p><strong style="font-weight:700">각종</strong></p><p><strong style="font-weight:700">인쇄</strong></p><p><strong style="font-weight:700">홍보물</strong></p><p><strong style="font-weight:700">제작</strong></p><p><strong style="font-weight:700">배포</strong></p><p><strong style="font-weight:700">시기별</strong></p><p><strong style="font-weight:700">구역별</strong></p><p><strong style="font-weight:700">Part Ⅳ. 기타</strong></p></div>
+      <ul class="bullet-list"><li>1. 홍보전략수립</li><li>1) 홍보전략</li></ul>
+      <span class="slide-number">38</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>행사장</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">행사장</strong></p><p><strong style="font-weight:700">동물</strong></p><p><strong style="font-weight:700">인형으로</strong></p><p><strong style="font-weight:700">이루어진</strong></p><p><strong style="font-weight:700">마리오네트들이</strong></p><p><strong style="font-weight:700">공원</strong></p><p><strong style="font-weight:700">안을</strong></p><p><strong style="font-weight:700">순회하며</strong></p><p><strong style="font-weight:700">버스킹</strong></p><p><strong style="font-weight:700">직접</strong></p><p><strong style="font-weight:700">인형을</strong></p><p><strong style="font-weight:700">만져보고</strong></p><p><strong style="font-weight:700">조작해</strong></p><p><strong style="font-weight:700">보는</strong></p><p><strong style="font-weight:700">관객참여형</strong></p><p><strong style="font-weight:700">인형극</strong></p><p><strong style="font-weight:700">공연과</strong></p><p><strong style="font-weight:700">놀이의</strong></p><p><strong style="font-weight:700">혼합</strong></p><p><strong style="font-weight:700">공간</strong></p><p><strong style="font-weight:700">체험공간에서</strong></p><p><strong style="font-weight:700">만든</strong></p><p><strong style="font-weight:700">소품</strong></p><p><strong style="font-weight:700">활용</strong></p><p><strong style="font-weight:700">마임</strong></p><p><strong style="font-weight:700">등</strong></p><p><strong style="font-weight:700">타</strong></p><p><strong style="font-weight:700">공연</strong></p><p><strong style="font-weight:700">프로그램과</strong></p><p><strong style="font-weight:700">연계</strong></p><p><strong style="font-weight:700">프로그램</strong></p><p><strong style="font-weight:700">1</strong></p><p><strong style="font-weight:700">Part Ⅳ. 기타</strong></p></div>
+      <ul class="bullet-list"><li>1) 상시공연</li><li></li><li></li><li>,</li><li></li><li>2. 특별제안</li></ul>
+      <span class="slide-number">39</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide content">
+      <div class="header">
+        
+        <h3>Part Ⅳ. 기타</h3>
+      </div>
+      <div class="body-text" style="margin-bottom:24px"><p><strong style="font-weight:700">Part Ⅳ. 기타</strong></p><p><strong style="font-weight:700">“2027</strong></p><p><strong style="font-weight:700">부산</strong></p><p><strong style="font-weight:700">봄꽃</strong></p><p><strong style="font-weight:700">전시회</strong></p><p><strong style="font-weight:700">”</strong></p><p><strong style="font-weight:700">를</strong></p><p><strong style="font-weight:700">위한</strong></p><p><strong style="font-weight:700">성과관리</strong></p><p><strong style="font-weight:700">스튜어드쉽</strong></p><p><strong style="font-weight:700">제공</strong></p><p><strong style="font-weight:700">사후</strong></p><p><strong style="font-weight:700">언론보</strong></p></div>
+      <ul class="bullet-list"><li>3. 성과및사후관리</li></ul>
+      <span class="slide-number">40</span>
+      <div class="slide-footer"></div>
+    </section>
+
+    <section class="slide chapter">
+      <div class="chapter-content">
+        <div class="chapter-number">06</div>
+        <h2>일상의</h2>
+      </div>
+      <div class="side-accent"></div>
+      <div class="slide-footer"></div>
+    </section>
+</body>
+</html>

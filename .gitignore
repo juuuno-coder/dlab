@@ -53,3 +53,14 @@
 !/knowledge-base/templates/.gitkeep
 /knowledge-base/resources/*
 !/knowledge-base/resources/.gitkeep
+
+# 프로젝트별 큰 파일 제외 (PDF, PPTX 등)
+public/projects/**/proposal/*.pptx
+public/projects/**/proposal/*.pdf
+public/projects/**/참고자료/*.pptx
+public/projects/**/참고자료/*.pdf
+public/projects/**/참고자료/*.xls
+public/projects/**/참고자료/*.ppt
+
+# Archive 폴더
+archive/

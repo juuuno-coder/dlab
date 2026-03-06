@@ -1,5 +1,5 @@
 class Admin::BiddingsController < ApplicationController
-  before_action :set_bidding, only: [:show, :edit, :update, :destroy, :generate_proposal, :generate_diagnosis, :generate_slides, :analyze_with_gemini]
+  before_action :set_bidding, only: [:show, :edit, :update, :destroy, :generate_proposal, :generate_diagnosis, :generate_slides, :analyze_with_gemini, :generate_presentation_script]
   layout 'admin'
 
   def index
@@ -82,6 +82,19 @@ class Admin::BiddingsController < ApplicationController
     end
   end
 
+  def generate_presentation_script
+    begin
+      generator = PresentationScriptGenerator.new(@bidding)
+      script = generator.generate
+
+      @bidding.update!(presentation_script: script)
+
+      redirect_to admin_bidding_path(@bidding), notice: '📝 발표대본이 생성되었습니다.'
+    rescue => e
+      redirect_to admin_bidding_path(@bidding), alert: "발표대본 생성 실패: #{e.message}"
+    end
+  end
+
   private
 
   def set_bidding
@@ -95,6 +108,7 @@ class Admin::BiddingsController < ApplicationController
       :analysis_notes, :proposal_outline, :winning_strategy,
       :diagnosis_report, :slides_html,
       :slide_theme_color, :slide_font_family,
+      :presentation_script, :proposal_content, :rfp_content, :task_order_content,
       documents: [], selected_template_ids: []
     )
   end
