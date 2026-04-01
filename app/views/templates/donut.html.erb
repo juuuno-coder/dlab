@@ -1,0 +1,170 @@
+<%# Donut Template - 롤링 도넛 (ROLLING DONUT) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-rounded { font-family: 'Fredoka', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .sprinkle-pattern {
+    background-image: radial-gradient(#FF61A6 15%, transparent 16%),
+    radial-gradient(#4ECDC4 15%, transparent 16%);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+    opacity: 0.1;
+  }
+</style>
+
+<div class="bg-[#FFF8F0] text-[#333] font-sans selection:bg-[#FF61A6] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 sprinkle-pattern pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-3 md:px-6 py-4 top-0 left-0">
+    <div class="container mx-auto px-4 md:px-6 flex items-center justify-between flex-nowrap">
+      <div class="bg-white/90 backdrop-blur-xl border border-[#FF61A6]/10 rounded-2xl px-6 py-4 flex justify-between items-center shadow-lg shadow-[#FF61A6]/5">
+        <div class="flex items-center gap-2">
+           <span class="text-2xl animate-bounce">🍩</span>
+           <span class="font-rounded font-semibold text-lg md:text-2xl text-[#FF61A6] tracking-tight">Rolling<span class="text-[#4ECDC4]">Donut</span></span>
+        </div>
+        
+        <div class="hidden md:flex gap-12 text-[14px] font-rounded font-semibold text-[#333]/60">
+          <a href="#menu" class="hover:text-[#FF61A6] transition">Menu</a>
+          <a href="#about" class="hover:text-[#FF61A6] transition">Our Story</a>
+          <a href="#stores" class="hover:text-[#FF61A6] transition">Find Us</a>
+        </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+        
+        <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="toggleDonutModal()" class="hidden md:block text-[13px] font-rounded font-semibold text-[#FF61A6] hover:bg-[#FF61A6]/10 px-4 py-2 rounded-lg transition" data-mobile-menu-copy="true">Jelly Club</button>
+           <button class="hidden md:inline-flex bg-[#FF61A6] text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-lg font-rounded font-semibold text-[14px] shadow-[0_4px_0_#D44085] hover:translate-y-1 hover:shadow-none transition-all" data-mobile-menu-copy="true">
+             Order Pickup
+           </button>
+        </div>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Floating Elements -->
+    <div class="absolute top-[15%] left-[10%] text-3xl md:text-5xl animate-float opacity-80 pointer-events-none delay-100">🍬</div>
+    <div class="absolute bottom-[20%] right-[10%] text-3xl md:text-5xl animate-float opacity-80 pointer-events-none delay-700">🍩</div>
+    <div class="absolute top-[30%] right-[20%] w-32 h-32 bg-[#4ECDC4]/20 rounded-full blur-[40px] pointer-events-none"></div>
+    <div class="absolute bottom-[10%] left-[20%] w-40 h-40 bg-[#FF61A6]/20 rounded-full blur-[40px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-10 md:p-16 items-center">
+       <div class="space-y-8 text-center lg:text-left order-2 lg:order-1">
+         <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-[#FF61A6]/20">
+            <span class="w-2 h-2 rounded-full bg-[#FF61A6] animate-pulse"></span>
+            <span class="text-[12px] font-rounded font-semibold text-[#FF61A6] uppercase tracking-wide">Freshly Baked Every Morning!</span>
+         </div>
+         
+         <h1 class="text-2xl md:text-4xl md:text-6xl font-rounded font-semibold leading-[1.1] text-[#333] mobile-title">
+            Happiness is<br>
+            <span class="text-[#FF61A6]">Round</span> & <span class="text-[#4ECDC4]">Sweet.</span>
+         </h1>
+         
+         <p class="text-[#333]/60 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-medium">
+            폭신한 도우 속에 가득 찬 달콤한 크림. 한 입 베어 무는 순간 퍼지는 행복, 롤링 도넛에서 만나보세요.
+         </p>
+         
+         <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
+            <button class="px-8 py-4 bg-[#4ECDC4] text-white font-rounded font-semibold text-lg rounded-[1rem] shadow-[0_6px_0_#2DA9A0] hover:translate-y-1 hover:shadow-none transition-all">
+               View Menu
+            </button>
+            <button class="px-8 py-4 bg-white text-[#FF61A6] border-2 border-[#FF61A6]/20 font-rounded font-semibold text-lg rounded-[1rem] hover:bg-[#FF61A6]/5 transition">
+               Gift Box
+            </button>
+         </div>
+       </div>
+       
+       <div class="relative order-1 lg:order-2 flex justify-center">
+          <div class="relative group cursor-pointer w-[300px] md:w-[450px]">
+             <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=800" alt="Tasty Donut" class="w-full h-auto object-cover rounded-2xl border-8 border-white shadow-2xl rotate-[5deg] group-hover:rotate-0 transition duration-500">
+             
+             <!-- Badge -->
+             <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-[1.5rem] shadow-xl border border-[#FF61A6]/10 rotate-[-5deg] animate-bounce-slow">
+                <div class="flex items-center gap-2">
+                   <span class="text-2xl">🏆</span>
+                   <div>
+                      <p class="text-[10px] font-semibold text-[#333]/40 uppercase">Best Seller</p>
+                      <p class="font-rounded font-semibold text-[#FF61A6]">Strawberry Glaze</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </header>
+
+   <style>
+      @keyframes float {
+         0%, 100% { transform: translateY(0); }
+         50% { transform: translateY(-20px); }
+      }
+      .animate-float { animation: float 6s ease-in-out infinite; }
+      @keyframes bounce-slow {
+         0%, 100% { transform: translateY(0) rotate(-5deg); }
+         50% { transform: translateY(-5px) rotate(-5deg); }
+      }
+      .animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
+   </style>
+
+  <!-- Login Modal -->
+  <div id="donut-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#333]/20 backdrop-blur-md">
+    <div class="bg-white w-full max-w-sm p-10 shadow-[0_20px_60px_-15px_rgba(255,97,166,0.3)] relative rounded-[2.5rem] border-4 border-[#FF61A6]/10">
+      <button onclick="toggleDonutModal()" class="absolute top-6 right-6 text-[#333]/20 hover:text-[#FF61A6] transition text-2xl font-rounded font-semibold">&times;</button>
+      
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-[#FFF0F6] rounded-full flex items-center justify-center text-2xl mx-auto mb-4 animate-bounce">
+           🦄
+        </div>
+        <h2 class="text-lg md:text-2xl font-rounded font-semibold text-[#333] mb-1">Jelly Club</h2>
+        <p class="text-[12px] text-[#FF61A6] font-semibold uppercase tracking-wide bg-[#FF61A6]/10 inline-block px-3 py-1 rounded-lg">Sweet Rewards Program</p>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+           <input type="text" placeholder="Phone Number" class="w-full bg-[#F9FAFB] border-2 border-[#F3F4F6] rounded-2xl py-4 px-6 outline-none focus:border-[#FF61A6] focus:bg-white transition text-[16px] font-rounded font-semibold text-[#333] text-center placeholder-[#333]/20">
+        </div>
+        
+        <button class="w-full bg-[#FF61A6] text-white py-4 rounded-2xl font-rounded font-semibold text-[18px] shadow-[0_6px_0_#D44085] hover:translate-y-1 hover:shadow-none transition-all">
+           Log In & Get Free Donut
+        </button>
+        
+        <div class="flex justify-center gap-10 pt-4 text-sm font-rounded font-semibold text-[#333]/40">
+           <a href="#" class="hover:text-[#FF61A6] transition">Join Club</a>
+           <span>•</span>
+           <a href="#" class="hover:text-[#FF61A6] transition">Lost Password?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-[#F3F4F6]">
+     <div class="inline-flex flex-col items-center gap-6 mb-8">
+        <span class="text-3xl">🥨</span>
+        <span class="font-rounded font-semibold text-lg md:text-2xl text-[#333]">Rolling<span class="text-[#FF61A6]">Donut</span></span>
+        <p class="text-[12px] font-semibold text-[#333]/30 uppercase tracking-wide">Handmade with Love in Seoul</p>
+     </div>
+     <p class="text-[10px] text-[#333]/20 tracking-wider">© 2024 ROLLING DONUT CO. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleDonutModal() {
+      const modal = document.getElementById('donut-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

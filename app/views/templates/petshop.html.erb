@@ -1,0 +1,184 @@
+<%# Petshop Template - 위드 펫 (WITH PET) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-rounded { font-family: 'Fredoka', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .paw-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.6 15.6c-.6 0-1.2-.5-1.2-1.1 0-.6.5-1.1 1.2-1.1.6 0 1.2.5 1.2 1.1 0 .6-.5 1.1-1.2 1.1zm6-4.9c-.6 0-1.2-.5-1.2-1.1 0-.6.5-1.1 1.2-1.1.6 0 1.2.5 1.2 1.1 0 .6-.5 1.1-1.2 1.1zm5.1 4.5c-.6 0-1.2-.5-1.2-1.1 0-.6.5-1.1 1.2-1.1.6 0 1.2.5 1.2 1.1 0 .6-.6 1.1-1.2 1.1zm-8.2 4.6c-1.3 0-2.4-.9-2.6-2.2-.2-1.5.8-2.8 2.3-3 .2 0 .4 0 .6 0 1.4.1 2.5 1.3 2.5 2.7 0 1.3-1.1 2.4-2.5 2.5h-.3zm4.5 0c-1.3 0-2.4-.9-2.6-2.2-.2-1.5.8-2.8 2.3-3 .2 0 .4 0 .6 0 1.4.1 2.5 1.3 2.5 2.7 0 1.3-1.1 2.4-2.5 2.5h-.3z' fill='%23F97316' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+</style>
+
+<div class="bg-[#FFF7ED] text-[#431407] font-sans selection:bg-[#F97316] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 paw-pattern pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-3 md:px-6 py-4 top-0">
+    <div class="container mx-auto px-4 md:px-6 flex items-center justify-between flex-nowrap">
+      <div class="bg-white/90 backdrop-blur-xl border-b-4 border-[#F97316] rounded-full px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap flex justify-between items-center shadow-lg shadow-[#F97316]/10">
+        <div class="flex items-center gap-2">
+           <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 bg-[#FCD34D] rounded-full flex items-center justify-center text-lg md:text-2xl shadow-sm rotate-12">
+              🐾
+           </div>
+           <span class="font-rounded font-semibold text-lg md:text-2xl text-[#431407] tracking-tight">With<span class="text-[#F97316]">Pet</span></span>
+        </div>
+        
+        <div class="hidden md:flex gap-12 text-[15px] font-rounded font-semibold text-[#431407]/60">
+          <a href="#grooming" class="hover:text-[#F97316] transition">Grooming</a>
+          <a href="#hotel" class="hover:text-[#F97316] transition">Hotel</a>
+          <a href="#gallery" class="hover:text-[#F97316] transition">Happy Tails</a>
+        </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+        
+        <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="togglePetModal()" class="hidden md:block text-[14px] font-rounded font-semibold text-[#F97316] bg-[#FFEDD5] px-4 py-2 rounded-lg hover:bg-[#FED7AA] transition" data-mobile-menu-copy="true">My Pet</button>
+           <button class="hidden md:inline-flex bg-[#F97316] text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-lg font-rounded font-semibold text-[14px] shadow-[0_4px_0_#EA580C] hover:translate-y-1 hover:shadow-none transition-all" data-mobile-menu-copy="true">
+             Book Now
+           </button>
+        </div>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Floating Bones -->
+    <div class="absolute top-[20%] left-[8%] text-2xl md:text-4xl animate-float opacity-80 cursor-pointer hover:rotate-12 transition">🦴</div>
+    <div class="absolute bottom-[25%] right-[8%] text-2xl md:text-4xl animate-float animation-delay-2000 opacity-80 cursor-pointer hover:-rotate-12 transition">🎾</div>
+    
+    <div class="absolute top-0 right-0 w-[50%] h-[100%] bg-[#FFEDD5] rounded-l-[15rem] -z-10 opacity-60"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-10 md:p-16 items-center">
+       <div class="space-y-8 text-center lg:text-left order-2 lg:order-1">
+         <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-lg border border-[#F97316]/30 shadow-sm text-[#EA580C] font-rounded font-semibold text-sm tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-[#EA580C] animate-pulse"></span>
+            Happy Tail Guarantee
+         </div>
+         
+         <h1 class="text-2xl md:text-4xl md:text-6xl font-rounded font-semibold leading-[1.1] text-[#431407] mobile-title">
+            Making<br>
+            <span class="text-[#F97316]">Tails Wag</span><br>
+            Everyday!
+         </h1>
+         
+         <p class="text-[#431407]/70 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-medium">
+            반려견을 위한 프리미엄 그루밍 & 케어 서비스.<br>
+            사랑하는 아이에게 최고의 하루를 선물하세요.
+         </p>
+         
+         <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
+            <button class="px-8 py-4 bg-[#431407] text-white font-rounded font-semibold text-lg rounded-[1.5rem] shadow-xl hover:bg-[#F97316] transition-colors">
+               Our Services
+            </button>
+            <button class="px-8 py-4 bg-white text-[#F97316] border-2 border-[#F97316] font-rounded font-semibold text-lg rounded-[1.5rem] hover:bg-[#FFF7ED] transition">
+               Gallery
+            </button>
+         </div>
+
+         <div class="pt-8 flex items-center justify-center lg:justify-start gap-6">
+            <div class="flex -space-x-4">
+               <img class="w-12 h-12 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=100" alt="Pet 1">
+               <img class="w-12 h-12 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=100" alt="Pet 2">
+               <img class="w-12 h-12 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=100" alt="Pet 3">
+               <div class="w-12 h-12 rounded-full border-2 border-white bg-[#F97316] flex items-center justify-center text-white font-semibold text-xs">+2k</div>
+            </div>
+            <p class="text-sm font-semibold text-[#431407]/60">Happy Friends</p>
+         </div>
+       </div>
+       
+       <div class="relative order-1 lg:order-2 flex justify-center">
+          <div class="relative group cursor-pointer w-[300px] md:w-[450px]">
+             <!-- Abstract Shape -->
+             <div class="absolute inset-0 bg-[#FCD34D] rounded-2xl transform rotate-6 -z-10 group-hover:rotate-3 transition duration-500"></div>
+             
+             <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=800" alt="Happy Dog" class="w-full h-auto object-cover rounded-2xl border-8 border-white shadow-2xl transform -rotate-3 group-hover:rotate-0 transition duration-500">
+             
+             <!-- Floating Badge -->
+             <div class="absolute bottom-10 -left-6 bg-white py-3 px-5 rounded-2xl shadow-xl border border-[#F97316]/20 animate-bounce-slow flex items-center gap-3">
+                <span class="text-2xl">✂️</span>
+                <div>
+                  <p class="text-[10px] font-semibold text-[#9CA3AF] uppercase">Style of Month</p>
+                  <p class="font-rounded font-semibold text-[#F97316]">Teddy Bear Cut</p>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </header>
+
+   <style>
+      @keyframes float {
+         0%, 100% { transform: translateY(0); }
+         50% { transform: translateY(-20px); }
+      }
+      .animate-float { animation: float 6s ease-in-out infinite; }
+      .animation-delay-2000 { animation-delay: 2s; }
+      @keyframes bounce-slow {
+         0%, 100% { transform: translateY(0); }
+         50% { transform: translateY(-10px); }
+      }
+      .animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
+   </style>
+
+  <!-- Login Modal -->
+  <div id="pet-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#431407]/30 backdrop-blur-md">
+    <div class="bg-white w-full max-w-sm p-10 shadow-[0_20px_50px_rgba(249,115,22,0.3)] relative rounded-[2.5rem] border-t-8 border-[#F97316]">
+      <button onclick="togglePetModal()" class="absolute top-6 right-6 text-[#9CA3AF] hover:text-[#F97316] transition text-2xl font-rounded font-semibold">&times;</button>
+      
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-[#FFEDD5] rounded-full flex items-center justify-center text-2xl mx-auto mb-4 border-2 border-[#F97316]/20">
+           🏠
+        </div>
+        <h2 class="text-lg md:text-2xl font-rounded font-semibold text-[#431407] mb-1">My Pet Lounge</h2>
+        <p class="text-[13px] text-[#F97316] font-semibold uppercase tracking-wide">Check Status & Schedule</p>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+           <label class="block text-[11px] font-semibold text-[#431407]/50 uppercase tracking-wide mb-1.5 ml-1">Pet Name / ID</label>
+           <input type="text" placeholder="e.g. Bella" class="w-full bg-[#FFF7ED] border-2 border-[#FED7AA] rounded-2xl py-3 px-6 outline-none focus:border-[#F97316] focus:bg-white transition text-lg font-rounded font-semibold text-[#431407] text-center">
+        </div>
+        
+        <button class="w-full bg-[#F97316] text-white py-4 rounded-2xl font-rounded font-semibold text-[18px] shadow-[0_6px_0_#EA580C] hover:translate-y-1 hover:shadow-none transition-all mt-2">
+           Open Door
+        </button>
+        
+        <div class="flex justify-center gap-10 pt-4 text-sm font-rounded font-semibold text-[#9CA3AF]">
+           <a href="#" class="hover:text-[#F97316] transition">New Friend?</a>
+           <span>•</span>
+           <a href="#" class="hover:text-[#F97316] transition">Support</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-[#FFF7ED]">
+     <div class="inline-flex flex-col items-center gap-6 mb-8">
+        <span class="text-3xl">🐕</span>
+        <span class="font-rounded font-semibold text-lg md:text-2xl text-[#431407]">With<span class="text-[#F97316]">Pet</span></span>
+        <p class="text-[12px] font-semibold text-[#9CA3AF] uppercase tracking-wide">Premium Pet Care Service</p>
+     </div>
+     <p class="text-[10px] text-[#9CA3AF]/60 tracking-wider font-semibold">© 2024 WITH PET. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function togglePetModal() {
+      const modal = document.getElementById('pet-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

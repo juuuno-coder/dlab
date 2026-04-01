@@ -1,0 +1,119 @@
+<div style="margin-bottom: var(--space-6);">
+  <%= link_to "← 목록으로", admin_orders_path, style: "color: var(--color-gray-500); text-decoration: none; display: inline-flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4);" %>
+  <div style="display: flex; justify-content: space-between; align-items: start;">
+    <div>
+      <h1 style="font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--space-2);">주문 #<%= @order.id %></h1>
+      <p style="color: var(--color-gray-500);"><%= @order.created_at.strftime("%Y년 %m월 %d일 %H:%M:%S") %></p>
+    </div>
+    <div style="display: flex; gap: var(--space-3); align-items: center;">
+      <%= form_with url: update_status_admin_order_path(@order), method: :patch, class: "flex items-center gap-2", data: { turbo: false } do |f| %>
+        <%= f.select :status, Order.statuses.keys.map { |s| [s.upcase, s] }, {}, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm p-2 bg-white border" %>
+        <%= f.submit "상태 변경", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-6);">
+  <!-- 주문 상품 목록 -->
+  <div class="card">
+    <h2 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-4);">주문 상품</h2>
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--color-gray-200);">
+          <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">상품명</th>
+          <th style="text-align: center; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">수량</th>
+          <th style="text-align: right; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">단가</th>
+          <th style="text-align: right; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">합계</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_items.each do |item| %>
+          <tr style="border-bottom: 1px solid var(--color-gray-100);">
+            <td style="padding: var(--space-4);">
+              <div style="font-weight: 500;"><%= item.design_template.name %></div>
+            </td>
+            <td style="padding: var(--space-4); text-align: center;">
+              <%= item.quantity %>
+            </td>
+            <td style="padding: var(--space-4); text-align: right;">
+              <%= number_to_currency(item.price, unit: "₩", precision: 0) %>
+            </td>
+            <td style="padding: var(--space-4); text-align: right; font-weight: 500;">
+              <%= number_to_currency(item.price * item.quantity, unit: "₩", precision: 0) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="padding: var(--space-4); text-align: right; font-weight: 700;">총 결제 금액</td>
+          <td style="padding: var(--space-4); text-align: right; font-weight: 700; font-size: var(--text-lg); color: var(--color-primary);">
+            <%= number_to_currency(@order.total_amount, unit: "₩", precision: 0) %>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- 주문 정보 -->
+  <div class="space-y-6">
+    <div class="card">
+      <h2 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-4);">주문자 정보</h2>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <% if @order.user %>
+          <div>
+            <label style="display: block; font-size: var(--text-sm); color: var(--color-gray-500); margin-bottom: var(--space-1);">이름</label>
+            <div style="font-weight: 500;">
+              <%= link_to @order.user.name || "이름 없음", admin_user_path(@order.user), class: "text-primary hover:underline" %>
+            </div>
+          </div>
+          <div>
+            <label style="display: block; font-size: var(--text-sm); color: var(--color-gray-500); margin-bottom: var(--space-1);">이메일</label>
+            <div style="font-weight: 500;"><%= @order.user.email %></div>
+          </div>
+        <% else %>
+          <div style="color: var(--color-gray-500);">비회원 주문</div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-4);">결제 정보</h2>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div>
+          <label style="display: block; font-size: var(--text-sm); color: var(--color-gray-500); margin-bottom: var(--space-1);">결제 상태</label>
+          <div>
+            <% 
+              badge_class = case @order.status
+                when 'pending' then 'bg-yellow-100 text-yellow-800'
+                when 'paid', 'completed' then 'bg-green-100 text-green-800'
+                when 'cancelled', 'refunded' then 'bg-red-100 text-red-800'
+                else 'bg-gray-100 text-gray-800'
+              end
+            %>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= badge_class %>">
+              <%= @order.status.upcase %>
+            </span>
+          </div>
+        </div>
+        <% if @order.payment_key.present? %>
+          <div>
+            <label style="display: block; font-size: var(--text-sm); color: var(--color-gray-500); margin-bottom: var(--space-1);">Payment Key</label>
+            <div style="font-size: var(--text-sm); font-family: monospace; word-break: break-all;">
+              <%= @order.payment_key %>
+            </div>
+          </div>
+        <% end %>
+        <% if @order.order_uid.present? %>
+          <div>
+            <label style="display: block; font-size: var(--text-sm); color: var(--color-gray-500); margin-bottom: var(--space-1);">Order UID</label>
+            <div style="font-size: var(--text-sm); font-family: monospace; word-break: break-all;">
+              <%= @order.order_uid %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

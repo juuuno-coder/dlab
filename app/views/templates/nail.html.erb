@@ -1,0 +1,164 @@
+<%# Nail Template - 네온 네일 (NEON NAIL) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-cyber { font-family: 'Syncopate', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .glitch-pattern {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      #FF00FF 2px,
+      #FF00FF 4px
+    );
+    opacity: 0.03;
+  }
+</style>
+
+<div class="bg-slate-950 text-white font-sans selection:bg-[#FF00FF] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 glitch-pattern pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-slate-950/80 backdrop-blur-md border-b border-[#FF00FF]/20">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-2">
+         <span class="text-[#00FFFF] text-2xl animate-pulse">✦</span>
+         <span class="font-cyber font-semibold text-lg tracking-wide text-white">Neon<span class="text-[#FF00FF]">Nail</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-16 text-[10px] font-cyber font-semibold tracking-[0.2em] text-[#FF00FF]/60 uppercase">
+        <a href="#gallery" class="hover:text-[#00FFFF] transition">Gallery</a>
+        <a href="#artists" class="hover:text-[#00FFFF] transition">Artists</a>
+        <a href="#price" class="hover:text-[#00FFFF] transition">Price</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="toggleNailModal()" class="hidden md:block text-[10px] font-cyber font-semibold uppercase tracking-[0.2em] text-[#FF00FF]/60 hover:text-[#00FFFF]" data-mobile-menu-copy="true">Membership</button>
+         <button class="hidden md:block border border-[#00FFFF] text-[#00FFFF] px-6 py-2 rounded-none font-cyber font-semibold text-[10px] hover:bg-[#00FFFF] hover:text-slate-900 transition shadow-[0_0_15px_#00FFFF]" data-mobile-menu-copy="true">
+           Book Now
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Neon Glows -->
+    <div class="absolute top-[20%] left-[20%] w-[300px] h-[300px] bg-[#FF00FF] rounded-full filter blur-[120px] opacity-40 animate-pulse"></div>
+    <div class="absolute bottom-[20%] right-[20%] w-[400px] h-[400px] bg-[#00FFFF] rounded-full filter blur-[150px] opacity-30 animate-pulse delay-1000"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-10 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 border border-[#FF00FF] px-4 py-1.5 rounded-none bg-slate-950/50 backdrop-blur-sm">
+           <span class="w-2 h-2 bg-[#FF00FF] animate-ping"></span>
+           <span class="text-[10px] font-cyber font-semibold text-[#FF00FF] uppercase tracking-wide">Cyber Aesthetic Studio</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-cyber font-semibold leading-[1.1] text-white mobile-title uppercase">
+           Future<br>
+           at your<br>
+           <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#FF00FF] animate-gradient-x">Fingertips.</span>
+        </h1>
+        
+        <p class="text-gray-400 text-sm md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-light">
+           평범함을 거부하는 당신을 위한 사이버 펑크 무드 네일.<br>
+           네온 네일에서 가장 감각적인 아트를 경험하세요.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-10 justify-center lg:justify-start pt-6">
+           <button class="px-10 py-4 bg-[#FF00FF] text-slate-900 font-cyber font-semibold text-sm uppercase tracking-wide hover:bg-[#00FFFF] transition shadow-[0_0_20px_#FF00FF] hover:shadow-[0_0_20px_#00FFFF]">
+              View Designs
+           </button>
+           <button class="px-10 py-4 border border-white/20 text-white font-cyber font-semibold text-sm uppercase tracking-wide hover:border-[#FF00FF] hover:text-[#FF00FF] transition bg-slate-950/50 backdrop-blur-sm">
+              Artist Info
+           </button>
+        </div>
+      </div>
+      
+      <div class="relative hidden lg:block">
+         <div class="relative z-10 w-full max-w-[450px] mx-auto aspect-[3/4] border border-[#00FFFF]/30 p-2 group">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#FF00FF]/20 to-[#00FFFF]/20 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=800" alt="Cyber Nail Art" class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition duration-700">
+            
+            <!-- Floating Elements -->
+            <div class="absolute top-10 -right-12 bg-slate-950 border border-[#FF00FF] p-4 shadow-[0_0_15px_#FF00FF] text-[#FF00FF] font-cyber text-xs uppercase tracking-wide rotate-90 origin-bottom-left">
+               New Collection
+            </div>
+            
+            <div class="absolute -bottom-6 -left-6 bg-slate-950 border border-[#00FFFF] py-3 px-6 shadow-[0_0_15px_#00FFFF]">
+               <p class="font-cyber font-semibold text-white text-lg">Chrome Heart</p>
+               <p class="text-[9px] text-[#00FFFF] uppercase tracking-wide">Premium Art</p>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+  
+  <style>
+     @keyframes gradient-x {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+     }
+     .animate-gradient-x {
+        background-size: 200% 200%;
+        animation: gradient-x 3s ease infinite;
+     }
+  </style>
+
+  <!-- Login Modal -->
+  <div id="nail-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-lg">
+    <div class="bg-slate-950 w-full max-w-sm p-12 shadow-[0_0_50px_#FF00FF] relative border border-[#FF00FF]">
+      <button onclick="toggleNailModal()" class="absolute top-6 right-6 text-gray-500 hover:text-[#00FFFF] transition text-2xl font-cyber">&times;</button>
+      
+      <div class="text-center mb-10">
+        <h2 class="text-xl font-cyber font-semibold text-white mb-2 uppercase">VIP Access</h2>
+        <p class="text-[9px] text-[#00FFFF] font-semibold tracking-[0.3em] uppercase border border-[#00FFFF] inline-block px-3 py-1">Members Only</p>
+      </div>
+      
+      <div class="space-y-6">
+        <div class="group">
+           <input type="text" placeholder="Passcode" class="w-full bg-slate-950 border border-[#FF00FF]/50 py-4 px-6 text-sm font-cyber font-semibold text-[#FF00FF] placeholder-[#FF00FF]/30 uppercase outline-none focus:border-[#00FFFF] focus:shadow-[0_0_15px_#00FFFF] transition text-center">
+        </div>
+        
+        <button class="w-full bg-[#FF00FF] text-slate-900 py-4 text-[10px] tracking-[0.3em] font-cyber font-semibold uppercase hover:bg-[#00FFFF] transition shadow-[0_0_20px_#FF00FF] hover:shadow-[0_0_20px_#00FFFF]">
+           Enter System
+        </button>
+        
+        <div class="flex justify-center gap-12 pt-4 border-t border-white/10 mt-4">
+           <a href="#" class="text-[9px] text-gray-500 tracking-[0.2em] font-semibold uppercase hover:text-[#00FFFF] transition font-cyber">Apply</a>
+           <a href="#" class="text-[9px] text-gray-500 tracking-[0.2em] font-semibold uppercase hover:text-[#00FFFF] transition font-cyber">Lost Key</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-slate-950 text-center px-6 border-t border-[#FF00FF]/20">
+     <div class="inline-flex flex-col items-center gap-10 mb-8">
+        <span class="font-cyber font-semibold text-2xl tracking-wide text-white uppercase">Neon<span class="text-[#FF00FF]">Nail</span></span>
+        <span class="text-[10px] font-semibold text-gray-600 tracking-[0.4em] uppercase">Cyberpunk Aesthetic</span>
+     </div>
+     <p class="text-[10px] text-white/10 tracking-[0.6em] uppercase px-6">© 2024 NEON NAIL. SEOUL.</p>
+  </footer>
+
+  <script>
+    function toggleNailModal() {
+      const modal = document.getElementById('nail-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

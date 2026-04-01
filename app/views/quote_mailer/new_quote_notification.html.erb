@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: 'Pretendard', -apple-system, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #00a859 0%, #00d670 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+    .content { background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; }
+    .quote-info { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #00a859; }
+    .label { font-weight: bold; color: #00a859; margin-top: 15px; }
+    .value { margin-top: 5px; padding: 10px; background: #f3f4f6; border-radius: 4px; }
+    .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px; }
+    .button { display: inline-block; padding: 12px 30px; background: #00a859; color: white; text-decoration: none; border-radius: 6px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0;">🎉 새로운 견적 문의</h1>
+      <p style="margin: 10px 0 0 0; opacity: 0.9;">DLAB 관리자님께</p>
+    </div>
+    
+    <div class="content">
+      <p>안녕하세요, 관리자님!</p>
+      <p><strong><%= @quote.contact_name %></strong>님으로부터 새로운 견적 문의가 접수되었습니다.</p>
+      
+      <div class="quote-info">
+        <div class="label">👤 문의자 정보</div>
+        <div class="value"><strong>이름:</strong> <%= @quote.contact_name %></div>
+        <% if @quote.company_name.present? %>
+          <div class="value"><strong>회사명:</strong> <%= @quote.company_name %></div>
+        <% end %>
+        <div class="value"><strong>이메일:</strong> <%= @quote.email %></div>
+        <div class="value"><strong>연락처:</strong> <%= @quote.phone %></div>
+        
+        <div class="label" style="margin-top: 25px;">📋 프로젝트 정보</div>
+        <div class="value"><strong>프로젝트 유형:</strong> <%= @quote.project_type %></div>
+        <% if @quote.budget.present? %>
+          <div class="value"><strong>예산:</strong> <%= @quote.budget %></div>
+        <% end %>
+        
+        <div class="label" style="margin-top: 25px;">💬 상세 내용</div>
+        <div class="value" style="white-space: pre-wrap;"><%= @quote.message %></div>
+        
+        <div class="label" style="margin-top: 25px;">📅 접수 시간</div>
+        <div class="value"><%= @quote.created_at.strftime("%Y년 %m월 %d일 %H:%M") %></div>
+      </div>
+      
+      <div style="text-align: center;">
+        <a href="<%= ENV.fetch('APP_URL', 'http://localhost:3000') %>/admin/quotes" class="button">
+          관리자 페이지에서 확인하기
+        </a>
+      </div>
+      
+      <div class="footer">
+        <p>이 메일은 DLAB 웹사이트에서 자동으로 발송되었습니다.</p>
+        <p style="font-size: 12px; color: #9ca3af;">© 2024 DLAB. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

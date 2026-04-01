@@ -1,0 +1,198 @@
+<%# Dental Template - MUA 진 치과 (MUA JIN) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-modern { font-family: 'Plus Jakarta Sans', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 36px !important; }
+  }
+
+  .clean-pattern {
+     background-image: radial-gradient(#0D9488 0.5px, transparent 0.5px);
+     background-size: 24px 24px;
+     opacity: 0.05;
+  }
+</style>
+
+<div class="bg-white text-[#0F172A] font-sans selection:bg-[#0D9488] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 clean-pattern pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-white/90 backdrop-blur-md border-b border-slate-100">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-2">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain bg-[#0D9488] rounded-tl-xl rounded-br-xl flex items-center justify-center shadow-lg shadow-teal-100">
+            <span class="text-white font-semibold text-lg">M</span>
+         </div>
+         <span class="font-modern font-semibold text-xl tracking-tight text-[#0F172A]">MUA<span class="text-[#0D9488]">JIN</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[13px] font-modern font-semibold text-slate-400">
+         <a href="#about" class="hover:text-[#0D9488] transition">Doctors</a>
+         <a href="#specialty" class="hover:text-[#0D9488] transition">Expertise</a>
+         <a href="#review" class="hover:text-[#0D9488] transition">Reviews</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="toggleDentalModal()" class="hidden md:block text-[13px] font-modern font-semibold text-[#0D9488] hover:bg-teal-50 px-4 py-2 rounded-lg transition" data-mobile-menu-copy="true">Check Up</button>
+         <button class="hidden md:inline-flex bg-[#0F172A] text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-lg font-modern font-semibold text-[13px] tracking-wide hover:bg-[#0D9488] transition shadow-xl shadow-slate-200" data-mobile-menu-copy="true">
+           Book Visit
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Abstract Shapes -->
+    <div class="absolute top-0 right-0 w-[40vw] h-[80vh] bg-teal-50 rounded-bl-[10rem] -z-10 opacity-60"></div>
+    <div class="absolute bottom-10 left-10 w-64 h-64 bg-slate-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-10 text-center lg:text-left">
+        <div class="inline-flex items-center gap-3 bg-white px-4 py-2 rounded-lg border border-slate-100 shadow-sm">
+           <span class="flex h-2.5 w-2.5 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#0D9488]"></span>
+           </span>
+           <span class="text-[11px] font-modern font-semibold text-[#0D9488] uppercase tracking-wider">Trusted by 10,000+ Patients</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-modern font-semibold leading-[1.1] tracking-tight text-[#0F172A] mobile-title">
+           Design Your<br>
+           <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#0D9488] to-[#14B8A6]">Perfect Smile.</span>
+        </h1>
+        
+        <p class="text-slate-500 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-medium">
+           과잉 진료 없는 정직한 원칙, 대학병원 출신 의료진의 정밀한 케어.<br>
+           당신의 미소가 가장 자연스럽게 빛나도록 디자인합니다.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
+           <button class="px-8 py-4 bg-[#0D9488] text-white font-modern font-semibold text-base rounded-xl hover:bg-[#0F766E] transition shadow-lg shadow-teal-100 ring-4 ring-teal-50">
+             Start Consultation
+           </button>
+           <button class="px-8 py-4 bg-white text-[#0F172A] border border-slate-200 font-modern font-semibold text-base rounded-xl hover:border-[#0D9488] hover:text-[#0D9488] transition flex items-center justify-center gap-2">
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+             Call Center
+           </button>
+        </div>
+        
+        <!-- Awards -->
+        <div class="pt-8 flex gap-12 justify-center lg:justify-start border-t border-slate-100 max-w-md mx-auto lg:mx-0">
+           <div>
+              <p class="text-2xl font-semibold text-[#0F172A]">5.0</p>
+              <p class="text-[10px] uppercase font-semibold text-slate-400 mt-1">Google Rating</p>
+           </div>
+           <div class="w-px h-10 bg-slate-100"></div>
+           <div>
+              <p class="text-2xl font-semibold text-[#0F172A]">15<span class="text-lg align-top text-[#0D9488]">+</span></p>
+              <p class="text-[10px] uppercase font-semibold text-slate-400 mt-1">Years Exp.</p>
+           </div>
+           <div class="w-px h-10 bg-slate-100"></div>
+           <div>
+              <p class="text-2xl font-semibold text-[#0F172A]">Top</p>
+              <p class="text-[10px] uppercase font-semibold text-slate-400 mt-1">Best Clinic</p>
+           </div>
+        </div>
+      </div>
+      
+      <div class="relative hidden lg:block">
+         <div class="relative z-10 w-full max-w-md mx-auto aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800" alt="Modern Dental Clinic" class="w-full h-full object-cover rounded-2xl shadow-2xl">
+            
+            <!-- Cards -->
+            <div class="absolute top-10 -left-10 bg-white p-5 rounded-2xl shadow-xl flex items-center gap-6 animate-bounce-slow">
+               <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 bg-teal-50 rounded-full flex items-center justify-center text-lg">🦷</div>
+               <div>
+                  <p class="text-[10px] font-semibold text-slate-400 uppercase">Treatment</p>
+                  <p class="font-semibold text-[#0F172A] text-sm">Pain-Free Implant</p>
+               </div>
+            </div>
+            
+            <div class="absolute bottom-10 -right-10 bg-[#0F172A] p-5 rounded-2xl shadow-xl animate-bounce-delayed">
+               <div class="flex items-center gap-3">
+                  <div class="flex -space-x-2">
+                     <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain rounded-full bg-slate-200 border-2 border-[#0F172A]"></div>
+                     <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain rounded-full bg-slate-300 border-2 border-[#0F172A]"></div>
+                     <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain rounded-full bg-slate-400 border-2 border-[#0F172A]"></div>
+                  </div>
+                  <div class="text-white">
+                     <p class="font-semibold text-sm">All Specialists</p>
+                     <p class="text-[10px] opacity-60 uppercase">Certified Doctors</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+  
+  <style>
+     @keyframes bounce-slow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+     }
+     .animate-bounce-slow { animation: bounce-slow 4s infinite ease-in-out; }
+     .animate-bounce-delayed { animation: bounce-slow 4s infinite ease-in-out 2s; }
+  </style>
+
+  <!-- Login Modal -->
+  <div id="dental-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#0F172A]/20 backdrop-blur-md">
+    <div class="bg-white w-full max-w-sm p-12 shadow-2xl relative rounded-2xl">
+      <button onclick="toggleDentalModal()" class="absolute top-8 right-8 text-slate-300 hover:text-[#0D9488] transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-10">
+        <div class="w-16 h-16 bg-[#F0FDFA] rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 text-[#0D9488]">
+           🏥
+        </div>
+        <h2 class="text-xl font-modern font-semibold text-[#0F172A] mb-1">Patient Portal</h2>
+        <p class="text-[11px] text-[#0D9488] font-semibold tracking-[0.2em] uppercase">Secure Medical Records</p>
+      </div>
+      
+      <div class="space-y-6">
+        <div>
+           <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide mb-2 ml-1">Chart Number</label>
+           <input type="text" placeholder="e.g. 2401-1234" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-5 outline-none focus:border-[#0D9488] focus:ring-1 focus:ring-[#0D9488] transition text-sm font-semibold text-[#0F172A] uppercase">
+        </div>
+        
+        <button class="w-full bg-[#0F172A] text-white py-4 rounded-xl text-[12px] tracking-wide font-semibold uppercase hover:bg-[#0D9488] transition shadow-lg shadow-teal-500/20">
+           Access Records
+        </button>
+        
+        <div class="flex justify-center gap-10 pt-2 text-[#94A3B8] font-semibold text-[11px] uppercase tracking-wide">
+           <a href="#" class="hover:text-[#0D9488] transition">First Visit?</a>
+           <span class="text-slate-200">|</span>
+           <a href="#" class="hover:text-[#0D9488] transition">Need Help</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-slate-100">
+     <div class="inline-flex items-center gap-3 mb-6">
+        <span class="font-modern font-semibold text-xl tracking-tight text-[#0F172A]">MUA<span class="text-[#0D9488]">JIN</span></span>
+        <span class="w-px h-4 bg-slate-200"></span>
+        <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Premium Dental Care</span>
+     </div>
+     <p class="text-[10px] text-slate-300 tracking-wide uppercase px-6">© 2024 MUA JIN Dental Clinic. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function toggleDentalModal() {
+      const modal = document.getElementById('dental-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

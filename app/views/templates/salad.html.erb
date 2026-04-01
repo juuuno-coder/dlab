@@ -1,0 +1,179 @@
+<%# Salad Template - 그린스 앤 그레인 (GREENS & GRAIN) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-brand { font-family: 'DM Sans', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .leaf-pattern {
+     background-image: radial-gradient(#22C55E 0.5px, transparent 0.5px), radial-gradient(#22C55E 0.5px, #F0FDF4 0.5px);
+     background-size: 20px 20px;
+     background-position: 0 0, 10px 10px;
+     opacity: 0.1;
+  }
+</style>
+
+<div class="bg-[#F0FDF4] text-[#14532D] font-sans selection:bg-[#22C55E] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 leaf-pattern pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-[#F0FDF4]/90 backdrop-blur-xl border-b border-[#22C55E]/10">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-2">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain bg-[#22C55E] rounded-lg flex items-center justify-center text-white text-lg shadow-sm">
+            🥗
+         </div>
+         <span class="font-brand font-semibold text-xl tracking-tight text-[#166534]">Greens<span class="text-[#22C55E] font-medium">&</span>Grain</span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[13px] font-brand font-medium tracking-wide text-[#166534]/60">
+        <a href="#signature" class="hover:text-[#166534] transition">Signature Bowls</a>
+        <a href="#custom" class="hover:text-[#166534] transition">Make Your Own</a>
+        <a href="#subscription" class="hover:text-[#166534] transition">Daily Plan</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="toggleSaladModal()" class="hidden md:block text-[13px] font-brand font-semibold text-[#166534] hover:bg-[#22C55E]/10 px-4 py-2 rounded-lg transition" data-mobile-menu-copy="true">Fresh Club</button>
+         <button class="hidden md:inline-flex bg-[#166534] text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-lg font-brand font-semibold text-[13px] hover:bg-[#14532D] transition shadow-lg shadow-[#166534]/20 hover:scale-105 active:scale-95 duration-200" data-mobile-menu-copy="true">
+           Order Now
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Organic blobs -->
+    <div class="absolute top-[10%] right-[5%] w-[500px] h-[500px] bg-[#DCFCE7] rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+    <div class="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-[#FEF3C7] rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+    <div class="absolute -bottom-[10%] left-[20%] w-[500px] h-[500px] bg-[#E0E7FF] rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-10 md:p-16 items-center">
+      <div class="space-y-10 text-center lg:text-left order-2 lg:order-1">
+        <div class="inline-flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg shadow-sm border border-[#22C55E]/20">
+           <span class="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse"></span>
+           <span class="text-[11px] font-brand font-semibold text-[#166534] uppercase tracking-wide">Farm to Bowl &nbsp;|&nbsp; 100% Organic</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-brand font-semibold leading-[1.05] tracking-tight text-[#052E16] mobile-title">
+           Eat Smart,<br>
+           Fill with <span class="text-[#22C55E]">Nature.</span>
+        </h1>
+        
+        <p class="text-[#166534]/70 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-medium">
+           아침 농장에서 온 신선함 그대로. <br>
+           내 몸을 깨우는 가장 건강하고 맛있는 한 그릇을 만나보세요.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
+           <button class="px-8 py-4 bg-[#22C55E] text-white font-brand font-semibold text-base rounded-lg shadow-[0_4px_14px_0_rgba(34,197,94,0.39)] hover:shadow-[0_6px_20px_rgba(34,197,94,0.23)] hover:-translate-y-1 transition-all">
+              Start Your Order
+           </button>
+           <button class="px-8 py-4 bg-white text-[#166534] border border-[#22C55E]/20 font-brand font-semibold text-base rounded-lg hover:bg-[#F0FDF4] transition flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Watch Process
+           </button>
+        </div>
+        
+        <div class="flex items-center justify-center lg:justify-start gap-12 pt-6">
+           <div>
+              <p class="text-2xl font-brand font-semibold text-[#166534]">450<span class="text-sm align-top text-[#22C55E]">+</span></p>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[#166534]/40">Kcal Average</p>
+           </div>
+           <div class="w-px h-10 bg-[#166534]/10"></div>
+           <div>
+              <p class="text-2xl font-brand font-semibold text-[#166534]">20<span class="text-sm align-top text-[#22C55E]">min</span></p>
+              <p class="text-xs font-semibold uppercase tracking-wider text-[#166534]/40">Fast Delivery</p>
+           </div>
+        </div>
+      </div>
+      
+      <div class="relative order-1 lg:order-2 flex justify-center">
+         <div class="relative w-[300px] md:w-[500px] aspect-square">
+             <div class="absolute inset-0 bg-[#22C55E]/5 rounded-full blur-3xl transform scale-90"></div>
+             <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1000" alt="Fresh Salad Bowl" class="relative z-10 w-full h-full object-contain hover:scale-105 transition duration-700 drop-shadow-2xl">
+             
+             <!-- Floating Badge -->
+             <div class="absolute bottom-10 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-[#22C55E]/10 animate-bounce cursor-pointer hover:bg-[#22C55E] hover:text-white group transition-colors">
+                <div class="flex items-center gap-3">
+                   <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 bg-[#F0FDF4] rounded-full flex items-center justify-center text-xl group-hover:bg-white/20">🥑</div>
+                   <div>
+                      <p class="text-[10px] font-semibold text-[#166534]/50 uppercase tracking-wide group-hover:text-white/60">Best Topping</p>
+                      <p class="font-brand font-semibold text-[#166534] group-hover:text-white">Fresh Avocado</p>
+                   </div>
+                </div>
+             </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+   <style>
+      @keyframes blob {
+         0% { transform: translate(0px, 0px) scale(1); }
+         33% { transform: translate(30px, -50px) scale(1.1); }
+         66% { transform: translate(-20px, 20px) scale(0.9); }
+         100% { transform: translate(0px, 0px) scale(1); }
+      }
+      .animate-blob { animation: blob 7s infinite; }
+      .animation-delay-2000 { animation-delay: 2s; }
+      .animation-delay-4000 { animation-delay: 4s; }
+   </style>
+
+  <!-- Login Modal -->
+  <div id="salad-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#052E16]/30 backdrop-blur-md">
+    <div class="bg-white w-full max-w-sm p-10 shadow-2xl relative rounded-2xl border border-[#22C55E]/10">
+      <button onclick="toggleSaladModal()" class="absolute top-6 right-6 text-[#166534]/30 hover:text-[#22C55E] transition text-2xl font-brand font-semibold">&times;</button>
+      
+      <div class="text-center mb-8">
+        <div class="w-14 h-14 bg-[#F0FDF4] rounded-2xl flex items-center justify-center text-lg md:text-2xl mx-auto mb-4 text-[#22C55E] shadow-sm">
+           🥗
+        </div>
+        <h2 class="text-2xl font-brand font-semibold text-[#166534] mb-1">Fresh Club</h2>
+        <p class="text-[12px] text-[#22C55E] font-semibold uppercase tracking-wide">Earn points with every bowl</p>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+           <label class="block text-[11px] font-semibold text-[#166534]/50 uppercase tracking-wide mb-1.5 ml-1">Mobile Number</label>
+           <input type="tel" placeholder="010-0000-0000" class="w-full bg-[#F0FDF4] border border-[#DCFCE7] rounded-xl py-3 px-5 outline-none focus:border-[#22C55E] focus:ring-1 focus:ring-[#22C55E] transition text-sm font-semibold text-[#166534]">
+        </div>
+        
+        <button class="w-full bg-[#166534] text-white py-3.5 rounded-xl text-[13px] font-semibold uppercase tracking-wide hover:bg-[#14532D] transition shadow-lg shadow-[#166534]/20 mt-2">
+           Login / Sign Up
+        </button>
+        
+        <div class="text-center pt-4 border-t border-[#F0FDF4] mt-6">
+           <p class="text-xs text-[#166534]/60">By continuing, you agree to our <a href="#" class="font-semibold underline">Terms of Service</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-[#F0FDF4]">
+     <div class="inline-flex items-center gap-6 mb-6">
+        <span class="font-brand font-semibold text-xl tracking-tight text-[#166534]">Greens<span class="text-[#22C55E] font-medium">&</span>Grain</span>
+     </div>
+     <p class="text-[11px] font-medium text-[#166534]/40 uppercase tracking-wide">Eat clean, live green. © 2024 Greens & Grain.</p>
+  </footer>
+
+  <script>
+    function toggleSaladModal() {
+      const modal = document.getElementById('salad-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

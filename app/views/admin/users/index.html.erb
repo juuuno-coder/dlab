@@ -1,0 +1,55 @@
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-6); flex-wrap: wrap; gap: 16px;">
+  <div>
+    <h1 style="font-size: var(--text-2xl); font-weight: 700;">회원 관리</h1>
+    <p style="color: var(--color-gray-500); font-size: var(--text-sm);">총 <%= User.count %>명의 회원이 가입되어 있습니다.</p>
+  </div>
+  
+  <div style="max-width: 400px; flex: 1;">
+    <%= form_with url: admin_users_path, method: :get, class: "flex gap-2", local: true do |f| %>
+      <%= f.text_field :query, value: params[:query], placeholder: "이름 또는 이메일 검색", class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm p-2 bg-white border" %>
+      <%= f.submit "검색", class: "btn btn-primary" %>
+      <% if params[:query].present? %>
+        <%= link_to "초기화", admin_users_path, class: "btn btn-outline" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="card">
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="border-bottom: 1px solid var(--color-gray-200);">
+        <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">ID</th>
+        <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">이메일</th>
+        <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">이름</th>
+        <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">가입일</th>
+        <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">소셜 계정</th>
+        <th style="text-align: right; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">관리</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr style="border-bottom: 1px solid var(--color-gray-100);">
+          <td style="padding: var(--space-4);">#<%= user.id %></td>
+          <td style="padding: var(--space-4);"><%= user.email %></td>
+          <td style="padding: var(--space-4);"><%= user.name %></td>
+          <td style="padding: var(--space-4);"><%= user.created_at.strftime("%Y-%m-%d") %></td>
+          <td style="padding: var(--space-4);">
+            <% if user.provider.present? %>
+              <span class="badge badge-primary"><%= user.provider %></span>
+            <% else %>
+              -
+            <% end %>
+          </td>
+          <td style="padding: var(--space-4); text-align: right;">
+            <%= link_to "상세보기", admin_user_path(user), class: "btn btn-outline btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <div style="padding: var(--space-4); display: flex; justify-content: center;">
+    <%= paginate @users %>
+  </div>
+</div>

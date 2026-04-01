@@ -1,0 +1,169 @@
+<%# Vet Template - 위드 펫 (WITH PET) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-soft { font-family: 'Nunito', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .paw-print {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 40c-2 0-3.5-1.5-3.5-3.5s1.5-3.5 3.5-3.5 3.5 1.5 3.5 3.5-1.5 3.5-3.5 3.5zm10-7c-2 0-3.5-1.5-3.5-3.5s1.5-3.5 3.5-3.5 3.5 1.5 3.5 3.5-1.5 3.5-3.5 3.5zm-20 0c-2 0-3.5-1.5-3.5-3.5s1.5-3.5 3.5-3.5 3.5 1.5 3.5 3.5-1.5 3.5-3.5 3.5zm25 15c-3 0-5.5-2.5-6.5-5.5-1 4-5 6-9 6s-8-2-9-6c-1 3-3.5 5.5-6.5 5.5-4 0-7-3-7-7 0-4 10-15 13-15h19c3 0 13 11 13 15 0 4-3 7-7 7z' fill='%233B82F6' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+</style>
+
+<div class="bg-[#F0F9FF] text-[#1E3A8A] font-sans selection:bg-[#60A5FA] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 paw-print pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-[#F0F9FF]/80 backdrop-blur-xl border-b border-[#BFDBFE]/50">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-2">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 bg-white rounded-xl flex items-center justify-center text-lg md:text-2xl shadow-sm border border-[#BFDBFE]">
+            🩺
+         </div>
+         <span class="font-soft font-semibold text-xl tracking-wide text-[#1E3A8A]">With<span class="text-[#3B82F6]">Pet</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[14px] font-soft font-semibold text-[#60A5FA]">
+        <a href="#about" class="hover:text-[#1E3A8A] transition">About</a>
+        <a href="#services" class="hover:text-[#1E3A8A] transition">Services</a>
+        <a href="#emergency" class="hover:text-[#1E3A8A] transition text-red-400">Emergency</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="toggleVetModal()" class="hidden md:block text-[14px] font-soft font-semibold text-[#60A5FA] hover:text-[#1E3A8A] bg-white px-4 py-2 rounded-xl shadow-sm border border-[#BFDBFE] hover:shadow-md transition" data-mobile-menu-copy="true">My Pet</button>
+         <button class="hidden md:inline-flex bg-[#3B82F6] text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-xl font-soft font-semibold text-[14px] hover:bg-[#2563EB] transition shadow-lg shadow-blue-300" data-mobile-menu-copy="true">
+           Book Appointment
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Soft Blobs -->
+    <div class="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-[#BFDBFE] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+    <div class="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-[#E0F2FE] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-10 text-center lg:text-left order-2 lg:order-1">
+        <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-[#BFDBFE]">
+           <span class="w-2 h-2 rounded-full bg-[#3B82F6] animate-pulse"></span>
+           <span class="text-[12px] font-soft font-semibold text-[#3B82F6] uppercase tracking-wide">24/7 Professional Medical Care</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-soft font-semibold leading-[1.1] text-[#1E3A8A] mobile-title">
+           Compassionate<br>
+           Care for Your<br>
+           <span class="text-[#3B82F6]">Best Friend.</span>
+        </h1>
+        
+        <p class="text-[#1E3A8A]/70 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-medium">
+           말하지 못하는 아이들의 마음까지 치료합니다.<br>
+           위드 펫 메디컬 센터는 평생의 건강 주치의가 되어드립니다.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
+           <button class="px-8 py-4 bg-[#1E3A8A] text-white font-soft font-semibold text-lg rounded-2xl hover:bg-[#1E40AF] transition shadow-xl">
+             Meet Our Doctors
+           </button>
+           <button class="px-8 py-4 bg-white text-[#1E3A8A] border-2 border-[#BFDBFE] font-soft font-semibold text-lg rounded-2xl hover:bg-[#F0F9FF] transition flex items-center justify-center gap-2 group">
+             <span>📞</span>
+             <span>Emergency Call</span>
+           </button>
+        </div>
+      </div>
+      
+      <div class="relative order-1 lg:order-2 flex justify-center">
+         <div class="relative z-10 w-[350px] md:w-[500px] aspect-square group">
+             <div class="absolute inset-0 bg-[#3B82F6] rounded-2xl rotate-3 opacity-10 group-hover:rotate-6 transition duration-700"></div>
+             <img src="https://images.unsplash.com/photo-1628009368231-76033527212e?q=80&w=800" alt="Veterinary Care" class="w-full h-full object-cover rounded-2xl shadow-2xl transform -rotate-3 group-hover:rotate-0 transition duration-700 border-8 border-white">
+             
+             <!-- Floating Badge -->
+             <div class="absolute -bottom-8 -right-8 bg-white p-5 rounded-2xl shadow-xl border border-[#BFDBFE] animate-bounce-slow flex items-center gap-6">
+                <div class="bg-blue-50 p-3 rounded-xl text-lg md:text-2xl">🐶</div>
+                <div>
+                   <p class="font-semibold text-[#1E3A8A] text-lg">98%</p>
+                   <p class="text-[10px] uppercase font-semibold text-[#93C5FD]">Recovery Rate</p>
+                </div>
+             </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+   <style>
+      @keyframes blob {
+         0% { transform: translate(0px, 0px) scale(1); }
+         33% { transform: translate(30px, -50px) scale(1.1); }
+         66% { transform: translate(-20px, 20px) scale(0.9); }
+         100% { transform: translate(0px, 0px) scale(1); }
+      }
+      .animate-blob { animation: blob 7s infinite; }
+      .animation-delay-2000 { animation-delay: 2s; }
+      @keyframes bounce-slow {
+         0%, 100% { transform: translateY(0); }
+         50% { transform: translateY(-10px); }
+      }
+      .animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
+   </style>
+
+  <!-- Login Modal -->
+  <div id="vet-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#1E3A8A]/20 backdrop-blur-md">
+    <div class="bg-white w-full max-w-sm p-10 shadow-2xl relative rounded-[2.5rem] border-4 border-[#BFDBFE]">
+      <button onclick="toggleVetModal()" class="absolute top-6 right-6 text-[#93C5FD] hover:text-[#3B82F6] transition text-2xl font-soft font-semibold">&times;</button>
+      
+      <div class="text-center mb-8">
+        <div class="w-20 h-20 bg-[#EFF6FF] rounded-full flex items-center justify-center text-3xl mx-auto mb-4 border border-[#BFDBFE]">
+           🐕
+        </div>
+        <h2 class="text-2xl font-soft font-semibold text-[#1E3A8A] mb-1">Guardian Portal</h2>
+        <p class="text-[13px] text-[#3B82F6] font-semibold uppercase tracking-wide">Access Pet Health Records</p>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+           <input type="text" placeholder="Guardian Phone Number" class="w-full bg-[#F0F9FF] border-2 border-[#E0F2FE] rounded-2xl py-4 px-6 outline-none focus:border-[#3B82F6] focus:bg-white transition text-lg font-soft font-semibold text-[#1E3A8A] text-center placeholder-[#93C5FD]">
+        </div>
+        
+        <button class="w-full bg-[#3B82F6] text-white py-4 rounded-2xl font-soft font-semibold text-lg shadow-lg hover:bg-[#2563EB] transition transform active:scale-95">
+           Log In
+        </button>
+        
+        <div class="flex justify-center gap-10 pt-4 text-sm font-soft font-semibold text-[#93C5FD]">
+           <a href="#" class="hover:text-[#3B82F6] transition">Register Pet</a>
+           <span>•</span>
+           <a href="#" class="hover:text-[#3B82F6] transition">Results Inquiry</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-[#F0F9FF]">
+     <div class="inline-flex flex-col items-center gap-6 mb-6">
+        <span class="text-2xl">🐾</span>
+        <span class="font-soft font-semibold text-xl text-[#1E3A8A]">With<span class="text-[#3B82F6]">Pet</span></span>
+     </div>
+     <p class="text-[11px] font-semibold text-[#93C5FD] uppercase tracking-wider">© 2024 WITH PET MEDICAL CENTER.</p>
+  </footer>
+
+  <script>
+    function toggleVetModal() {
+      const modal = document.getElementById('vet-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

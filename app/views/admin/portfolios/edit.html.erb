@@ -1,0 +1,211 @@
+<div style="max-width: 800px;">
+  <div style="margin-bottom: var(--space-8);">
+    <%= link_to "← 목록으로", admin_portfolios_path, style: "color: var(--color-gray-600); text-decoration: none;" %>
+    <h1 style="font-size: var(--text-4xl); margin-top: var(--space-4); margin-bottom: var(--space-2);">포트폴리오 수정</h1>
+  </div>
+
+  <%= form_with model: @portfolio, url: admin_portfolio_path(@portfolio), method: :patch, class: "card", style: "padding: var(--space-8);" do |f| %>
+    <% if @portfolio.errors.any? %>
+      <div style="background: var(--color-error); color: white; padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-6);">
+        <strong><%= pluralize(@portfolio.errors.count, "error") %> 발생:</strong>
+        <ul style="margin-top: var(--space-2); padding-left: var(--space-4);">
+          <% @portfolio.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :title, "프로젝트명 *", class: "form-label" %>
+      <%= f.text_field :title, class: "form-input", placeholder: "예: 디어스 공식 웹사이트", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :category, "카테고리", class: "form-label" %>
+      <%= f.select :category, 
+        options_for_select([
+          ["선택해주세요", ""],
+          ["웹사이트", "웹사이트"],
+          ["웹 애플리케이션", "웹 애플리케이션"],
+          ["모바일 앱", "모바일 앱"],
+          ["UI/UX 디자인", "UI/UX 디자인"],
+          ["AI/ML", "AI/ML"],
+          ["기타", "기타"]
+        ], @portfolio.category), 
+        {}, 
+        { class: "form-select" }
+      %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :client, "클라이언트", class: "form-label" %>
+      <%= f.text_field :client, class: "form-input", placeholder: "예: 주식회사 디어스" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :project_date, "프로젝트 날짜", class: "form-label" %>
+      <%= f.date_field :project_date, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :image, "프로젝트 이미지 (권장: 800x600px)", class: "form-label" %>
+      
+      <div style="border: 2px dashed var(--color-gray-300); border-radius: var(--radius-lg); padding: var(--space-6); text-align: center; background: var(--color-gray-50); transition: all 0.2s;" id="drop-zone">
+        <input type="file" name="portfolio[image]" id="portfolio_image" class="form-input" style="display: none;" accept="image/*" onchange="previewImage(this)">
+        
+        <div id="upload-prompt" style="<%= @portfolio.image.attached? || @portfolio.image_url.present? ? 'display: none;' : 'cursor: pointer;' %>" onclick="document.getElementById('portfolio_image').click()">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" stroke-width="2" style="margin-bottom: var(--space-2);">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <p style="color: var(--color-gray-600); font-weight: 500; margin-bottom: var(--space-1);">이미지 업로드</p>
+          <p style="color: var(--color-gray-400); font-size: var(--text-sm);">또는 파일을 여기로 드래그하세요</p>
+        </div>
+
+        <div id="preview-container" style="<%= @portfolio.image.attached? || @portfolio.image_url.present? ? 'display: block;' : 'display: none;' %> position: relative;">
+          <% if @portfolio.image.attached? %>
+            <%= image_tag @portfolio.image, id: "image-preview", style: "max-width: 100%; max-height: 300px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);" %>
+          <% elsif @portfolio.image_url.present? %>
+            <%= image_tag @portfolio.image_url, id: "image-preview", style: "max-width: 100%; max-height: 300px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);" %>
+          <% else %>
+            <img id="image-preview" src="#" alt="Preview" style="max-width: 100%; max-height: 300px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <% end %>
+          <button type="button" onclick="removeImage()" style="position: absolute; top: -10px; right: -10px; background: white; border: 1px solid var(--color-gray-200); border-radius: 50%; padding: 5px; cursor: pointer; box-shadow: var(--shadow-sm);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-error)" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <%= f.hidden_field :image_url %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :mobile_image, "모바일 미리보기 이미지 (선택사항)", class: "form-label" %>
+      
+      <div style="border: 2px dashed var(--color-gray-300); border-radius: var(--radius-lg); padding: var(--space-6); text-align: center; background: var(--color-gray-50); transition: all 0.2s;" id="drop-zone-mobile">
+        <input type="file" name="portfolio[mobile_image]" id="portfolio_mobile_image" class="form-input" style="display: none;" accept="image/*" onchange="previewMobileImage(this)">
+        
+        <div id="upload-prompt-mobile" style="<%= @portfolio.mobile_image.attached? ? 'display: none;' : 'cursor: pointer;' %>" onclick="document.getElementById('portfolio_mobile_image').click()">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" stroke-width="2" style="margin-bottom: var(--space-2);">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12" y2="18"></line>
+          </svg>
+          <p style="color: var(--color-gray-600); font-weight: 500; margin-bottom: var(--space-1);">모바일 이미지 업로드</p>
+          <p style="color: var(--color-gray-400); font-size: var(--text-sm);">또는 파일을 여기로 드래그하세요</p>
+        </div>
+
+        <div id="preview-container-mobile" style="<%= @portfolio.mobile_image.attached? ? 'display: block;' : 'display: none;' %> position: relative;">
+          <% if @portfolio.mobile_image.attached? %>
+            <%= image_tag @portfolio.mobile_image, id: "image-preview-mobile", style: "max-width: 100%; max-height: 300px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);" %>
+          <% else %>
+            <img id="image-preview-mobile" src="#" alt="Preview" style="max-width: 100%; max-height: 300px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <% end %>
+          <button type="button" onclick="removeMobileImage()" style="position: absolute; top: -10px; right: -10px; background: white; border: 1px solid var(--color-gray-200); border-radius: 50%; padding: 5px; cursor: pointer; box-shadow: var(--shadow-sm);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-error)" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function previewImage(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function(e) {
+            document.getElementById('image-preview').src = e.target.result;
+            document.getElementById('upload-prompt').style.display = 'none';
+            document.getElementById('preview-container').style.display = 'block';
+          }
+          
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      function removeImage() {
+        document.getElementById('portfolio_image').value = "";
+        document.getElementById('image-preview').src = "#";
+        document.getElementById('upload-prompt').style.display = 'block';
+        document.getElementById('preview-container').style.display = 'none';
+      }
+
+      function previewMobileImage(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function(e) {
+            document.getElementById('image-preview-mobile').src = e.target.result;
+            document.getElementById('upload-prompt-mobile').style.display = 'none';
+            document.getElementById('preview-container-mobile').style.display = 'block';
+          }
+          
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      function removeMobileImage() {
+        document.getElementById('portfolio_mobile_image').value = "";
+        document.getElementById('image-preview-mobile').src = "#";
+        document.getElementById('upload-prompt-mobile').style.display = 'block';
+        document.getElementById('preview-container-mobile').style.display = 'none';
+      }
+
+      // Drag and Drop support PC
+      const dropZone = document.getElementById('drop-zone');
+      setupDropZone(dropZone, 'portfolio_image', previewImage);
+
+      // Drag and Drop support Mobile
+      const dropZoneMobile = document.getElementById('drop-zone-mobile');
+      setupDropZone(dropZoneMobile, 'portfolio_mobile_image', previewMobileImage);
+
+      function setupDropZone(zone, inputId, previewCallback) {
+        if(!zone) return;
+
+        zone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          zone.style.borderColor = 'var(--color-primary)';
+          zone.style.background = 'var(--color-white)';
+        });
+
+        zone.addEventListener('dragleave', (e) => {
+          e.preventDefault();
+          zone.style.borderColor = 'var(--color-gray-300)';
+          zone.style.background = 'var(--color-gray-50)';
+        });
+
+        zone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          zone.style.borderColor = 'var(--color-gray-300)';
+          zone.style.background = 'var(--color-gray-50)';
+          
+          const files = e.dataTransfer.files;
+          if (files.length > 0) {
+            const input = document.getElementById(inputId);
+            input.files = files;
+            previewCallback(input);
+          }
+        });
+      }
+    </script>
+
+    <div class="form-group">
+      <%= f.label :description, "프로젝트 설명", class: "form-label" %>
+      <div class="prose max-w-none">
+        <%= f.rich_text_area :description, class: "form-textarea", placeholder: "프로젝트에 대한 상세한 설명을 입력하세요...", style: "min-height: 300px;" %>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: var(--space-4); margin-top: var(--space-8);">
+      <%= f.submit "수정하기", class: "btn btn-primary btn-lg" %>
+      <%= link_to "취소", admin_portfolios_path, class: "btn btn-outline btn-lg" %>
+    </div>
+  <% end %>
+</div>

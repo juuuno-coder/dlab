@@ -1,0 +1,262 @@
+<div class="bg-gray-50 pb-32">
+  <!-- Header -->
+  <div class="bg-white border-b py-16">
+    <div class="container text-center" data-aos="fade-down">
+      <h1 class="text-5xl font-bold font-serif text-primary mb-6">Design System</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        DLAB의 브랜드 아이덴티티와 UI 컴포넌트를 정의한 디자인 가이드입니다.<br>
+        일관된 사용자 경험을 위해 아래의 가이드를 준수합니다.
+      </p>
+    </div>
+  </div>
+
+  <div class="container mt-16 space-y-24">
+    
+    <!-- 1. Brand Colors -->
+    <section id="colors" data-aos="fade-up">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="text-4xl text-primary font-serif">01</span>
+        <h2 class="text-3xl font-bold text-gray-900">Brand Colors</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Primary -->
+        <div class="group cursor-pointer">
+          <div class="h-40 rounded-2xl bg-primary shadow-lg mb-4 flex items-end p-6 group-hover:scale-105 transition-transform">
+            <span class="text-white font-mono text-lg opacity-80">var(--primary)</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Primary Green</h3>
+          <p class="text-gray-500 font-mono">#00a859</p>
+          <p class="text-sm text-gray-400 mt-2">메인 브랜드 컬러, 버튼, 강조 텍스트</p>
+        </div>
+
+        <!-- Primary Dark -->
+        <div class="group cursor-pointer">
+          <div class="h-40 rounded-2xl bg-[#008a47] shadow-lg mb-4 flex items-end p-6 group-hover:scale-105 transition-transform">
+            <span class="text-white font-mono text-lg opacity-80">primary-dark</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Dark Green</h3>
+          <p class="text-gray-500 font-mono">#008a47</p>
+          <p class="text-sm text-gray-400 mt-2">호버 상태, 깊이감 표현</p>
+        </div>
+
+        <!-- Accent -->
+        <div class="group cursor-pointer">
+          <div class="h-40 rounded-2xl bg-accent shadow-lg mb-4 flex items-end p-6 group-hover:scale-105 transition-transform">
+            <span class="text-white font-mono text-lg opacity-80">var(--accent)</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Accent Green</h3>
+          <p class="text-gray-500 font-mono">#00d670</p>
+          <p class="text-sm text-gray-400 mt-2">그라데이션, 보조 강조</p>
+        </div>
+
+        <!-- Gray Scale -->
+        <div class="space-y-2">
+          <div class="h-12 rounded-lg bg-gray-900 flex items-center justify-between px-4 text-white text-sm"><span>Gray 900</span> <span>#111827</span></div>
+          <div class="h-12 rounded-lg bg-gray-700 flex items-center justify-between px-4 text-white text-sm"><span>Gray 700</span> <span>#374151</span></div>
+          <div class="h-12 rounded-lg bg-gray-500 flex items-center justify-between px-4 text-white text-sm"><span>Gray 500</span> <span>#6B7280</span></div>
+          <div class="h-12 rounded-lg bg-gray-300 flex items-center justify-between px-4 text-gray-700 text-sm"><span>Gray 300</span> <span>#D1D5DB</span></div>
+          <div class="h-12 rounded-lg bg-gray-100 flex items-center justify-between px-4 text-gray-600 text-sm"><span>Gray 100</span> <span>#F3F4F6</span></div>
+        </div>
+      </div>
+
+      <!-- Semantics -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+        <div class="bg-red-50 p-6 rounded-xl border border-red-100 flex items-center gap-4">
+          <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white">!</div>
+          <div>
+            <p class="font-bold text-red-900">Error</p>
+            <p class="text-sm text-red-600">시스템 오류, 삭제 등 위험 작업</p>
+          </div>
+        </div>
+        <div class="bg-yellow-50 p-6 rounded-xl border border-yellow-100 flex items-center gap-4">
+          <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white">⚠️</div>
+          <div>
+            <p class="font-bold text-yellow-900">Warning</p>
+            <p class="text-sm text-yellow-600">주의사항, 확인 필요</p>
+          </div>
+        </div>
+        <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100 flex items-center gap-4">
+          <div class="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white">✓</div>
+          <div>
+            <p class="font-bold text-emerald-900">Success</p>
+            <p class="text-sm text-emerald-600">작업 완료, 긍정적 메시지</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Typography -->
+    <section id="typography" data-aos="fade-up">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="text-4xl text-primary font-serif">02</span>
+        <h2 class="text-3xl font-bold text-gray-900">Typography</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 bg-white rounded-3xl shadow-sm border p-12">
+        <div>
+          <div class="mb-12">
+            <span class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 block">Font Family</span>
+            <div class="space-y-6">
+              <div>
+                <p class="text-6xl font-serif text-gray-900 mb-2">Noto Serif KR</p>
+                <p class="text-gray-500">Headings, Emotional contexts</p>
+              </div>
+              <div>
+                <p class="text-6xl font-sans font-bold text-gray-900 mb-2">Pretendard</p>
+                <p class="text-gray-500">Body text, UI Elements, Data</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="border-b pb-8">
+            <h1 class="text-5xl font-serif text-gray-900 mb-4">Display Heading</h1>
+            <p class="font-mono text-sm text-gray-400">font-serif text-5xl</p>
+          </div>
+          <div class="border-b pb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Section Title Style</h2>
+            <p class="font-mono text-sm text-gray-400">font-bold text-3xl</p>
+          </div>
+          <div class="border-b pb-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Component Heading</h3>
+            <p class="font-mono text-sm text-gray-400">font-bold text-xl</p>
+          </div>
+          <div>
+            <p class="text-gray-600 leading-relaxed">
+              본문 텍스트입니다. 가독성을 최우선으로 하며, 줄간격(Line-height)은 1.6~1.8을 유지합니다. 
+              색상은 순수한 검정(#000)보다는 #374151 또는 #4B5563을 사용하여 눈의 피로를 줄입니다.
+              한글 폰트로는 Pretendard를 사용하여 모던하고 깔끔한 인상을 전달합니다.
+            </p>
+            <p class="font-mono text-sm text-gray-400 mt-4">text-base text-gray-600 leading-relaxed</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. UI Components -->
+    <section id="components" data-aos="fade-up">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="text-4xl text-primary font-serif">03</span>
+        <h2 class="text-3xl font-bold text-gray-900">UI Components</h2>
+      </div>
+
+      <div class="grid gap-12">
+        <!-- Buttons -->
+        <div class="bg-white rounded-3xl p-10 shadow-sm border">
+          <h3 class="text-xl font-bold mb-8">Buttons & Interaction</h3>
+          <div class="flex flex-wrap items-center gap-6">
+            <!-- Primary -->
+            <div class="text-center">
+              <button class="btn btn-primary mb-2">Get Started</button>
+              <p class="text-xs text-gray-400 font-mono">.btn-primary</p>
+            </div>
+            <!-- Outline -->
+            <div class="text-center">
+              <button class="btn btn-outline mb-2">View Portfolio</button>
+              <p class="text-xs text-gray-400 font-mono">.btn-outline</p>
+            </div>
+            <!-- Floating -->
+             <div class="text-center">
+              <button class="w-14 h-14 rounded-full bg-primary text-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform mb-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              </button>
+              <p class="text-xs text-gray-400 font-mono">Floating Action</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card group">
+            <span class="inline-block px-3 py-1 bg-emerald-100 text-primary text-xs font-bold rounded-full mb-4">FEATURE</span>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">Premium Design Template</h3>
+            <p class="text-gray-600 mb-6 line-clamp-2">
+              고객의 비즈니스에 최적화된 프리미엄 디자인 템플릿을 제공합니다. 
+              반응형 웹, SEO 최적화가 기본으로 적용되어 있습니다.
+            </p>
+            <div class="flex items-center justify-between border-t pt-4">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-gray-200"></div>
+                <span class="text-sm text-gray-500">D.LAB Team</span>
+              </div>
+              <span class="text-primary font-bold text-sm">Read More →</span>
+            </div>
+          </div>
+
+          <div class="card bg-gray-900 text-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-primary opacity-20 rounded-full blur-3xl -mr-10 -mt-10"></div>
+            <h3 class="text-2xl font-bold mb-3 relative z-10">Cyber Security</h3>
+            <p class="text-gray-300 mb-6 relative z-10">
+              안전한 보안 시스템 구축과 데이터 암호화 서비스.
+            </p>
+            <button class="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-bold transition-all backdrop-blur-sm">
+              Service Detail
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Elements -->
+        <div class="bg-white rounded-3xl p-10 shadow-sm border">
+          <h3 class="text-xl font-bold mb-8">Form System</h3>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+                <div class="relative">
+                  <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">@</span>
+                  <input type="email" value="example@dlab.com" class="w-full pl-10 pr-4 py-3 bg-gray-50 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none">
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">Success State</label>
+                <div class="relative">
+                  <input type="text" value="Verified User" class="w-full px-4 py-3 bg-emerald-50 border-emerald-300 text-emerald-800 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500">✓</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">Select Project Type</label>
+                <select class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none cursor-pointer">
+                  <option>Web Development</option>
+                  <option>Mobile App</option>
+                  <option>Consulting</option>
+                </select>
+              </div>
+              <div class="flex items-center gap-4 pt-4">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="radio-demo" checked class="w-5 h-5 text-primary focus:ring-primary">
+                  <span>Option A</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="radio-demo" class="w-5 h-5 text-primary focus:ring-primary">
+                  <span>Option B</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Shadow & Depth -->
+    <section id="shadows" data-aos="fade-up">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="text-4xl text-primary font-serif">04</span>
+        <h2 class="text-3xl font-bold text-gray-900">Elevation & Depth</h2>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="bg-white h-32 rounded-xl border flex items-center justify-center text-gray-400">No Shadow</div>
+        <div class="bg-white h-32 rounded-xl shadow-sm flex items-center justify-center text-gray-500 font-bold">Shadow SM</div>
+        <div class="bg-white h-32 rounded-xl shadow-lg flex items-center justify-center text-primary font-bold">Shadow LG</div>
+        <div class="bg-white h-32 rounded-xl shadow-2xl flex items-center justify-center text-primary font-bold text-xl">Shadow 2XL</div>
+      </div>
+    </section>
+
+  </div>
+</div>

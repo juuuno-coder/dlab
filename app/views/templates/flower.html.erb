@@ -1,0 +1,148 @@
+<%# Flower Template - 블룸 앤 가든 (BLOOM & GARDEN) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+  
+  .font-serif-display { font-family: 'Cormorant Garamond', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .floral-pattern {
+    background-image: radial-gradient(#FBCFE8 2px, transparent 2px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+  }
+</style>
+
+<div class="bg-[#FFFCF8] text-[#4A4238] font-sans selection:bg-[#F9A8D4] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 floral-pattern pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-[#FFFCF8]/80 backdrop-blur-md border-b border-[#F9A8D4]/10">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl text-[#F472B6]">✤</span>
+        <span class="font-serif-display font-semibold text-2xl tracking-wide text-[#5D5447]">Bloom<span class="italic text-[#F472B6]">&</span>Garden</span>
+      </div>
+      
+      <div class="hidden md:flex gap-16 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9CA3AF]">
+        <a href="#workshop" class="hover:text-[#F472B6] transition">Workshop</a>
+        <a href="#bouquet" class="hover:text-[#F472B6] transition">Bouquet</a>
+        <a href="#wedding" class="hover:text-[#F472B6] transition">Wedding</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-10 items-center">
+         <button onclick="toggleFlowerModal()" class="hidden md:block text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9CA3AF] hover:text-[#F472B6]" data-mobile-menu-copy="true">My Garden</button>
+         <button class="hidden md:inline-flex border border-[#F472B6]/30 text-[#5D5447] px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-lg font-serif-display font-medium text-sm hover:bg-[#FDF2F8] hover:border-[#F472B6] transition" data-mobile-menu-copy="true">
+           Subscribe
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Soft Organic Shapes -->
+    <div class="absolute top-0 right-0 w-[50vw] h-[80vh] bg-[#FFF1F2] rounded-bl-[15rem] -z-10 opacity-70"></div>
+    <div class="absolute bottom-0 left-0 w-[40vw] h-[60vh] bg-[#F3F4F6] rounded-tr-[15rem] -z-10 opacity-50"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-10 text-center lg:text-left order-2 lg:order-1">
+        <div class="inline-flex items-center gap-3 justify-center lg:justify-start">
+           <span class="w-8 h-[1px] bg-[#F472B6]"></span>
+           <span class="text-[11px] font-serif-display italic text-[#F472B6] text-lg tracking-wide">French Modern Floristry</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-[6rem] font-serif-display font-light leading-[1] text-[#4A4238] mobile-title">
+           Nature's<br>
+           <span class="italic text-[#F472B6]">Poetry</span> in<br>
+           Your Hands.
+        </h1>
+        
+        <p class="text-[#4A4238]/70 text-sm md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mobile-desc font-light">
+           계절의 숨결을 담은 가장 아름다운 순간.<br>
+           블룸 앤 가든에서 당신의 일상에 향기를 더하세요.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-10 justify-center lg:justify-start pt-6">
+           <button class="px-10 py-4 bg-[#5D5447] text-white font-serif-display italic text-lg tracking-wide rounded-sm hover:bg-[#F472B6] transition shadow-xl shadow-[#F9A8D4]/30">
+             Shop Flowers
+           </button>
+           <button class="px-10 py-4 text-[#5D5447] font-serif-display italic text-lg tracking-wide border-b border-[#5D5447]/20 hover:border-[#F472B6] hover:text-[#F472B6] transition">
+             View Class
+           </button>
+        </div>
+      </div>
+      
+      <div class="relative order-1 lg:order-2 flex justify-center">
+         <div class="relative z-10 w-[350px] md:w-[450px] aspect-[3/4]">
+            <div class="absolute inset-0 bg-white p-4 pb-20 shadow-2xl rotate-3 transform transition-transform duration-700 hover:rotate-0">
+               <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ee0?q=80&w=800" alt="Artistic Flower Arrangement" class="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition duration-700">
+               <div class="absolute bottom-6 left-0 w-full text-center">
+                  <p class="font-serif-display italic text-2xl text-[#4A4238]">Spring Collection</p>
+                  <p class="text-[9px] uppercase tracking-[0.2em] text-[#9CA3AF] mt-1">Limited Edition</p>
+               </div>
+            </div>
+            
+            <!-- Floating Petals Decoration (CSS Only) -->
+            <div class="absolute -top-10 -right-10 text-3xl opacity-50 animate-bounce delay-700">🌸</div>
+            <div class="absolute bottom-20 -left-10 text-2xl opacity-40 animate-bounce">🍃</div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="flower-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#5D5447]/10 backdrop-blur-md">
+    <div class="bg-[#FFFCF8] w-full max-w-sm p-14 shadow-2xl relative border border-[#F9A8D4]/20">
+      <button onclick="toggleFlowerModal()" class="absolute top-8 right-8 text-[#9CA3AF] hover:text-[#F472B6] transition text-2xl font-serif-display">&times;</button>
+      
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-serif-display italic text-[#5D5447] mb-2">My Garden</h2>
+        <p class="text-[10px] text-[#F472B6] font-semibold tracking-[0.3em] uppercase">Join Our Flower Club</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div>
+           <input type="text" placeholder="Garden ID or Email" class="w-full bg-[#FFF1F2] border border-[#FCE7F3] py-4 px-6 text-[12px] font-semibold tracking-wide text-[#5D5447] placeholder-[#9CA3AF] uppercase outline-none focus:border-[#F472B6] transition text-center rounded-sm">
+        </div>
+        
+        <button class="w-full bg-[#5D5447] text-white py-4 text-[12px] tracking-[0.2em] font-semibold uppercase hover:bg-[#F472B6] transition shadow-lg rounded-sm">
+           Open Gate
+        </button>
+        
+        <div class="flex justify-center gap-12 pt-2">
+           <a href="#" class="text-[9px] text-[#9CA3AF] tracking-[0.2em] font-semibold uppercase hover:text-[#F472B6] transition">Sign Up</a>
+           <span class="text-[#9CA3AF]/30">|</span>
+           <a href="#" class="text-[9px] text-[#9CA3AF] tracking-[0.2em] font-semibold uppercase hover:text-[#F472B6] transition">Forgot?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-[#F3F4F6]">
+     <div class="inline-flex flex-col items-center gap-10 mb-8">
+        <span class="font-serif-display font-semibold text-2xl tracking-wide text-[#5D5447]">Bloom<span class="italic text-[#F472B6]">&</span>Garden</span>
+        <span class="text-[10px] font-semibold text-[#9CA3AF] tracking-[0.3em] uppercase">Floral Design Studio</span>
+     </div>
+     <p class="text-[10px] text-[#9CA3AF]/50 tracking-[0.5em] uppercase px-6">© 2024 BLOOM & GARDEN. SEOUL.</p>
+  </footer>
+
+  <script>
+    function toggleFlowerModal() {
+      const modal = document.getElementById('flower-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

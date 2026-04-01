@@ -1,0 +1,37 @@
+# SQLite configuration for development and test
+default: &default
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  primary:
+    <<: *default
+    database: storage/development.sqlite3
+  cache:
+    <<: *default
+    database: storage/development_cache.sqlite3
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    database: storage/development_queue.sqlite3
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    database: storage/development_cable.sqlite3
+    migrations_paths: db/cable_migrate
+
+test:
+  <<: *default
+  database: storage/test.sqlite3
+
+# Production configuration (Database-less)
+# We force NullDB for now since the Render PostgreSQL database is expired
+# Production configuration (SQLite3 on Fly Volume)
+production: &production
+  <<: *default
+  database: /rails/storage/production.sqlite3
+
+# Staging or other environments
+staging:
+  <<: *production

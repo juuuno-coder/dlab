@@ -1,0 +1,79 @@
+<div style="margin-bottom: var(--space-8); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-4);">
+  <div>
+    <h1 style="font-size: var(--text-4xl); margin-bottom: var(--space-2);">포트폴리오 관리</h1>
+    <p class="text-gray">등록된 포트폴리오를 관리하고 새로운 프로젝트를 추가하세요</p>
+  </div>
+  
+  <div style="flex: 1; max-width: 500px; display: flex; flex-direction: column; gap: var(--space-4); align-items: flex-end;">
+    <%= link_to "새 포트폴리오 추가", new_admin_portfolio_path, class: "btn btn-primary" %>
+    
+    <%= form_with url: admin_portfolios_path, method: :get, class: "flex gap-2 w-full", local: true do |f| %>
+      <%= f.text_field :query, value: params[:query], placeholder: "프로젝트명, 클라이언트, 카테고리 검색", class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm p-2 bg-white border" %>
+      <%= f.submit "검색", class: "btn btn-primary" %>
+      <% if params[:query].present? %>
+        <%= link_to "초기화", admin_portfolios_path, class: "btn btn-outline" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<% if @portfolios.any? %>
+  <div style="background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-sm);">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead style="background: var(--color-gray-50); border-bottom: 2px solid var(--color-gray-200);">
+        <tr>
+          <th style="padding: var(--space-4); text-align: left; font-weight: 600; color: var(--color-gray-700);">프로젝트명</th>
+          <th style="padding: var(--space-4); text-align: left; font-weight: 600; color: var(--color-gray-700);">카테고리</th>
+          <th style="padding: var(--space-4); text-align: left; font-weight: 600; color: var(--color-gray-700);">클라이언트</th>
+          <th style="padding: var(--space-4); text-align: left; font-weight: 600; color: var(--color-gray-700);">프로젝트 날짜</th>
+          <th style="padding: var(--space-4); text-align: center; font-weight: 600; color: var(--color-gray-700);">관리</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @portfolios.each do |portfolio| %>
+          <tr style="border-bottom: 1px solid var(--color-gray-100);">
+            <td style="padding: var(--space-4);">
+              <strong><%= portfolio.title %></strong>
+            </td>
+            <td style="padding: var(--space-4);">
+              <% if portfolio.category.present? %>
+                <span style="display: inline-block; padding: var(--space-1) var(--space-3); background: var(--color-accent); color: white; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600;">
+                  <%= portfolio.category %>
+                </span>
+              <% end %>
+            </td>
+            <td style="padding: var(--space-4); color: var(--color-gray-600);">
+              <%= portfolio.client || "-" %>
+            </td>
+            <td style="padding: var(--space-4); color: var(--color-gray-600);">
+              <%= portfolio.project_date&.strftime("%Y-%m-%d") || "-" %>
+            </td>
+            <td style="padding: var(--space-4); text-align: center;">
+              <div style="display: flex; gap: var(--space-2); justify-content: center;">
+                <%= link_to "수정", edit_admin_portfolio_path(portfolio), class: "btn btn-sm", style: "background: var(--color-gray-100); color: var(--color-gray-700);" %>
+                <%= button_to "삭제", admin_portfolio_path(portfolio), method: :delete, data: { confirm: "정말 삭제하시겠습니까?" }, class: "btn btn-sm", style: "background: var(--color-error); color: white;" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top: var(--space-8); display: flex; justify-content: center;">
+    <%= paginate @portfolios rescue nil %>
+  </div>
+<% else %>
+  <div class="card text-center" style="padding: var(--space-20);">
+    <div style="width: 100px; height: 100px; background: var(--color-gray-100); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-6);">
+      <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <path d="M21 15l-5-5L5 21"/>
+      </svg>
+    </div>
+    <h3 style="font-size: var(--text-2xl); margin-bottom: var(--space-4);">등록된 포트폴리오가 없습니다</h3>
+    <p class="text-gray" style="margin-bottom: var(--space-6);">첫 번째 포트폴리오를 추가해보세요</p>
+    <%= link_to "포트폴리오 추가", new_admin_portfolio_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

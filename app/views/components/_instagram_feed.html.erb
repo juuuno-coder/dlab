@@ -1,0 +1,45 @@
+<%# app/views/components/_instagram_feed.html.erb %>
+<div class="instagram-feed bg-gray-50 p-8 rounded-lg" data-controller="instagram">
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <div class="bg-gradient-to-tr from-yellow-400 to-purple-600 p-[2px] rounded-full">
+        <div class="bg-white p-[2px] rounded-full">
+          <!-- Profile Image Placeholder -->
+          <% if local_assigns[:profile_image] %>
+            <%= image_tag profile_image, class: "w-10 h-10 rounded-full object-cover" %>
+          <% else %>
+             <div class="w-10 h-10 bg-black rounded-full"></div>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        <p class="font-bold text-sm"><%= local_assigns[:username] || 'yourbrand' %></p>
+        <p class="text-xs text-gray-500"><%= local_assigns[:brand_name] || 'Your Brand Name' %></p>
+      </div>
+    </div>
+    <a
+      href="https://instagram.com/<%= local_assigns[:username] %>"
+      target="_blank"
+      className="bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded-md transition"
+    >
+      Follow
+    </a>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+    <%# Using dummy images for now as placeholder for real API data %>
+    <% [
+      "https://images.unsplash.com/photo-1515405295579-ba7f9f1b8cd8?q=80&w=400",
+      "https://images.unsplash.com/photo-1545989253-02cc26577f88?q=80&w=400",
+      "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=400",
+      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=400"
+    ].each do |src| %>
+      <a href="#" target="_blank" class="relative aspect-square bg-gray-200 group overflow-hidden block">
+        <%= image_tag src, class: "object-cover w-full h-full group-hover:scale-110 transition duration-500" %>
+        <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        </div>
+      </a>
+    <% end %>
+  </div>
+</div>

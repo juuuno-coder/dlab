@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=907, initial-scale=1.0" name="viewport"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Noto Sans KR', sans-serif; }
+    .slide-container {
+        width: 1280px; height: 907px; position: relative;
+        background-color: #fff; display: flex; flex-direction: column; overflow: hidden;
+    }
+    .header-section {
+        background-color: #002B5B; height: 120px;
+        display: flex; align-items: center; padding: 0 60px; position: relative;
+    }
+    .header-deco {
+        position: absolute; right: 0; top: 0; height: 100%; width: 300px;
+        background: #C8102E; opacity: 0.1;
+        clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+    .page-title { color: white; font-size: 42px; font-weight: 700; letter-spacing: -0.5px; z-index: 10; }
+    .content-wrapper {
+        flex: 1; display: flex; padding: 50px 60px 40px; gap: 40px; position: relative;
+    }
+    .content-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(255, 255, 255, 0.95); z-index: 0;
+    }
+    .column { flex: 1; display: flex; flex-direction: column; gap: 25px; z-index: 1; }
+    .section-card {
+        display: flex; background: white; border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 43, 91, 0.08); overflow: hidden;
+        height: 100%; border-left: 6px solid #002B5B;
+    }
+    .section-num {
+        width: 80px; background-color: #f3f6f9;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 32px; font-weight: 900; color: #002B5B;
+    }
+    .section-content { flex: 1; padding: 20px 25px; display: flex; flex-direction: column; justify-content: center; }
+    .section-title {
+        font-size: 24px; font-weight: 700; color: #111; margin-bottom: 8px;
+        display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .section-pages { font-size: 16px; color: #6B7280; font-weight: 500; }
+    .sub-items { font-size: 16px; color: #4B5563; line-height: 1.5; margin: 0; }
+    .footer-bar {
+        height: 40px; background-color: #f3f4f6;
+        display: flex; align-items: center; justify-content: flex-end;
+        padding: 0 40px; font-size: 14px; color: #6B7280;
+        border-top: 1px solid #e5e7eb;
+    }
+    /* Accent colors */
+    .card-accent-navy { border-left-color: #002B5B; }
+    .card-accent-blue { border-left-color: #004c8c; }
+    .card-accent-red  { border-left-color: #C8102E; }
+    .card-accent-gray { border-left-color: #6B7280; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+    <div class="header-section">
+        <div class="header-deco"></div>
+        <h1 class="page-title">CONTENTS</h1>
+    </div>
+    <div class="content-wrapper">
+        <div class="content-overlay"></div>
+        <div class="column">
+            <!-- LEFT COLUMN SECTIONS -->
+            <div class="section-card card-accent-navy">
+                <div class="section-num">I</div>
+                <div class="section-content">
+                    <div class="section-title">
+                        <span>{{section_1_title}}</span>
+                        <span class="section-pages">{{section_1_pages}}</span>
+                    </div>
+                    <p class="sub-items">{{section_1_items}}</p>
+                </div>
+            </div>
+            <div class="section-card card-accent-navy">
+                <div class="section-num">II</div>
+                <div class="section-content">
+                    <div class="section-title">
+                        <span>{{section_2_title}}</span>
+                        <span class="section-pages">{{section_2_pages}}</span>
+                    </div>
+                    <p class="sub-items">{{section_2_items}}</p>
+                </div>
+            </div>
+            <div class="section-card card-accent-blue" style="flex: 1.5;">
+                <div class="section-num">III</div>
+                <div class="section-content">
+                    <div class="section-title">
+                        <span>{{section_3_title}}</span>
+                        <span class="section-pages">{{section_3_pages}}</span>
+                    </div>
+                    <p class="sub-items">{{section_3_items}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <!-- RIGHT COLUMN SECTIONS -->
+            <div class="section-card card-accent-red">
+                <div class="section-num">IV</div>
+                <div class="section-content">
+                    <div class="section-title">
+                        <span>{{section_4_title}}</span>
+                        <span class="section-pages">{{section_4_pages}}</span>
+                    </div>
+                    <p class="sub-items">{{section_4_items}}</p>
+                </div>
+            </div>
+            <div class="section-card card-accent-red">
+                <div class="section-num">V</div>
+                <div class="section-content">
+                    <div class="section-title">
+                        <span>{{section_5_title}}</span>
+                        <span class="section-pages">{{section_5_pages}}</span>
+                    </div>
+                    <p class="sub-items">{{section_5_items}}</p>
+                </div>
+            </div>
+            <div class="section-card card-accent-gray">
+                <div class="section-num">VI</div>
+                <div class="section-content">
+                    <div class="section-title">
+                        <span>{{section_6_title}}</span>
+                        <span class="section-pages">{{section_6_pages}}</span>
+                    </div>
+                    <p class="sub-items">{{section_6_items}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bar">
+        <span>{{page_number}}</span>
+    </div>
+</div>
+</body>
+</html>

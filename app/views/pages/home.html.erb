@@ -1,0 +1,591 @@
+<% content_for :title, branding['tagline'] %>
+<% content_for :description, branding['meta_description'] %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+<!-- Hero Layout with Side Money Images -->
+    <style>
+      @keyframes float-vertical {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+      }
+      
+      .hero-wide-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .hero-flex-wrapper {
+        display: flex;
+        flex-direction: column; /* Mobile: side by side logic revised to stack or center */
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+        text-align: center;
+      }
+
+      .hero-text-box {
+        z-index: 10;
+        width: 100%;
+      }
+
+      .money-side-img {
+        width: clamp(132px, 33vw, 176px);
+        height: auto;
+        animation: float-vertical 3s ease-in-out infinite;
+        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1));
+        flex-shrink: 0;
+      }
+
+      @media (min-width: 900px) {
+        .hero-flex-wrapper {
+          flex-direction: row;
+          justify-content: space-between;
+          text-align: left;
+          gap: 3rem;
+        }
+        .hero-text-box {
+          flex: 0 0 60%;
+        }
+        .money-side-img.money-right {
+          width: 320px;
+        }
+        .money-wrapper-right {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+
+      /* Stats Grid Responsive Styles */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Mobile: 2x2 is much cleaner */
+        gap: 0.75rem;
+        margin-top: 2.5rem;
+        width: 100%;
+      }
+      
+      @media (min-width: 1024px) {
+        .stats-grid {
+          grid-template-columns: repeat(4, 1fr); /* PC: 4 columns */
+          gap: 1.5rem;
+          margin-top: 4rem;
+        }
+      }
+
+      /* Stat Card Styles */
+      .stat-card {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 1.25rem 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .stat-card:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-number {
+        font-size: clamp(1.25rem, 5vw, 1.75rem);
+        font-weight: 850;
+        color: white;
+        margin-bottom: 0.25rem;
+        white-space: nowrap;
+        word-break: keep-all;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      .stat-label {
+        font-size: clamp(0.75rem, 3.5vw, 0.875rem);
+        font-weight: 500;
+        color: rgba(255,255,255,0.85);
+        letter-spacing: -0.01em;
+      }
+
+      @media (min-width: 1024px) {
+        .stat-card {
+          padding: 2.5rem 1.5rem;
+          min-height: 160px;
+          border-radius: 24px;
+        }
+        .stat-number {
+          font-size: 2.75rem;
+          margin-bottom: 0.75rem;
+        }
+        .stat-label {
+          font-size: 1.125rem;
+        }
+      }
+
+      .hero-cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      @media (max-width: 480px) {
+        .hero-cta .btn {
+          width: 100%;
+        }
+      }
+
+      /* Grid Global Helper Responsive */
+      @media (max-width: 768px) {
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    </style>
+
+    <div class="hero-wide-container" style="max-width: 100%; padding: 0 2rem;">
+      <div class="hero-flex-wrapper">
+        <!-- Left Spacer for PC Balance -->
+        <div class="pc-spacer hidden lg:block" style="display: none;"></div>
+
+        <!-- Center Text -->
+        <div class="hero-text-box">
+          <h1 class="hero-title" style="margin-bottom: 1.5rem; line-height: 1.2; font-weight: 850; letter-spacing: -0.02em; font-size: clamp(2rem, 10vw, 4.5rem); word-break: keep-all;">
+            <%= branding['tagline'] %>
+          </h1>
+          <p class="hero-subtitle" style="margin-bottom: 0.5rem; word-break: keep-all; font-size: clamp(1rem, 4.5vw, 1.5rem); opacity: 0.9; line-height: 1.6;">
+            <%= branding['sub_tagline'] %>
+          </p>
+        </div>
+
+        <!-- Right Money (Wrapper for PC alignment) -->
+        <div class="money-wrapper-right">
+          <img src="/images/money_final.png" class="money-side-img money-right" style="animation-delay: 1.5s;" alt="Money Icon">
+        </div>
+      </div>
+    </div>
+    <div class="hero-cta">
+          <%= link_to "디자인 템플릿 보기", design_templates_path, class: "btn btn-outline btn-lg", style: "color: white; border-color: white;" %>
+      <%= link_to "요금제 보기", pricing_path, class: "btn btn-accent btn-lg" %>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <% stats = branding['hero_stats'] || [{ "number" => "30+", "label" => "템플릿 선택" }, { "number" => "3+", "label" => "플랜 선택" }, { "number" => "맞춤형", "label" => "개발 서비스" }, { "number" => "안정적인", "label" => "유지보수" }] %>
+      <% stats.each do |stat| %>
+        <div class="stat-card">
+          <div class="stat-number"><%= stat['number'] %></div>
+          <div class="stat-label"><%= stat['label'] %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Templates Section -->
+<section class="section" style="background: white;">
+  <div class="container">
+    <div class="text-center" style="margin-bottom: 4rem;">
+      <span style="color: var(--color-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: var(--text-sm);">PREMIUM TEMPLATES</span>
+      <h2 style="font-size: clamp(1.75rem, 5vw, 3rem); margin-top: var(--space-2); margin-bottom: var(--space-4); font-weight: 800; word-break: keep-all; line-height: 1.3;">시간과 돈을 벌어주는 디자인 템플릿</h2>
+      <p class="text-gray" style="font-size: clamp(1rem, 4vw, 1.25rem); max-width: 700px; margin: 0 auto; word-break: keep-all; line-height: 1.6;">
+        업종별 최적화된 고퀄리티 디자인으로<br>합리적인 요금제로 빠르게 사업을 시작하세요.
+      </p>
+    </div>
+
+    <div class="grid grid-3" style="gap: var(--space-8);">
+      
+      <% if @featured_templates.present? %>
+      <% @featured_templates.each do |template| %>
+          <div class="card template-card" style="padding: 0; overflow: hidden; border: none; box-shadow: var(--shadow-xl); transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 25px 50px -12px rgba(0,0,0,0.25)'" onmouseout="this.style.transform=''; this.style.boxShadow='var(--shadow-xl)'">
+            <div style="height: 240px; overflow: hidden; position: relative; cursor: pointer;" onclick="openLiveDemo('<%= template.preview_url %>', '<%= template.title %>')">
+              <% 
+                img_src = if template.try(:pc_image).try(:attached?)
+                            url_for(template.pc_image)
+                          elsif template.respond_to?(:pc_thumbnail_url) && template.pc_thumbnail_url.present?
+                            template.pc_thumbnail_url
+                          elsif template.try(:image_url).present?
+                            template.image_url
+                          else
+                            '/images/templates/portfolio_gallery.png'
+                          end
+              %>
+              <img src="<%= img_src %>" 
+                   loading="lazy" 
+                   decoding="async"
+                   alt="<%= template.title %> - <%= template.category %> 웹사이트 템플릿" 
+                   style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;" 
+                   class="template-thumb">
+              
+              <!-- Category Badge -->
+              <div style="position: absolute; top: 12px; left: 12px; background: white; padding: 4px 12px; border-radius: 99px; font-size: 11px; font-weight: bold; color: #1a1a1a; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <%= case template.category
+                   when 'beauty' then '뷰티/살롱'
+                   when 'dining' then '다이닝/F&B'
+                   when 'fitness' then '피트니스/요가'
+                   when 'stay' then '스테이/숙박'
+                   when 'shopping' then '쇼핑몰'
+                   when 'corporate' then '기업/브랜드'
+                   when 'space' then '공간/렌탈'
+                   when 'medical' then '병원/의료'
+                   when 'cafe' then '카페/베이커리'
+                   when 'portfolio' then '포트폴리오'
+                   when 'law' then '법률/전문직'
+                   else '기타'
+                   end
+                %>
+              </div>
+
+              <%
+                diamond_score = case template.category
+                                when 'shopping', 'corporate', 'finance', 'medical', 'dental', 'real_estate', 'hotel', 'stay', 'startup', 'ecommerce', 'rental', 'consulting'
+                                  70
+                                when 'fitness', 'gym', 'yoga', 'law', 'tax', 'academy', 'learnhub', 'english', 'dining', 'restaurant', 'seafood', 'rice', 'burger', 'studio', 'wedding', 'cleaning', 'construction', 'interior', 'vet'
+                                  50
+                                else
+                                  30
+                                end
+              %>
+              <!-- Diamond Badge -->
+              <div style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 800; color: #fff; z-index: 10; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; gap: 4px;">
+                <span style="font-size: 10px;">💎</span> <%= diamond_score %>
+              </div>
+              
+              <!-- Hover Overlay -->
+              <div class="thumb-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center;">
+                <span style="background: white; padding: 10px 24px; border-radius: 99px; font-weight: bold; font-size: 14px; color: #1a1a1a; transform: scale(0.9); transition: transform 0.3s;">미리보기</span>
+              </div>
+            </div>
+            <div style="padding: var(--space-6);">
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: var(--space-2); color: #111;"><%= template.title %></h3>
+              <p style="color: var(--color-gray-500); font-size: 14px; margin-bottom: var(--space-4); line-height: 1.6; min-height: 44px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all;">
+                <%= template.description %>
+              </p>
+              <div style="display: flex; gap: 10px;">
+                <button onclick="openLiveDemo('<%= template.preview_url %>', '<%= template.title %>')" class="btn btn-outline btn-sm" style="flex: 1; text-align: center; font-weight: 700;">둘러보기</button>
+                <%= link_to "제작 의뢰", contact_path(template_id: template.id, template_title: template.title, preview_url: template.preview_url), class: "btn btn-primary btn-sm", style: "flex: 1; text-align: center; font-weight: 700;" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <!-- Fallback if no templates are featured (Optional: Keep one hardcoded or show message) -->
+        <div class="col-span-3 text-center py-10 text-gray-500">
+          표시할 추천 템플릿이 없습니다. 관리자 페이지에서 설정해주세요.
+        </div>
+      <% end %>
+
+    </div>
+    
+    <div style="text-align: center; margin-top: var(--space-12);">
+      <%= link_to "템플릿 더 보기 →", design_templates_path, class: "btn btn-link", style: "font-size: var(--text-lg); font-weight: 600; color: var(--color-primary);" %>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="section bg-gray-50">
+  <div class="container">
+    <div class="text-center" style="margin-bottom: 4rem;">
+      <h2 style="font-size: var(--text-5xl); margin-bottom: var(--space-4);">우리의 서비스</h2>
+      <p class="text-gray" style="font-size: var(--text-xl); max-width: 700px; margin: 0 auto;">
+        최고의 순발력과 창의성으로, 고객과 함께 성장합니다.
+      </p>
+    </div>
+
+    <div class="grid grid-3">
+      <!-- Service 1: Web Development -->
+      <div class="card">
+        <div style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h3 class="card-title">웹 개발</h3>
+        <p class="card-text">
+          반응형 웹사이트부터 복잡한 웹 애플리케이션까지, 최신 기술 스택을 활용한 고품질 솔루션을 제공합니다.
+        </p>
+        <ul style="list-style: none; padding: 0; margin-top: var(--space-4); color: var(--color-gray-600);">
+          <li style="margin-bottom: var(--space-2);">✓ 반응형 웹사이트</li>
+          <li style="margin-bottom: var(--space-2);">✓ 웹 애플리케이션</li>
+          <li style="margin-bottom: var(--space-2);">✓ 쇼핑몰 등 E-커머스 플랫폼</li>
+        </ul>
+      </div>
+
+      <!-- Service 2: App Development -->
+      <div class="card">
+        <div style="width: 60px; height: 60px; background: var(--gradient-accent); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2"/>
+            <line x1="12" y1="18" x2="12" y2="18"/>
+          </svg>
+        </div>
+        <h3 class="card-title">앱 개발</h3>
+        <p class="card-text">
+          iOS와 Android를 아우르는 네이티브 및 크로스플랫폼 모바일 앱 개발로 모바일 시장을 선점하세요.
+        </p>
+        <ul style="list-style: none; padding: 0; margin-top: var(--space-4); color: var(--color-gray-600);">
+          <li style="margin-bottom: var(--space-2);">✓ iOS/Android 앱</li>
+          <li style="margin-bottom: var(--space-2);">✓ 크로스플랫폼 앱</li>
+          <li style="margin-bottom: var(--space-2);">✓ 앱 유지보수</li>
+        </ul>
+      </div>
+
+      <!-- Service 3: UI/UX Design -->
+      <div class="card">
+        <div style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <h3 class="card-title">디자인</h3>
+        <p class="card-text">
+          사용자 중심의 직관적이고 매력적인 디자인으로 최상의 경험을 제공합니다.
+        </p>
+        <ul style="list-style: none; padding: 0; margin-top: var(--space-4); color: var(--color-gray-600);">
+          <li style="margin-bottom: var(--space-2);">✓ 브랜드 디자인</li>
+          <li style="margin-bottom: var(--space-2);">✓ 시각/편집 디자인</li>
+          <li style="margin-bottom: var(--space-2);">✓ UI/UX 디자인</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="section">
+  <div class="container">
+    <div class="text-center" style="margin-bottom: 4rem;">
+      <h2 style="font-size: var(--text-5xl); margin-bottom: var(--space-4);"><%= branding['why_title'] || "왜 #{branding['brand_name']}일까요?" %></h2>
+      <p class="text-gray" style="font-size: var(--text-xl); max-width: 700px; margin: 0 auto;">
+        <%= branding['why_subtitle'] || "차별화된 전문성과 경험으로 여러분과 함께 성공합니다!" %>
+      </p>
+    </div>
+
+    <div class="grid grid-2" style="gap: var(--space-8);">
+      <div style="display: flex; gap: var(--space-4); align-items: start;">
+        <div style="flex-shrink: 0; width: 50px; height: 50px; background: var(--gradient-accent); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div>
+          <h4 style="font-size: var(--text-2xl); margin-bottom: var(--space-2);">검증된 전문성</h4>
+          <p class="text-gray">
+            10년 이상의 경력으로 모든 프로젝트를 안전하게 관리합니다.
+          </p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: var(--space-4); align-items: start;">
+        <div style="flex-shrink: 0; width: 50px; height: 50px; background: var(--gradient-accent); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div>
+          <h4 style="font-size: var(--text-2xl); margin-bottom: var(--space-2);">빠른 개발 속도</h4>
+          <p class="text-gray">
+            애자일 방법론과 최신 개발 도구를 활용하여 빠르고 효율적인 개발을 진행합니다.
+          </p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: var(--space-4); align-items: start;">
+        <div style="flex-shrink: 0; width: 50px; height: 50px; background: var(--gradient-accent); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div>
+          <h4 style="font-size: var(--text-2xl); margin-bottom: var(--space-2);">맞춤형 솔루션</h4>
+          <p class="text-gray">
+            여러분의 비즈니스 목표와 요구사항에 맞춰 최적화된 솔루션을 제공합니다.
+          </p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: var(--space-4); align-items: start;">
+        <div style="flex-shrink: 0; width: 50px; height: 50px; background: var(--gradient-accent); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 style="font-size: var(--text-2xl); margin-bottom: var(--space-2);">지속적인 지원</h4>
+          <p class="text-gray">
+            프로젝트 완료 후에도 지속적인 유지보수와 기술 지원을 제공합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section" style="background: var(--gradient-primary); color: white;">
+  <div class="container text-center">
+    <h2 style="font-size: var(--text-5xl); color: white; margin-bottom: var(--space-4);">
+      프로젝트를 시작할 준비가 되셨나요?
+    </h2>
+    <p style="font-size: var(--text-xl); color: rgba(255, 255, 255, 0.9); margin-bottom: var(--space-8); max-width: 700px; margin-left: auto; margin-right: auto;">
+      지금 바로 문의하시면 무료 컨설팅과 견적을 받아보실 수 있습니다
+    </p>
+    <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+      <%= link_to "디자인 템플릿 보기", design_templates_path, class: "btn btn-accent btn-lg" %>
+      <%= link_to "무료 상담 및 문의하기", contact_path, class: "btn btn-outline btn-lg", style: "color: white; border-color: white;" %>
+    </div>
+  </div>
+</section>
+
+<!-- Live Demo Modal -->
+<div id="live-demo-modal" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);">
+  
+  <!-- Header -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 60px; background: #1a1a1a; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; padding: 0 20px;">
+    <div style="color: white; font-weight: bold; font-size: 18px;" id="demo-title">Template Demo</div>
+    
+    <!-- View Switcher -->
+    <div style="background: #333; padding: 4px; border-radius: 99px; display: flex;">
+      <button onclick="switchDemoView('pc')" id="btn-demo-pc" class="demo-view-btn active">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        <span style="margin-left: 6px; font-size: 14px;">PC</span>
+      </button>
+      <button onclick="switchDemoView('mobile')" id="btn-demo-mobile" class="demo-view-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12" y2="18"></line></svg>
+        <span style="margin-left: 6px; font-size: 14px;">Mobile</span>
+      </button>
+    </div>
+
+    <!-- Close Button -->
+    <button onclick="closeLiveDemo()" style="background: none; border: none; color: #999; cursor: pointer; padding: 8px;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      <span style="font-size: 12px; display: block; margin-top: 2px;">ESC</span>
+    </button>
+  </div>
+
+  <!-- Content Area -->
+  <div style="position: absolute; top: 60px; left: 0; right: 0; bottom: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; padding: 20px;">
+    
+    <!-- PC Frame -->
+    <div id="demo-frame-pc" style="width: 100%; height: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
+      <iframe id="iframe-pc" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+
+    <!-- Mobile Frame -->
+    <div id="demo-frame-mobile" style="display: none; width: 375px; height: 80vh; background: black; border-radius: 40px; border: 12px solid #1a1a1a; overflow: hidden; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+      <!-- Notch -->
+      <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #1a1a1a; border-radius: 0 0 15px 15px; z-index: 10;"></div>
+      <iframe id="iframe-mobile" src="" style="width: 100%; height: 100%; border: none; background: white;"></iframe>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .demo-view-btn {
+    border: none;
+    background: transparent;
+    color: #888;
+    padding: 6px 16px;
+    border-radius: 99px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+  }
+  .demo-view-btn.active {
+    background: #555;
+    color: white;
+  }
+  .demo-view-btn:hover:not(.active) {
+    color: #ccc;
+  }
+  
+  /* Template Card Hover Effects */
+  .template-card:hover .template-thumb {
+    transform: scale(1.05);
+  }
+  .template-card:hover .thumb-overlay {
+    opacity: 1;
+  }
+  .template-card:hover .thumb-overlay span {
+    transform: scale(1);
+  }
+</style>
+
+<script>
+  function openLiveDemo(url, title) {
+    const modal = document.getElementById('live-demo-modal');
+    document.getElementById('demo-title').innerText = title || 'Live Demo';
+    
+    // Load iframe
+    document.getElementById('iframe-pc').src = url;
+    document.getElementById('iframe-mobile').src = url;
+
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Reset to PC view
+    switchDemoView('pc');
+  }
+
+  function closeLiveDemo() {
+    const modal = document.getElementById('live-demo-modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    
+    // Reset iframes to stop playback/process
+    document.getElementById('iframe-pc').src = '';
+    document.getElementById('iframe-mobile').src = '';
+  }
+
+  function switchDemoView(mode) {
+    const pcFrame = document.getElementById('demo-frame-pc');
+    const moFrame = document.getElementById('demo-frame-mobile');
+    const btnPc = document.getElementById('btn-demo-pc');
+    const btnMo = document.getElementById('btn-demo-mobile');
+
+    if (mode === 'pc') {
+      pcFrame.style.display = 'block';
+      moFrame.style.display = 'none';
+      btnPc.classList.add('active');
+      btnMo.classList.remove('active');
+    } else {
+      pcFrame.style.display = 'none';
+      moFrame.style.display = 'block';
+      btnPc.classList.remove('active');
+      btnMo.classList.add('active');
+    }
+  }
+
+  // ESC Listener
+  document.addEventListener('keydown', function(event) {
+    if (document.getElementById('live-demo-modal').style.display === 'block') {
+      if (event.key === "Escape") {
+        closeLiveDemo();
+      }
+    }
+  });
+</script>
+

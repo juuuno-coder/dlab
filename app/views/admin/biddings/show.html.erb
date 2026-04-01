@@ -1,0 +1,839 @@
+<div class="bidding-show">
+  <div class="header">
+    <h1><%= @bidding.title %></h1>
+    <div class="actions">
+      <div class="action-group">
+        <%= button_to "🤖 AI 분석", analyze_with_gemini_admin_bidding_path(@bidding), method: :post, class: "btn btn-ai", style: "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;" %>
+        <%= button_to "📊 진단 생성", generate_diagnosis_admin_bidding_path(@bidding), method: :post, class: "btn btn-success" %>
+        <%= button_to "📄 슬라이드 생성", generate_slides_admin_bidding_path(@bidding), method: :post, class: "btn btn-info" %>
+        <%= button_to "🎤 발표대본", generate_presentation_script_admin_bidding_path(@bidding), method: :post, class: "btn btn-primary" %>
+        <%= button_to "📝 아웃라인", generate_proposal_admin_bidding_path(@bidding), method: :post, class: "btn btn-warning" %>
+      </div>
+      <div class="action-group">
+        <%= link_to "수정", edit_admin_bidding_path(@bidding), class: "btn btn-primary" %>
+        <%= link_to "삭제", admin_bidding_path(@bidding), method: :delete, data: { confirm: "정말 삭제하시겠습니까?" }, class: "btn btn-danger" %>
+        <%= link_to "목록으로", admin_biddings_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <label>공모기관</label>
+      <div class="value"><%= @bidding.agency %></div>
+    </div>
+
+    <div class="info-card">
+      <label>협력사</label>
+      <div class="value"><%= @bidding.partner %></div>
+    </div>
+
+    <div class="info-card">
+      <label>예산규모</label>
+      <div class="value"><%= @bidding.budget %></div>
+    </div>
+
+    <div class="info-card">
+      <label>신청기간</label>
+      <div class="value"><%= @bidding.application_period %></div>
+    </div>
+
+    <div class="info-card">
+      <label>상태</label>
+      <div class="value">
+        <span class="badge badge-<%= @bidding.status_color %>">
+          <%= @bidding.status %>
+        </span>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <label>진행률</label>
+      <div class="value">
+        <div class="progress-bar">
+          <div class="progress-fill progress-<%= @bidding.progress_color %>" style="width: <%= @bidding.progress %>%"></div>
+        </div>
+        <span><%= @bidding.progress %>%</span>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <label>담당자</label>
+      <div class="value"><%= @bidding.assignee %></div>
+    </div>
+
+    <div class="info-card">
+      <label>마감일</label>
+      <div class="value"><%= @bidding.deadline&.strftime("%Y-%m-%d") || "미정" %></div>
+    </div>
+  </div>
+
+  <% if @bidding.description.present? %>
+    <div class="description-section">
+      <label>사업 설명</label>
+      <div class="description-content">
+        <%= simple_format(@bidding.description) %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @bidding.documents.attached? %>
+    <div class="documents-section">
+      <label>첨부 파일 (공고문/RFP/과업지시서)</label>
+      <div class="documents-list">
+        <% @bidding.documents.each do |document| %>
+          <div class="document-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <%= link_to document.filename, rails_blob_path(document, disposition: "attachment"), target: "_blank" %>
+            <span class="file-size">(<%= number_to_human_size(document.byte_size) %>)</span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @bidding.analysis_notes.present? %>
+    <div class="analysis-section">
+      <label>분석 노트 (NotebookLM 결과)</label>
+      <div class="analysis-content">
+        <%= simple_format(@bidding.analysis_notes) %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @bidding.winning_strategy.present? %>
+    <div class="strategy-section">
+      <label>승리 전략</label>
+      <div class="strategy-content">
+        <%= simple_format(@bidding.winning_strategy) %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @bidding.diagnosis_report.present? %>
+    <div class="diagnosis-section">
+      <label>🔍 NotebookLM 스타일 진단 보고서</label>
+      <div class="diagnosis-content">
+        <%= simple_format(@bidding.diagnosis_report) %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @bidding.proposal_outline.present? %>
+    <div class="proposal-section">
+      <label>📝 제안서 아웃라인 (텍스트 버전)</label>
+      <div class="proposal-content">
+        <%= simple_format(@bidding.proposal_outline) %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @bidding.slides_html.present? %>
+    <div class="slides-section">
+      <label>📊 피그마 연동 가능한 슬라이드 (HTML)</label>
+      <div class="slides-actions">
+        <%= link_to "슬라이드 미리보기", "#", class: "btn btn-info btn-sm", onclick: "openSlidesPreview(); return false;" %>
+        <%= link_to "HTML 다운로드", "#", class: "btn btn-outline btn-sm", onclick: "downloadSlidesHTML(); return false;" %>
+        <%= link_to "PPT 다운로드", "#", class: "btn btn-warning btn-sm", onclick: "downloadPPT(); return false;" %>
+        <%= link_to "PDF로 저장", "#", class: "btn btn-success btn-sm", onclick: "printToPDF(); return false;" %>
+        <span style="font-size: 0.875rem; color: #6B7280; margin-left: 1rem;">💡 피그마: File → Import → HTML | PowerPoint: .pptx 형식</span>
+      </div>
+      <div class="slides-preview" style="display: none;">
+        <iframe id="slides-iframe" style="width: 1920px; height: 1080px; border: 1px solid #E5E7EB; border-radius: 0.5rem; margin-top: 1rem; transform: scale(0.75); transform-origin: 0 0;"></iframe>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- 발표대본 섹션 -->
+  <div class="presentation-script-section">
+    <div class="section-header">
+      <label>📝 발표대본 (20분 + 10분 Q&A)</label>
+      <% if @bidding.presentation_script.blank? %>
+        <%= button_to "발표대본 생성", generate_presentation_script_admin_bidding_path(@bidding), method: :post, class: "btn btn-primary btn-sm", style: "margin-left: auto;" %>
+      <% else %>
+        <%= button_to "발표대본 재생성", generate_presentation_script_admin_bidding_path(@bidding), method: :post, class: "btn btn-warning btn-sm", style: "margin-left: auto;", data: { confirm: "기존 대본을 덮어씁니다. 계속하시겠습니까?" } %>
+      <% end %>
+    </div>
+
+    <% if @bidding.presentation_script.present? %>
+      <div class="presentation-script-content">
+        <%= simple_format(@bidding.presentation_script) %>
+      </div>
+      <div class="presentation-script-actions" style="margin-top: 1rem;">
+        <%= link_to "다운로드 (Markdown)", "#", class: "btn btn-outline btn-sm", onclick: "downloadPresentationScript(); return false;" %>
+        <span style="font-size: 0.875rem; color: #6B7280; margin-left: 1rem;">💡 Tip: 마크다운 형식으로 저장하여 노션, 옵시디언 등에서 활용하세요</span>
+      </div>
+    <% else %>
+      <div class="presentation-script-empty" style="text-align: center; padding: 3rem; color: #9CA3AF;">
+        <p>발표대본이 생성되지 않았습니다.</p>
+        <p style="font-size: 0.875rem; margin-top: 0.5rem;">위 버튼을 클릭하여 Gemini AI로 발표대본을 생성하세요.</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script>
+  function openSlidesPreview() {
+    const preview = document.querySelector('.slides-preview');
+    const iframe = document.getElementById('slides-iframe');
+    const htmlContent = <%= raw @bidding.slides_html.to_json %>;
+
+    preview.style.display = 'block';
+    iframe.srcdoc = htmlContent;
+  }
+
+  function downloadSlidesHTML() {
+    const htmlContent = <%= raw @bidding.slides_html.to_json %>;
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '<%= @bidding.title.gsub(/[^\w\s-]/, '') %>_슬라이드.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadPPT() {
+    const htmlContent = <%= raw @bidding.slides_html.to_json %>;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, 'text/html');
+    const slides = doc.querySelectorAll('.slide');
+
+    if (slides.length === 0) {
+      alert('슬라이드를 찾을 수 없습니다.');
+      return;
+    }
+
+    const pres = new PptxGenJS();
+    pres.layout = 'LAYOUT_16x9';
+    pres.author = '<%= @bidding.partner || "디어스" %>';
+    pres.title = '<%= @bidding.title %>';
+
+    slides.forEach((slide, index) => {
+      const pptSlide = pres.addSlide();
+      const isCover = slide.classList.contains('cover');
+
+      // 커버 슬라이드: 그라디언트 배경
+      if (isCover) {
+        pptSlide.background = {
+          fill: '1E40AF',
+          transparency: 0
+        };
+
+        const slideTitle = slide.querySelector('.slide-title');
+        const slideSubtitle = slide.querySelector('.slide-subtitle');
+
+        if (slideTitle) {
+          pptSlide.addText(slideTitle.textContent.trim(), {
+            x: 0.5,
+            y: 2.0,
+            w: 9,
+            h: 1.2,
+            fontSize: 60,
+            bold: true,
+            color: 'FFFFFF',
+            align: 'center',
+            fontFace: 'Pretendard'
+          });
+        }
+
+        if (slideSubtitle) {
+          pptSlide.addText(slideSubtitle.textContent.trim(), {
+            x: 0.5,
+            y: 3.2,
+            w: 9,
+            h: 0.6,
+            fontSize: 32,
+            color: 'E8F4FF',
+            align: 'center',
+            fontFace: 'Pretendard'
+          });
+        }
+
+        // 추가 정보 (제안사, 제안일 등)
+        const additionalInfo = slide.querySelectorAll('div[style*="margin-top"]');
+        if (additionalInfo.length > 0) {
+          const infoText = additionalInfo[0].innerHTML.replace(/<br>/g, '\n').replace(/<[^>]+>/g, '');
+          pptSlide.addText(infoText, {
+            x: 0.5,
+            y: 4.2,
+            w: 9,
+            h: 0.8,
+            fontSize: 20,
+            color: 'FFFFFF',
+            align: 'center',
+            fontFace: 'Pretendard'
+          });
+        }
+      } else {
+        // 일반 슬라이드: 흰색 배경
+        pptSlide.background = { fill: 'FFFFFF' };
+
+        // 헤더 영역
+        const header = slide.querySelector('.slide-header');
+        if (header) {
+          // 슬라이드 번호
+          const slideNumber = header.querySelector('.slide-number');
+          if (slideNumber) {
+            pptSlide.addText(slideNumber.textContent, {
+              x: 0.625,
+              y: 0.4,
+              w: 1,
+              h: 0.4,
+              fontSize: 18,
+              bold: true,
+              color: '1E40AF',
+              fontFace: 'Pretendard'
+            });
+          }
+
+          // 제목
+          const title = header.querySelector('.slide-title');
+          if (title) {
+            pptSlide.addText(title.textContent, {
+              x: 0.625,
+              y: 0.7,
+              w: 8,
+              h: 0.8,
+              fontSize: 40,
+              bold: true,
+              color: '111111',
+              fontFace: 'Pretendard'
+            });
+          }
+
+          // 부제목
+          const subtitle = header.querySelector('.slide-subtitle');
+          if (subtitle) {
+            pptSlide.addText(subtitle.textContent, {
+              x: 0.625,
+              y: 1.4,
+              w: 8,
+              h: 0.4,
+              fontSize: 20,
+              color: '666666',
+              fontFace: 'Pretendard'
+            });
+          }
+
+          // 헤더 하단 테두리
+          pptSlide.addShape('rect', {
+            x: 0.625,
+            y: 1.75,
+            w: 8.75,
+            h: 0.03,
+            fill: { color: '1E40AF' }
+          });
+        }
+
+        // 본문 콘텐츠
+        const content = slide.querySelector('.slide-content');
+        let yPos = 2.2;
+
+        if (content) {
+          // 테이블 처리
+          const table = content.querySelector('table');
+          if (table) {
+            const rows = [];
+            const thead = table.querySelector('thead');
+            const tbody = table.querySelector('tbody');
+
+            if (thead) {
+              const headerCells = thead.querySelectorAll('th');
+              rows.push(Array.from(headerCells).map(cell => ({
+                text: cell.textContent.trim(),
+                options: { fill: '1E40AF', color: 'FFFFFF', bold: true, fontSize: 16 }
+              })));
+            }
+
+            if (tbody) {
+              const bodyRows = tbody.querySelectorAll('tr');
+              bodyRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                rows.push(Array.from(cells).map(cell => ({
+                  text: cell.textContent.trim(),
+                  options: { fontSize: 14, color: '333333' }
+                })));
+              });
+            }
+
+            if (rows.length > 0) {
+              pptSlide.addTable(rows, {
+                x: 0.625,
+                y: yPos,
+                w: 8.75,
+                rowH: 0.4,
+                border: { pt: 1, color: 'E5E7EB' },
+                fontFace: 'Pretendard'
+              });
+            }
+          } else {
+            // h3 제목들
+            const h3Elements = content.querySelectorAll('h3');
+            h3Elements.forEach(h3 => {
+              const text = h3.textContent.trim();
+              pptSlide.addText(text, {
+                x: 0.625,
+                y: yPos,
+                w: 8.75,
+                h: 0.4,
+                fontSize: 24,
+                bold: true,
+                color: '3B82F6',
+                fontFace: 'Pretendard'
+              });
+              yPos += 0.6;
+
+              // h3 다음의 ul 또는 p
+              let nextEl = h3.nextElementSibling;
+              while (nextEl && !nextEl.matches('h3')) {
+                if (nextEl.tagName === 'UL') {
+                  const items = nextEl.querySelectorAll('li');
+                  items.forEach(li => {
+                    pptSlide.addText('• ' + li.textContent.trim(), {
+                      x: 0.875,
+                      y: yPos,
+                      w: 8.25,
+                      h: 0.35,
+                      fontSize: 16,
+                      color: '333333',
+                      fontFace: 'Pretendard'
+                    });
+                    yPos += 0.4;
+                  });
+                } else if (nextEl.tagName === 'P') {
+                  pptSlide.addText(nextEl.textContent.trim(), {
+                    x: 0.875,
+                    y: yPos,
+                    w: 8.25,
+                    h: 0.35,
+                    fontSize: 16,
+                    color: '333333',
+                    fontFace: 'Pretendard'
+                  });
+                  yPos += 0.5;
+                } else if (nextEl.classList.contains('strategy-box')) {
+                  // 전략 박스: 배경색 있는 박스
+                  const boxText = nextEl.innerHTML.replace(/<br>/g, '\n').replace(/<[^>]+>/g, '').trim();
+                  pptSlide.addText(boxText, {
+                    x: 0.625,
+                    y: yPos,
+                    w: 8.75,
+                    h: 1.5,
+                    fontSize: 16,
+                    color: '111111',
+                    fill: { color: 'F0F9FF' },
+                    line: { color: '1E40AF', pt: 3, dashType: 'solid' },
+                    fontFace: 'Pretendard',
+                    valign: 'top'
+                  });
+                  yPos += 1.7;
+                }
+                nextEl = nextEl.nextElementSibling;
+              }
+
+              yPos += 0.3;
+            });
+          }
+        }
+
+        // 푸터
+        const footer = slide.querySelector('.footer');
+        if (footer) {
+          pptSlide.addText(footer.textContent.trim(), {
+            x: 7.5,
+            y: 5.0,
+            w: 2,
+            h: 0.3,
+            fontSize: 12,
+            color: '999999',
+            align: 'right',
+            fontFace: 'Pretendard'
+          });
+        }
+      }
+    });
+
+    const fileName = '<%= @bidding.title.gsub(/[^\w\s-]/, '') %>_슬라이드.pptx';
+    pres.writeFile({ fileName: fileName });
+  }
+
+  function printToPDF() {
+    const preview = document.querySelector('.slides-preview');
+    const iframe = document.getElementById('slides-iframe');
+    const htmlContent = <%= raw @bidding.slides_html.to_json %>;
+
+    // 미리보기가 없으면 먼저 열기
+    if (preview.style.display === 'none') {
+      preview.style.display = 'block';
+      iframe.srcdoc = htmlContent;
+    }
+
+    // iframe 로드 후 인쇄
+    setTimeout(() => {
+      try {
+        iframe.contentWindow.print();
+      } catch (e) {
+        alert('PDF 저장 기능:\n\n1. "슬라이드 미리보기" 버튼을 먼저 클릭하세요\n2. 미리보기 화면에서 우클릭 → "인쇄" 선택\n3. 대상을 "PDF로 저장"으로 변경\n4. 여백을 "없음"으로 설정\n5. 저장 버튼 클릭');
+      }
+    }, 1000);
+  }
+
+  function downloadPresentationScript() {
+    <% if @bidding.presentation_script.present? %>
+      const scriptContent = <%= raw @bidding.presentation_script.to_json %>;
+      const blob = new Blob([scriptContent], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '<%= @bidding.title.gsub(/[^\w\s-]/, '') %>_발표대본.md';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    <% end %>
+  }
+</script>
+
+<style>
+  .bidding-show {
+    max-width: 1000px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    gap: 2rem;
+  }
+
+  .header h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1E3A8A;
+    margin: 0;
+    flex: 1;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .action-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .info-card {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+  }
+
+  .info-card label {
+    display: block;
+    font-size: 0.875rem;
+    color: #6B7280;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .info-card .value {
+    font-size: 1.125rem;
+    color: #111827;
+    font-weight: 500;
+  }
+
+  .description-section {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+  }
+
+  .description-section label {
+    display: block;
+    font-size: 0.875rem;
+    color: #6B7280;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .description-content {
+    color: #374151;
+    line-height: 1.6;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .badge-gray { background: #F3F4F6; color: #374151; }
+  .badge-blue { background: #DBEAFE; color: #1E40AF; }
+  .badge-yellow { background: #FEF3C7; color: #92400E; }
+  .badge-purple { background: #EDE9FE; color: #5B21B6; }
+  .badge-green { background: #D1FAE5; color: #065F46; }
+  .badge-red { background: #FEE2E2; color: #991B1B; }
+
+  .progress-bar {
+    height: 0.75rem;
+    background: #E5E7EB;
+    border-radius: 9999px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+
+  .progress-fill {
+    height: 100%;
+  }
+
+  .progress-red { background: #EF4444; }
+  .progress-yellow { background: #F59E0B; }
+  .progress-blue { background: #3B82F6; }
+  .progress-green { background: #10B981; }
+
+  .btn {
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+
+  .btn-primary {
+    background: #1E3A8A;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #3B82F6;
+  }
+
+  .btn-secondary {
+    background: #E5E7EB;
+    color: #374151;
+  }
+
+  .btn-secondary:hover {
+    background: #D1D5DB;
+  }
+
+  .btn-danger {
+    background: #DC2626;
+    color: white;
+  }
+
+  .btn-danger:hover {
+    background: #B91C1C;
+  }
+
+  .btn-success {
+    background: #10B981;
+    color: white;
+  }
+
+  .btn-success:hover {
+    background: #059669;
+  }
+
+  .btn-info {
+    background: #3B82F6;
+    color: white;
+  }
+
+  .btn-info:hover {
+    background: #2563EB;
+  }
+
+  .btn-warning {
+    background: #F59E0B;
+    color: white;
+  }
+
+  .btn-warning:hover {
+    background: #D97706;
+  }
+
+  .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-outline {
+    background: white;
+    color: #3B82F6;
+    border: 2px solid #3B82F6;
+  }
+
+  .btn-outline:hover {
+    background: #3B82F6;
+    color: white;
+  }
+
+  .documents-section,
+  .analysis-section,
+  .strategy-section,
+  .proposal-section,
+  .diagnosis-section,
+  .slides-section {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .documents-section label,
+  .analysis-section label,
+  .strategy-section label,
+  .proposal-section label,
+  .diagnosis-section label,
+  .slides-section label {
+    display: block;
+    font-size: 1rem;
+    color: #1E40AF;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .documents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .document-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #F9FAFB;
+    border-radius: 0.375rem;
+  }
+
+  .document-item svg {
+    flex-shrink: 0;
+    color: #1E40AF;
+  }
+
+  .document-item a {
+    color: #1E40AF;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .document-item a:hover {
+    text-decoration: underline;
+  }
+
+  .file-size {
+    color: #9CA3AF;
+    font-size: 0.875rem;
+  }
+
+  .analysis-content,
+  .strategy-content,
+  .proposal-content,
+  .diagnosis-content {
+    color: #374151;
+    line-height: 1.6;
+    background: #F9FAFB;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    white-space: pre-wrap;
+  }
+
+  .diagnosis-content {
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  .slides-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .slides-preview {
+    max-width: none;
+    overflow: visible;
+  }
+
+  .slides-preview iframe {
+    display: block;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .slides-section {
+    max-width: none;
+  }
+
+  .presentation-script-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    margin-top: 1.5rem;
+  }
+
+  .presentation-script-section .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .presentation-script-section label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .presentation-script-content {
+    color: #374151;
+    line-height: 1.8;
+    background: #F9FAFB;
+    padding: 1.5rem;
+    border-radius: 0.375rem;
+    white-space: pre-wrap;
+    max-height: 800px;
+    overflow-y: auto;
+    border: 1px solid #E5E7EB;
+  }
+
+  .presentation-script-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .presentation-script-empty {
+    background: #F9FAFB;
+    border: 2px dashed #E5E7EB;
+    border-radius: 0.5rem;
+  }
+</style>

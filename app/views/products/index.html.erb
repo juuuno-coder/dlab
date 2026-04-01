@@ -1,0 +1,67 @@
+<% content_for :title, "Products" %>
+
+<div class="bg-white">
+  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-extrabold tracking-tight text-gray-900">상품 목록</h2>
+      <%= link_to "상품 등록", new_product_path, class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+    </div>
+
+    <% if notice.present? %>
+      <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-8">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <!-- Icon -->
+            <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-green-700"><%= notice %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @products.any? %>
+      <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        <% @products.each do |product| %>
+          <div class="group relative">
+            <div class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+              <% if product.image_url.present? %>
+                <img src="<%= product.image_url %>" alt="<%= product.name %>" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+              <% else %>
+                <div class="w-full h-full flex items-center justify-center text-gray-400 bg-gray-100">
+                  <span>No image</span>
+                </div>
+              <% end %>
+            </div>
+            <div class="mt-4 flex justify-between">
+              <div>
+                <h3 class="text-sm text-gray-700">
+                  <%= link_to product do %>
+                    <span aria-hidden="true" class="absolute inset-0"></span>
+                    <%= product.name %>
+                  <% end %>
+                </h3>
+                <p class="mt-1 text-sm text-gray-500"><%= truncate(product.description, length: 30) %></p>
+              </div>
+              <p class="text-sm font-medium text-gray-900"><%= number_to_currency(product.price, unit: "₩", precision: 0, format: "%u%n") %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">등록된 상품이 없습니다</h3>
+        <p class="mt-1 text-sm text-gray-500">새로운 상품을 등록하여 판매를 시작해보세요.</p>
+        <div class="mt-6">
+          <%= link_to "상품 등록하기", new_product_path, class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+DEPLOYED_AT: <%= Time.now %>
+COMMIT_HASH: <%= `git rev-parse HEAD`.strip rescue 'unknown' %>
+STATUS: Site is being redeployed.

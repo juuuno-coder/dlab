@@ -1,0 +1,372 @@
+<% content_for :title, "문의하기 - 디어스" %>
+<% content_for :description, "프로젝트 문의 및 견적 요청을 남겨주세요. 디어스 전문가가 빠르게 연락드리겠습니다." %>
+
+<!-- Contact Hero -->
+<section class="hero" style="min-height: 40vh; padding-top: 120px; padding-bottom: 120px;">
+  <div class="hero-content">
+    <h1 class="hero-title" style="font-size: var(--text-6xl);">프로젝트 문의</h1>
+    <p class="hero-subtitle">
+      프로젝트에 대해 자세히 알려주세요<br>
+      최적의 솔루션을 제안해드리겠습니다
+    </p>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="section">
+  <% if params[:template_id].present? %>
+    <!-- [템플릿 의뢰 모드] 와이드 분할 레이아웃 (88% Width) -->
+    <div style="width: 88%; max-width: 1800px; margin: 0 auto; padding-bottom: 80px;">
+      
+      <!-- 상단 여백 -->
+      <div style="height: 40px;"></div>
+
+      <div style="margin-bottom: 30px;">
+        <h1 class="text-3xl font-bold text-gray-900">
+          <span class="text-emerald-600"><%= params[:template_title] || "템플릿" %></span> 의뢰하기
+        </h1>
+        <p class="text-gray-500 mt-2 text-lg">선택하신 디자인을 기반으로 빠르고 정확하게 제작해 드립니다.</p>
+      </div>
+
+      <!-- Mobile Selected Template Summary (Visible only on Mobile) -->
+      <div class="lg:hidden mb-8 bg-white rounded-xl border border-gray-200 p-4 flex gap-4 items-center shadow-sm">
+         <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+           <% if params[:preview_url] %>
+             <!-- Try to guess image from preview_url mapping or generic icon -->
+             <div class="w-full h-full flex items-center justify-center bg-slate-100 text-slate-400">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+             </div>
+           <% end %>
+         </div>
+         <div>
+           <div class="text-xs font-bold text-gray-500 uppercase">Selected Template</div>
+           <div class="text-lg font-bold text-gray-900"><%= params[:template_title] || "Unknown Template" %></div>
+           <a href="<%= params[:preview_url] %>" target="_blank" class="text-sm text-emerald-600 font-bold hover:underline">미리보기 새창으로 열기 &rarr;</a>
+         </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-10" style="min-height: 800px;">
+        
+        <!-- Left: Interactive Preview (60%) - HIDDEN ON MOBILE -->
+        <div class="hidden lg:flex w-full lg:w-[60%] flex-col">
+          <div class="bg-gray-100 rounded-2xl overflow-hidden border border-gray-200 flex flex-col relative sticky top-24" style="height: 85vh; max-height: 900px;">
+            <!-- Preview Header -->
+            <div class="bg-white border-b border-gray-200 px-5 py-4 flex justify-between items-center shrink-0">
+              <div class="font-bold text-gray-700 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                <span class="ml-3 text-sm font-semibold text-gray-500">Live Preview</span>
+              </div>
+              
+              <!-- View Switcher -->
+              <div class="bg-gray-100 p-1 rounded-lg flex text-sm font-medium">
+                <button onclick="switchEmbedView('pc')" id="btn-embed-pc" class="px-4 py-2 rounded-md bg-white shadow-sm text-emerald-600 font-bold transition-all flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                  PC
+                </button>
+                <button onclick="switchEmbedView('mobile')" id="btn-embed-mobile" class="px-4 py-2 rounded-md text-gray-500 hover:text-gray-900 transition-all flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12" y2="18"></line></svg>
+                  Mobile
+                </button>
+              </div>
+            </div>
+
+            <!-- Preview Area -->
+            <div class="flex-1 bg-gray-100 overflow-hidden flex justify-center items-center p-6 transition-colors duration-300" id="embed-bg">
+              <!-- Iframe -->
+              <div id="iframe-wrapper" class="w-full h-full bg-white shadow-xl transition-all duration-500 ease-in-out relative overflow-hidden rounded-lg">
+                <iframe id="embed-iframe" src="" class="w-full h-full border-none bg-white"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Contact Form (40%) -->
+        <div class="w-full lg:w-[40%]">
+          <div class="bg-white p-8 lg:p-10 rounded-2xl border border-gray-100 shadow-xl sticky top-24">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-2">
+              <span>프로젝트 상세 정보</span>
+              <span class="text-xs font-normal text-white bg-emerald-500 px-2 py-1 rounded">필수 입력</span>
+            </h2>
+            
+            <%= form_with url: contact_path, local: true, class: "space-y-6", html: { id: "template-contact-form", data: { controller: "honeypot" } } do |f| %>
+              <%# Honeypot field - hidden from users but visible to bots %>
+              <div style="display:none !important;" aria-hidden="true">
+                <%= f.text_field :nickname, tabindex: "-1", autocomplete: "off", data: { honeypot_target: "field" } %>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-bold text-gray-700 mb-2">담당자명 *</label>
+                  <%= text_field_tag "quote[contact_name]", nil, class: "w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition outline-none", placeholder: "홍길동", required: true %>
+                </div>
+                <div>
+                  <label class="block text-sm font-bold text-gray-700 mb-2">회사명</label>
+                  <%= text_field_tag "quote[company_name]", nil, class: "w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition outline-none", placeholder: "회사명 입력" %>
+                </div>
+                <!-- Preferred Domain Field (Added) -->
+                <div class="col-span-2">
+                  <label class="block text-sm font-bold text-gray-700 mb-2">희망 도메인</label>
+                  <%= text_field_tag "quote[preferred_domain]", nil, class: "w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition outline-none", placeholder: "example.com (선택사항)" %>
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">이메일 *</label>
+                <%= email_field_tag "quote[email]", nil, class: "w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition outline-none", placeholder: "example@company.com", required: true %>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">연락처 *</label>
+                <%= text_field_tag "quote[phone]", nil, class: "w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition outline-none", placeholder: "010-0000-0000", required: true %>
+              </div>
+
+              <div>
+                 <label class="block text-sm font-bold text-gray-700 mb-2">예산 범위</label>
+                 <div class="relative">
+                   <%= select_tag "quote[budget]", options_for_select(["100만원 이하", "100만원 ~ 500만원", "500만원 ~ 1,000만원", "1,000만원 ~ 3,000만원", "3,000만원 ~ 5,000만원", "5,000만원 이상", "미정"]), { prompt: "예산을 선택해주세요", class: "w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition outline-none appearance-none cursor-pointer" } %>
+                   <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                   </div>
+                 </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">요청사항 *</label>
+                <% 
+                  default_msg = if params[:template_title]
+                    "안녕하세요. '#{params[:template_title]}' 템플릿으로 제작을 의뢰합니다.\n\n[추가 요청사항]\n1. \n2. "
+                  else
+                    ""
+                  end
+                %>
+                <%= text_area_tag "quote[message]", default_msg, rows: 6, class: "w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition outline-none text-sm leading-relaxed resize-none", required: true %>
+              </div>
+
+              <!-- 프로젝트 유형 hidden 필드 -->
+              <%= hidden_field_tag "quote[project_type]", "템플릿 의뢰" %>
+
+              <div class="flex gap-3">
+                <button type="submit" class="flex-[2] py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg rounded-xl shadow-lg shadow-emerald-200 hover:shadow-emerald-300 transition-all transform hover:-translate-y-0.5 flex justify-center items-center gap-2">
+                  <span>무료 견적 신청하기</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+                </button>
+                
+                <%= link_to add_to_cart_path(item_type: 'DesignTemplate', item_id: params[:template_id]), 
+                    data: { turbo_method: :post },
+                    class: "flex-1 py-4 bg-white border-2 border-slate-200 hover:border-slate-800 text-slate-600 hover:text-slate-900 font-bold text-lg rounded-xl transition-all transform hover:-translate-y-0.5 flex justify-center items-center gap-2" do %>
+                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                  <span>담기</span>
+                <% end %>
+              </div>
+              
+              <p class="text-xs text-center text-gray-400 mt-4 bg-gray-50 py-2 rounded-lg">
+                🔒 보내주신 정보는 프로젝트 상담 목적으로만 사용됩니다.
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Load Iframe from DB data (No hardcoding)
+      const targetUrl = "<%= @preview_url %>"; 
+      const iframe = document.getElementById('embed-iframe');
+      
+      if (iframe && targetUrl) {
+          iframe.src = targetUrl;
+      } else if (iframe) {
+          // Fallback if URL is missing
+          iframe.src = '/templates/beauty';
+      }
+
+      function switchEmbedView(mode) {
+          const wrapper = document.getElementById('iframe-wrapper');
+          const btnPc = document.getElementById('btn-embed-pc');
+          const btnMobile = document.getElementById('btn-embed-mobile');
+          const bg = document.getElementById('embed-bg');
+
+          if (mode === 'pc') {
+              // PC Style
+              wrapper.style.width = '100%';
+              wrapper.style.height = '100%';
+              wrapper.style.maxWidth = '100%';
+              wrapper.style.border = 'none';
+              wrapper.style.borderRadius = '8px';
+              
+              bg.classList.remove('bg-gray-800');
+              bg.classList.add('bg-gray-100');
+
+              // Button Style
+              btnPc.classList.add('bg-white', 'shadow-sm', 'text-emerald-600');
+              btnPc.classList.remove('text-gray-500', 'hover:text-gray-900');
+              
+              btnMobile.classList.remove('bg-white', 'shadow-sm', 'text-emerald-600');
+              btnMobile.classList.add('text-gray-500', 'hover:text-gray-900');
+          } else {
+              // Mobile Style
+              wrapper.style.width = '375px';
+              wrapper.style.height = '812px';
+              wrapper.style.maxWidth = '100%';
+              wrapper.style.border = '12px solid #1f2937'; // gray-800 border
+              wrapper.style.borderRadius = '40px';
+              
+              bg.classList.remove('bg-gray-100');
+              bg.classList.add('bg-gray-800');
+
+              // Button Style
+              btnMobile.classList.add('bg-white', 'shadow-sm', 'text-emerald-600');
+              btnMobile.classList.remove('text-gray-500', 'hover:text-gray-900');
+              
+              btnPc.classList.remove('bg-white', 'shadow-sm', 'text-emerald-600');
+              btnPc.classList.add('text-gray-500', 'hover:text-gray-900');
+          }
+      }
+    </script>
+
+  <% else %>
+    <!-- [일반 문의 모드] 깔끔한 싱글 컨테이너 -->
+    <div class="container container-sm" style="padding-bottom: 80px;">
+      <div class="card" style="padding: var(--space-8);">
+
+
+        <%= form_with model: @quote, url: contact_path, local: true, class: "contact-form", html: { onsubmit: "return submitContactForm(this);", id: "contact-form", data: { controller: "honeypot" } } do |f| %>
+          <%# Honeypot field - hidden from users but visible to bots %>
+          <div style="display:none !important;" aria-hidden="true">
+            <%= f.text_field :nickname, tabindex: "-1", autocomplete: "off", data: { honeypot_target: "field" } %>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <%= f.label :contact_name, "담당자 성함 *", class: "form-label" %>
+              <%= f.text_field :contact_name, class: "form-input", placeholder: "홍길동", required: true %>
+            </div>
+            
+            <div class="form-group">
+              <%= f.label :company_name, "회사/단체명", class: "form-label" %>
+              <%= f.text_field :company_name, class: "form-input", placeholder: "(주)디어스" %>
+            </div>
+            
+            <div class="form-group" style="grid-column: span 2;">
+              <%= f.label :preferred_domain, "희망 도메인", class: "form-label" %>
+              <%= f.text_field :preferred_domain, class: "form-input", placeholder: "example.com (선택사항)" %>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <%= f.label :email, "이메일 *", class: "form-label" %>
+              <%= f.email_field :email, class: "form-input", placeholder: "contact@example.com", required: true %>
+            </div>
+            
+            <div class="form-group">
+              <%= f.label :phone, "연락처 *", class: "form-label" %>
+              <%= f.text_field :phone, class: "form-input", placeholder: "010-1234-5678", required: true %>
+            </div>
+          </div>
+
+          <div class="form-group">
+             <%= f.label :project_type, "프로젝트 유형 *", class: "form-label" %>
+             <%= f.select :project_type, ["웹사이트 제작", "쇼핑몰 제작", "앱 개발", "유지보수", "기타"], { prompt: "프로젝트 유형을 선택해주세요" }, class: "form-select", required: true %>
+          </div>
+
+          <div class="form-group">
+             <%= f.label :budget, "예산 범위", class: "form-label" %>
+             <%= f.select :budget, ["100만원 이하", "100만원 ~ 500만원", "500만원 ~ 1,000만원", "1,000만원 ~ 3,000만원", "3,000만원 ~ 5,000만원", "5,000만원 이상", "미정"], { prompt: "예산 범위를 선택해주세요" }, class: "form-select" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :message, "프로젝트 내용 *", class: "form-label" %>
+            <%= f.text_area :message, class: "form-textarea", rows: 5, placeholder: "프로젝트의 목적, 주요 기능, 참고 사이트 등을 자유롭게 적어주세요.", required: true %>
+          </div>
+          
+          <div style="margin-top: var(--space-6);">
+            <button type="submit" class="btn btn-primary btn-lg w-full" id="submit-btn">
+              <span id="btn-text">문의하기</span>
+              <span id="btn-loader" style="display: none; margin-left: 8px;">↻</span>
+            </button>
+          </div>
+          
+          <p style="text-align: center; color: var(--color-gray-500); font-size: var(--text-sm); margin-top: var(--space-4);">
+            문의 주신 내용은 영업일 기준 24시간 이내에 답변드립니다.
+          </p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <script>
+    function submitContactForm(form) {
+      const btn = document.getElementById('submit-btn');
+      const txt = document.getElementById('btn-text');
+      const loader = document.getElementById('btn-loader');
+      
+      // Check HTML5 validity
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return false;
+      }
+      
+      btn.disabled = true;
+      btn.style.opacity = '0.8';
+      btn.style.cursor = 'not-allowed';
+      txt.innerText = '전송 중...';
+      loader.style.display = 'inline-block';
+      loader.style.animation = 'spin 1s linear infinite';
+      
+      return true;
+    }
+  </script>
+
+  <style>
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+  </style>
+</section>
+
+<!-- Contact Info Section -->
+<section class="section bg-gray-50">
+  <div class="container">
+    <div class="text-center" style="margin-bottom: var(--space-12);">
+      <h2 style="font-size: var(--text-4xl); margin-bottom: var(--space-4);">다른 방법으로 연락하기</h2>
+      <p class="text-gray" style="font-size: var(--text-lg);">
+        편하신 방법으로 언제든지 연락주세요
+      </p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card text-center">
+        <div style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-2);">이메일</h3>
+        <p class="text-gray">contact@dlab.kr</p>
+      </div>
+
+      <div class="card text-center">
+        <div style="width: 60px; height: 60px; background: var(--gradient-accent); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-2);">전화</h3>
+        <p class="text-gray">02-1234-5678</p>
+      </div>
+
+      <div class="card text-center">
+        <div style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-2);">운영 시간</h3>
+        <p class="text-gray">평일 09:00 - 18:00<br>(주말 및 공휴일 휴무)</p>
+      </div>
+    </div>
+  </div>
+</section>
+

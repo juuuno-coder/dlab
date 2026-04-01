@@ -1,0 +1,155 @@
+<%# Shopping Template - 에비뉴 (THE AVENUE) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,400&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-serif-modern { font-family: 'Bodoni Moda', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  /* Smooth scroll behavior */
+  html { scroll-behavior: smooth; }
+</style>
+
+<div class="bg-white text-slate-900 font-sans selection:bg-slate-950 selection:text-white min-h-screen overflow-x-hidden">
+
+  <!-- Promo Bar -->
+  <div class="bg-slate-950 text-white text-[9px] py-2 text-center tracking-[0.4em] uppercase font-semibold relative z-50">
+     <span class="animate-pulse">Seasonal Archive Sale • Up to 50% Off</span>
+  </div>
+
+  <!-- Nav -->
+  <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-black/5 transition-all duration-300">
+    <div class="container mx-auto px-4 md:px-6 md: py-6 flex justify-between items-center relative flex-nowrap">
+      <div class="hidden md:flex gap-14 text-[10px] font-semibold tracking-[0.2em] uppercase text-slate-900/40">
+         <a href="#new" class="hover:text-slate-900 transition">Editorial</a>
+         <a href="#collection" class="hover:text-slate-900 transition">Collections</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <a href="#" class="font-serif-modern text-2xl md:text-3xl tracking-[0.1em] font-semibold absolute left-1/2 -translate-x-1/2 uppercase">Avenue</a>
+      
+      <div class="flex-nowrap shrink-0 flex gap-12 text-[10px] font-semibold tracking-[0.2em] uppercase text-slate-900/40 items-center">
+         <button onclick="toggleAvenueModal()" class="hidden md:block hover:text-slate-900 transition" data-mobile-menu-copy="true">Account</button>
+         <button class="hidden md:block hover:text-slate-900 transition flex items-center gap-2" data-mobile-menu-copy="true">
+            Bag <span class="bg-slate-950 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-semibold">0</span>
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="h-screen relative overflow-hidden flex items-center justify-center">
+    <!-- Video Background Concept -->
+    <div class="absolute inset-0 z-0">
+       <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2400" alt="Fashion" class="w-full h-full object-cover grayscale brightness-90 animate-subtle-zoom">
+       <!-- You would typically use a video here for a real luxury site -->
+       <div class="absolute inset-0 bg-slate-950/10"></div>
+    </div>
+    
+    <div class="relative z-10 text-center text-white space-y-12 px-6 max-w-4xl mx-auto">
+      <div class="inline-block border border-white/30 px-6 py-2 backdrop-blur-md">
+         <p class="font-serif-modern text-lg md:text-xl italic tracking-wide">Fall / Winter 2024</p>
+      </div>
+      
+      <h1 class="text-3xl md:text-5xl md:text-[8rem] font-serif-modern leading-[0.9] tracking-tight uppercase mobile-title">
+        Urban<br><span class="italic font-light">Elegance.</span>
+      </h1>
+      
+      <p class="text-white/80 text-sm md:text-lg leading-relaxed max-w-lg mx-auto font-sans font-light mobile-desc border-t border-white/20 pt-8 mt-8">
+         도시의 감각을 재해석한 새로운 컬렉션. 섬세한 디테일과 과감한 실루엣의 조화를 만나보세요.
+      </p>
+      
+      <div class="pt-8 flex flex-col sm:flex-row gap-10 justify-center">
+         <button class="bg-white text-slate-900 px-6 md:px-16 py-5 text-[10px] font-semibold tracking-[0.4em] uppercase hover:bg-slate-950 hover:text-white transition duration-500 shadow-2xl">
+           Shop Women
+         </button>
+         <button class="border border-white text-white px-6 md:px-16 py-5 text-[10px] font-semibold tracking-[0.4em] uppercase hover:bg-white hover:text-slate-900 transition duration-500 backdrop-blur-sm">
+           Shop Men
+         </button>
+      </div>
+    </div>
+    
+    <style>
+       @keyframes subtle-zoom {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.05); }
+       }
+       .animate-subtle-zoom { animation: subtle-zoom 20s infinite alternate ease-in-out; }
+    </style>
+  </header>
+
+  <!-- Category Grid (Teaser) -->
+  <section class="grid grid-cols-1 md:grid-cols-2">
+     <div class="h-[600px] relative group overflow-hidden cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="New Arrivals">
+        <div class="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/40 transition duration-500 flex items-center justify-center">
+           <div class="text-center">
+              <h3 class="text-3xl font-serif-modern text-white italic mb-4 translate-y-8 group-hover:translate-y-0 transition duration-500 opacity-0 group-hover:opacity-100">New Arrivals</h3>
+              <span class="text-white text-[10px] font-semibold tracking-[0.4em] uppercase border-b border-white pb-1">Discover</span>
+           </div>
+        </div>
+     </div>
+     <div class="h-[600px] relative group overflow-hidden cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1529139574466-a302d2052574?q=80&w=1200" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="Accessories">
+         <div class="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/40 transition duration-500 flex items-center justify-center">
+           <div class="text-center">
+              <h3 class="text-3xl font-serif-modern text-white italic mb-4 translate-y-8 group-hover:translate-y-0 transition duration-500 opacity-0 group-hover:opacity-100">Accessories</h3>
+              <span class="text-white text-[10px] font-semibold tracking-[0.4em] uppercase border-b border-white pb-1">Discover</span>
+           </div>
+        </div>
+     </div>
+  </section>
+
+  <!-- Login Modal -->
+  <div id="avenue-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-white/80 backdrop-blur-2xl">
+    <div class="bg-white w-full max-w-sm p-6 md:p-16 shadow-2xl relative border border-black/5">
+      <button onclick="toggleAvenueModal()" class="absolute top-8 right-8 text-slate-900/20 hover:text-slate-900 transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl font-serif-modern tracking-wide text-slate-900 mb-2 italic">Avenue Club</h2>
+        <p class="font-sans text-[9px] text-slate-900/40 tracking-[0.3em] uppercase font-semibold">Exclusive Member Access</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="relative group">
+           <input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border-b border-black/10 py-4 text-[11px] font-semibold tracking-[0.2em] placeholder-black/30 uppercase outline-none focus:border-black transition">
+           <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-slate-950 transition-all duration-500 group-hover:w-full"></span>
+        </div>
+        <button class="w-full bg-slate-950 text-white py-5 text-[10px] tracking-[0.4em] font-semibold uppercase hover:bg-gray-900 transition shadow-xl">
+           Sign In
+        </button>
+        <div class="flex justify-between pt-4 border-t border-black/5">
+           <a href="#" class="text-[9px] text-slate-900/40 tracking-[0.2em] font-semibold uppercase hover:text-slate-900 transition">Create Account</a>
+           <a href="#" class="text-[9px] text-slate-900/40 tracking-[0.2em] font-semibold uppercase hover:text-slate-900 transition">Assistance</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-24 md:py-40 bg-white text-slate-900 border-t border-black/5 text-center">
+     <div class="inline-flex flex-col items-center gap-12 mb-12">
+        <span class="font-serif-modern text-2xl md:text-4xl tracking-[0.1em] uppercase">Avenue</span>
+        <div class="w-12 h-[1px] bg-slate-950"></div>
+        <span class="text-[10px] font-semibold text-slate-900/40 tracking-[0.4em] uppercase">The Art of Luxury Retail</span>
+     </div>
+     <p class="text-[10px] text-slate-900/20 tracking-[0.8em] uppercase px-6">© 2024 THE AVENUE. SEOUL.</p>
+  </footer>
+
+  <script>
+    function toggleAvenueModal() {
+      const modal = document.getElementById('avenue-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

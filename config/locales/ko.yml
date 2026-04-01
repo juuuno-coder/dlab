@@ -1,0 +1,23 @@
+ko:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "유효성 검사에 실패했습니다: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "종속된 %{record} 레코드가 있어 삭제할 수 없습니다."
+          has_many: "종속된 %{record} 레코드가 있어 삭제할 수 없습니다."
+      models:
+        user:
+          attributes:
+            email:
+              blank: "이메일은 필수 입력 항목입니다."
+              taken: "이미 사용 중인 이메일입니다."
+              invalid: "유효하지 않은 이메일 형식입니다."
+            password:
+              blank: "비밀번호는 필수 입력 항목입니다."
+              too_short: "비밀번호는 최소 %{count}자 이상이어야 합니다."
+              confirmation: "비밀번호 확인이 일치하지 않습니다."
+    attributes:
+      email: "이메일"
+      password: "비밀번호"
+      password_confirmation: "비밀번호 확인"

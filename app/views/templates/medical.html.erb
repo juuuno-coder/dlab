@@ -1,0 +1,266 @@
+<%# Medical Template - 미소 라인 (MISO LINE) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-serif { font-family: 'Nanum Myeongjo', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 32px !important; }
+  }
+
+  /* Before After Slider */
+  .ba-slider {
+    position: relative;
+    overflow: hidden;
+  }
+  .ba-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .resize {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+  }
+  .handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: ew-resize;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 20;
+  }
+  .resize::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255,255,255,0.8);
+  }
+</style>
+
+<div class="bg-white text-slate-900 font-sans selection:bg-cyan-600 selection:text-white min-h-screen overflow-x-hidden">
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-white/80 backdrop-blur-xl border-b border-cyan-50 transition-all duration-300" data-aos="fade-down" data-aos-duration="1000">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-3">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold text-xs shadow-lg shadow-cyan-200">
+            +
+         </div>
+         <span class="font-semibold text-base md:text-xl shrink truncate tracking-tight uppercase text-slate-800">MISO<span class="text-cyan-600">LINE</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-16 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+        <a href="#about" class="hover:text-cyan-600 transition">Center</a>
+        <a href="#specialty" class="hover:text-cyan-600 transition">Specialty</a>
+        <a href="#story" class="hover:text-cyan-600 transition">Philosophy</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-10 items-center">
+         <button onclick="toggleMedicalModal()" class="hidden md:block text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 hover:text-cyan-600" data-mobile-menu-copy="true">Patient Portal</button>
+         <button class="hidden md:inline-flex bg-slate-900 text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-lg font-semibold text-[11px] tracking-wide uppercase hover:bg-cyan-600 transition shadow-xl shadow-slate-200" data-mobile-menu-copy="true">
+           Appointment
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero with Quick Consult Form -->
+  <header class="min-h-screen relative flex flex-col justify-center pt-32 pb-20">
+    <div class="absolute top-0 right-0 w-[50%] h-[80%] bg-cyan-50/50 rounded-bl-[10rem] -z-10" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="300"></div>
+    
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-10 md:p-16 items-center mb-16">
+      <div class="space-y-10 text-center lg:text-left" data-aos="fade-right" data-aos-duration="1200">
+        <div class="inline-flex items-center gap-2 bg-white border border-cyan-100 px-4 py-1.5 rounded-lg shadow-sm">
+           <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
+           <span class="text-[10px] font-semibold tracking-wide uppercase text-cyan-600">Certified Excellence Center</span>
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl font-serif font-semibold leading-[1.2] tracking-tight text-slate-900 mobile-title">
+           평생의 미소를 위한<br>
+           <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600">정직하고 따뜻한 진료.</span>
+        </h1>
+        
+        <p class="text-slate-500 text-sm md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc">
+           미소라인은 당신의 건강과 회복을 최우선으로 생각합니다. 분야별 전문의들이 가족을 대하는 마음으로 가장 따뜻한 케어를 약속드립니다.
+        </p>
+        
+        <div class="pt-6 flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+           <button class="px-8 py-4 bg-slate-900 text-white font-semibold text-[11px] tracking-wide uppercase rounded-xl hover:bg-cyan-600 transition shadow-xl transform hover:-translate-y-1">
+              Find Specialist
+           </button>
+           <button class="px-8 py-4 bg-white border border-slate-200 text-slate-600 font-semibold text-[11px] tracking-wide uppercase rounded-xl hover:border-cyan-200 hover:text-cyan-600 transition shadow-sm">
+              Online Check-up
+           </button>
+        </div>
+
+        <div class="pt-8 flex items-center justify-center lg:justify-start gap-12 border-t border-slate-100">
+           <div data-aos="fade-up" data-aos-delay="500">
+              <p class="text-2xl font-semibold text-slate-900">24<span class="text-cyan-600">+</span></p>
+              <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">Medical Staff</p>
+           </div>
+           <div class="w-[1px] h-8 bg-slate-200" data-aos="fade-up" data-aos-delay="600"></div>
+           <div data-aos="fade-up" data-aos-delay="700">
+              <p class="text-2xl font-semibold text-slate-900">98<span class="text-cyan-600">%</span></p>
+              <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">Recovery Rate</p>
+           </div>
+        </div>
+      </div>
+      
+      <div class="relative hidden lg:block" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200">
+         <div class="relative group">
+            <div class="absolute -inset-4 bg-gradient-to-tr from-cyan-200 to-blue-200 rounded-2xl rotate-3 opacity-30 group-hover:rotate-6 transition duration-700"></div>
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200" alt="Medical Care" class="relative z-10 w-full aspect-[4/5] object-cover rounded-[2.5rem] shadow-2xl">
+            
+            <div class="absolute bottom-10 -left-10 z-20 bg-white p-8 rounded-2xl shadow-2xl border border-slate-100 max-w-[260px]" data-aos="fade-up" data-aos-delay="800">
+               <div class="flex items-center gap-6 mb-4">
+                  <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  </div>
+                  <div>
+                     <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">Trust Score</p>
+                     <p class="text-lg font-semibold text-slate-900">Patient 1st</p>
+                  </div>
+               </div>
+               <p class="text-xs text-slate-500 leading-relaxed font-medium">"환자 중심의 진료 철학으로 신뢰받는 병원이 되겠습니다."</p>
+            </div>
+         </div>
+      </div>
+    </div>
+
+    <!-- Quick Consult Bar -->
+    <div class="container mx-auto px-3 md:px-6 relative z-10" data-aos="fade-up" data-aos-offset="0">
+       <div class="bg-white rounded-2xl shadow-xl shadow-slate-200 border border-slate-100 p-6 md:p-8 flex flex-col md:flex-row items-center gap-10">
+          <div class="flex-1 w-full">
+             <h3 class="font-semibold text-slate-900 mb-1">빠른 상담 신청</h3>
+             <p class="text-xs text-slate-500">연락처를 남겨주시면 전문 상담원이 연락드립니다.</p>
+          </div>
+          <div class="flex flex-col md:flex-row gap-6 w-full md:w-auto">
+             <input type="text" placeholder="이름" class="bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-cyan-500 w-full md:w-40">
+             <input type="text" placeholder="연락처 (010-0000-0000)" class="bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-cyan-500 w-full md:w-60">
+             <button class="bg-cyan-600 text-white px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap rounded-lg font-semibold text-sm hover:bg-cyan-700 transition whitespace-nowrap w-full md:w-auto">상담 신청</button>
+          </div>
+       </div>
+    </div>
+  </header>
+
+  <!-- Before & After Slider Section -->
+  <section class="py-20 md:py-32 bg-slate-50" data-aos="fade-up">
+     <div class="container mx-auto px-3 md:px-6 max-w-4xl text-center">
+        <div class="mb-12">
+           <span class="text-cyan-600 font-semibold text-xs tracking-wide uppercase block mb-3">Proven Results</span>
+           <h2 class="text-2xl font-semibold text-slate-900 font-serif">Before & After</h2>
+           <p class="text-slate-500 mt-4 text-sm">드래그하여 변화를 확인하세요.</p>
+        </div>
+        
+        <div class="ba-slider relative aspect-video rounded-2xl shadow-2xl overflow-hidden cursor-ew-resize group" onmousemove="moveSlider(event)" ontouchmove="moveSlider(event)">
+           <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=1200" alt="After" class="absolute inset-0 w-full h-full object-cover">
+           <div class="resize w-1/2 group-hover:w-1/2 transition-none" id="ba-resize">
+              <img src="https://images.unsplash.com/photo-1598300056393-875845047b7e?q=80&w=1200" alt="Before" class="absolute top-0 left-0 w-full h-auto object-cover max-w-none aspect-video" style="width: 100vw; max-width: 896px;"> 
+              <!-- Note: max-width match container approx width for proper alignment trick or use JS to lock width -->
+           </div>
+           <div class="handle" id="ba-handle" style="left: 50%">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg>
+           </div>
+           <span class="absolute top-4 left-4 bg-slate-950/50 text-white text-[10px] px-2 py-1 rounded font-semibold z-20">BEFORE</span>
+           <span class="absolute top-4 right-4 bg-cyan-600 text-white text-[10px] px-2 py-1 rounded font-semibold z-20">AFTER</span>
+        </div>
+     </div>
+  </section>
+
+  <!-- Login Modal -->
+  <div id="medical-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xl">
+    <div class="bg-white w-full max-w-sm p-12 shadow-2xl relative rounded-2xl" data-aos="zoom-in">
+      <button onclick="toggleMedicalModal()" class="absolute top-8 right-8 text-slate-300 hover:text-cyan-600 transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-10">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-900 mb-2 uppercase">HEALTH_CONNECT</h2>
+        <p class="text-[9px] text-cyan-600 font-semibold tracking-[0.2em] uppercase">Private Medical Record Access</p>
+      </div>
+      
+      <div class="space-y-6">
+        <div class="space-y-2">
+           <p class="text-[9px] font-semibold text-slate-400 uppercase tracking-wide ml-2">Patient ID / Mobile</p>
+           <input type="text" placeholder="Enter Credentials" class="w-full bg-slate-50 border-none rounded-2xl py-5 px-6 outline-none focus:ring-1 focus:ring-cyan-500 transition text-[11px] font-semibold tracking-wide text-slate-800">
+        </div>
+        <button class="w-full bg-slate-900 text-white py-5 rounded-2xl text-[10px] tracking-[0.4em] font-semibold uppercase hover:bg-cyan-600 transition shadow-xl shadow-cyan-200">
+           Secure Login
+        </button>
+        <div class="flex justify-center gap-12 pt-4">
+           <a href="#" class="text-[9px] text-slate-400 tracking-[0.2em] font-semibold uppercase hover:text-cyan-600 transition">First Visit?</a>
+           <a href="#" class="text-[9px] text-slate-400 tracking-[0.2em] font-semibold uppercase hover:text-cyan-600 transition">Find My ID</a>
+        </div>
+      </div>
+       
+       <div class="mt-8 pt-6 border-t border-slate-100 text-center">
+          <p class="text-[9px] text-slate-400 flex items-center justify-center gap-2">
+             <span class="w-2 h-2 rounded-full bg-green-500"></span>
+             Secure Encrypted Connection
+          </p>
+       </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-slate-100">
+     <div class="inline-flex items-center gap-10 mb-8">
+        <span class="font-semibold text-base md:text-xl shrink truncate tracking-tight uppercase text-slate-900">MISO<span class="text-cyan-600">LINE</span></span>
+        <span class="w-12 h-[1px] bg-slate-100"></span>
+        <span class="text-[10px] font-semibold text-slate-400 tracking-[0.3em] uppercase">With Your Life</span>
+     </div>
+     <p class="text-[10px] text-slate-300 tracking-[0.6em] uppercase px-6">© 2024 MISO LINE MEDICAL CENTER. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleMedicalModal() {
+      const modal = document.getElementById('medical-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+
+    // Simple Before/After Slider Logic
+    function moveSlider(e) {
+       const slider = document.querySelector('.ba-slider');
+       const resize = document.getElementById('ba-resize');
+       const handle = document.getElementById('ba-handle');
+       const rect = slider.getBoundingClientRect();
+       
+       let x = (e.clientX || e.touches[0].clientX) - rect.left;
+       x = Math.max(0, Math.min(x, rect.width));
+       
+       const percent = (x / rect.width) * 100;
+       
+       resize.style.width = percent + '%';
+       handle.style.left = percent + '%';
+       
+       // Correct the inner image position
+       // Note: In a real robust implementation, we'd adjust the inner image transform or use clip-path
+       // For this CSS demo, we strictly sized the inner image to match container width in CSS `style` attr
+    }
+  </script>
+
+</div>

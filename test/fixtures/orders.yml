@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: one
+  customer_name: MyString
+  amount: 1
+  status: MyString
+  payment_key: MyString
+  order_uid: MyString
+
+two:
+  product: two
+  customer_name: MyString
+  amount: 1
+  status: MyString
+  payment_key: MyString
+  order_uid: MyString

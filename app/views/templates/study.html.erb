@@ -1,0 +1,162 @@
+<%# Study Template - 라이브러리 원 (LIBRARY ONE) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-modern-serif { font-family: 'DM Serif Display', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .paper-texture {
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.1;
+  }
+</style>
+
+<div class="bg-[#F5F5F0] text-[#2D2D2A] font-sans selection:bg-[#4A5D44] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 paper-texture pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-[#F5F5F0]/90 backdrop-blur-md border-b border-[#4A5D44]/10">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-2">
+         <span class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain bg-[#4A5D44] rounded-full flex items-center justify-center text-[#F5F5F0] font-modern-serif text-lg pt-1">L</span>
+         <span class="font-modern-serif text-xl tracking-tight text-[#2D2D2A]">Library<span class="text-[#4A5D44]">One</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[12px] font-semibold tracking-[0.1em] text-[#8C8C85] uppercase">
+        <a href="#focus" class="hover:text-[#4A5D44] transition">Focus Zone</a>
+        <a href="#lounge" class="hover:text-[#4A5D44] transition"> Lounge</a>
+        <a href="#pricing" class="hover:text-[#4A5D44] transition">Seats</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="toggleStudyModal()" class="hidden md:block text-[12px] font-semibold uppercase tracking-[0.1em] text-[#8C8C85] hover:text-[#4A5D44]" data-mobile-menu-copy="true">My Seat</button>
+         <button class="hidden md:inline-flex bg-[#4A5D44] text-[#F5F5F0] px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-sm lg:rounded-lg font-semibold text-[11px] tracking-wide uppercase hover:bg-[#3A4A35] transition shadow-lg shadow-[#4A5D44]/20" data-mobile-menu-copy="true">
+           Check In
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Calm Background Elements -->
+    <div class="absolute top-0 right-0 w-[40vw] h-[100vh] bg-[#EBEBE6] -z-10"></div>
+    <div class="absolute bottom-20 left-20 w-64 h-64 border border-[#4A5D44]/10 rounded-full animate-spin-slow"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-12 text-center lg:text-left order-2 lg:order-1">
+        <div class="inline-flex items-center gap-3 border-l-2 border-[#4A5D44] pl-4">
+           <span class="text-[11px] font-semibold text-[#4A5D44] uppercase tracking-[0.2em]">Premium Study Lounge</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-modern-serif font-normal leading-[1.1] text-[#2D2D2A] mobile-title">
+           Silence,<br>
+           Focus, and<br>
+           <span class="italic text-[#4A5D44]">Inspiration.</span>
+        </h1>
+        
+        <p class="text-[#8C8C85] text-sm md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mobile-desc font-medium">
+           몰입의 깊이가 다른 공간. 라이브러리 원은 당신의 가장 집중된 시간을 디자인합니다.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-10 justify-center lg:justify-start pt-6">
+           <button class="px-10 py-4 bg-[#2D2D2A] text-[#F5F5F0] font-modern-serif text-lg hover:bg-[#4A5D44] transition shadow-xl">
+              Reserve Now
+           </button>
+           <button class="px-10 py-4 border border-[#4A5D44]/30 text-[#4A5D44] font-modern-serif text-lg hover:bg-[#4A5D44] hover:text-[#F5F5F0] transition">
+              View Spaces
+           </button>
+        </div>
+
+        <div class="pt-10 flex gap-12 justify-center lg:justify-start text-[#8C8C85] text-xs font-semibold uppercase tracking-wider">
+           <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#4A5D44]"></span> Silence Zone
+           </div>
+           <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#A3B19E]"></span> Cafe Lounge
+           </div>
+           <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#D4D4D0]"></span> Meeting Room
+           </div>
+        </div>
+      </div>
+      
+      <div class="relative order-1 lg:order-2 flex justify-center h-full items-center">
+         <div class="relative w-[350px] md:w-[450px] aspect-[4/5]">
+            <div class="absolute inset-0 bg-[#4A5D44] transform translate-x-4 translate-y-4 -z-10"></div>
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800" alt="Quiet Study Space" class="w-full h-full object-cover grayscale-[20%] sepia-[10%] shadow-2xl">
+            
+            <div class="absolute -bottom-6 -left-10 bg-[#F5F5F0] p-6 border border-[#4A5D44]/10 shadow-lg max-w-[200px] hidden md:block">
+               <p class="font-modern-serif text-2xl text-[#2D2D2A]">24h</p>
+               <p class="text-[10px] uppercase font-semibold text-[#8C8C85] mt-1 tracking-wide">Open Every Day</p>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+  
+  <style>
+     @keyframes spin-slow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+     }
+     .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+  </style>
+
+  <!-- Login Modal -->
+  <div id="study-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#2D2D2A]/40 backdrop-blur-md">
+    <div class="bg-[#F5F5F0] w-full max-w-sm p-12 shadow-2xl relative border-t-4 border-[#4A5D44]">
+      <button onclick="toggleStudyModal()" class="absolute top-8 right-8 text-[#8C8C85] hover:text-[#4A5D44] transition text-2xl font-modern-serif">&times;</button>
+      
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-modern-serif text-[#2D2D2A] mb-2">Member Access</h2>
+        <p class="text-[10px] text-[#4A5D44] font-semibold tracking-[0.3em] uppercase">Private Study Lounge</p>
+      </div>
+      
+      <div class="space-y-6">
+        <div>
+           <label class="block text-[10px] font-semibold text-[#8C8C85] uppercase tracking-wide mb-2 ml-1">Phone Number</label>
+           <input type="text" placeholder="010-0000-0000" class="w-full bg-white border border-[#EBEBE6] py-3 px-5 outline-none focus:border-[#4A5D44] transition text-sm font-semibold text-[#2D2D2A] tracking-wide placeholder-[#D4D4D0]">
+        </div>
+        
+        <button class="w-full bg-[#4A5D44] text-[#F5F5F0] py-4 text-[11px] tracking-[0.2em] font-semibold uppercase hover:bg-[#3A4A35] transition shadow-lg">
+           Confirm Entry
+        </button>
+        
+        <div class="flex justify-center gap-12 pt-2">
+           <a href="#" class="text-[10px] text-[#8C8C85] tracking-wide uppercase hover:text-[#4A5D44] transition">Code Login</a>
+           <span class="text-[#EBEBE6]">|</span>
+           <a href="#" class="text-[10px] text-[#8C8C85] tracking-wide uppercase hover:text-[#4A5D44] transition">Buy Pass</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-[#2D2D2A] text-center px-6">
+     <div class="inline-flex flex-col items-center gap-10 mb-8">
+        <span class="font-modern-serif text-2xl text-[#F5F5F0]">Library<span class="text-[#4A5D44]">One</span></span>
+        <span class="text-[10px] font-semibold text-[#8C8C85] tracking-[0.3em] uppercase">Premium Study Environment</span>
+     </div>
+     <p class="text-[10px] text-[#8C8C85]/30 tracking-[0.5em] uppercase px-6">© 2024 LIBRARY ONE. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleStudyModal() {
+      const modal = document.getElementById('study-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

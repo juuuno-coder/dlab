@@ -1,0 +1,145 @@
+<%# Burger Template - 버거 조인트 (BURGER JOINT) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-display { font-family: 'Anton', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .grunge-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+    opacity: 0.8;
+  }
+</style>
+
+<div class="bg-[#121212] text-white font-sans selection:bg-[#E8482D] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 grunge-texture pointer-events-none opacity-20"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-3 md:px-6 py-6 bg-[#121212]/90 backdrop-blur-md border-b border-white/5">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-3">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 bg-[#FFB400] skew-x-[-12deg] flex items-center justify-center text-slate-900 font-semibold text-xl shadow-[4px_4px_0px_#E8482D]">
+            B
+         </div>
+         <span class="font-display text-2xl tracking-wide uppercase text-white">BURGER<span class="text-[#FFB400]">JOINT</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/40">
+        <a href="#burgers" class="hover:text-[#FFB400] transition">The Menu</a>
+        <a href="#sides" class="hover:text-[#FFB400] transition">Sides</a>
+        <a href="#craft-beer" class="hover:text-[#FFB400] transition">Craft Beer</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="toggleBurgerModal()" class="hidden md:block text-[11px] font-semibold uppercase tracking-[0.2em] text-white/40 hover:text-[#FFB400]" data-mobile-menu-copy="true">Join Club</button>
+         <button class="hidden md:inline-flex bg-[#E8482D] text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap skew-x-[-12deg] font-semibold text-[12px] tracking-wide uppercase hover:bg-[#FFB400] hover:text-slate-900 transition shadow-[4px_4px_0px_black] border border-white/10 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none" data-mobile-menu-copy="true">
+           Order Now
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-20 overflow-hidden">
+    <!-- Graffiti elements -->
+    <div class="absolute top-[10%] left-[5%] text-4xl md:text-[15rem] font-semibold text-white/5 font-display rotate-[-15deg] pointer-events-none select-none">TASTY</div>
+    <div class="absolute bottom-[10%] right-[0%] text-4xl md:text-[15rem] font-semibold text-white/5 font-display rotate-[10deg] pointer-events-none select-none">JUICY</div>
+    
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+      <div class="space-y-8 text-center lg:text-left order-2 lg:order-1">
+        <div class="inline-flex items-center gap-2 bg-[#FFB400] text-slate-900 px-4 py-1 skew-x-[-12deg] shadow-[4px_4px_0px_#E8482D]">
+           <span class="font-semibold text-xs uppercase tracking-wider">Premium American Grill</span>
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl md:text-[8rem] font-display uppercase leading-[0.85] tracking-wide text-white mobile-title text-shadow-lg">
+           Real<br>
+           <span class="text-[#E8482D]">Meat</span><br>
+           <span class="text-white/20">Lover.</span>
+        </h1>
+        
+        <p class="text-white/60 text-sm md:text-xl leading-relaxed max-w-md mx-auto lg:mx-0 mobile-desc font-medium">
+           매일 아침 직접 갈아 만든 100% 소고기 패티의 진한 육즙.<br>
+           타협하지 않는 오리지널 아메리칸 버거의 맛을 경험하세요.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-10 justify-center lg:justify-start pt-4">
+           <button class="px-10 py-5 bg-[#FFB400] text-slate-900 font-semibold text-sm uppercase tracking-wide skew-x-[-12deg] hover:bg-white transition shadow-[6px_6px_0px_#E8482D] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none">
+              Explore Menu
+           </button>
+           <button class="px-10 py-5 border-2 border-white/20 text-white font-semibold text-sm uppercase tracking-wide skew-x-[-12deg] hover:border-[#FFB400] hover:text-[#FFB400] transition backdrop-blur-sm">
+              Our Location
+           </button>
+        </div>
+      </div>
+      
+      <div class="relative order-1 lg:order-2">
+         <div class="relative z-10 w-full max-w-lg mx-auto">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1000" alt="Delicious Burger" class="w-full h-auto object-contain transform hover:scale-105 transition duration-500 drop-shadow-[0_20px_50px_rgba(232,72,45,0.3)] filter contrast-125">
+            
+            <!-- Graphic Stickers -->
+            <div class="absolute -top-10 -right-10 bg-[#E8482D] text-white p-6 rounded-full rotate-[15deg] shadow-xl flex flex-col items-center justify-center w-28 h-28 border-4 border-white border-dashed animate-pulse">
+               <span class="text-xs font-semibold uppercase">Only</span>
+               <span class="text-2xl font-semibold font-display">$8.99</span>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="burger-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl">
+    <div class="bg-[#1a1a1a] w-full max-w-sm p-12 shadow-[8px_8px_0px_#E8482D] relative border-2 border-[#333]">
+      <button onclick="toggleBurgerModal()" class="absolute top-6 right-6 text-white/20 hover:text-[#FFB400] transition text-2xl font-semibold">&times;</button>
+      
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-display uppercase text-white mb-1 tracking-wide">Burger Club</h2>
+        <p class="text-[10px] text-[#FFB400] font-semibold tracking-[0.2em] uppercase bg-white/5 inline-block px-3 py-1 rounded skew-x-[-12deg]">Join the Meat Society</p>
+      </div>
+      
+      <div class="space-y-6">
+        <div>
+           <label class="block text-[10px] font-semibold text-[#555] uppercase tracking-wide mb-2 ml-1">Phone Number</label>
+           <input type="text" placeholder="010-0000-0000" class="w-full bg-slate-950 border-2 border-[#333] py-4 px-6 outline-none focus:border-[#FFB400] transition text-sm font-semibold text-white placeholder-white/20 uppercase">
+        </div>
+        
+        <button class="w-full bg-[#E8482D] text-white py-4 text-xs tracking-wide font-semibold uppercase hover:bg-[#FFB400] hover:text-slate-900 transition shadow-[4px_4px_0px_white] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none">
+           Get Coupon & Stamp
+        </button>
+        
+        <div class="flex justify-center gap-10 pt-4 border-t border-[#333] mt-2">
+           <a href="#" class="text-[10px] text-[#555] tracking-wide uppercase hover:text-[#FFB400] transition font-semibold border-b border-transparent hover:border-[#FFB400]">Check Balance</a>
+           <a href="#" class="text-[10px] text-[#555] tracking-wide uppercase hover:text-[#FFB400] transition font-semibold border-b border-transparent hover:border-[#FFB400]">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-[#121212] text-center px-6 border-t border-white/5">
+     <div class="inline-flex flex-col items-center gap-10 mb-8">
+        <span class="font-display text-3xl text-white tracking-wide uppercase">Burger<span class="text-[#E8482D]">Joint</span></span>
+        <div class="w-12 h-1 bg-[#FFB400]"></div>
+        <span class="text-[10px] font-semibold text-white/30 tracking-[0.4em] uppercase">Authentic American Taste</span>
+     </div>
+     <p class="text-[10px] text-white/20 tracking-[0.6em] uppercase px-6">© 2024 BURGER JOINT. SEOUL.</p>
+  </footer>
+
+  <script>
+    function toggleBurgerModal() {
+      const modal = document.getElementById('burger-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

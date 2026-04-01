@@ -1,0 +1,337 @@
+<%# 
+  PURE DB-DRIVEN DESIGN TEMPLATES PAGE 
+  No hardcoded data. What you see is what's in the DB.
+%>
+
+<div class="bg-slate-50 min-h-screen pt-24 pb-20 font-sans">
+  
+  <!-- Header Filter Section -->
+
+
+  <!-- Main Grid -->
+  <div class="max-w-7xl mx-auto px-4 md:px-6 py-12">
+    
+    <!-- Filter Section (Moved here) -->
+    <div class="mb-12">
+      <form action="<%= design_templates_path %>" method="get" class="space-y-4">
+        
+        <!-- Category Buttons (Top Row) -->
+        <div class="flex flex-wrap gap-2">
+          <% 
+            categories = [
+              ['all', '전체'],
+              ['beauty', '뷰티'],
+              ['dining', '다이닝'],
+              ['corporate', '기업 · 스타트업'],
+              ['medical', '병원 · 법률'],
+              ['fitness', '운동 · 헬스'],
+              ['shopping', '쇼핑 · 패션'],
+              ['stay', '숙박 · 여행'],
+              ['space', '공간 · 스튜디오'],
+              ['academy', '교육 · 학원']
+            ] 
+          %>
+          <% categories.each do |cat_code, cat_name| %>
+            <button type="submit" name="category" value="<%= cat_code %>" 
+                    class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all
+                    <%= params[:category] == cat_code || (params[:category].blank? && cat_code == 'all') ? 'bg-slate-900 text-white shadow-md' : 'bg-white text-gray-500 hover:bg-gray-100 border border-gray-100' %>">
+              <%= cat_name %>
+            </button>
+          <% end %>
+        </div>
+
+        <!-- Search & Sort (Bottom Row - Right aligned) -->
+        <div class="flex justify-end gap-3">
+<div class="flex items-center gap-3 mr-4">
+            <% 
+              # 정렬 옵션 정의 (순서: 최신순, 추천순, 인기순)
+              sort_options = [
+                ['latest', '최신순'],
+                ['recommend', '추천순'],
+                ['popular', '인기순']
+              ]
+              current_sort = params[:sort].presence || 'recommend' # 기본값
+            %>
+            <% sort_options.each_with_index do |(val, label), index| %>
+              <button type="submit" name="sort" value="<%= val %>" 
+                      class="text-sm font-bold transition-colors <%= current_sort == val ? 'text-slate-900' : 'text-gray-400 hover:text-gray-600' %>">
+                <%= label %>
+              </button>
+              <% if index < sort_options.length - 1 %>
+                <span class="text-gray-300 text-xs">|</span>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="relative w-64">
+             <input type="text" name="query" value="<%= params[:query] %>" placeholder="템플릿 검색..." class="w-full bg-white border border-gray-200 rounded-xl text-sm px-4 py-2.5 pl-10 focus:ring-2 focus:ring-slate-500 outline-none transition shadow-sm">
+             <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <% if @design_templates.blank? %>
+      <div class="text-center py-20">
+        <div class="text-6xl mb-4">😢</div>
+        <h3 class="text-xl font-bold text-gray-800">조건에 맞는 템플릿이 없습니다.</h3>
+        <p class="text-gray-500 mt-2">다른 카테고리나 검색어를 이용해보세요.</p>
+        <a href="<%= design_templates_path %>" class="inline-block mt-6 px-6 py-3 bg-slate-900 text-white rounded-lg font-bold">전체 보기</a>
+      </div>
+    <% else %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <% @design_templates.each do |template| %>
+          <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full transform hover:-translate-y-1">
+            
+            <!-- Thumbnail (Click to Preview) -->
+            <div class="relative aspect-[4/3] bg-gray-100 cursor-pointer overflow-hidden" 
+                 onclick="openPreview('<%= template.preview_url %>', '<%= j template.title %>', '<%= template.category %>', <%= template.id %>)">
+              
+              <% thumb_src = template.pc_thumbnail_url %>
+              
+              <img src="<%= thumb_src %>" 
+                   alt="<%= template.title %> - <%= template.category %> 템플릿" 
+                   loading="lazy"
+                   decoding="async"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
+              <!-- Badge -->
+              <!-- Badge -->
+              <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-white/90 backdrop-blur text-xs font-bold rounded-full uppercase tracking-wider shadow-sm text-slate-800 border border-slate-100">
+                  <%= template.category %>
+                </span>
+
+                <% if template.is_featured %>
+                  <span class="px-3 py-1 bg-amber-400 text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-sm shadow-amber-200">
+                    BEST
+                  </span>
+                <% end %>
+              </div>
+
+              <%
+                # Diamond Score Logic
+                diamond_score = case template.category
+                                when 'shopping', 'corporate', 'finance', 'medical', 'dental', 'real_estate', 'hotel', 'stay', 'startup', 'ecommerce', 'rental', 'consulting'
+                                  70
+                                when 'fitness', 'gym', 'yoga', 'law', 'tax', 'academy', 'learnhub', 'english', 'dining', 'restaurant', 'seafood', 'rice', 'burger', 'studio', 'wedding', 'cleaning', 'construction', 'interior', 'vet', 'bag', 'shoes', 'cloth', 'artistry', 'portfolio'
+                                  50
+                                else
+                                  30
+                                end
+              %>
+              <!-- Diamond Badge (Right) -->
+              <div style="position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 800; color: #fff; z-index: 10; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; gap: 4px;">
+                <span style="font-size: 10px;">💎</span> <%= diamond_score %>
+              </div>
+              
+              <!-- Hover Overlay -->
+              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span class="px-6 py-3 bg-white text-slate-900 font-bold rounded-full transform scale-90 group-hover:scale-100 transition-transform">
+                  미리보기
+                </span>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                <%= template.title %>
+              </h3>
+              <p class="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-6 flex-grow">
+                <%= template.description %>
+              </p>
+              
+              <!-- Action Buttons -->
+              <div class="flex gap-3 mt-auto">
+                <button onclick="openPreview('<%= template.preview_url %>', '<%= j template.title %>', '<%= template.category %>', <%= template.id %>)" 
+                        class="flex-1 py-3 border-2 border-slate-100 text-slate-600 font-bold rounded-xl hover:bg-slate-50 hover:border-slate-200 transition">
+                  둘러보기
+                </button>
+
+                <!-- Heart Button -->
+                <% liked = current_user&.likes&.exists?(design_template: template) %>
+                <%= button_to design_template_toggle_like_path(template), method: :post, 
+                    class: "w-12 h-full border-2 #{liked ? 'border-red-500 bg-red-50 text-red-500' : 'border-slate-100 text-slate-400 hover:border-red-200 hover:text-red-400'} rounded-xl flex items-center justify-center transition" do %>
+                  <svg width="24" height="24" fill="<%= liked ? 'currentColor' : 'none' %>" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                <% end %>
+
+                <%= link_to contact_path(template_id: template.id, template_title: template.title, preview_url: template.preview_url), 
+                            class: "flex-1 py-3 bg-slate-900 text-white font-bold rounded-xl text-center hover:bg-indigo-600 transition shadow-lg shadow-slate-200 flex items-center justify-center gap-2" do %>
+                  <span>PICK</span>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M5 12h14m-7-7l7 7-7 7"/></svg>
+                <% end %>
+
+              </div>
+            </div>
+
+          </div>
+        <% end %>
+      </div>
+
+      <style>
+        .pagination { display: flex; justify-content: center; align-items: center; gap: 0.5rem; list-style: none; padding: 0; }
+        
+        /* Apply button styles ONLY to the leaf nodes we care about */
+        .pagination a, 
+        .pagination em, 
+        .pagination span.current, 
+        .pagination span.disabled,
+        .pagination span.gap {
+          display: inline-flex; align-items: center; justify-content: center;
+          min-width: 2.5rem; height: 2.5rem; padding: 0 0.75rem;
+          border-radius: 9999px; font-weight: 500; font-size: 0.875rem;
+          background-color: white; border: 1px solid #e2e8f0; color: #64748b;
+          text-decoration: none; transition: all 0.2s;
+        }
+
+        /* Hover state for clickable links */
+        .pagination a:hover { 
+          border-color: #cbd5e1; background-color: #f1f5f9; color: #0f172a; 
+        }
+
+        /* Active/Current page style */
+        .pagination .current, .pagination em.current {
+          background-color: #0f172a; border-color: #0f172a; color: white; pointer-events: none;
+        }
+
+        /* Disabled state */
+        .pagination .disabled, .pagination span.disabled { 
+          opacity: 0.5; cursor: not-allowed; background-color: #f8fafc; 
+        }
+
+        /* Gap style (...) */
+        .pagination .gap, .pagination span.gap { 
+          border: none; background: transparent; min-width: auto; padding: 0 0.5rem;
+        }
+      </style>
+
+      <!-- Pagination -->
+      <div class="mt-16 flex justify-center">
+        <%= paginate @design_templates %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Live Demo Modal (Same style as Main Page) -->
+  <div id="preview-modal" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);">
+    
+    <!-- Header -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 60px; background: #1a1a1a; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; padding: 0 20px;">
+      <div style="color: white; font-weight: bold; font-size: 18px;" id="modal-title">Template Demo</div>
+      
+      <!-- View Switcher (Centered) -->
+      <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #333; padding: 4px; border-radius: 99px; display: flex;">
+        <button onclick="setDevice('pc')" id="btn-device-pc" class="demo-view-btn active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          <span style="margin-left: 6px; font-size: 14px;">PC</span>
+        </button>
+        <button onclick="setDevice('mobile')" id="btn-device-mobile" class="demo-view-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12" y2="18"></line></svg>
+          <span style="margin-left: 6px; font-size: 14px;">Mobile</span>
+        </button>
+      </div>
+
+      <!-- Close Button -->
+      <button onclick="closePreview()" style="background: none; border: none; color: #999; cursor: pointer; padding: 8px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <span style="font-size: 12px; display: block; margin-top: 2px;">ESC</span>
+      </button>
+    </div>
+
+    <!-- Content Area -->
+    <div style="position: absolute; top: 60px; left: 0; right: 0; bottom: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; padding: 20px;">
+      
+      <!-- PC Frame -->
+      <div id="frame-container-pc" style="width: 100%; height: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
+        <iframe id="iframe-preview-pc" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+      </div>
+
+      <!-- Mobile Frame -->
+      <div id="frame-container-mobile" style="display: none; width: 375px; height: 80vh; background: black; border-radius: 40px; border: 12px solid #1a1a1a; overflow: hidden; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+        <!-- Notch -->
+        <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #1a1a1a; border-radius: 0 0 15px 15px; z-index: 10;"></div>
+        <iframe id="iframe-preview-mobile" src="" style="width: 100%; height: 100%; border: none; background: white;"></iframe>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    .demo-view-btn {
+      border: none;
+      background: transparent;
+      color: #888;
+      padding: 6px 16px;
+      border-radius: 99px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s;
+    }
+    .demo-view-btn.active {
+      background: #555;
+      color: white;
+    }
+    .demo-view-btn:hover:not(.active) {
+      color: #ccc;
+    }
+  </style>
+
+  <script>
+    const modal = document.getElementById('preview-modal');
+    const iframePC = document.getElementById('iframe-preview-pc');
+    const iframeMobile = document.getElementById('iframe-preview-mobile');
+    
+    // UI Elements
+    const framePC = document.getElementById('frame-container-pc');
+    const frameMobile = document.getElementById('frame-container-mobile');
+    const btnDevicePC = document.getElementById('btn-device-pc');
+    const btnDeviceMobile = document.getElementById('btn-device-mobile');
+
+    function openPreview(url, title, category, id) {
+      // 1. Set Content
+      document.getElementById('modal-title').innerText = title || 'Live Demo';
+
+      // 2. Load iframe
+      iframePC.src = url;
+      iframeMobile.src = url;
+
+      // 3. Show Modal
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+
+      // 4. Default to PC view
+      setDevice('pc');
+    }
+
+    function closePreview() {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      
+      // Reset iframes to stop playback/process
+      iframePC.src = '';
+      iframeMobile.src = '';
+    }
+
+    function setDevice(mode) {
+      if (mode === 'mobile') {
+        framePC.style.display = 'none';
+        frameMobile.style.display = 'block';
+        btnDevicePC.classList.remove('active');
+        btnDeviceMobile.classList.add('active');
+      } else {
+        frameMobile.style.display = 'none';
+        framePC.style.display = 'block';
+        btnDeviceMobile.classList.remove('active');
+        btnDevicePC.classList.add('active');
+      }
+    }
+
+    // Global ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'block') closePreview();
+    });
+  </script>
+
+</div>
+

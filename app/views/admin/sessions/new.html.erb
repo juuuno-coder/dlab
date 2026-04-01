@@ -1,0 +1,55 @@
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+  
+  <!-- Background Elements -->
+  <div class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
+    <div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-600 rounded-full blur-[150px] opacity-20"></div>
+    <div class="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-emerald-500 rounded-full blur-[150px] opacity-20"></div>
+  </div>
+
+  <div class="max-w-md w-full space-y-8 relative z-10 bg-slate-800/50 backdrop-blur-xl p-10 rounded-3xl border border-slate-700 shadow-2xl">
+    <div>
+      <div class="flex justify-center">
+        <!-- Logo Text -->
+        <h1 class="text-4xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+          D.us<span class="text-xs ml-1 bg-slate-700 text-white px-2 py-0.5 rounded-full relative bottom-4">ADMIN</span>
+        </h1>
+      </div>
+      <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-white">
+        관리자 접속
+      </h2>
+      <p class="mt-2 text-center text-sm text-slate-400">
+        안전한 보안 환경에서 접속하세요.
+      </p>
+    </div>
+
+    <%= form_with url: admin_session_path, class: "mt-8 space-y-6" do |f| %>
+      <% if flash[:alert] %>
+        <div class="bg-red-500/10 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg text-sm text-center">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div class="mb-4">
+          <label for="username" class="sr-only">Username</label>
+          <%= f.text_field :username, id: "username", required: true, class: "appearance-none rounded-xl relative block w-full px-4 py-4 border border-slate-600 bg-slate-900/50 placeholder-slate-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent focus:z-10 sm:text-sm transition", placeholder: "Admin Username" %>
+        </div>
+        <div>
+          <label for="password" class="sr-only">Password</label>
+          <%= f.password_field :password, id: "password", required: true, class: "appearance-none rounded-xl relative block w-full px-4 py-4 border border-slate-600 bg-slate-900/50 placeholder-slate-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent focus:z-10 sm:text-sm transition", placeholder: "Password" %>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-xl text-slate-900 bg-emerald-400 hover:bg-emerald-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition duration-200 shadow-[0_0_20px_rgba(52,211,153,0.3)]">
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            <svg class="h-5 w-5 text-slate-800 group-hover:text-slate-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+          </span>
+          대시보드 접속하기
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>

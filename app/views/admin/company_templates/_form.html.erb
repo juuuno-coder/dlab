@@ -1,0 +1,193 @@
+<%= form_with(model: [:admin, company_template], local: true, class: "template-form") do |form| %>
+  <% if company_template.errors.any? %>
+    <div class="error-messages">
+      <h3><%= pluralize(company_template.errors.count, "error") %> prohibited this template from being saved:</h3>
+      <ul>
+        <% company_template.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, "템플릿 이름" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "예: 디어스 회사 소개 2026" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :template_type, "템플릿 유형" %>
+    <%= form.select :template_type,
+        options_for_select(CompanyTemplate.template_types.map { |k, v| [v, k] }, company_template.template_type),
+        { prompt: "유형을 선택하세요" },
+        class: "form-control" %>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <%= form.label :order, "표시 순서" %>
+      <%= form.number_field :order, class: "form-control", min: 0, value: company_template.order || 0 %>
+      <small class="form-text">숫자가 작을수록 먼저 표시됩니다</small>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :active, "활성화 상태" %>
+      <div class="checkbox-wrapper">
+        <%= form.check_box :active, class: "form-checkbox" %>
+        <span>이 템플릿을 활성화합니다</span>
+      </div>
+      <small class="form-text">활성화된 템플릿만 슬라이드에 삽입됩니다</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :content, "텍스트 내용" %>
+    <%= form.text_area :content, rows: 8, class: "form-control", placeholder: "템플릿의 텍스트 내용을 입력하세요\n\n예:\n회사명: 주식회사디어스\n설립일: 2020년 1월\n주요 사업: 디자인 템플릿 제작, 입찰 컨설팅\n..." %>
+    <small class="form-text">일반 텍스트 버전입니다. 제안서 아웃라인에 사용됩니다.</small>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :html_content, "HTML 슬라이드 내용 (선택)" %>
+    <%= form.text_area :html_content, rows: 12, class: "form-control code-editor", placeholder: "<div class=\"slide\">\n  <div class=\"slide-header\">\n    <div class=\"slide-number\">XX</div>\n    <div class=\"slide-title\">회사 소개</div>\n  </div>\n  <div class=\"slide-content\">\n    <h3>회사 개요</h3>\n    <ul>\n      <li><strong>회사명:</strong> 주식회사디어스</li>\n      <li><strong>설립일:</strong> 2020년 1월</li>\n    </ul>\n  </div>\n  <div class=\"footer\">디어스</div>\n</div>" %>
+    <small class="form-text">HTML 슬라이드에 삽입될 코드입니다. 비워두면 텍스트 내용이 자동 변환됩니다.</small>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit company_template.new_record? ? "템플릿 추가" : "템플릿 수정", class: "btn btn-primary" %>
+    <%= link_to "취소", admin_company_templates_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>
+
+<style>
+  .template-form {
+    max-width: 900px;
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid #E5E7EB;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+  }
+
+  .form-control:focus {
+    outline: none;
+    border-color: #1E3A8A;
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+  }
+
+  .code-editor {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8125rem;
+  }
+
+  textarea.form-control {
+    resize: vertical;
+  }
+
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #F9FAFB;
+    border-radius: 0.375rem;
+  }
+
+  .form-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .checkbox-wrapper span {
+    font-size: 0.875rem;
+    color: #374151;
+  }
+
+  .form-text {
+    display: block;
+    margin-top: 0.5rem;
+    color: #6B7280;
+    font-size: 0.75rem;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+
+  .btn-primary {
+    background: #1E3A8A;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #3B82F6;
+  }
+
+  .btn-secondary {
+    background: #E5E7EB;
+    color: #374151;
+  }
+
+  .btn-secondary:hover {
+    background: #D1D5DB;
+  }
+
+  .error-messages {
+    background: #FEE2E2;
+    border: 1px solid #DC2626;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .error-messages h3 {
+    color: #991B1B;
+    font-size: 0.875rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .error-messages ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 0;
+    color: #991B1B;
+    font-size: 0.875rem;
+  }
+</style>

@@ -1,0 +1,165 @@
+<%# Wine Template - 빈티지 1988 (Vintage 1988) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+  
+  .font-serif-display { font-family: 'Cinzel', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .noise-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+    opacity: 0.15;
+  }
+</style>
+
+<div class="bg-[#1A0B12] text-[#E0C097] font-sans selection:bg-[#722F37] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 noise-texture pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-[#1A0B12]/80 backdrop-blur-md border-b border-[#722F37]/30 transition-all duration-300">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-6">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 border border-[#E0C097]/30 flex items-center justify-center transform rotate-45">
+            <span class="transform -rotate-45 text-2xl">🍷</span>
+         </div>
+         <span class="font-serif-display font-semibold text-xl tracking-[0.2em] text-[#E0C097]">Vintage<span class="text-[#722F37]">1988</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-16 text-[10px] font-serif-display font-semibold tracking-[0.3em] text-[#E0C097]/50">
+        <a href="#collection" class="hover:text-[#E0C097] transition">Collection</a>
+        <a href="#vineyard" class="hover:text-[#E0C097] transition">Vineyard</a>
+        <a href="#tasting" class="hover:text-[#E0C097] transition">Tasting</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-10 items-center">
+         <button onclick="toggleWineModal()" class="hidden md:block text-[10px] font-serif-display font-semibold tracking-[0.3em] text-[#E0C097]/50 hover:text-[#E0C097]" data-mobile-menu-copy="true">Member's Cave</button>
+         <button class="hidden md:inline-flex bg-[#722F37] text-white px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap font-serif-display font-semibold text-[11px] tracking-[0.2em] hover:bg-[#8B3A44] transition shadow-[0_0_20px_rgba(114,47,55,0.4)] border border-[#E0C097]/10" data-mobile-menu-copy="true">
+           Reserve
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+       <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1920" alt="Wine Cellar" class="w-full h-full object-cover">
+       <div class="absolute inset-0 bg-gradient-to-t from-[#1A0B12] via-[#1A0B12]/90 to-[#1A0B12]/60"></div>
+    </div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-12 text-center lg:text-left">
+        <div class="inline-flex items-center gap-3 justify-center lg:justify-start">
+           <span class="w-12 h-[1px] bg-[#E0C097]/50"></span>
+           <span class="text-[10px] font-serif-display font-semibold text-[#E0C097] tracking-[0.4em] uppercase">Premium Selection</span>
+           <span class="w-12 h-[1px] bg-[#E0C097]/50"></span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-serif-display font-semibold leading-[1.2] text-[#E0C097] mobile-title">
+           Timeless<br>
+           <span class="text-[#722F37] italic pr-4">Elegance</span>in<br>
+           Every Drop.
+        </h1>
+        
+        <p class="text-[#E0C097]/60 text-sm md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-light">
+           시간이 빚어낸 깊고 그윽한 향기. <br>
+           엄선된 빈티지와 소믈리에의 철학이 담긴 리스트를 경험하세요.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-10 justify-center lg:justify-start pt-4">
+           <button class="px-10 py-4 border border-[#E0C097] text-[#E0C097] font-serif-display font-semibold text-xs tracking-[0.3em] hover:bg-[#E0C097] hover:text-[#1A0B12] transition duration-500">
+              Explore Collection
+           </button>
+           <button class="px-10 py-4 text-[#E0C097]/70 font-serif-display font-semibold text-xs tracking-[0.3em] hover:text-[#E0C097] transition flex items-center gap-2 justify-center lg:justify-start group">
+              <span class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain rounded-full border border-[#E0C097]/30 flex items-center justify-center group-hover:border-[#E0C097] transition">▶</span>
+              Watch The Story
+           </button>
+        </div>
+      </div>
+      
+      <div class="relative hidden lg:block">
+         <!-- Bottle Display -->
+         <div class="relative z-10 flex justify-center items-center">
+            <div class="relative w-[300px] h-[600px] group cursor-pointer perspective-1000">
+               <div class="absolute inset-x-0 top-10 bottom-10 bg-[#722F37]/20 blur-[60px] rounded-full group-hover:bg-[#722F37]/30 transition duration-700"></div>
+               <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=400" alt="Premium Wine Bottle" class="w-full h-full object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] transform group-hover:scale-105 group-hover:rotate-y-12 transition duration-700">
+               
+               <!-- Label Info -->
+               <div class="absolute bottom-20 -right-10 bg-[#1A0B12]/90 backdrop-blur-sm p-6 border border-[#E0C097]/20 shadow-2xl max-w-[200px]">
+                  <p class="font-serif-display text-xl text-[#E0C097] mb-1">Château 1988</p>
+                  <div class="h-[1px] w-full bg-[#E0C097]/20 mb-2"></div>
+                  <div class="flex justify-between items-center text-[10px] uppercase tracking-wide text-[#E0C097]/60">
+                     <span>Grand Cru</span>
+                     <span>Red</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+    
+    <style>
+       .rotate-y-12 { transform: rotateY(12deg); }
+       .perspective-1000 { perspective: 1000px; }
+    </style>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="wine-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
+    <div class="bg-[#0F0508] w-full max-w-sm p-14 relative border border-[#722F37]/40 shadow-[0_0_60px_rgba(114,47,55,0.2)]">
+      <button onclick="toggleWineModal()" class="absolute top-6 right-6 text-[#E0C097]/30 hover:text-[#E0C097] transition text-2xl font-serif-display">&times;</button>
+      
+      <div class="text-center mb-12">
+         <div class="w-12 h-12 border border-[#E0C097]/20 flex items-center justify-center transform rotate-45 mx-auto mb-6">
+            <span class="transform -rotate-45 text-2xl text-[#E0C097]">🗝️</span>
+         </div>
+        <h2 class="text-xl font-serif-display font-semibold text-[#E0C097] mb-2 tracking-[0.2em] uppercase">Private Cellar</h2>
+        <p class="text-[9px] text-[#722F37] font-semibold tracking-[0.3em] uppercase">Members Only Access</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="group relative">
+           <input type="text" placeholder="MEMBERSHIP ID" class="w-full bg-transparent border-b border-[#E0C097]/20 py-3 text-[11px] font-semibold tracking-[0.2em] text-[#E0C097] placeholder-[#E0C097]/20 uppercase outline-none focus:border-[#722F37] transition text-center">
+        </div>
+        
+        <button class="w-full bg-[#E0C097] text-[#1A0B12] py-4 text-[10px] tracking-[0.3em] font-semibold uppercase hover:bg-white transition duration-500 shadow-lg">
+           Unlock Cellar
+        </button>
+        
+        <div class="flex justify-center gap-12 pt-4 border-t border-[#E0C097]/5 mt-4">
+           <a href="#" class="text-[9px] text-[#E0C097]/40 tracking-[0.2em] font-semibold uppercase hover:text-[#E0C097] transition font-serif-display">Apply</a>
+           <a href="#" class="text-[9px] text-[#E0C097]/40 tracking-[0.2em] font-semibold uppercase hover:text-[#E0C097] transition font-serif-display">Concierge</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-[#0F0508] text-center px-6 border-t border-[#722F37]/20">
+     <div class="inline-flex flex-col items-center gap-10 mb-8">
+        <span class="font-serif-display font-semibold text-2xl text-[#E0C097] tracking-[0.3em] uppercase">Vintage<span class="text-[#722F37]">1988</span></span>
+        <div class="w-8 h-[1px] bg-[#E0C097]/20"></div>
+        <span class="text-[10px] font-semibold text-[#E0C097]/30 tracking-[0.4em] uppercase">Premium Wine Boutique</span>
+     </div>
+     <p class="text-[10px] text-[#E0C097]/20 tracking-[0.6em] uppercase px-6">© 2024 VINTAGE 1988. SEOUL.</p>
+  </footer>
+
+  <script>
+    function toggleWineModal() {
+      const modal = document.getElementById('wine-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

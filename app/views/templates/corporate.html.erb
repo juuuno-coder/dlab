@@ -1,0 +1,275 @@
+<%# Corporate Template - 넥서스 그룹 (NEXUS GROUP) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-display { font-family: 'Manrope', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .grid-pattern {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(17, 24, 39, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(17, 24, 39, 0.05) 1px, transparent 1px);
+  }
+
+  /* Marquee Animation */
+  .marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+  }
+  .marquee-content {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
+
+<div class="bg-white text-slate-900 font-sans selection:bg-[#0F172A] selection:text-white min-h-screen overflow-x-hidden relative grid-pattern">
+
+  <!-- Ticker (Hiring) -->
+  <div class="bg-[#0F172A] text-white text-[10px] md:text-xs font-semibold py-2 px-4 text-center tracking-wide relative overflow-hidden">
+     <div class="marquee-container">
+        <div class="marquee-content">
+           <span class="mx-4">🚀 NOW HIRING: Senior Backend Engineer</span>
+           <span class="mx-4">•</span>
+           <span class="mx-4">New Offices Opened in Singapore</span>
+           <span class="mx-4">•</span>
+           <span class="mx-4">NEXUS Series A Funding Complete</span>
+           <span class="mx-4">•</span>
+           <span class="mx-4">🚀 NOW HIRING: Senior Backend Engineer</span>
+           <span class="mx-4">•</span>
+           <span class="mx-4">New Offices Opened in Singapore</span>
+           <span class="mx-4">•</span>
+           <span class="mx-4">NEXUS Series A Funding Complete</span>
+        </div>
+     </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-white/90 backdrop-blur-xl border-b border-slate-100 top-8" data-aos="fade-down" data-aos-duration="1000">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-3">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain bg-[#0F172A] flex items-center justify-center text-white font-semibold text-sm rounded-sm">
+            N
+         </div>
+         <span class="font-display text-2xl font-semibold tracking-tight text-[#0F172A]">NEXUS<span class="text-blue-600">.</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-16 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-500">
+        <a href="#solutions" class="hover:text-[#0F172A] transition">Solutions</a>
+        <a href="#platform" class="hover:text-[#0F172A] transition">Platform</a>
+        <a href="#resources" class="hover:text-[#0F172A] transition">Resources</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-10 items-center">
+         <button onclick="toggleCorporateModal()" class="hidden md:block text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-500 hover:text-[#0F172A]" data-mobile-menu-copy="true">Sign In</button>
+         <button class="hidden md:inline-flex bg-[#0F172A] text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-sm font-semibold text-[11px] tracking-wide hover:bg-blue-600 transition shadow-lg shadow-slate-200" data-mobile-menu-copy="true">
+           Request Demo
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-32 overflow-hidden">
+    <!-- Abstract Tech Elements -->
+    <div class="absolute right-0 top-1/4 w-[600px] h-[600px] bg-gradient-to-bl from-blue-50 to-transparent rounded-full filter blur-3xl opacity-60 pointer-events-none" data-aos="zoom-in" data-aos-duration="2000"></div>
+    <div class="absolute left-0 bottom-1/4 w-[500px] h-[500px] bg-gradient-to-tr from-slate-50 to-transparent rounded-full filter blur-3xl opacity-60 pointer-events-none" data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="500"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up" data-aos-duration="1200">
+        <div class="inline-flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-1 rounded-lg mb-8">
+           <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+           <span class="text-[10px] font-semibold text-slate-600 uppercase tracking-wide">Enterprise Solutions v2.0 Released</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-display font-semibold leading-[1.1] tracking-tight text-[#0F172A] mobile-title mb-8">
+           Powering the future of<br>
+           <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Enterprise Intelligence.</span>
+        </h1>
+        
+        <p class="text-slate-500 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mobile-desc mb-10">
+           데이터 기반의 의사결정과 자동화된 워크플로우로 비즈니스 효율성을 극대화하세요. 넥서스는 기업의 디지털 전환을 가속화하는 핵심 엔진입니다.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+           <button class="px-8 py-4 bg-[#0F172A] text-white font-semibold text-sm rounded-sm hover:bg-blue-600 transition shadow-xl shadow-blue-900/10 hover:-translate-y-1 transform duration-300">
+              Start Free Trial
+           </button>
+           <button class="px-8 py-4 bg-white border border-slate-200 text-slate-700 font-semibold text-sm rounded-sm hover:border-slate-400 transition flex items-center gap-2 justify-center group">
+              <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-blue-50 text-blue-600">▶</span>
+              View Product Tour
+           </button>
+        </div>
+      </div>
+
+      <!-- Dashboard Mockup -->
+      <div class="relative max-w-5xl mx-auto perspective-1000" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+         <div class="bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden transform rotate-x-12 hover:rotate-x-0 transition duration-1000 origin-bottom">
+            <div class="bg-slate-50 border-b border-slate-100 p-4 flex items-center justify-between">
+               <div class="flex gap-2">
+                  <div class="w-3 h-3 rounded-full bg-slate-200"></div>
+                  <div class="w-3 h-3 rounded-full bg-slate-200"></div>
+                  <div class="w-3 h-3 rounded-full bg-slate-200"></div>
+               </div>
+               <div class="h-2 w-48 bg-slate-200 rounded-full"></div>
+            </div>
+            <div class="p-8 grid md:grid-cols-3 gap-12 bg-white min-h-[400px]">
+               <div class="col-span-2 space-y-6">
+                  <div class="flex justify-between items-end">
+                     <div>
+                        <p class="text-xs text-slate-400 font-semibold uppercase">Total Revenue</p>
+                        <p class="text-2xl font-display font-semibold text-[#0F172A]" id="revenue">$0</p>
+                     </div>
+                     <span class="px-2 py-1 bg-green-50 text-green-600 text-xs font-semibold rounded">+12.5%</span>
+                  </div>
+                  <div class="h-48 bg-slate-50 rounded-lg w-full flex items-end justify-between p-4 gap-2">
+                     <div class="w-full bg-blue-500/20 h-[40%] rounded-sm hover:h-[45%] transition-all duration-500"></div>
+                     <div class="w-full bg-blue-500/40 h-[60%] rounded-sm hover:h-[65%] transition-all duration-500"></div>
+                     <div class="w-full bg-blue-500/30 h-[30%] rounded-sm hover:h-[35%] transition-all duration-500"></div>
+                     <div class="w-full bg-blue-500/60 h-[80%] rounded-sm hover:h-[85%] transition-all duration-500"></div>
+                     <div class="w-full bg-blue-600 h-[70%] rounded-sm shadow-lg shadow-blue-500/30 hover:h-[75%] transition-all duration-500 relative group">
+                        <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">Record</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="space-y-4">
+                  <div class="p-4 rounded-lg border border-slate-100 bg-slate-50 hover:border-blue-200 transition duration-300">
+                     <p class="text-xs text-slate-400 font-semibold uppercase mb-2">Active Users</p>
+                     <p class="text-xl font-semibold text-[#0F172A]" id="users">0</p>
+                  </div>
+                  <div class="p-4 rounded-lg border border-slate-100 bg-slate-50 hover:border-blue-200 transition duration-300">
+                     <p class="text-xs text-slate-400 font-semibold uppercase mb-2">System Status</p>
+                     <div class="flex items-center gap-2 text-green-600 font-semibold text-sm"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Operational</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Glow Effect -->
+         <div class="absolute -inset-10 bg-blue-500/20 blur-[80px] -z-10 animate-pulse"></div>
+      </div>
+      
+      <!-- Partner Marquee -->
+      <div class="mt-20 border-t border-slate-100 pt-10 overflow-hidden" data-aos="fade-in" data-aos-delay="800">
+         <p class="text-center text-xs font-semibold text-slate-400 uppercase tracking-wide mb-8">Trusted by Industry Leaders</p>
+         <div class="marquee-container opacity-50 grayscale hover:grayscale-0 transition duration-500">
+            <div class="marquee-content text-2xl font-display font-semibold text-slate-300 gap-16 flex items-center">
+               <span>ACME Corp</span>
+               <span>Stark Ind</span>
+               <span>Wayne Ent</span>
+               <span>Cyberdyne</span>
+               <span>Massive Dynamic</span>
+               <span>Umbrella Corp</span>
+               <span>Globex</span>
+               <span>InGen</span>
+               <!-- Duplicate for seamless loop -->
+               <span>ACME Corp</span>
+               <span>Stark Ind</span>
+               <span>Wayne Ent</span>
+               <span>Cyberdyne</span>
+               <span>Massive Dynamic</span>
+               <span>Umbrella Corp</span>
+               <span>Globex</span>
+               <span>InGen</span>
+            </div>
+         </div>
+      </div>
+    </div>
+
+    <style>
+       .perspective-1000 { perspective: 1000px; }
+       .rotate-x-12 { transform: rotateX(20deg) scale(0.95); }
+    </style>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="corporate-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#0F172A]/80 backdrop-blur-md">
+    <div class="bg-white w-full max-w-sm p-10 shadow-2xl relative rounded-xl border border-white/20" data-aos="zoom-in">
+      <button onclick="toggleCorporateModal()" class="absolute top-6 right-6 text-slate-300 hover:text-[#0F172A] transition text-xl">&times;</button>
+      
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 bg-[#0F172A] rounded-lg flex items-center justify-center text-white font-semibold text-xl mx-auto mb-4 shadow-lg">N</div>
+        <h2 class="text-xl font-display font-semibold text-[#0F172A] mb-1">Welcome back</h2>
+        <p class="text-xs text-slate-500">Sign in to your enterprise account</p>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+           <label class="block text-[10px] font-semibold text-slate-500 uppercase tracking-wide mb-1.5 ml-1">Work Email</label>
+           <input type="email" placeholder="name@company.com" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-3 px-4 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition text-sm font-medium text-[#0F172A]">
+        </div>
+        <div>
+           <label class="block text-[10px] font-semibold text-slate-500 uppercase tracking-wide mb-1.5 ml-1">Password</label>
+           <input type="password" placeholder="••••••••" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-3 px-4 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition text-sm font-medium text-[#0F172A]">
+        </div>
+        
+        <button class="w-full bg-[#0F172A] text-white py-3.5 rounded-lg text-xs font-semibold uppercase tracking-wide hover:bg-blue-600 transition shadow-lg mt-2">
+           Sign In securely
+        </button>
+        
+        <div class="text-center pt-4 border-t border-slate-100 mt-6">
+           <a href="#" class="text-xs text-blue-600 font-semibold hover:underline">Forgot your password?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white border-t border-slate-100 text-center px-6">
+     <div class="inline-flex items-center gap-6 mb-6 opacity-50 grayscale hover:grayscale-0 transition duration-500">
+        <span class="font-display font-semibold text-lg text-[#0F172A]">NEXUS<span class="text-blue-600">.</span></span>
+        <span class="w-[1px] h-4 bg-slate-300"></span>
+        <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Enterprise Division</span>
+     </div>
+     <p class="text-[10px] text-slate-400 tracking-wider">© 2024 NEXUS INC. SEOUL, KOREA.</p>
+  </footer>
+
+  <script>
+    function toggleCorporateModal() {
+      const modal = document.getElementById('corporate-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+
+    // Number Counting Animation
+    function animateValue(obj, start, end, duration, prefix = "") {
+       let startTimestamp = null;
+       const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          obj.innerHTML = prefix + Math.floor(progress * (end - start) + start).toLocaleString();
+          if (progress < 1) {
+             window.requestAnimationFrame(step);
+          } else {
+             obj.innerHTML = prefix + end.toLocaleString() + (prefix === "$" ? ".00" : ""); // Format at end
+          }
+       };
+       window.requestAnimationFrame(step);
+    }
+
+    // Trigger animation when visible
+    document.addEventListener('DOMContentLoaded', () => {
+       setTimeout(() => {
+          const rev = document.getElementById("revenue");
+          const users = document.getElementById("users");
+          if(rev) animateValue(rev, 0, 124500, 2000, "$");
+          if(users) animateValue(users, 0, 2451, 2000);
+       }, 1000);
+    });
+  </script>
+
+</div>

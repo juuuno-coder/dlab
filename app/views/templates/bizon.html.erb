@@ -1,0 +1,155 @@
+<%# Agency Template - 에이전시X (AGENCY X) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-inter { font-family: 'Inter', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.6; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+  }
+</style>
+
+<div class="bg-[#050505] text-white font-sans selection:bg-[#BEF264] selection:text-slate-900 min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 noise pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-3 md:px-6 py-6 border-b border-white/5 bg-[#050505]/80 backdrop-blur-xl">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-3 group cursor-pointer">
+         <div class="w-2 h-2 bg-[#BEF264] rounded-full group-hover:animate-ping"></div>
+         <span class="font-inter font-semibold text-2xl tracking-tight uppercase italic">AGENCY<span class="text-[#BEF264]">X</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-16 text-[10px] font-semibold uppercase tracking-[0.4em] text-white/40">
+        <a href="#projects" class="hover:text-[#BEF264] transition">Artifacts</a>
+        <a href="#vision" class="hover:text-[#BEF264] transition">Our_Vision</a>
+        <a href="#lab" class="hover:text-[#BEF264] transition">X_Lab</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-12 items-center">
+         <button onclick="toggleAgencyModal()" class="hidden md:block text-[10px] font-semibold uppercase tracking-[0.4em] text-white/40 hover:text-white" data-mobile-menu-copy="true">Admin_X</button>
+         <button class="hidden md:inline-flex bg-[#BEF264] text-slate-900 px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap rounded-none font-semibold text-[10px] tracking-[0.4em] uppercase hover:bg-white transition-all" data-mobile-menu-copy="true">
+           Initiate Project
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center pt-24 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+       <div class="absolute top-[20%] right-[-10%] w-[60%] h-[60%] bg-[#BEF264]/10 rounded-full blur-[150px]"></div>
+       <div class="absolute bottom-[10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/5 rounded-full blur-[150px]"></div>
+    </div>
+    
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-12 gap-16 items-center">
+      <div class="lg:col-span-8 space-y-12">
+        <div class="inline-flex items-center gap-6 text-[#BEF264] text-[10px] font-semibold tracking-[0.5em] uppercase border-l-2 border-[#BEF264] pl-6">
+           Breaking the digital ceiling
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl md:text-[10rem] font-inter font-semibold leading-[0.9] tracking-tight mobile-title">
+           BIZON<br>MARKETING<br><span class="italic text-transparent bg-clip-text bg-gradient-to-r from-[#BEF264] to-emerald-500">AGENCY.</span>
+        </h1>
+        
+        <div class="flex flex-col md:flex-row gap-16 items-start">
+           <p class="max-w-[400px] text-white/40 text-sm md:text-lg leading-relaxed mobile-desc">
+             비즈온 마케팅은 데이터 기반의 전략과 크리에이티브로 성공적인 비즈니스 성장을 이끌어냅니다. 당신의 파트너가 되어 새로운 가치를 창출하겠습니다.
+           </p>
+           <div class="pt-4">
+              <button class="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#BEF264] hover:text-slate-900 transition-all group">
+                 <span class="text-2xl group-hover:translate-x-1 transition">→</span>
+              </button>
+           </div>
+        </div>
+      </div>
+      
+      <div class="lg:col-span-4 relative hidden lg:block">
+         <div class="aspect-[3/4] bg-white/5 border border-white/10 rounded-2xl overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200" alt="Creative" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="absolute bottom-10 left-10">
+               <p class="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#BEF264]">Latest Artifact</p>
+               <h3 class="text-2xl font-inter font-semibold uppercase mt-2">CYBER_DYNE 2024</h3>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Marquee -->
+  <div class="py-20 border-y border-white/5 bg-white text-slate-900 overflow-hidden relative z-20">
+    <div class="whitespace-nowrap flex gap-16 font-inter font-semibold text-2xl md:text-5xl animate-marquee-fast italic">
+       <span>STRATEGY_</span> <span>-</span> <span>DEVELOPMENT_</span> <span>-</span> <span>BRANDING_</span> <span>-</span> <span>MOTION_</span> <span>-</span> <span>EXPERIENCE_</span> <span>-</span>
+       <span>STRATEGY_</span> <span>-</span> <span>DEVELOPMENT_</span> <span>-</span> <span>BRANDING_</span> <span>-</span> <span>MOTION_</span> <span>-</span> <span>EXPERIENCE_</span> <span>-</span>
+    </div>
+  </div>
+
+  <style>
+    @keyframes marquee-fast {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee-fast { animation: marquee-fast 20s linear infinite; }
+  </style>
+
+  <!-- Login Modal -->
+  <div id="agency-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-950/95 backdrop-blur-3xl">
+    <div class="bg-[#0F0F0F] w-full max-w-sm p-14 shadow-2xl relative border border-white/10">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#BEF264] to-emerald-500"></div>
+      <button onclick="toggleAgencyModal()" class="absolute top-10 right-10 text-white/20 hover:text-[#BEF264] transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-14">
+        <h2 class="text-xl font-inter tracking-[0.5em] text-white mb-2 font-semibold uppercase italic">ACCESS_X</h2>
+        <p class="text-[9px] text-[#BEF264] font-semibold tracking-[0.3em] uppercase">Authorized personnel only</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="space-y-4">
+           <div class="flex justify-between items-center px-1">
+              <span class="text-[9px] font-semibold tracking-[0.4em] uppercase text-white/30">Entry Code</span>
+              <span class="text-[8px] font-semibold tracking-[0.4em] uppercase text-[#BEF264]">Encrypted</span>
+           </div>
+           <input type="password" placeholder="********" class="w-full bg-white/5 border border-white/10 py-5 px-6 outline-none focus:border-[#BEF264] transition text-[11px] font-semibold tracking-[0.4em] text-white">
+        </div>
+        <button class="w-full bg-white text-slate-900 py-5 font-inter font-semibold text-[10px] tracking-[0.4em] uppercase hover:bg-[#BEF264] transition-all">
+           BOOT_PROTOCOL
+        </button>
+        <div class="flex flex-col items-center gap-10 pt-4">
+           <a href="#" class="text-[9px] text-white/20 tracking-[0.4em] font-semibold uppercase hover:text-[#BEF264] transition underline decoration-1 underline-offset-8">Request Project Access</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-24 md:py-40 bg-[#050505] text-center px-6 relative z-10 border-t border-white/5">
+     <div class="inline-flex items-center gap-14 mb-12">
+        <span class="font-inter text-2xl tracking-tight font-semibold uppercase text-white/10 italic">AGENCY<span class="text-white/5">X</span></span>
+        <div class="w-12 h-[1px] bg-white/5"></div>
+        <span class="text-[10px] font-semibold text-white/20 tracking-[0.6em] uppercase">Defining the Edge</span>
+     </div>
+     <p class="text-[10px] text-white/10 tracking-[1em] uppercase px-6">© 2024 AGENCY X CREATIVE. NO MORE BOUNDARIES.</p>
+  </footer>
+
+  <script>
+    function toggleAgencyModal() {
+      const modal = document.getElementById('agency-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

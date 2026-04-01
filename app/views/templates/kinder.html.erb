@@ -1,0 +1,186 @@
+<%# Kinder Template - 리틀 스타 (LITTLE STAR) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-rounded { font-family: 'Fredoka', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .doodle-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FCD34D' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+</style>
+
+<div class="bg-[#FFFBEB] text-[#4B5563] font-sans selection:bg-[#FCD34D] selection:text-[#78350F] min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 doodle-pattern pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-3 md:px-6 py-4 top-0">
+    <div class="container mx-auto px-4 md:px-6 flex items-center justify-between flex-nowrap">
+      <div class="bg-white/90 backdrop-blur-xl border-b-4 border-[#FCD34D] rounded-full px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap flex justify-between items-center shadow-lg shadow-[#FCD34D]/10">
+        <div class="flex items-center gap-3">
+           <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 bg-[#FF6B6B] rounded-full flex items-center justify-center text-lg md:text-2xl shadow-sm animate-bounce">
+              🎈
+           </div>
+           <span class="font-rounded font-semibold text-lg md:text-2xl text-[#4B5563] tracking-tight">Little<span class="text-[#FF6B6B]">Star</span></span>
+        </div>
+        
+        <div class="hidden md:flex gap-12 text-[15px] font-rounded font-semibold text-[#4B5563]/60">
+          <a href="#about" class="hover:text-[#FF6B6B] transition">Our Story</a>
+          <a href="#class" class="hover:text-[#4ADE80] transition">Classes</a>
+          <a href="#events" class="hover:text-[#FCD34D] transition">Events</a>
+        </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+        
+        <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="toggleParentModal()" class="hidden md:block text-[14px] font-rounded font-semibold text-[#FF6B6B] bg-[#FFF5F5] px-4 py-2 rounded-lg hover:bg-[#FFE4E6] transition" data-mobile-menu-copy="true">Parent Login</button>
+           <button class="hidden md:inline-flex bg-[#4ADE80] text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-lg font-rounded font-semibold text-[14px] shadow-[0_4px_0_#16A34A] hover:translate-y-1 hover:shadow-none transition-all" data-mobile-menu-copy="true">
+             Visit Us
+           </button>
+        </div>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Floating Icons -->
+    <div class="absolute top-[15%] left-[10%] text-3xl md:text-5xl animate-wiggle cursor-pointer hover:scale-110 transition">🎨</div>
+    <div class="absolute bottom-[20%] right-[10%] text-3xl md:text-5xl animate-wiggle animation-delay-2000 cursor-pointer hover:scale-110 transition">🚀</div>
+    <div class="absolute top-[30%] right-[20%] w-32 h-32 bg-[#FF6B6B]/10 rounded-full blur-[40px]"></div>
+    <div class="absolute bottom-[10%] left-[20%] w-40 h-40 bg-[#FCD34D]/10 rounded-full blur-[40px]"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-10 md:p-16 items-center">
+       <div class="space-y-8 text-center lg:text-left order-2 lg:order-1">
+         <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-lg border-2 border-[#FCD34D] shadow-sm transform -rotate-2">
+            <span class="text-xl">🌟</span>
+            <span class="text-[13px] font-rounded font-semibold text-[#F59E0B] uppercase tracking-wide">Where Fun Meets Learning!</span>
+         </div>
+         
+         <h1 class="text-2xl md:text-4xl md:text-6xl font-rounded font-semibold leading-[1.1] text-[#1F2937] mobile-title">
+            Dream Big,<br>
+            <span class="text-[#FF6B6B]">Play</span> & <span class="text-[#4ADE80]">Grow.</span>
+         </h1>
+         
+         <p class="text-[#4B5563]/70 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-medium">
+            아이들의 반짝이는 호기심이 자라나는 곳.<br>
+            리틀 스타에서 세상에서 가장 즐거운 배움을 시작하세요.
+         </p>
+         
+         <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
+            <button class="px-8 py-4 bg-[#FCD34D] text-[#78350F] font-rounded font-semibold text-lg rounded-[1.5rem] shadow-[0_6px_0_#D97706] hover:translate-y-1 hover:shadow-none transition-all transform hover:rotate-1">
+               Start Adventure
+            </button>
+            <button class="px-8 py-4 bg-white text-[#FF6B6B] border-2 border-[#FF6B6B]/20 font-rounded font-semibold text-lg rounded-[1.5rem] hover:bg-[#FFF5F5] transition transform hover:-rotate-1">
+               Watch Video
+            </button>
+         </div>
+
+         <!-- Stats -->
+         <div class="flex items-center justify-center lg:justify-start gap-12 pt-8">
+            <div class="text-center bg-white p-4 rounded-2xl shadow-sm border border-[#F3F4F6] rotate-[-3deg]">
+               <p class="text-lg md:text-2xl font-rounded font-semibold text-[#4ADE80]">10:1</p>
+               <p class="text-xs font-semibold text-[#9CA3AF]">Teacher Ratio</p>
+            </div>
+            <div class="text-center bg-white p-4 rounded-2xl shadow-sm border border-[#F3F4F6] rotate-[2deg]">
+               <p class="text-lg md:text-2xl font-rounded font-semibold text-[#FF6B6B]">100%</p>
+               <p class="text-xs font-semibold text-[#9CA3AF]">Safety Care</p>
+            </div>
+            <div class="text-center bg-white p-4 rounded-2xl shadow-sm border border-[#F3F4F6]">
+               <p class="text-lg md:text-2xl font-rounded font-semibold text-[#FCD34D]">Organic</p>
+               <p class="text-xs font-semibold text-[#9CA3AF]">Daily Meals</p>
+            </div>
+         </div>
+       </div>
+       
+       <div class="relative order-1 lg:order-2 flex justify-center">
+          <div class="relative group cursor-pointer w-[300px] md:w-[450px]">
+             <!-- Blob Background -->
+             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full text-[#E0E7FF] fill-current -z-10 transform scale-110">
+                <path d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,79.6,-46.9C87.4,-34.7,90.1,-20.4,90.9,-6.2C91.7,8,90.6,22.1,83.8,34.1C77,46.1,64.5,56,51.7,63.2C38.9,70.4,25.8,74.9,11.8,77.3C-2.2,79.7,-17.1,80,-31.1,76.6C-45.1,73.2,-58.2,66.1,-68.8,55.4C-79.4,44.7,-87.5,30.4,-89.7,15.2C-91.9,0,-88.2,-16.1,-79.8,-29.6C-71.4,-43.1,-58.3,-54,-44.9,-61.5C-31.5,-69,-17.8,-73.1,-3.3,-73.7C11.2,-74.3,22.4,-71.4,44.7,-76.4Z" transform="translate(100 100)" />
+             </svg>
+             
+             <img src="https://images.unsplash.com/photo-1587652990173-fed31454e2cc?q=80&w=800" alt="Happy Kids" class="w-full h-auto object-cover rounded-2xl border-8 border-white shadow-2xl rotate-2 group-hover:rotate-0 transition duration-500">
+             
+             <!-- Sticker -->
+             <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-full shadow-xl border-4 border-[#FCD34D] animate-bounce-slow">
+                <span class="text-2xl">🧸</span>
+             </div>
+          </div>
+       </div>
+    </div>
+  </header>
+
+   <style>
+      @keyframes wiggle {
+         0%, 100% { transform: rotate(-3deg); }
+         50% { transform: rotate(3deg); }
+      }
+      .animate-wiggle { animation: wiggle 2s ease-in-out infinite; }
+      .animation-delay-2000 { animation-delay: 1s; }
+      @keyframes bounce-slow {
+         0%, 100% { transform: translateY(0); }
+         50% { transform: translateY(-10px); }
+      }
+      .animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
+   </style>
+
+  <!-- Login Modal -->
+  <div id="parent-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#FF6B6B]/20 backdrop-blur-md">
+    <div class="bg-white w-full max-w-sm p-10 shadow-[0_20px_50px_rgba(255,107,107,0.3)] relative rounded-[2.5rem] border-4 border-[#FF6B6B]/10">
+      <button onclick="toggleParentModal()" class="absolute top-6 right-6 text-[#9CA3AF] hover:text-[#FF6B6B] transition text-2xl font-rounded font-semibold">&times;</button>
+      
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-[#FFF5F5] rounded-full flex items-center justify-center text-2xl mx-auto mb-4 border-2 border-[#FF6B6B]/20">
+           🦄
+        </div>
+        <h2 class="text-lg md:text-2xl font-rounded font-semibold text-[#4B5563] mb-1">Parent Hub</h2>
+        <p class="text-[13px] text-[#FF6B6B] font-semibold uppercase tracking-wide bg-[#FFF5F5] inline-block px-3 py-1 rounded-lg">Secure Family Access</p>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+           <input type="text" placeholder="Kids Code (e.g. STAR-01)" class="w-full bg-[#F9FAFB] border-2 border-[#F3F4F6] rounded-2xl py-4 px-6 outline-none focus:border-[#FF6B6B] focus:bg-white transition text-[16px] font-rounded font-semibold text-[#4B5563] text-center placeholder-[#9CA3AF]">
+        </div>
+        
+        <button class="w-full bg-[#FF6B6B] text-white py-4 rounded-2xl font-rounded font-semibold text-[18px] shadow-[0_6px_0_#DC2626] hover:translate-y-1 hover:shadow-none transition-all">
+           Log In
+        </button>
+        
+        <div class="flex justify-center gap-10 pt-4 text-sm font-rounded font-semibold text-[#9CA3AF]">
+           <a href="#" class="hover:text-[#FF6B6B] transition">Apply</a>
+           <span>•</span>
+           <a href="#" class="hover:text-[#FF6B6B] transition">Help</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-[#F3F4F6]">
+     <div class="inline-flex flex-col items-center gap-6 mb-8">
+        <span class="text-3xl">🎈</span>
+        <span class="font-rounded font-semibold text-lg md:text-2xl text-[#4B5563]">Little<span class="text-[#FF6B6B]">Star</span></span>
+        <p class="text-[12px] font-semibold text-[#9CA3AF] uppercase tracking-wide">Premium Kids Education</p>
+     </div>
+     <p class="text-[10px] text-[#9CA3AF]/60 tracking-wider font-semibold">© 2024 LITTLE STAR. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleParentModal() {
+      const modal = document.getElementById('parent-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

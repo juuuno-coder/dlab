@@ -1,0 +1,231 @@
+<%# Pension Template - 리버사이드 (RIVERSIDE STAY) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-classic { font-family: 'Libre Baskerville', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .wood-grain {
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    opacity: 0.3;
+  }
+  
+  .scroll-hide::-webkit-scrollbar {
+      display: none;
+  }
+</style>
+
+<div class="bg-[#F7F5F2] text-[#4A4238] font-sans selection:bg-[#786C5E] selection:text-white min-h-screen overflow-x-hidden relative pb-20 md:pb-0">
+  <div class="fixed inset-0 wood-grain pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-[#F7F5F2]/90 backdrop-blur-md border-b border-[#786C5E]/10 transition-all duration-300" data-aos="fade-down" data-aos-duration="1000">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-6">
+         <span class="font-classic font-semibold text-xl tracking-[0.1em] text-[#4A4238] cursor-pointer">River<span class="text-[#786C5E]">side</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-16 text-[12px] font-sans font-medium tracking-[0.2em] text-[#9A8C7D] uppercase">
+        <a href="#stay" class="hover:text-[#4A4238] transition">Rooms</a>
+        <a href="#amenities" class="hover:text-[#4A4238] transition">Amenities</a>
+        <a href="#location" class="hover:text-[#4A4238] transition">Find Us</a>
+      </div>
+      
+      <div class="flex-nowrap shrink-0 flex gap-6 items-center">
+         <button onclick="togglePensionModal()" class="hidden md:block text-[12px] font-sans font-semibold uppercase tracking-[0.2em] text-[#9A8C7D] hover:text-[#4A4238]" data-mobile-menu-copy="true">Reservation</button>
+         <button class="mobile-menu-trigger md:hidden ml-2 sm:ml-4 text-2xl focus:outline-none" style="color: inherit;">
+           <i class="fas fa-bars"></i>
+         </button>
+
+         <button class="hidden md:inline-flex bg-[#786C5E] text-[#F7F5F2] px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-sm font-classic italic text-sm hover:bg-[#5D5348] transition shadow-lg shadow-[#786C5E]/20" data-mobile-menu-copy="true">
+           Check Availability
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Nature Elements -->
+    <div class="absolute top-0 right-0 w-[50vw] h-full bg-[#EBE8E3] -z-10" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="300"></div>
+    <div class="absolute bottom-10 left-10 w-full h-[1px] bg-[#786C5E]/10"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center h-full">
+      <div class="space-y-12 text-center lg:text-left order-2 lg:order-1" data-aos="fade-right" data-aos-duration="1200">
+        <div class="inline-flex items-center gap-3 border-l-2 border-[#786C5E] pl-4">
+           <span class="text-[11px] font-semibold text-[#786C5E] uppercase tracking-[0.3em]">Private Sanctuary</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-classic font-normal leading-[1.1] text-[#2C2822] mobile-title">
+           Listen to<br>
+           the <span class="italic text-[#786C5E]">Silence</span> of<br>
+           Nature.
+        </h1>
+        
+        <p class="text-[#786C5E]/80 text-sm md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-light">
+           숲의 숨결과 강의 흐름만이 존재하는 곳.<br>
+           리버사이드에서 온전한 휴식을 경험하세요.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-10 justify-center lg:justify-start pt-6">
+           <button class="px-10 py-4 bg-[#4A4238] text-[#F7F5F2] font-classic italic text-lg hover:bg-[#786C5E] transition shadow-xl">
+              Book Your Stay
+           </button>
+           <button class="px-10 py-4 border-b border-[#786C5E]/30 text-[#786C5E] font-classic italic text-lg hover:border-[#786C5E] transition">
+              View Gallery
+           </button>
+        </div>
+
+        <div class="pt-12 flex justify-center lg:justify-start gap-16 text-[#9A8C7D]">
+           <div class="text-center lg:text-left">
+              <span class="block text-2xl font-classic text-[#4A4238]" data-aos="fade-up" data-aos-delay="500">04</span>
+              <span class="text-[10px] uppercase tracking-wide">Private Villas</span>
+           </div>
+           <div class="text-center lg:text-left">
+              <span class="block text-2xl font-classic text-[#4A4238]" data-aos="fade-up" data-aos-delay="600">Infinity</span>
+              <span class="text-[10px] uppercase tracking-wide">Pool & Spa</span>
+           </div>
+        </div>
+      </div>
+      
+      <div class="relative order-1 lg:order-2 h-full flex items-center justify-center p-8 sm:p-0" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200">
+         <div class="relative w-full max-w-[500px] aspect-[4/5]">
+            <div class="absolute top-0 right-0 w-3/4 h-3/4 border border-[#786C5E]/30 z-0"></div>
+            <div class="absolute bottom-0 left-0 w-3/4 h-3/4 bg-[#EBE8E3] z-0"></div>
+            
+            <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=800" alt="Serene Stay" class="w-full h-full object-cover relative z-10 shadow-2xl filter sepia-[5%] brightness-105 transition-transform hover:scale-[1.01] duration-700">
+            
+            <div class="absolute -bottom-6 -right-6 bg-white p-6 shadow-xl z-20 max-w-[200px] hidden md:block border border-[#786C5E]/10" data-aos="fade-up" data-aos-delay="1000">
+               <p class="font-classic text-xl text-[#4A4238] italic">"Healing"</p>
+               <p class="text-[10px] uppercase font-semibold text-[#9A8C7D] mt-2 leading-relaxed">Best Architecture Award 2024</p>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Horizontal Scroll Gallery (Rooms) -->
+  <section class="py-20 md:py-32 px-6 overflow-hidden">
+     <div class="container mx-auto">
+        <div class="mb-12 text-center md:text-left" data-aos="fade-up">
+           <h2 class="text-2xl font-classic text-[#4A4238] italic mb-2">Our Rooms</h2>
+           <p class="text-[#786C5E] text-sm">Swipe to explore</p>
+        </div>
+     </div>
+     <div class="flex gap-10 overflow-x-auto pb-8 snap-x snap-mandatory scroll-hide px-6 md:px-[calc((100vw-1280px)/2)]" data-aos="fade-left">
+        <!-- Room 1 -->
+        <div class="snap-center shrink-0 w-[85vw] md:w-[400px] relative group cursor-pointer">
+           <div class="aspect-[4/5] overflow-hidden mb-4 relative">
+              <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=600" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+              <div class="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition duration-500"></div>
+           </div>
+           <h3 class="text-xl font-classic text-[#4A4238] group-hover:text-[#786C5E] transition">Suite A</h3>
+           <p class="text-xs text-[#9A8C7D] mt-1">Ocean View • 2 Guests</p>
+        </div>
+        <!-- Room 2 -->
+        <div class="snap-center shrink-0 w-[85vw] md:w-[400px] relative group cursor-pointer">
+           <div class="aspect-[4/5] overflow-hidden mb-4 relative">
+              <img src="https://images.unsplash.com/photo-1549294413-26f195200c16?q=80&w=600" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+           </div>
+           <h3 class="text-xl font-classic text-[#4A4238] group-hover:text-[#786C5E] transition">Suite B</h3>
+           <p class="text-xs text-[#9A8C7D] mt-1">Garden View • 4 Guests</p>
+        </div>
+        <!-- Room 3 -->
+        <div class="snap-center shrink-0 w-[85vw] md:w-[400px] relative group cursor-pointer">
+           <div class="aspect-[4/5] overflow-hidden mb-4 relative">
+              <img src="https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?q=80&w=600" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+           </div>
+           <h3 class="text-xl font-classic text-[#4A4238] group-hover:text-[#786C5E] transition">Royal Villa</h3>
+           <p class="text-xs text-[#9A8C7D] mt-1">Private Pool • 6 Guests</p>
+        </div>
+     </div>
+  </section>
+
+  <!-- Instagram Grid -->
+  <section class="py-20 md:py-32 bg-white" data-aos="fade-up">
+     <div class="container mx-auto px-3 md:px-6 text-center">
+        <div class="mb-10">
+           <i class="block text-2xl mb-2">@riverside_stay</i>
+           <p class="text-xs text-[#9A8C7D] uppercase tracking-wide">Share your moments</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 md:grid-cols-4 gap-2">
+           <div class="aspect-square bg-gray-100 overflow-hidden cursor-pointer group">
+              <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+           </div>
+           <div class="aspect-square bg-gray-100 overflow-hidden cursor-pointer group">
+              <img src="https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+           </div>
+           <div class="aspect-square bg-gray-100 overflow-hidden cursor-pointer group">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+           </div>
+           <div class="aspect-square bg-gray-100 overflow-hidden cursor-pointer group">
+              <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+           </div>
+        </div>
+     </div>
+  </section>
+
+  <!-- Floating Reservation Bar (Mobile Only) -->
+  <div class="fixed bottom-0 left-0 w-full bg-white z-[60] border-t border-[#786C5E]/20 p-4 flex md:hidden items-center justify-between shadow-[0_-5px_20px_rgba(0,0,0,0.05)]" data-aos="fade-up" data-aos-offset="0">
+     <div class="flex flex-col">
+        <span class="text-[10px] text-[#9A8C7D] uppercase tracking-wider">Starting from</span>
+        <span class="font-classic text-lg text-[#4A4238] font-semibold">₩ 250,000</span>
+     </div>
+     <button class="bg-[#4A4238] text-white px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap rounded-sm font-classic uppercase text-sm tracking-wide hover:bg-[#2C2822] transition">
+        Book Now
+     </button>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="pension-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#4A4238]/40 backdrop-blur-md">
+    <div class="bg-[#F7F5F2] w-full max-w-sm p-12 shadow-2xl relative border-t-4 border-[#786C5E]" data-aos="zoom-in">
+      <button onclick="togglePensionModal()" class="absolute top-8 right-8 text-[#9A8C7D] hover:text-[#786C5E] transition text-2xl font-classic">&times;</button>
+      
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-classic text-[#4A4238] mb-2 italic">Guest Check-in</h2>
+        <p class="text-[10px] text-[#786C5E] font-semibold tracking-[0.3em] uppercase">Manage Your Reservation</p>
+      </div>
+      
+      <div class="space-y-6">
+        <div>
+           <label class="block text-[10px] font-semibold text-[#9A8C7D] uppercase tracking-wide mb-2 ml-1">Reservation No.</label>
+           <input type="text" placeholder="R-2024-" class="w-full bg-white border border-[#E0DCD6] py-3 px-5 outline-none focus:border-[#786C5E] transition text-sm font-semibold text-[#4A4238] tracking-wide placeholder-[#D4D4D0]">
+        </div>
+        
+        <button class="w-full bg-[#786C5E] text-[#F7F5F2] py-4 text-[11px] tracking-[0.2em] font-semibold uppercase hover:bg-[#5D5348] transition shadow-lg">
+           Find Booking
+        </button>
+        
+        <div class="flex justify-center gap-12 pt-2">
+           <a href="#" class="text-[10px] text-[#9A8C7D] tracking-wide uppercase hover:text-[#786C5E] transition">Modifiy</a>
+           <span class="text-[#E0DCD6]">|</span>
+           <a href="#" class="text-[10px] text-[#9A8C7D] tracking-wide uppercase hover:text-[#786C5E] transition">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-[#F7F5F2] text-center px-6 border-t border-[#786C5E]/10 pb-32 md:pb-20">
+     <div class="inline-flex flex-col items-center gap-10 mb-8">
+        <span class="font-classic font-semibold text-2xl tracking-[0.1em] text-[#4A4238]">River<span class="text-[#786C5E]">side</span></span>
+        <span class="text-[10px] font-semibold text-[#9A8C7D] tracking-[0.3em] uppercase">Nature Retreat</span>
+     </div>
+     <p class="text-[10px] text-[#9A8C7D]/50 tracking-[0.5em] uppercase px-6">© 2024 RIVERSIDE STAY. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function togglePensionModal() {
+      const modal = document.getElementById('pension-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

@@ -1,0 +1,115 @@
+{
+  "source": "3회 선원의 날 정성제안서_260311_제출용.pptx",
+  "total_slides": 58,
+  "projects_mixed": [
+    { "name": "선원의 날", "slides": "1-27", "design": "navy_wave" },
+    { "name": "봄꽃 전시회", "slides": "28-58", "design": "pink_nature" }
+  ],
+
+  "slide_types": {
+    "cover": {
+      "name": "표지",
+      "examples": [1, 28, 58],
+      "description": "프로젝트 제목, 날짜, 로고 배치",
+      "priority": "medium"
+    },
+    "contents_card": {
+      "name": "목차 (카드형)",
+      "examples": [2],
+      "description": "6개 섹션을 카드 형태로 배치, 로마숫자+제목+하위항목",
+      "priority": "high",
+      "status": "빌더 완성 (contents_two_column)"
+    },
+    "section_divider": {
+      "name": "섹션 구분",
+      "examples": [3, 8, 12],
+      "description": "좌측 네이비 50% + 로마숫자 + 섹션명 + 우측 웨이브곡선 + 하위항목 목록",
+      "priority": "high",
+      "design_notes": {
+        "left_bg": "#002B5B (50%)",
+        "curve": "wave/diagonal from left to right",
+        "roman_numeral": "white, large",
+        "section_title": "white, large, on navy",
+        "subtitle": "yellow accent text",
+        "right_side": "white bg, numbered sub-item list"
+      }
+    },
+    "three_column_cards": {
+      "name": "3단 카드",
+      "examples": [5, 6, 13, 16],
+      "description": "상단 컬러바 + 아이콘 + 번호(01/02/03) + 제목 + 설명 + 체크리스트 박스",
+      "priority": "high",
+      "design_notes": {
+        "header": "Part N. 섹션명 / 소제목",
+        "color_bars": "navy, red, gold (3개 컬럼 상단)",
+        "icon": "원형 배경 + 아이콘",
+        "number": "큰 워터마크 숫자 (01, 02, 03)",
+        "checklist": "회색 박스 안 체크마크 항목들",
+        "footer": "네이비 바 + 키워드"
+      }
+    },
+    "split_article": {
+      "name": "좌우 분할 (기사형)",
+      "examples": [4],
+      "description": "좌측 기사/이미지 클리핑 + 우측 슬로건+정보카드(아이콘+텍스트)",
+      "priority": "medium"
+    },
+    "header_body_grid": {
+      "name": "본문 그리드 (3x3)",
+      "examples": [5],
+      "description": "3개 전략축별 3행 그리드, 각 셀에 아이콘+텍스트",
+      "priority": "medium"
+    },
+    "floorplan": {
+      "name": "배치도/공간계획",
+      "examples": [19, 20, 32, 33, 34, 35, 36, 37, 38, 39, 40],
+      "description": "행사장 공간 배치, 동선, 범례 포함",
+      "priority": "low",
+      "note": "이미지 기반이라 빌더보다는 수작업"
+    },
+    "gantt_timeline": {
+      "name": "간트차트/타임라인",
+      "examples": [44],
+      "description": "STEP 원형 이미지 + 월별 간트바 + 범례",
+      "priority": "high"
+    },
+    "budget_chart": {
+      "name": "예산/차트",
+      "examples": [52],
+      "description": "파이차트 + 항목별 테이블 + 설명 텍스트",
+      "priority": "high"
+    },
+    "table_layout": {
+      "name": "표 레이아웃",
+      "examples": [9, 10, 11, 51],
+      "description": "네이비 헤더 테이블 + 데이터 행",
+      "priority": "medium"
+    }
+  },
+
+  "design_system_seafarer": {
+    "colors": {
+      "primary": "#002B5B",
+      "secondary": "#004c8c",
+      "accent_red": "#C8102E",
+      "accent_gold": "#FFD700",
+      "accent_yellow": "#FFFF00",
+      "body_text": "#333333",
+      "muted": "#6B7280",
+      "light_bg": "#f3f6f9",
+      "footer_bar": "#002B5B"
+    },
+    "header_pattern": "Part {roman}. {section_name} / {sub_number}. {sub_title}",
+    "footer_pattern": "네이비 바 + 키워드 텍스트 + 페이지번호",
+    "section_divider_pattern": "좌 50% navy + wave curve + 우 50% white"
+  },
+
+  "recommended_build_order": [
+    "section_divider",
+    "three_column_cards",
+    "split_article",
+    "gantt_timeline",
+    "budget_chart",
+    "table_layout"
+  ]
+}

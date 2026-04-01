@@ -1,0 +1,71 @@
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-6); flex-wrap: wrap; gap: 16px;">
+  <div>
+    <h1 style="font-size: var(--text-2xl); font-weight: 700;">주문 관리</h1>
+    <p style="color: var(--color-gray-500); font-size: var(--text-sm);">전체 주문 내역을 확인하고 관리합니다.</p>
+  </div>
+  
+  <div style="flex: 1; max-width: 600px;">
+    <%= form_with url: admin_orders_path, method: :get, class: "flex gap-2 items-center", local: true do |f| %>
+      <%= f.select :status, [["모든 상태", ""]] + Order.statuses.keys.map { |s| [s.upcase, s] }, { selected: params[:status] }, class: "block rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm p-2 bg-white border" %>
+      <%= f.text_field :query, value: params[:query], placeholder: "주문번호, 이름, 이메일 검색", class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm p-2 bg-white border" %>
+      <%= f.submit "검색", class: "btn btn-primary" %>
+      <% if params[:query].present? || params[:status].present? %>
+        <%= link_to "초기화", admin_orders_path, class: "btn btn-outline" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="card">
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="border-bottom: 1px solid var(--color-gray-200);">
+        <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">주문번호</th>
+        <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">주문자</th>
+        <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">주문일</th>
+        <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">상태</th>
+        <th style="text-align: right; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">금액</th>
+        <th style="text-align: right; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">관리</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr style="border-bottom: 1px solid var(--color-gray-100);">
+          <td style="padding: var(--space-4);">#<%= order.id %></td>
+          <td style="padding: var(--space-4);">
+            <% if order.user %>
+              <%= link_to order.user.name || order.user.email, admin_user_path(order.user), class: "text-gray-900 hover:text-primary" %>
+              <div style="font-size: var(--text-xs); color: var(--color-gray-500);"><%= order.user.email %></div>
+            <% else %>
+              <span style="color: var(--color-gray-500);">비회원</span>
+            <% end %>
+          </td>
+          <td style="padding: var(--space-4);"><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td style="padding: var(--space-4);">
+            <% 
+              badge_class = case order.status
+                when 'pending' then 'bg-yellow-100 text-yellow-800'
+                when 'paid', 'completed' then 'bg-green-100 text-green-800'
+                when 'cancelled', 'refunded' then 'bg-red-100 text-red-800'
+                else 'bg-gray-100 text-gray-800'
+              end
+            %>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= badge_class %>">
+              <%= order.status.upcase %>
+            </span>
+          </td>
+          <td style="padding: var(--space-4); text-align: right; font-weight: 500;">
+            <%= number_to_currency(order.total_amount, unit: "₩", precision: 0) %>
+          </td>
+          <td style="padding: var(--space-4); text-align: right;">
+            <%= link_to "상세보기", admin_order_path(order), class: "btn btn-outline btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <div style="padding: var(--space-4); display: flex; justify-content: center;">
+    <%= paginate @orders %>
+  </div>
+</div>

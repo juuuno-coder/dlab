@@ -1,0 +1,150 @@
+<%# Academy Template - 대치 엘리트 (ELITE ACADEMY) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-serif { font-family: 'Nanum Myeongjo', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.6; }
+    .mobile-title { font-size: 32px !important; }
+  }
+</style>
+
+<div class="bg-white text-slate-900 font-sans selection:bg-[#1B4332] selection:text-white min-h-screen overflow-x-hidden">
+
+  <!-- Rolling Banner -->
+  <div class="bg-[#1B4332] text-white py-2.5 overflow-hidden border-b border-white/10">
+    <div class="flex whitespace-nowrap animate-marquee-slow">
+       <span class="px-8 text-[10px] md:text-xs font-semibold tracking-wide uppercase">🎉 2024 SKY PASSING RATE: 92.4%</span>
+       <span class="px-8 text-[10px] md:text-xs font-semibold tracking-wide uppercase">MEDICAL SCHOOL ADMISSION: 42 STUDENTS</span>
+       <span class="px-8 text-[10px] md:text-xs font-semibold tracking-wide uppercase">IVY LEAGUE ENROLLMENT: 8 STUDENTS</span>
+       <span class="px-8 text-[10px] md:text-xs font-semibold tracking-wide uppercase">TOP 1% SCORE IMPROVEMENT GUARANTEED</span>
+    </div>
+  </div>
+
+  <style>
+    @keyframes marquee-slow {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee-slow {
+      animation: marquee-slow 30s linear infinite;
+    }
+  </style>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-3 md:px-6 py-6 bg-white/9 worst backdrop-blur-md border-b border-slate-100 mt-[36px]">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-3">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 bg-[#1B4332] rounded-xs flex items-center justify-center text-white font-serif font-semibold text-lg md:text-2xl shadow-lg">E</div>
+         <span class="font-semibold text-base md:text-xl shrink truncate text-[#1B4332] tracking-tight uppercase">ELITE<span class="text-emerald-600">ACADEMY</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">
+        <a href="#about" class="hover:text-[#1B4332] transition">Instructor</a>
+        <a href="#system" class="hover:text-[#1B4332] transition">LMS System</a>
+        <a href="#admission" class="hover:text-[#1B4332] transition">Admission</a>
+      </div>
+      
+      <div class="flex-nowrap shrink-0 flex gap-10 items-center">
+         <button onclick="toggleAcademyModal()" class="hidden md:block text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400 hover:text-[#1B4332]" data-mobile-menu-copy="true">Student LMS</button>
+         <button class="hidden md:inline-flex bg-[#1B4332] text-white px-3 py-2 text-xs md:text-sm md:px-6 md:py-2.5 whitespace-nowrap rounded-sm font-semibold text-[11px] tracking-wide uppercase hover:bg-slate-900 transition shadow-xl" data-mobile-menu-copy="true">
+           Counseling
+         </button>
+         <button class="mobile-menu-trigger md:hidden ml-2 sm:ml-4 text-2xl focus:outline-none" style="color: inherit;">
+           <i class="fas fa-bars"></i>
+         </button>
+
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center overflow-hidden pt-32 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-tr from-white to-slate-50 z-0 opacity-40 pointer-events-none"></div>
+    <div class="absolute inset-0">
+       <div class="absolute top-8 md:p-20 right-[-10%] w-[50%] h-[50%] bg-emerald-50/50 rounded-full blur-[120px]"></div>
+       <div class="absolute bottom-20 left-[-10%] w-[50%] h-[50%] bg-[#1B4332]/5 rounded-full blur-[120px]"></div>
+    </div>
+    
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid md:grid-cols-2 gap-10 md:p-16 items-center">
+      <div class="space-y-8 text-center md:text-left">
+        <div class="inline-flex items-center gap-2 text-emerald-700 font-semibold bg-white px-4 py-1.5 rounded-lg shadow-sm border border-emerald-100 text-[10px] tracking-wide uppercase">
+           <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span> Highest Success Rate in Daechi
+        </div>
+        <h1 class="text-2xl md:text-4xl md:text-7xl font-serif font-semibold leading-none tracking-tight text-[#1b4332] mobile-title">
+           결과로 증명하는<br><span class="text-emerald-600 italic">교육의 정점.</span>
+        </h1>
+        <p class="text-slate-500 text-sm md:text-xl leading-relaxed max-w-md mx-auto md:mx-0 mobile-desc">
+           공부는 기교가 아닌 태도입니다. 엘리트 아카데미는 대치동 1%의 학습 몰입 시스템과 압도적 데이터 기반의 입시 컨설팅으로 당신의 목표를 현실로 바꿉니다.
+        </p>
+        <div class="pt-4 flex flex-col sm:flex-row gap-10 justify-center md:justify-start">
+           <button class="px-12 py-5 bg-[#1b4332] text-white font-semibold text-[11px] tracking-wide uppercase hover:bg-slate-900 transition shadow-2xl">
+              Apply Admission
+           </button>
+           <button class="px-12 py-5 border border-slate-100 text-slate-900 font-semibold text-[11px] tracking-wide uppercase hover:bg-slate-50 transition">
+              View Instructors
+           </button>
+        </div>
+      </div>
+      
+      <div class="relative hidden md:block">
+         <div class="absolute -inset-20 bg-emerald-600/5 rounded-full blur-[120px]"></div>
+         <div class="relative z-10">
+            <div class="relative group">
+               <img src="https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?q=80&w=1200" alt="학습" class="w-full aspect-[4/5] object-cover rounded-[3rem_3rem_1rem_1rem] border-8 border-white shadow-2xl grayscale brightness-75 transition duration-700 group-hover:grayscale-0 group-hover:brightness-100">
+               <div class="absolute -bottom-10 -left-10 bg-[#1b4332] p-8 rounded-2xl shadow-2xl text-white rotate-[-3deg]">
+                  <p class="text-[10px] font-semibold text-emerald-400 uppercase tracking-wide mb-2">Student Performance</p>
+                  <p class="text-2xl font-serif font-semibold">TOP 0.1%</p>
+                  <p class="text-[9px] font-semibold text-emerald-300 uppercase tracking-wide mt-1">Average Improvement Rate</p>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="academy-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#1B4332]/ worse backdrop-blur-md">
+    <div class="bg-white w-full max-w-sm p-12 shadow-2xl relative rounded-2xl border border-emerald-50">
+      <button onclick="toggleAcademyModal()" class="absolute top-10 right-10 text-slate-300 hover:text-emerald-600 transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-10">
+        <h2 class="text-xl font-serif tracking-[0.4em] text-[#1b4332] mb-2 font-semibold uppercase">STUDENT_LMS</h2>
+        <p class="text-[9px] text-emerald-600 font-semibold tracking-[0.2em] uppercase">Elite Learning Management System</p>
+      </div>
+      
+      <div class="space-y-6">
+        <input type="text" placeholder="STUDENT ID" class="w-full bg-slate-50 border-none rounded-2xl py-5 px-6 outline-none focus:ring-1 focus:ring-emerald-600 transition text-[11px] font-semibold tracking-wide uppercase">
+        <button class="w-full bg-[#1b4332] text-white py-5 rounded-2xl text-[10px] tracking-[0.4em] font-semibold uppercase hover:bg-slate-900 transition shadow-lg shadow-emerald-100">
+           Authorize Session
+        </button>
+        <div class="flex justify-center gap-14 pt-4">
+           <a href="#" class="text-[9px] text-slate-400 tracking-[0.2em] font-semibold uppercase hover:text-[#1b4332] transition font-serif italic">New Enrollment</a>
+           <a href="#" class="text-[9px] text-slate-400 tracking-[0.2em] font-semibold uppercase hover:text-[#1b4332] transition font-serif italic">Parents Room</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-slate-100">
+     <div class="inline-flex items-center gap-10 mb-8">
+        <span class="font-serif text-2xl tracking-[0.4em] font-semibold uppercase text-[#1B4332]">ELITE</span>
+        <span class="w-12 h-[1px] bg-emerald-100"></span>
+        <span class="text-[10px] font-semibold text-slate-400 tracking-[0.4em] uppercase">Intelligence & Discipline</span>
+     </div>
+     <p class="text-[10px] text-slate-300 tracking-[0.6em] uppercase px-6">© 2024 ELITE EDUCATION NETWORK. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleAcademyModal() {
+      const modal = document.getElementById('academy-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

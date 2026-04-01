@@ -1,0 +1,134 @@
+<%# Cafe Template - 데일리 크럼 (DAILY CRUMB) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,900;1,400&display=swap');
+  
+  .font-serif { font-family: 'Nanum Myeongjo', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+  .font-playfair { font-family: 'Playfair Display', serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .grain-overlay {
+    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+    opacity: 0.5;
+  }
+</style>
+
+<div class="bg-[#FAF9F6] text-[#433D3C] font-sans selection:bg-[#BC9D84] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 grain-overlay pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-12 md:px-12 bg-[#FAF9F6]/80 backdrop-blur-xl border-b border-[#BC9D84]/10">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-10">
+         <span class="font-playfair text-2xl tracking-tight font-semibold italic text-[#8B735B]">Daily Crumb</span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[10px] font-semibold uppercase tracking-[0.4em] text-[#433D3C]/40">
+        <a href="#about" class="hover:text-[#8B735B] transition">Bakery</a>
+        <a href="#menu" class="hover:text-[#8B735B] transition">Patisserie</a>
+        <a href="#location" class="hover:text-[#8B735B] transition">Atelier</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-12 items-center">
+         <button onclick="toggleCafeModal()" class="hidden md:block text-[10px] font-semibold uppercase tracking-[0.4em] text-[#433D3C]/40 hover:text-[#8B735B]" data-mobile-menu-copy="true">Club Crumb</button>
+         <button class="hidden md:block bg-[#8B735B] text-white px-10 py-3.5 rounded-lg font-semibold text-[10px] tracking-[0.4em] uppercase hover:bg-[#433D3C] transition shadow-2xl shadow-[#8B735B]/20" data-mobile-menu-copy="true">
+           Order Online
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-20">
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-12 text-center lg:text-left">
+        <div class="inline-flex items-center gap-6">
+           <span class="w-12 h-[1px] bg-[#BC9D84]"></span>
+           <span class="text-[10px] font-semibold tracking-[0.6em] uppercase text-[#BC9D84]">Artisan Boulangerie</span>
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl md:text-[8rem] font-serif font-semibold leading-none tracking-tight text-[#433D3C] mobile-title">
+           따스한 향기,<br><span class="italic text-[#BC9D84]">매일의 휴식.</span>
+        </h1>
+        
+        <p class="text-[#433D3C]/60 text-sm md:text-xl leading-[2] max-w-lg mx-auto lg:mx-0 mobile-desc">
+           천연 발효종과 유기농 밀가루로 구워낸 정직한 빵. 데일리 크럼은 당신의 평범한 아침을 가장 특별한 순간으로 바꿉니다.
+        </p>
+        
+        <div class="pt-6 flex flex-col sm:flex-row gap-12 justify-center lg:justify-start">
+           <button class="px-14 py-6 bg-[#433D3C] text-white font-semibold text-[11px] tracking-[0.4em] uppercase hover:bg-[#8B735B] transition-all shadow-2xl">
+              Morning Batch
+           </button>
+           <button class="px-14 py-6 border border-[#BC9D84]/30 text-[#8B735B] font-semibold text-[11px] tracking-[0.4em] uppercase hover:bg-white transition-all">
+              Bakery Story
+           </button>
+        </div>
+      </div>
+
+      <div class="relative">
+         <div class="absolute -top-8 md:p-20 -right-20 w-80 h-80 bg-[#BC9D84]/10 rounded-full blur-[120px]"></div>
+         <div class="relative group">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200" alt="Bakery" class="w-full aspect-square object-cover rounded-[5rem_2rem_5rem_2rem] shadow-2xl group-hover:scale-105 transition duration-1000">
+            <div class="absolute -bottom-10 -left-10 bg-white p-12 rounded-2xl shadow-2xl border border-[#BC9D84]/10 max-w-[300px]">
+               <p class="text-[10px] font-semibold text-[#BC9D84] uppercase tracking-[0.4em] mb-4">Slow Baking Ritual</p>
+               <p class="text-2xl font-playfair italic font-semibold text-[#433D3C]">Fermented with Care.</p>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="cafe-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#433D3C]/20 backdrop-blur-3xl">
+    <div class="bg-white w-full max-w-sm p-6 md:p-16 shadow-2xl relative rounded-[4rem] border border-[#BC9D84]/10">
+      <button onclick="toggleCafeModal()" class="absolute top-12 right-12 text-[#433D3C]/20 hover:text-[#8B735B] transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-14">
+        <h2 class="text-xl font-playfair tracking-[0.2em] italic text-[#433D3C] mb-3 font-semibold">Club Crumb Access</h2>
+        <p class="text-[9px] text-[#BC9D84] font-semibold tracking-[0.3em] uppercase">Private Member Session</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="space-y-3">
+           <p class="text-[9px] font-semibold text-[#433D3C]/30 uppercase tracking-[0.2em] ml-1">Member ID</p>
+           <input type="text" placeholder="BREAD_LOVER_ID" class="w-full bg-[#FAF9F6] border-none rounded-2xl py-6 px-8 outline-none focus:ring-1 focus:ring-[#8B735B] transition text-[11px] font-semibold tracking-wide text-[#433D3C]">
+        </div>
+        <button class="w-full bg-[#8B735B] text-white py-6 rounded-2xl text-[10px] tracking-[0.6em] font-semibold uppercase hover:bg-[#433D3C] transition shadow-xl shadow-[#8B735B]/30">
+           Establish Session
+        </button>
+        <div class="flex justify-center gap-14 pt-4">
+           <a href="#" class="text-[9px] text-[#433D3C]/40 tracking-[0.4em] font-semibold uppercase hover:text-[#8B735B] transition italic">Join Atelier</a>
+           <a href="#" class="text-[9px] text-[#433D3C]/40 tracking-[0.4em] font-semibold uppercase hover:text-[#8B735B] transition italic">Support</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-24 md:py-40 bg-[#433D3C] text-center px-6">
+     <div class="inline-flex items-center gap-14 mb-12">
+        <span class="font-playfair text-2xl text-white tracking-tight font-semibold italic">Daily Crumb</span>
+        <span class="w-[1px] h-10 bg-white/10"></span>
+        <span class="text-[10px] font-semibold text-white/30 tracking-[0.6em] uppercase">Boulangerie & Atelier</span>
+     </div>
+     <p class="text-[10px] text-white/10 tracking-[1em] uppercase px-6">© 2024 DAILY CRUMB BAKERY. ALL RIGHTS RESERVED BY DLAB.</p>
+  </footer>
+
+  <script>
+    function toggleCafeModal() {
+      const modal = document.getElementById('cafe-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

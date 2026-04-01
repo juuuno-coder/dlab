@@ -1,0 +1,144 @@
+<%# Dessert Template - 달콤 상점 (SUCRE) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-serif-elegant { font-family: 'Playfair Display', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .marble-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/white-diamond.png");
+    opacity: 0.4;
+  }
+</style>
+
+<div class="bg-[#FDFBF7] text-[#5D4037] font-sans selection:bg-[#E6A4B4] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 marble-texture pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-[#FDFBF7]/80 backdrop-blur-md border-b border-[#E6A4B4]/10">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-3">
+         <span class="text-2xl opacity-80">🧁</span>
+         <span class="font-serif-elegant font-semibold text-2xl text-[#E6A4B4] tracking-wider uppercase">Sucre<span class="text-[#5D4037]">.</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-16 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#5D4037]/40">
+        <a href="#patisserie" class="hover:text-[#E6A4B4] transition">Patisserie</a>
+        <a href="#atelier" class="hover:text-[#E6A4B4] transition">Atelier</a>
+        <a href="#gifts" class="hover:text-[#E6A4B4] transition">Gifts</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-10 items-center">
+         <button onclick="toggleDessertModal()" class="hidden md:block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#5D4037]/40 hover:text-[#E6A4B4]" data-mobile-menu-copy="true">My Sweet</button>
+         <button class="hidden md:inline-flex bg-[#E6A4B4] text-white px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap rounded-sm font-serif-elegant font-italic text-[13px] tracking-wide hover:bg-[#5D4037] transition shadow-lg shadow-[#E6A4B4]/20" data-mobile-menu-copy="true">
+           Pre Order
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-20 overflow-hidden">
+    <!-- Soft Gradient Background -->
+    <div class="absolute top-0 right-0 w-[60%] h-[80%] bg-gradient-to-bl from-[#FFF0F5] to-transparent rounded-bl-[10rem] -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-[40%] h-[60%] bg-[#F5E6EA] rounded-tr-[10rem] -z-10 opacity-50"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-12 text-center lg:text-left">
+        <div class="inline-flex items-center gap-3">
+           <span class="w-8 h-[1px] bg-[#E6A4B4]"></span>
+           <span class="text-[11px] font-serif-elegant italic text-[#E6A4B4] tracking-wide">Handcrafted in Seoul</span>
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl md:text-[7rem] font-serif-elegant leading-[1.1] text-[#5D4037] mobile-title">
+           Sweetness<br>
+           <span class="italic text-[#E6A4B4]">Redefined.</span>
+        </h1>
+        
+        <p class="text-[#5D4037]/70 text-sm md:text-xl leading-relaxed max-w-md mx-auto lg:mx-0 mobile-desc font-light">
+           버터의 풍미와 계절의 과일이 만나 탄생하는 작은 사치.<br>
+           슈크레의 디저트로 당신의 오후를 완벽하게 채워보세요.
+        </p>
+        
+        <div class="pt-6 flex flex-col sm:flex-row gap-10 justify-center lg:justify-start">
+           <button class="px-10 py-4 bg-[#5D4037] text-white font-serif-elegant italic text-sm tracking-wide hover:bg-[#E6A4B4] transition shadow-xl">
+             View Collection
+           </button>
+           <button class="px-10 py-4 border border-[#5D4037]/20 text-[#5D4037] font-serif-elegant italic text-sm tracking-wide hover:border-[#E6A4B4] hover:text-[#E6A4B4] transition">
+             Our Story
+           </button>
+        </div>
+      </div>
+      
+      <div class="relative hidden lg:flex justify-center items-center">
+         <div class="relative z-10 w-[400px]">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[350px] h-[450px] border border-[#E6A4B4] rounded-t-[10rem] -z-10 translate-y-4 translate-x-4"></div>
+            <img src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?q=80&w=800" alt="Elegant Dessert" class="w-full h-[500px] object-cover rounded-t-[10rem] shadow-2xl grayscale-[20%] hover:grayscale-0 transition duration-700">
+            
+            <div class="absolute bottom-10 -left-10 bg-white/90 backdrop-blur-sm p-6 shadow-xl border border-[#E6A4B4]/20 max-w-xs">
+               <p class="font-serif-elegant text-2xl italic text-[#5D4037] mb-2">Signature Tart</p>
+               <p class="text-[10px] text-[#5D4037]/50 uppercase tracking-wide leading-relaxed">
+                  Seasonal Raspberry & Vanilla Bean Custard
+               </p>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="dessert-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#5D4037]/10 backdrop-blur-md">
+    <div class="bg-[#FDFBF7] w-full max-w-sm p-14 shadow-2xl relative border border-[#E6A4B4]/20">
+      <button onclick="toggleDessertModal()" class="absolute top-8 right-8 text-[#5D4037]/20 hover:text-[#E6A4B4] transition text-2xl font-serif-elegant">&times;</button>
+      
+      <div class="text-center mb-12">
+        <h2 class="text-2xl font-serif-elegant italic text-[#5D4037] mb-2">Bon Appétit</h2>
+        <p class="text-[10px] text-[#E6A4B4] font-semibold tracking-[0.3em] uppercase">Join Our Patisserie Club</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="group">
+           <input type="text" placeholder="GUEST EMAIL" class="w-full bg-transparent border-b border-[#5D4037]/10 py-3 text-[12px] font-semibold tracking-wide placeholder-[#5D4037]/30 uppercase outline-none focus:border-[#E6A4B4] transition text-center text-[#5D4037]">
+        </div>
+        
+        <button class="w-full bg-[#E6A4B4] text-white py-4 text-[11px] tracking-[0.3em] font-semibold uppercase hover:bg-[#5D4037] transition shadow-lg">
+           Sign In
+        </button>
+        
+        <div class="flex justify-center gap-12 pt-2">
+           <a href="#" class="text-[10px] text-[#5D4037]/40 tracking-[0.2em] font-semibold uppercase hover:text-[#E6A4B4] transition font-serif-elegant italic">Register</a>
+           <a href="#" class="text-[10px] text-[#5D4037]/40 tracking-[0.2em] font-semibold uppercase hover:text-[#E6A4B4] transition font-serif-elegant italic">Inquiry</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-[#FDFBF7] text-center px-6 border-t border-[#E6A4B4]/10">
+     <div class="inline-flex flex-col items-center gap-10 mb-8">
+        <span class="font-serif-elegant font-semibold text-2xl text-[#5D4037] tracking-wider uppercase">Sucre<span class="text-[#E6A4B4]">.</span></span>
+        <div class="w-8 h-[1px] bg-[#5D4037]/20"></div>
+        <span class="text-[10px] font-semibold text-[#5D4037]/40 tracking-[0.3em] uppercase">Artisan Patisserie in Seoul</span>
+     </div>
+     <p class="text-[10px] text-[#5D4037]/20 tracking-[0.6em] uppercase px-6">© 2024 SUCRE PATISSERIE. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleDessertModal() {
+      const modal = document.getElementById('dessert-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

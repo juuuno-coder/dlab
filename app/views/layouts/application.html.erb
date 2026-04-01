@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7704550771011130" crossorigin="anonymous"></script>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CGK1BSBM63"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CGK1BSBM63');
+    </script>
+    <meta charset="UTF-8">
+    <title><%= content_for(:title) || "#{branding['brand_name']} - AI와 함께하는 디지털 혁신 파트너" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="<%= content_for(:description) || branding['meta_description'] %>">
+    <meta name="keywords" content="<%= branding['meta_keywords'] %>">
+    <meta name="author" content="<%= branding['brand_name'] %>">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="<%= branding['primary_color'] %>">
+    
+    <!-- Performance Hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:title" content="<%= content_for?(:title) ? "#{content_for(:title)} | #{branding['brand_name']}" : "#{branding['brand_name']} - AI Premium Web Agency" %>">
+    <meta property="og:description" content="<%= content_for?(:description) ? content_for(:description) : branding['meta_description'] %>">
+    <meta property="og:image" content="<%= content_for?(:og_image) ? content_for(:og_image) : asset_path(branding['logo']) %>">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="<%= request.original_url %>">
+    <meta name="twitter:title" content="<%= content_for?(:title) ? "#{content_for(:title)} | #{branding['brand_name']}" : "#{branding['brand_name']} - AI Premium Web Agency" %>">
+    <meta name="twitter:description" content="<%= content_for?(:description) ? content_for(:description) : branding['meta_description'] %>">
+    <meta name="twitter:image" content="<%= content_for?(:og_image) ? content_for(:og_image) : asset_path(branding['logo']) %>">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="<%= branding['brand_name'] %>">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Fonts (Optimized) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">  
+    
+    <!-- Critical CSS - Prevent FOUC (Flash of Unstyled Content) -->
+    <style>
+      /* Critical Layout Styles - Inline for instant render */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { font-family: 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.5; }
+      body { min-height: 100vh; background-color: #fff; color: #1f2937; }
+      .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 1rem 2rem; }
+      .navbar-container { display: flex; align-items: center; justify-content: space-between; max-width: 1280px; margin: 0 auto; }
+      .navbar-menu { display: flex; gap: 2rem; list-style: none; }
+      .navbar-link { text-decoration: none; color: #374151; font-weight: 500; }
+      .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+      main { padding-top: 80px; }
+      img { max-width: 100%; height: auto; }
+      /* Flexbox utilities */
+      .flex { display: flex; }
+      .items-center { align-items: center; }
+      .justify-between { justify-content: space-between; }
+      /* Mobile menu hidden by default - will be controlled by Tailwind */
+    </style>
+
+    <!-- Tailwind CSS CDN (No defer - load immediately) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: "<%= branding['primary_color'] %>",
+                dark: "<%= branding['primary_dark'] || branding['primary_color'] %>",
+              },
+              accent: "<%= branding['accent_color'] || branding['primary_color'] %>",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              serif: ["Noto Serif KR", "serif"],
+              cinzel: ["Cinzel", "serif"],
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- PortOne V2 SDK -->
+    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "trix", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="navbar-container">
+        <%= link_to root_path, class: "navbar-logo" do %>
+          <%= image_tag branding['logo'], alt: branding['brand_name'], style: "height: 50px; width: auto;" %>
+        <% end %>
+        
+        <!-- Desktop Menu -->
+        <ul class="navbar-menu hidden md:flex">
+          <li><%= link_to "홈", root_path, class: "navbar-link #{current_page?(root_path) ? 'active' : ''}" %></li>
+          <li><%= link_to "디자인 템플릿", design_templates_path, class: "navbar-link #{current_page?(design_templates_path) ? 'active' : ''}" %></li>
+          <%# <li>link_to "포트폴리오", portfolio_path, class: "navbar-link"</li> %>
+          <li><%= link_to "요금제", pricing_path, class: "navbar-link #{current_page?(pricing_path) ? 'active' : ''}" %></li>
+          <li><%= link_to "문의하기", contact_path, class: "navbar-link #{current_page?(contact_path) ? 'active' : ''}" %></li>
+          
+          <% if user_signed_in? %>
+             <li style="margin-left: 10px; display: flex; align-items: center; gap: 15px;">
+              <%= link_to cart_path, class: "relative text-gray-600 hover:text-emerald-600 transition", title: "장바구니" do %>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                <% if current_user.cart&.cart_items&.any? %>
+                  <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full"><%= current_user.cart.cart_items.sum(:quantity) %></span>
+                <% end %>
+              <% end %>
+
+              <!-- 아바타 드롭다운 -->
+              <div class="relative" id="user-menu-container">
+                <button type="button" id="user-menu-button" class="flex items-center gap-2 hover:opacity-80 transition group focus:outline-none">
+                  <% if current_user.image.present? %>
+                    <%= image_tag current_user.image, class: "w-8 h-8 rounded-full object-cover border-2 border-emerald-100 group-hover:border-emerald-300 transition" %>
+                  <% else %>
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-sm font-bold border-2 border-emerald-100 group-hover:border-emerald-300 transition">
+                      <%= (current_user.name&.first || current_user.email.first).upcase %>
+                    </div>
+                  <% end %>
+                  <span style="font-size: 14px; color: #666; font-weight: 500;"><%= current_user.name || current_user.email.split('@')[0] %>님</span>
+                  <svg class="w-4 h-4 text-gray-600 transition-transform" id="user-menu-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </button>
+
+                <!-- 드롭다운 메뉴 -->
+                <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
+                  <!-- 사용자 정보 -->
+                  <div class="px-4 py-3 border-b border-gray-100">
+                    <div class="text-sm font-medium text-gray-900"><%= current_user.name || current_user.email.split('@')[0] %></div>
+                    <div class="text-xs text-gray-600 truncate"><%= current_user.email %></div>
+                  </div>
+
+                  <!-- 메뉴 아이템 -->
+                  <% if current_user.super_admin? || current_user.agency_admin? %>
+                    <%= link_to admin_root_path, class: "flex items-center gap-3 px-4 py-2.5 text-sm text-blue-600 bg-blue-50 hover:bg-blue-100 transition font-bold" do %>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      </svg>
+                      <span>관리자 페이지</span>
+                    <% end %>
+                    <div class="border-t border-gray-100 my-1"></div>
+                  <% end %>
+                  <%= link_to mypage_path, class: "flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition" do %>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <span>마이페이지</span>
+                  <% end %>
+
+                  <%= link_to mypage_orders_path, class: "flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition" do %>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                    <span>주문 내역</span>
+                  <% end %>
+
+                  <%= link_to mypage_wishlist_path, class: "flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition" do %>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                    <span>위시리스트</span>
+                  <% end %>
+
+                  <%= link_to cart_path, class: "flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition" do %>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <span>장바구니</span>
+                    <% if current_user.cart&.cart_items&.any? %>
+                      <span class="ml-auto bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-0.5 rounded-full">
+                        <%= current_user.cart.cart_items.sum(:quantity) %>
+                      </span>
+                    <% end %>
+                  <% end %>
+
+                  <div class="border-t border-gray-100 my-1"></div>
+
+                  <%= link_to edit_mypage_path, class: "flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition" do %>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>설정</span>
+                  <% end %>
+
+                  <%= button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: "w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition" do %>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    <span>로그아웃</span>
+                  <% end %>
+                </div>
+              </div>
+
+              <script>
+                // 아바타 드롭다운 토글
+                (function() {
+                  const button = document.getElementById('user-menu-button');
+                  const dropdown = document.getElementById('user-menu-dropdown');
+                  const arrow = document.getElementById('user-menu-arrow');
+                  const container = document.getElementById('user-menu-container');
+
+                  if (button && dropdown) {
+                    button.addEventListener('click', (e) => {
+                      e.stopPropagation();
+                      dropdown.classList.toggle('hidden');
+                      arrow.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                    });
+
+                    // 외부 클릭 시 닫기
+                    document.addEventListener('click', (e) => {
+                      if (!container.contains(e.target)) {
+                        dropdown.classList.add('hidden');
+                        arrow.style.transform = 'rotate(0deg)';
+                      }
+                    });
+                  }
+                })();
+              </script>
+            </li>
+          <% else %>
+            <li style="margin-left: 10px; display: flex; align-items: center; gap: 10px;">
+              <%= link_to "로그인", new_user_session_path, class: "navbar-link", style: "font-size: 14px; color: #666;" %>
+              <%= link_to "회원가입", new_user_registration_path, class: "btn btn-sm btn-primary", style: "padding: 6px 16px; font-size: 13px; border-radius: 99px; color: white; background: var(--color-primary);" %>
+            </li>
+          <% end %>
+        </ul>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 hover:text-emerald-600 focus:outline-none">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 flex flex-col p-4 space-y-4">
+        <%= link_to "홈", root_path, class: "block px-4 py-2 text-gray-700 font-bold hover:bg-gray-50 rounded-lg #{current_page?(root_path) ? 'text-emerald-600 bg-emerald-50' : ''}" %>
+        <%= link_to "디자인 템플릿", design_templates_path, class: "block px-4 py-2 text-gray-700 font-bold hover:bg-gray-50 rounded-lg #{current_page?(design_templates_path) ? 'text-emerald-600 bg-emerald-50' : ''}" %>
+        <%= link_to "요금제", pricing_path, class: "block px-4 py-2 text-gray-700 font-bold hover:bg-gray-50 rounded-lg #{current_page?(pricing_path) ? 'text-emerald-600 bg-emerald-50' : ''}" %>
+        <%= link_to "문의하기", contact_path, class: "block px-4 py-2 text-gray-700 font-bold hover:bg-gray-50 rounded-lg #{current_page?(contact_path) ? 'text-emerald-600 bg-emerald-50' : ''}" %>
+        
+        <div style="border-top: 1px solid #eee; margin-top: 10px; padding-top: 10px;">
+          <% if user_signed_in? %>
+            <div class="px-4 py-2 text-sm text-gray-500 mb-2">
+              <%= current_user.email %>님 환영합니다
+            </div>
+            <%= link_to "마이페이지", mypage_path, class: "block px-4 py-2 text-gray-700 font-bold hover:bg-gray-50 rounded-lg" %>
+            <%= link_to "장바구니", cart_path, class: "block px-4 py-2 text-gray-700 font-bold hover:bg-gray-50 rounded-lg" %>
+            <%= button_to "로그아웃", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "block w-full text-left px-4 py-2 text-red-500 font-bold hover:bg-red-50 rounded-lg" %>
+          <% else %>
+            <%= link_to "로그인", new_user_session_path, class: "block px-4 py-2 text-gray-700 font-bold hover:bg-gray-50 rounded-lg" %>
+            <%= link_to "회원가입", new_user_registration_path, class: "block px-4 py-2 text-emerald-600 font-bold hover:bg-emerald-50 rounded-lg" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+    
+    <script>
+      // Mobile Menu Toggle
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    </script>
+
+    <!-- Flash Messages (Toast) -->
+    <div class="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-lg px-4 space-y-2 pointer-events-none">
+      <% flash.each do |key, value| %>
+        <div class="flash-message pointer-events-auto shadow-lg rounded-lg p-4 flex items-center justify-between text-white transition-all duration-300 ease-in-out transform translate-y-0 opacity-100 <%= key == 'notice' ? 'bg-emerald-600' : 'bg-red-500' %>">
+          <div class="flex items-center gap-3">
+             <% if key == 'notice' %>
+               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+             <% else %>
+               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+             <% end %>
+             <span class="font-medium"><%= value %></span>
+          </div>
+          <button onclick="this.parentElement.remove()" class="text-white hover:text-gray-200 focus:outline-none">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+      <%= yield %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3><%= branding['brand_name'] %></h3>
+            <p><%= branding['tagline'] %></p>
+          </div>
+          
+          <div class="footer-section">
+            <h3>서비스</h3>
+            <ul>
+              <li><a href="#">웹 개발</a></li>
+              <li><a href="#">앱 개발</a></li>
+              <li><a href="#">UI/UX 디자인</a></li>
+              <li><a href="#">디지털 마케팅</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3>회사</h3>
+            <ul>
+              <li><%= link_to "디자인 템플릿", design_templates_path %></li>
+              <li><%= link_to "요금제", pricing_path %></li>
+              <li><%= link_to "문의하기", contact_path %></li>
+              <li><%= link_to "디자인 가이드", design_system_path %></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3>연락처</h3>
+            <p>이메일: <%= branding['contact_email'] %></p>
+          </div>
+        </div>
+        
+        <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+          <p>&copy; <%= Time.current.year %> <%= branding['copyright'] || branding['company_name'] %>. All rights reserved.</p>
+          <div style="display: flex; gap: 20px;">
+            <%= link_to "서비스 이용약관", terms_path, style: "color: #999; text-decoration: none; font-size: 13px;" %>
+            <%= link_to "개인정보처리방침", privacy_path, style: "color: #999; text-decoration: none; font-size: 13px; font-weight: bold;" %>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="fixed bottom-8 right-8 z-50 bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-full shadow-lg transition-all transform translate-y-20 opacity-0" onclick="scrollToTop()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 15l-6-6-6 6"/>
+      </svg>
+    </button>
+
+    <!-- Navbar & Utility Scripts -->
+    <!-- Floating Consultation Button -->
+    <a href="<%= contact_path %>" class="fixed bottom-24 right-8 z-50 bg-white text-emerald-600 p-4 rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 flex items-center justify-center group" title="실시간 문의">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      <span class="absolute right-full mr-3 bg-gray-900 text-white text-sm py-1 px-3 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+        무료 견적 문의
+      </span>
+    </a>
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+      function initializeUI() {
+        // Initialize AOS
+        if (typeof AOS !== 'undefined') {
+          AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+          });
+        }
+
+        // 2. Auto-hide Flash Messages (Toast)
+        const flashes = document.querySelectorAll('.flash-message');
+        flashes.forEach(flash => {
+          setTimeout(() => {
+            flash.style.opacity = '0';
+            flash.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+              flash.remove();
+            }, 300);
+          }, 4000); 
+        });
+
+        // 3. Client-side Form Validation
+        const contactForm = document.querySelector('form[action="/contact"]');
+        if (contactForm) {
+          // Remove existing listeners to prevent duplicates if any
+          const newForm = contactForm.cloneNode(true);
+          contactForm.parentNode.replaceChild(newForm, contactForm);
+          
+          newForm.addEventListener('submit', function(event) {
+            let isValid = true;
+            const emailInput = newForm.querySelector('input[type="email"]');
+            const phoneInput = newForm.querySelector('input[name="quote[phone]"]');
+            
+            if (emailInput && !emailInput.value.includes('@')) {
+              isValid = false;
+              alert('올바른 이메일 주소를 입력해주세요.');
+              emailInput.focus();
+              event.preventDefault();
+              return;
+            }
+             
+            if (phoneInput && phoneInput.value.length < 9) {
+              isValid = false;
+              alert('올바른 전화번호를 입력해주세요.');
+              phoneInput.focus();
+              event.preventDefault();
+              return;
+            }
+          });
+        }
+      }
+
+      // Navbar Scroll Effect (Global Listener)
+      window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        
+        if (navbar) {
+          if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        }
+
+        if (scrollBtn) {
+          if (window.scrollY > 300) {
+            scrollBtn.classList.remove('translate-y-20', 'opacity-0');
+          } else {
+            scrollBtn.classList.add('translate-y-20', 'opacity-0');
+          }
+        }
+      });
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Initialize on load and Turbo navigation
+      document.addEventListener('turbo:load', initializeUI);
+      document.addEventListener('DOMContentLoaded', initializeUI);
+    </script>
+  </body>
+</html>

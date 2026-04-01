@@ -1,0 +1,182 @@
+<div style="margin-bottom: var(--space-8);">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="font-size: var(--text-4xl);">디자인 템플릿 관리</h1>
+    <%= link_to "새 템플릿 추가", new_admin_design_template_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
+<% if @design_templates.any? %>
+  <div class="grid grid-4" style="gap: var(--space-6);">
+    <% @design_templates.each do |template| %>
+      <div class="card" style="padding: var(--space-4);">
+        <div style="height: 200px; background: #eee; border-radius: var(--radius-md); margin-bottom: var(--space-4); overflow: hidden; position: relative; cursor: pointer;" 
+             onclick="openPreview('<%= template.preview_url %>', '<%= j template.title %>', '<%= template.category %>', <%= template.id %>)">
+          <% thumb_src = template.pc_thumbnail_url %>
+          <% if thumb_src %>
+            <img src="<%= thumb_src %>" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+          <% else %>
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #999;">No Image</div>
+          <% end %>
+          
+          <!-- Hover Overlay (Guide) -->
+          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center;"
+               onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+            <span style="background: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 12px;">미리보기</span>
+          </div>
+
+          <!-- Featured Badge -->
+          <% if template.is_featured %>
+            <div style="position: absolute; top: 10px; right: 10px; background: var(--color-accent); color: white; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 99px;">MAIN</div>
+          <% end %>
+        </div>
+        <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2);"><%= template.title %></h3>
+        <p style="color: var(--color-gray-500); font-size: var(--text-sm);"><%= template.category %></p>
+        
+        <div style="display: flex; gap: var(--space-2); margin-top: var(--space-4);">
+          <%= link_to "수정", edit_admin_design_template_path(template), class: "btn btn-outline btn-sm", style: "flex: 1;" %>
+          <%= button_to "삭제", admin_design_template_path(template), method: :delete, class: "btn btn-sm", style: "background: var(--color-error); color: white; border: none; flex: 1;", title: "삭제하기", onclick: "return confirm('정말 삭제하시겠습니까?');" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div style="text-align: center; padding: 60px 20px; background: white; border-radius: var(--radius-lg); border: 1px dashed var(--color-gray-300);">
+    <div style="width: 60px; height: 60px; background: var(--color-gray-100); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" stroke-width="2">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+    </div>
+    <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-2); color: var(--color-gray-800);">등록된 템플릿이 없습니다</h3>
+    <p style="color: var(--color-gray-500); margin-bottom: var(--space-6);">새로운 디자인 템플릿을 등록하여 포트폴리오를 관리해보세요.</p>
+    <%= link_to "첫 번째 템플릿 추가하기", new_admin_design_template_path, class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<!-- Preview Modal (Copied from frontend) -->
+<div id="preview-modal" class="fixed inset-0 z-[200] hidden" role="dialog" aria-modal="true" style="text-align: left;">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity opacity-0" id="modal-backdrop"></div>
+  
+  <!-- Modal Content -->
+  <div class="absolute inset-0 flex flex-col bg-white w-full h-full md:m-8 md:w-auto md:h-auto md:rounded-2xl overflow-hidden shadow-2xl transition-transform scale-95 opacity-0" id="modal-content">
+    
+    <!-- Header -->
+    <div class="h-16 border-b border-gray-100 flex justify-between items-center px-6 bg-white shrink-0">
+      <div class="flex items-center gap-4">
+        <h2 id="modal-title" class="font-bold text-lg text-slate-900">Template Title</h2>
+        <span id="modal-category" class="px-2 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded uppercase">CAT</span>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <!-- Device Toggle -->
+        <div class="hidden md:flex bg-gray-100 p-1 rounded-lg">
+          <button onclick="setDevice('pc')" class="p-2 rounded hover:bg-white shadow-sm transition" title="PC View">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </button>
+          <button onclick="setDevice('mobile')" class="p-2 rounded hover:bg-white shadow-sm transition" title="Mobile View">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          </button>
+        </div>
+
+        <a id="modal-pick-btn" href="#" target="_blank" class="px-6 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg hover:bg-indigo-700 transition">
+          페이지 열기
+        </a>
+        
+        <button onclick="closePreview()" class="p-2 text-gray-400 hover:text-gray-600">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Iframe Container -->
+    <div class="flex-grow bg-gray-50 relative overflow-hidden flex flex-col items-center justify-center w-full">
+      <iframe id="iframe-preview" class="w-full h-full bg-white transition-all duration-500 shadow-sm" src="about:blank"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('preview-modal');
+  const backdrop = document.getElementById('modal-backdrop');
+  const content = document.getElementById('modal-content');
+  const iframe = document.getElementById('iframe-preview');
+  const pickBtn = document.getElementById('modal-pick-btn');
+  
+  function openPreview(url, title, category, id) {
+    iframe.src = url;
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-category').innerText = category;
+    // Admin context: Open actual page in new tab instead of 'quote'
+    pickBtn.href = url; 
+    
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      backdrop.classList.remove('opacity-0');
+      content.classList.remove('scale-95', 'opacity-0');
+    }, 10);
+    document.body.style.overflow = 'hidden';
+
+    // ESC Key Listener for Iframe (Sequential Closing)
+    iframe.onload = () => {
+      try {
+        const iframeDoc = iframe.contentWindow.document;
+        iframe.contentWindow.focus();
+        
+        iframeDoc.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            const openInnerModals = Array.from(iframeDoc.querySelectorAll('div[id*="modal"]')).filter(el => {
+              const style = window.getComputedStyle(el);
+              return !el.classList.contains('hidden') && style.display !== 'none' && style.visibility !== 'hidden';
+            });
+
+            if (openInnerModals.length > 0) {
+              e.preventDefault();
+              e.stopPropagation();
+              openInnerModals.forEach(modal => {
+                const closeBtn = Array.from(modal.querySelectorAll('button')).find(btn => {
+                   const text = btn.innerText.trim().toLowerCase();
+                   return text === 'x' || text === 'close' || text === '닫기' || btn.getAttribute('onclick');
+                });
+                if (closeBtn) closeBtn.click();
+                else modal.classList.add('hidden');
+              });
+            } else {
+              closePreview();
+            }
+          }
+        });
+      } catch(e) { console.warn("Cross-origin or simple handling"); }
+    };
+  }
+
+  function closePreview() {
+    backdrop.classList.add('opacity-0');
+    content.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      iframe.src = 'about:blank';
+      document.body.style.overflow = '';
+    }, 300);
+  }
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) closePreview();
+  });
+
+  function setDevice(type) {
+    if (type === 'mobile') {
+        iframe.style.width = '375px';
+        iframe.style.borderRadius = '20px';
+        iframe.style.margin = '30px auto';
+        iframe.style.height = 'calc(100% - 60px)';
+        iframe.style.border = '8px solid #333';
+        iframe.style.boxSizing = 'border-box';
+    } else {
+        iframe.style.width = '100%';
+        iframe.style.borderRadius = '0';
+        iframe.style.margin = '0';
+        iframe.style.height = '100%';
+        iframe.style.border = 'none';
+    }
+  }
+</script>

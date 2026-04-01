@@ -1,0 +1,39 @@
+<%# app/views/components/_parallax_gallery.html.erb %>
+<div class="parallax-gallery-container w-full overflow-hidden h-[50rem]" data-controller="parallax-scroll" data-parallax-scroll-target="container">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-4 items-start">
+    
+    <%# Column 1 %>
+    <div class="grid gap-10" data-parallax-scroll-target="column">
+      <% images.each_with_index do |img, i| %>
+        <% if i % 3 == 0 %>
+          <div class="rounded-lg overflow-hidden h-80 w-full relative">
+            <%= image_tag img, class: "object-cover object-left-top w-full h-full" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    
+    <%# Column 2 %>
+    <div class="grid gap-10" data-parallax-scroll-target="column">
+      <% images.each_with_index do |img, i| %>
+         <% if i % 3 == 1 %>
+          <div class="rounded-lg overflow-hidden h-80 w-full relative">
+             <%= image_tag img, class: "object-cover object-left-top w-full h-full" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%# Column 3 %>
+    <div class="grid gap-10" data-parallax-scroll-target="column">
+     <% images.each_with_index do |img, i| %>
+        <% if i % 3 == 2 %>
+          <div class="rounded-lg overflow-hidden h-80 w-full relative">
+             <%= image_tag img, class: "object-cover object-left-top w-full h-full" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>

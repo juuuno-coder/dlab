@@ -1,0 +1,161 @@
+<%# English Template - 잉글리시 타운 (ETOWN ACADEMY) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300..900;1,300..900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-display { font-family: 'Jost', sans-serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .grid-bg {
+    background-image: linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+</style>
+
+<div class="bg-white text-slate-900 font-sans selection:bg-blue-600 selection:text-white min-h-screen overflow-x-hidden relative grid-bg">
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-white/90 backdrop-blur-xl border-b border-blue-50">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-3">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain rounded-lg bg-blue-600 flex items-center justify-center text-white font-semibold text-sm italic shadow-lg shadow-blue-200 transform -skew-x-12">
+            E
+         </div>
+         <span class="font-display text-2xl font-semibold tracking-tight uppercase text-slate-900 italic">Etown<span class="text-blue-600">Academy</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-16 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+        <a href="#about" class="hover:text-blue-600 transition">About</a>
+        <a href="#programs" class="hover:text-blue-600 transition">Programs</a>
+        <a href="#teachers" class="hover:text-blue-600 transition">Teachers</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-10 items-center">
+         <button onclick="toggleEnglishModal()" class="hidden md:block text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 hover:text-blue-600" data-mobile-menu-copy="true">LMS Portal</button>
+         <button class="hidden md:inline-flex bg-slate-900 text-white px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap rounded-lg font-semibold text-[11px] tracking-wide uppercase hover:bg-blue-600 transition shadow-xl shadow-slate-200" data-mobile-menu-copy="true">
+           Free Level Test
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-20">
+    <div class="absolute top-0 right-0 w-[60%] h-full bg-slate-50 skew-x-12 -z-10 translate-x-1/4"></div>
+    
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-10 md:p-16 items-center">
+      <div class="space-y-10 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 px-4 py-1.5 rounded-lg shadow-sm text-blue-700">
+           <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+           <span class="text-[10px] font-semibold tracking-wide uppercase">Global Enrollment Open</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-7xl font-display font-semibold leading-[0.9] tracking-tight text-slate-900 mobile-title italic">
+           Speak<br>
+           <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">The Future.</span>
+        </h1>
+        
+        <p class="text-slate-500 text-sm md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc font-medium">
+           단순한 암기가 아닌, 언어의 본질을 깨우는 프리미엄 어학교육.<br>
+           검증된 커리큘럼으로 당신의 잠재력을 글로벌 무대와 연결합니다.
+        </p>
+        
+        <div class="pt-6 flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+           <button class="px-8 py-4 bg-blue-600 text-white font-semibold text-[11px] tracking-wide uppercase rounded-xl hover:bg-slate-900 transition shadow-xl shadow-blue-200 transform hover:-translate-y-1">
+              Start Learning
+           </button>
+           <button class="px-8 py-4 bg-white border border-slate-200 text-slate-600 font-semibold text-[11px] tracking-wide uppercase rounded-xl hover:border-blue-200 hover:text-blue-600 transition shadow-sm">
+              Watch Class Demo
+           </button>
+        </div>
+
+        <div class="pt-10 flex gap-12 items-center justify-center lg:justify-start border-t border-slate-100">
+             <div class="flex -space-x-4">
+               <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 rounded-full border-2 border-white bg-slate-200"></div>
+               <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 rounded-full border-2 border-white bg-slate-300"></div>
+               <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 rounded-full border-2 border-white bg-slate-400"></div>
+               <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 rounded-full border-2 border-white bg-blue-100 flex items-center justify-center text-[10px] font-semibold text-blue-600">+2k</div>
+             </div>
+             <div>
+                <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">Active Students</p>
+                <div class="flex items-center gap-1 text-yellow-400 text-xs">★★★★★ <span class="text-slate-900 font-semibold ml-1">4.9/5</span></div>
+             </div>
+        </div>
+      </div>
+      
+      <div class="relative hidden lg:block">
+         <div class="relative group">
+            <div class="absolute -inset-4 bg-gradient-to-tr from-blue-200 to-cyan-200 rounded-2xl -rotate-3 group-hover:rotate-0 transition duration-700 opacity-60"></div>
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200" alt="Education" class="relative z-10 w-full aspect-[4/5] object-cover rounded-[1.5rem] shadow-2xl transform transition hover:scale-[1.02] duration-500">
+            
+            <div class="absolute bottom-10 -right-10 z-20 bg-white p-8 rounded-2xl shadow-xl border border-slate-100 max-w-[260px] transform rotate-3 hover:rotate-0 transition duration-500">
+               <div class="flex items-center gap-6 mb-4">
+                  <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-semibold italic">
+                     A+
+                  </div>
+                  <div>
+                     <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">Global Standard</p>
+                     <p class="text-lg font-semibold text-slate-900 italic">IELTS Certified</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="english-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xl">
+    <div class="bg-white w-full max-w-sm p-12 shadow-2xl relative rounded-2xl">
+      <button onclick="toggleEnglishModal()" class="absolute top-8 right-8 text-slate-300 hover:text-blue-600 transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-10">
+        <h2 class="text-xl font-display font-semibold tracking-tight text-slate-900 mb-2 uppercase italic">Student Portal</h2>
+        <p class="text-[9px] text-blue-600 font-semibold tracking-[0.2em] uppercase">LMS Secure Access</p>
+      </div>
+      
+      <div class="space-y-6">
+        <div class="space-y-2">
+           <p class="text-[9px] font-semibold text-slate-400 uppercase tracking-wide ml-2">Student ID / Email</p>
+           <input type="text" placeholder="STU-2024-XXXX" class="w-full bg-slate-50 border-none rounded-xl py-5 px-6 outline-none focus:ring-2 focus:ring-blue-500/20 transition text-[11px] font-semibold tracking-wide text-slate-800 uppercase">
+        </div>
+        <button class="w-full bg-blue-600 text-white py-5 rounded-xl text-[10px] tracking-[0.4em] font-semibold uppercase hover:bg-slate-900 transition shadow-xl shadow-blue-200">
+           Enter Classroom
+        </button>
+        <div class="flex justify-center gap-12 pt-4">
+           <a href="#" class="text-[9px] text-slate-400 tracking-[0.2em] font-semibold uppercase hover:text-blue-600 transition">Register Class</a>
+           <a href="#" class="text-[9px] text-slate-400 tracking-[0.2em] font-semibold uppercase hover:text-blue-600 transition">Assignment Help</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-white text-center px-6 border-t border-slate-100">
+     <div class="inline-flex items-center gap-10 mb-8">
+        <span class="font-display font-semibold text-2xl tracking-tight uppercase text-slate-900 italic">Etown<span class="text-blue-600">Academy</span></span>
+        <span class="w-12 h-[1px] bg-slate-100"></span>
+        <span class="text-[10px] font-semibold text-slate-400 tracking-[0.3em] uppercase">Language Intelligence</span>
+     </div>
+     <p class="text-[10px] text-slate-300 tracking-[0.6em] uppercase px-6">© 2024 ETOWN ACADEMY. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleEnglishModal() {
+      const modal = document.getElementById('english-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

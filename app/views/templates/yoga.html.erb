@@ -1,0 +1,146 @@
+<%# Yoga Template - 요가 플로우 (YOGA FLOW) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+  
+  .font-serif-flow { font-family: 'Cormorant Garamond', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .paper-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+    opacity: 0.6;
+  }
+</style>
+
+<div class="bg-[#F0EFEB] text-[#4A4843] font-sans selection:bg-[#8B9178] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 paper-texture pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-12 md:px-12 bg-[#F0EFEB]/80 backdrop-blur-xl border-b border-[#4A4843]/5">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-6">
+         <span class="font-serif-flow text-2xl font-medium tracking-wide italic leading-none">Yoga<span class="text-[#8B9178]">Flow</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#4A4843]/40">
+        <a href="#mind" class="hover:text-[#8B9178] transition">Mindfulness</a>
+        <a href="#body" class="hover:text-[#8B9178] transition">Asana</a>
+        <a href="#studio" class="hover:text-[#8B9178] transition">Sanctuary</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-12 items-center">
+         <button onclick="toggleYogaModal()" class="hidden md:block text-[10px] font-semibold uppercase tracking-[0.3em] text-[#4A4843]/40 hover:text-[#8B9178]" data-mobile-menu-copy="true">Member ID</button>
+         <button class="hidden md:inline-flex bg-[#8B9178] text-white px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap rounded-lg font-semibold text-[10px] tracking-[0.3em] uppercase hover:bg-[#4A4843] transition shadow-lg shadow-[#8B9178]/20" data-mobile-menu-copy="true">
+           Book Mat
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-20">
+    <!-- Organic blobs -->
+    <div class="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-[#E2E1D9] rounded-[30%_70%_70%_30%/30%_30%_70%_70%] mix-blend-multiply filter blur-2xl opacity-70 animate-morph-slow"></div>
+    <div class="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-[#D4D3CB] rounded-[70%_30%_30%_70%/60%_40%_60%_40%] mix-blend-multiply filter blur-2xl opacity-70 animate-morph-slower"></div>
+
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-12 text-center lg:text-left">
+        <div class="inline-flex items-center gap-6">
+           <span class="w-12 h-[1px] bg-[#8B9178]"></span>
+           <span class="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#8B9178]">Balance of Life</span>
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl md:text-[8rem] font-serif-flow font-light leading-[0.9] tracking-tight text-[#4A4843] mobile-title">
+           Breathe,<br><span class="italic text-[#8B9178]">Become.</span>
+        </h1>
+        
+        <p class="text-[#4A4843]/60 text-sm md:text-xl leading-[1.8] max-w-md mx-auto lg:mx-0 mobile-desc">
+           매트 위에서 마주하는 온전한 나. 호흡과 동작이 하나가 되는 순간, 내면의 고요한 숲을 만나보세요.
+        </p>
+        
+        <div class="pt-6 flex flex-col sm:flex-row gap-12 justify-center lg:justify-start">
+           <button class="px-12 py-5 bg-[#4A4843] text-white font-semibold text-[11px] tracking-[0.4em] uppercase rounded-lg hover:bg-[#8B9178] transition shadow-xl">
+              Start Journey
+           </button>
+           <button class="px-12 py-5 border border-[#4A4843]/10 text-[#4A4843] font-semibold text-[11px] tracking-[0.4em] uppercase rounded-lg hover:bg-white transition">
+              View Schedule
+           </button>
+        </div>
+      </div>
+      
+      <div class="relative hidden lg:block">
+         <div class="aspect-[4/5] rounded-[10rem_10rem_0_0] overflow-hidden relative group">
+            <img src="https://images.unsplash.com/photo-1599447332191-aaa5d52540c4?q=80&w=1200" alt="Yoga Practice" class="w-full h-full object-cover transition duration-[2s] group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#8B9178]/20 to-transparent pointer-events-none"></div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+   <style>
+      @keyframes morph-slow {
+         0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+         50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+      }
+      @keyframes morph-slower {
+         0%, 100% { border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%; }
+         50% { border-radius: 30% 70% 70% 30% / 40% 60% 40% 60%; }
+      }
+      .animate-morph-slow { animation: morph-slow 10s ease-in-out infinite; }
+      .animate-morph-slower { animation: morph-slower 12s ease-in-out infinite; }
+   </style>
+
+  <!-- Login Modal -->
+  <div id="yoga-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#4A4843]/10 backdrop-blur-xl">
+    <div class="bg-[#F0EFEB] w-full max-w-sm p-6 md:p-16 shadow-2xl relative rounded-2xl border border-[#8B9178]/10">
+      <button onclick="toggleYogaModal()" class="absolute top-10 right-10 text-[#4A4843]/30 hover:text-[#8B9178] transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl font-serif-flow text-[#4A4843] mb-2 italic">Flow ID</h2>
+        <p class="text-[9px] text-[#8B9178] font-semibold tracking-[0.3em] uppercase">Private Studio Space</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="space-y-3">
+           <p class="text-[9px] font-semibold text-[#4A4843]/30 uppercase tracking-[0.2em] ml-2">Member Email</p>
+           <input type="text" placeholder="yogi@flow.com" class="w-full bg-white border-none rounded-2xl py-5 px-6 outline-none focus:ring-1 focus:ring-[#8B9178]/50 transition text-[11px] font-semibold tracking-wide text-[#4A4843]">
+        </div>
+        <button class="w-full bg-[#8B9178] text-white py-5 rounded-2xl text-[10px] tracking-[0.4em] font-semibold uppercase hover:bg-[#4A4843] transition shadow-xl shadow-[#8B9178]/20">
+           Enter Studio
+        </button>
+        <div class="flex justify-center gap-14 pt-4">
+           <a href="#" class="text-[9px] text-[#4A4843]/40 tracking-[0.2em] font-semibold uppercase hover:text-[#8B9178] transition">New Member</a>
+           <a href="#" class="text-[9px] text-[#4A4843]/40 tracking-[0.2em] font-semibold uppercase hover:text-[#8B9178] transition">My Journey</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-[#F0EFEB] text-center px-6 border-t border-[#4A4843]/5">
+     <div class="inline-flex flex-col items-center gap-10 mb-8">
+        <span class="font-serif-flow text-2xl text-[#4A4843] tracking-wide italic">YogaFlow</span>
+        <div class="w-12 h-[1px] bg-[#4A4843]/10"></div>
+        <span class="text-[10px] font-semibold text-[#4A4843]/30 tracking-[0.4em] uppercase">Natural Balance Sanctuary</span>
+     </div>
+     <p class="text-[10px] text-[#4A4843]/20 tracking-[0.8em] uppercase px-6">© 2024 YOGA FLOW. SEOUL.</p>
+  </footer>
+
+  <script>
+    function toggleYogaModal() {
+      const modal = document.getElementById('yoga-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

@@ -1,0 +1,258 @@
+<%= form_with model: [:admin, design_template], local: true, multipart: true, class: "card", style: "padding: var(--space-8);" do |f| %>
+  <% if design_template.errors.any? %>
+    <div style="background: var(--color-error); color: white; padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-6);">
+      <strong><%= pluralize(design_template.errors.count, "error") %> 발생:</strong>
+      <ul>
+        <% design_template.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title, "템플릿명", class: "form-label" %>
+    <%= f.text_field :title, class: "form-input", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category, "카테고리", class: "form-label" %>
+    <%= f.select :category, [
+      ['뷰티/살롱', 'beauty'],
+      ['다이닝/F&B', 'dining'],
+      ['피트니스/요가', 'fitness'],
+      ['공간/렌탈', 'space'],
+      ['스테이/숙박', 'stay'],
+      ['쇼핑몰', 'shopping'],
+      ['기업/브랜드', 'corporate'],
+      ['카페/베이커리', 'cafe'],
+      ['포트폴리오', 'portfolio'],
+      ['병원/의료', 'medical'],
+      ['법률/전문직', 'law'],
+      ['교육/학원', 'academy'],
+      ['유아/유치원', 'kinder']
+    ], {}, class: "form-select" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, "설명", class: "form-label" %>
+    <%= f.text_area :description, class: "form-textarea", rows: 4 %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :preview_url, "미리보기 URL (예: /templates/beauty)", class: "form-label" %>
+    <%= f.text_field :preview_url, class: "form-input", placeholder: "/templates/..." %>
+  </div>
+
+  <div class="form-group" style="display: flex; align-items: center; gap: 10px; padding: 10px 0;">
+    <%= f.check_box :is_featured, class: "form-checkbox", style: "width: 20px; height: 20px;" %>
+    <%= f.label :is_featured, "메인 페이지(Design Templates 섹션)에 노출하기", class: "form-label", style: "margin-bottom: 0;" %>
+  </div>
+
+  <!-- =============== PC 이미지 섹션 =============== -->
+  <div style="background: #f8fafc; border-radius: var(--radius-lg); padding: var(--space-6); margin-bottom: var(--space-6);">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4);">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #1e293b; margin: 0;">
+        🖥️ PC 대표 이미지
+      </h3>
+      <% if design_template.persisted? %>
+        <% case design_template.pc_image_source_type %>
+        <% when :uploaded %>
+          <span style="background: #10b981; color: white; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: bold;">✓ 업로드된 이미지</span>
+        <% when :url %>
+          <span style="background: #3b82f6; color: white; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: bold;">🔗 외부 URL</span>
+        <% else %>
+          <span style="background: #ef4444; color: white; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: bold;">⚠️ 이미지 없음</span>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- 현재 적용된 이미지 미리보기 -->
+    <% if design_template.persisted? && design_template.pc_thumbnail_url.present? %>
+      <div style="margin-bottom: var(--space-4); padding: var(--space-4); background: white; border-radius: var(--radius-md); border: 1px solid #e2e8f0;">
+        <p style="font-size: 12px; color: #64748b; margin-bottom: 8px; font-weight: 600;">▼ 현재 메인/목록 페이지에 표시되는 이미지</p>
+        <img src="<%= design_template.pc_thumbnail_url %>" 
+             style="max-width: 100%; max-height: 200px; border-radius: var(--radius-md); display: block;"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display: none; padding: 20px; background: #fef2f2; border-radius: var(--radius-md); text-align: center; color: #dc2626;">
+          ⚠️ 이미지를 불러올 수 없습니다. 새 이미지를 업로드하거나 URL을 확인해주세요.
+        </div>
+      </div>
+    <% end %>
+
+    <!-- 파일 업로드 영역 -->
+    <div class="form-group" style="margin-bottom: var(--space-4);">
+      <%= f.label :pc_image, "새 이미지 업로드", class: "form-label", style: "font-size: 14px; color: #475569;" %>
+      
+      <div style="border: 2px dashed var(--color-gray-300); border-radius: var(--radius-lg); padding: var(--space-6); text-align: center; background: white; transition: all 0.2s;" id="drop-zone-pc">
+        <%= f.file_field :pc_image, class: "form-input", style: "display: none;", accept: "image/*", onchange: "previewImage(this, 'pc')" %>
+        
+        <div id="upload-prompt-pc" style="<%= design_template.pc_image.attached? ? 'display: none;' : 'cursor: pointer;' %>" onclick="document.getElementById('design_template_pc_image').click()">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" stroke-width="2" style="margin-bottom: var(--space-2);">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <p style="color: var(--color-gray-600); font-weight: 500; margin-bottom: var(--space-1);">클릭하여 이미지 선택</p>
+          <p style="color: var(--color-gray-400); font-size: var(--text-sm);">또는 파일을 드래그하세요 (PNG, JPG, WebP)</p>
+        </div>
+
+        <div id="preview-container-pc" style="<%= design_template.pc_image.attached? ? 'display: block;' : 'display: none;' %> position: relative;">
+          <% if design_template.pc_image.attached? %>
+            <%= image_tag design_template.pc_image, id: "preview-img-pc", style: "max-width: 100%; max-height: 300px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);" %>
+          <% else %>
+            <img id="preview-img-pc" src="#" alt="Preview" style="max-width: 100%; max-height: 300px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <% end %>
+          <button type="button" onclick="removeImage('pc')" style="position: absolute; top: -10px; right: -10px; background: white; border: 1px solid var(--color-gray-200); border-radius: 50%; padding: 5px; cursor: pointer; box-shadow: var(--shadow-sm);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-error)" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 외부 URL 입력 -->
+    <div class="form-group" style="margin: 0;">
+      <%= f.label :image_url, "또는 외부 이미지 URL 직접 입력", class: "form-label", style: "font-size: 14px; color: #475569;" %>
+      <%= f.text_field :image_url, class: "form-input", placeholder: "https://example.com/image.jpg 또는 /images/templates/..." %>
+      <p style="font-size: 12px; color: #94a3b8; margin-top: 4px;">※ 파일 업로드 시 이 URL은 자동으로 업데이트됩니다.</p>
+    </div>
+  </div>
+
+  <!-- =============== 모바일 이미지 섹션 =============== -->
+  <div style="background: #fef3c7; border-radius: var(--radius-lg); padding: var(--space-6); margin-bottom: var(--space-6);">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4);">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: #92400e; margin: 0;">
+        📱 모바일 대표 이미지 <span style="font-size: 12px; font-weight: 400; color: #b45309;">(선택사항)</span>
+      </h3>
+      <% if design_template.persisted? %>
+        <% case design_template.mobile_image_source_type %>
+        <% when :uploaded %>
+          <span style="background: #10b981; color: white; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: bold;">✓ 업로드됨</span>
+        <% when :url %>
+          <span style="background: #3b82f6; color: white; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: bold;">🔗 URL</span>
+        <% else %>
+          <span style="background: #94a3b8; color: white; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: bold;">PC 이미지 사용</span>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- 현재 적용된 모바일 이미지 미리보기 -->
+    <% if design_template.persisted? && (design_template.mobile_image.attached? || design_template.mobile_image_url.present?) %>
+      <div style="margin-bottom: var(--space-4); padding: var(--space-4); background: white; border-radius: var(--radius-md); border: 1px solid #fde68a;">
+        <p style="font-size: 12px; color: #92400e; margin-bottom: 8px; font-weight: 600;">▼ 현재 모바일용 이미지</p>
+        <img src="<%= design_template.mobile_thumbnail_url %>" 
+             style="max-width: 200px; max-height: 300px; border-radius: var(--radius-md); display: block;"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display: none; padding: 20px; background: #fef2f2; border-radius: var(--radius-md); text-align: center; color: #dc2626; font-size: 14px;">
+          ⚠️ 이미지를 불러올 수 없습니다.
+        </div>
+      </div>
+    <% end %>
+
+    <!-- 파일 업로드 영역 -->
+    <div class="form-group" style="margin-bottom: var(--space-4);">
+      <%= f.label :mobile_image, "새 모바일 이미지 업로드", class: "form-label", style: "font-size: 14px; color: #92400e;" %>
+      
+      <div style="border: 2px dashed #fcd34d; border-radius: var(--radius-lg); padding: var(--space-6); text-align: center; background: white; transition: all 0.2s;" id="drop-zone-mobile">
+        <%= f.file_field :mobile_image, class: "form-input", style: "display: none;", accept: "image/*", onchange: "previewImage(this, 'mobile')" %>
+        
+        <div id="upload-prompt-mobile" style="<%= design_template.mobile_image.attached? ? 'display: none;' : 'cursor: pointer;' %>" onclick="document.getElementById('design_template_mobile_image').click()">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" style="margin-bottom: var(--space-2);">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12" y2="18"></line>
+          </svg>
+          <p style="color: #92400e; font-weight: 500; margin-bottom: var(--space-1);">클릭하여 모바일 이미지 선택</p>
+          <p style="color: #b45309; font-size: var(--text-sm);">세로 비율 권장 (예: 375x812)</p>
+        </div>
+
+        <div id="preview-container-mobile" style="<%= design_template.mobile_image.attached? ? 'display: block;' : 'display: none;' %> position: relative;">
+          <% if design_template.mobile_image.attached? %>
+            <%= image_tag design_template.mobile_image, id: "preview-img-mobile", style: "max-width: 200px; max-height: 300px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);" %>
+          <% else %>
+            <img id="preview-img-mobile" src="#" alt="Preview" style="max-width: 200px; max-height: 300px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <% end %>
+          <button type="button" onclick="removeImage('mobile')" style="position: absolute; top: -10px; right: -10px; background: white; border: 1px solid #fcd34d; border-radius: 50%; padding: 5px; cursor: pointer; box-shadow: var(--shadow-sm);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 외부 URL 입력 -->
+    <div class="form-group" style="margin: 0;">
+      <%= f.label :mobile_image_url, "또는 외부 모바일 이미지 URL", class: "form-label", style: "font-size: 14px; color: #92400e;" %>
+      <%= f.text_field :mobile_image_url, class: "form-input", placeholder: "https://example.com/mobile-image.jpg" %>
+      <p style="font-size: 12px; color: #b45309; margin-top: 4px;">※ 모바일 이미지가 없으면 PC 이미지가 자동으로 사용됩니다.</p>
+    </div>
+  </div>
+
+  <script>
+    function previewImage(input, type) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+          document.getElementById('preview-img-' + type).src = e.target.result;
+          document.getElementById('upload-prompt-' + type).style.display = 'none';
+          document.getElementById('preview-container-' + type).style.display = 'block';
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function removeImage(type) {
+      document.getElementById('design_template_' + type + '_image').value = "";
+      document.getElementById('preview-img-' + type).src = "#";
+      document.getElementById('upload-prompt-' + type).style.display = 'block';
+      document.getElementById('preview-container-' + type).style.display = 'none';
+    }
+
+    // Drag and Drop support
+    function setupDropZone(type) {
+      const zone = document.getElementById('drop-zone-' + type);
+      const inputId = 'design_template_' + type + '_image';
+      
+      if(!zone) return;
+
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        zone.style.borderColor = type === 'mobile' ? '#f59e0b' : 'var(--color-primary)';
+        zone.style.background = '#fefce8';
+      });
+
+      zone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        zone.style.borderColor = type === 'mobile' ? '#fcd34d' : 'var(--color-gray-300)';
+        zone.style.background = 'white';
+      });
+
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.style.borderColor = type === 'mobile' ? '#fcd34d' : 'var(--color-gray-300)';
+        zone.style.background = 'white';
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          const input = document.getElementById(inputId);
+          input.files = files;
+          previewImage(input, type);
+        }
+      });
+    }
+
+    setupDropZone('pc');
+    setupDropZone('mobile');
+  </script>
+
+  <div style="margin-top: var(--space-8); display: flex; gap: 12px;">
+    <%= f.submit "저장하기", class: "btn btn-primary btn-lg" %>
+    <%= link_to "취소", admin_design_templates_path, class: "btn btn-outline btn-lg" %>
+  </div>
+<% end %>

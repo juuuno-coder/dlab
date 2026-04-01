@@ -1,0 +1,89 @@
+<div style="max-width: 900px; margin: 0 auto;">
+  <div style="margin-bottom: var(--space-8);">
+    <%= link_to "← 목록으로", admin_agencies_path, style: "color: var(--color-gray-600); text-decoration: none;" %>
+    <h1 style="font-size: var(--text-4xl); margin-top: var(--space-4); margin-bottom: var(--space-2);"><%= @agency.name %></h1>
+    <p class="text-gray">
+      <%= @agency.subdomain %>.designd.co.kr
+      <% if @agency.active? %>
+        <span style="display: inline-block; padding: 2px 8px; font-size: 12px; font-weight: 600; background: #dcfce7; color: #166534; border-radius: 9999px; margin-left: 8px;">운영중</span>
+      <% else %>
+        <span style="display: inline-block; padding: 2px 8px; font-size: 12px; font-weight: 600; background: #f3f4f6; color: #374151; border-radius: 9999px; margin-left: 8px;">비활성</span>
+      <% end %>
+    </p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-8);">
+    <!-- Main Info -->
+    <div style="space-y: var(--space-8);">
+      <div class="card" style="padding: var(--space-6);">
+        <h3 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-4);">기본 정보</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+          <div>
+            <p style="color: var(--color-gray-500); font-size: var(--text-sm);">소유자 (Owner)</p>
+            <p style="font-weight: 500;"><%= @agency.owner.name %> (<%= @agency.owner.email %>)</p>
+          </div>
+          <div>
+            <p style="color: var(--color-gray-500); font-size: var(--text-sm);">관리자 (Admins)</p>
+            <p style="font-weight: 500;">
+              <% if @agency.admins.any? %>
+                <%= @agency.admins.map { |a| "#{a.name} (#{a.email})" }.join(", ") %>
+              <% else %>
+                <span class="text-gray-400">-</span>
+              <% end %>
+            </p>
+          </div>
+          <div>
+            <p style="color: var(--color-gray-500); font-size: var(--text-sm);">수수료율</p>
+            <p style="font-weight: 500;"><%= number_to_percentage(@agency.commission_rate, precision: 1) %></p>
+          </div>
+          <div>
+            <p style="color: var(--color-gray-500); font-size: var(--text-sm);">등록일</p>
+            <p style="font-weight: 500;"><%= @agency.created_at.strftime("%Y-%m-%d") %></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders via Agency -->
+      <div class="card" style="padding: var(--space-6);">
+         <h3 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-4);">최근 주문 내역</h3>
+         <% if @agency.orders.any? %>
+           <table style="width: 100%;">
+             <thead>
+               <tr style="text-align: left; border-bottom: 1px solid var(--color-gray-200);">
+                 <th style="padding-bottom: 8px;">주문번호</th>
+                 <th style="padding-bottom: 8px;">주문자</th>
+                 <th style="padding-bottom: 8px;">금액</th>
+                 <th style="padding-bottom: 8px;">수수료</th>
+                 <th style="padding-bottom: 8px;">상태</th>
+               </tr>
+             </thead>
+             <tbody>
+               <% @agency.orders.order(created_at: :desc).limit(5).each do |order| %>
+                 <tr>
+                    <td style="padding: 12px 0;"><%= order.id %></td>
+                    <td><%= order.user.name %></td>
+                    <td><%= number_to_currency(order.total_amount, unit: "₩", precision: 0) %></td>
+                    <td style="color: var(--color-primary);"><%= number_to_currency(order.commission_amount, unit: "₩", precision: 0) %></td>
+                    <td><span class="badge badge-<%= order.status %>"><%= order.status %></span></td>
+                 </tr>
+               <% end %>
+             </tbody>
+           </table>
+         <% else %>
+           <p style="color: var(--color-gray-500); text-align: center; padding: 20px;">아직 발생한 주문이 없습니다.</p>
+         <% end %>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div style="space-y: var(--space-6);">
+      <div class="card" style="padding: var(--space-6);">
+        <h3 style="font-size: var(--text-md); font-weight: 700; margin-bottom: var(--space-4);">관리</h3>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <%= link_to "정보 수정", edit_admin_agency_path(@agency), class: "btn btn-outline", style: "width: 100%; text-align: center;" %>
+          <%= button_to "에이전시 삭제", admin_agency_path(@agency), method: :delete, data: { turbo_confirm: "정말 삭제하시겠습니까? 소속된 회원들의 연결이 해제됩니다." }, class: "btn btn-danger", style: "width: 100%; margin-top: 8px;" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

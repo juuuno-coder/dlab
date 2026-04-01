@@ -1,0 +1,145 @@
+<%# Cloth Template - 모드 서울 (MODE SEOUL) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-serif-display { font-family: 'Cormorant Garamond', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .fabric-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/woven.png");
+    opacity: 0.05;
+  }
+</style>
+
+<div class="bg-[#F5F5F4] text-[#292524] font-sans selection:bg-[#57534E] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 fabric-texture pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-12 md:px-12 bg-[#F5F5F4]/80 backdrop-blur-xl border-b border-[#292524]/5">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-10">
+         <span class="font-serif-display text-2xl tracking-wide font-semibold uppercase text-[#292524]">Mode<span class="italic font-light">Seoul</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#292524]/40">
+        <a href="#lookbook" class="hover:text-[#57534E] transition">Editorial</a>
+        <a href="#shop" class="hover:text-[#57534E] transition">Collection</a>
+        <a href="#archive" class="hover:text-[#57534E] transition">Archive</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-12 items-center">
+         <button onclick="toggleModeModal()" class="hidden md:block text-[10px] font-semibold uppercase tracking-[0.3em] text-[#292524]/40 hover:text-[#292524]" data-mobile-menu-copy="true">Atelier_ID</button>
+         <button class="hidden md:block relative" data-mobile-menu-copy="true">
+            <span class="text-[10px] font-semibold uppercase tracking-[0.3em] hover:text-[#57534E] transition">Cart</span>
+            <span class="absolute -top-1 -right-2 w-1.5 h-1.5 bg-[#57534E] rounded-full"></span>
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Abstract Shapes -->
+    <div class="absolute top-[20%] left-[10%] w-[300px] h-[300px] bg-[#E7E5E4] rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+    <div class="absolute top-[20%] right-[10%] w-[300px] h-[300px] bg-[#D6D3D1] rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+    
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-12 gap-16 items-center">
+      <div class="lg:col-span-1 hidden lg:flex flex-col gap-12 items-center text-[10px] font-semibold tracking-[0.4em] uppercase text-[#292524]/30 [writing-mode:vertical-rl] rotate-180">
+         <span>Spring / Summer 24</span>
+         <div class="h-24 w-[1px] bg-[#292524]/20"></div>
+         <span>Minimalism</span>
+      </div>
+
+      <div class="lg:col-span-5 relative z-20">
+         <div class="relative overflow-hidden aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1200" alt="Fashion Editorial" class="w-full h-full object-cover grayscale brightness-90 hover:scale-105 transition duration-[1.5s]">
+            <div class="absolute bottom-8 left-8 bg-white/80 backdrop-blur-sm p-6 border border-white/20">
+               <p class="font-serif-display text-2xl italic mb-2">The New Silence</p>
+               <button class="text-[9px] font-semibold uppercase tracking-[0.3em] border-b border-black pb-1">View Lookbook</button>
+            </div>
+         </div>
+      </div>
+
+      <div class="lg:col-span-6 space-y-12 text-center lg:text-left pl-0 lg:pl-12">
+        <h1 class="text-3xl md:text-5xl md:text-[8rem] font-serif-display leading-[0.9] tracking-tight text-[#292524] mobile-title">
+           Essential<br>
+           <span class="italic font-light text-[#57534E]">Form.</span>
+        </h1>
+        
+        <p class="text-[#292524]/60 text-sm md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mobile-desc">
+           서울의 정서, 비워진 미학. 불필요한 것을 덜어내고 본질만을 남긴 모드 서울의 새로운 컬렉션을 확인하세요.
+        </p>
+        
+        <div class="pt-8 flex flex-col sm:flex-row gap-12 justify-center lg:justify-start">
+           <button class="group flex items-center gap-6 text-[11px] font-semibold uppercase tracking-[0.4em] text-[#292524] hover:text-[#57534E] transition">
+              <span class="w-12 h-[1px] bg-[#292524] group-hover:w-20 transition-all"></span> Shop Now
+           </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+   <style>
+      @keyframes blob {
+         0% { transform: translate(0px, 0px) scale(1); }
+         33% { transform: translate(30px, -50px) scale(1.1); }
+         66% { transform: translate(-20px, 20px) scale(0.9); }
+         100% { transform: translate(0px, 0px) scale(1); }
+      }
+      .animate-blob { animation: blob 7s infinite; }
+      .animation-delay-2000 { animation-delay: 2s; }
+   </style>
+
+  <!-- Login Modal -->
+  <div id="mode-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#292524]/10 backdrop-blur-3xl">
+    <div class="bg-[#F5F5F4] w-full max-w-sm p-6 md:p-16 shadow-2xl relative border border-[#292524]/5">
+      <button onclick="toggleModeModal()" class="absolute top-12 right-12 text-[#292524]/20 hover:text-[#292524] transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-16">
+        <h2 class="text-2xl font-serif-display tracking-wide text-[#292524] mb-2 italic">Atelier Club</h2>
+        <p class="text-[9px] text-[#57534E] font-semibold tracking-[0.3em] uppercase">Private Archive Access</p>
+      </div>
+      
+      <div class="space-y-10">
+        <div class="relative group">
+           <input type="text" placeholder="MEMBER CODE" class="w-full bg-transparent border-b border-[#292524]/10 py-4 text-[11px] font-semibold tracking-[0.3em] placeholder-[#292524]/20 uppercase outline-none focus:border-[#292524] transition text-center">
+        </div>
+        <button class="w-full bg-[#292524] text-white py-6 text-[10px] tracking-[0.4em] font-semibold uppercase hover:bg-[#57534E] transition shadow-xl">
+           Enter Archive
+        </button>
+        <div class="flex justify-center pt-2">
+           <a href="#" class="text-[9px] text-[#292524]/30 tracking-[0.3em] font-semibold uppercase hover:text-[#292524] transition border-b border-transparent hover:border-[#292524]">Apply for Membership</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-24 md:py-40 bg-[#F5F5F4] text-center px-6 border-t border-[#292524]/5">
+     <div class="inline-flex flex-col items-center gap-12 mb-12">
+        <span class="font-serif-display text-3xl tracking-wide uppercase text-[#292524]">Mode Seoul</span>
+        <div class="w-12 h-[1px] bg-[#292524]/20"></div>
+        <span class="text-[10px] font-semibold text-[#292524]/30 tracking-[0.4em] uppercase">Minimalism Culture</span>
+     </div>
+     <p class="text-[10px] text-[#292524]/20 tracking-[1em] uppercase px-6">© 2024 MODE SEOUL ATELIER. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleModeModal() {
+      const modal = document.getElementById('mode-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

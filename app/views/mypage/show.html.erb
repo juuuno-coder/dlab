@@ -1,0 +1,255 @@
+<% content_for :title, "마이페이지 - 디어스" %>
+
+<div class="min-h-screen bg-gray-50 py-12">
+  <div class="container mx-auto px-4 max-w-6xl">
+    <!-- 프로필 헤더 -->
+    <div class="bg-white rounded-2xl shadow-sm p-4 md:p-8 mb-8">
+      <div class="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-6">
+        <!-- 아바타 -->
+        <div class="relative">
+          <% if @user.image.present? %>
+            <%= image_tag @user.image, class: "w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-emerald-100" %>
+          <% else %>
+            <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-2xl md:text-3xl font-bold border-4 border-emerald-100">
+              <%= @user.name&.first&.upcase || @user.email.first.upcase %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- 사용자 정보 -->
+        <div class="flex-1 text-center md:text-left">
+          <h1 class="text-xl md:text-2xl font-bold text-gray-900 mb-1">
+            <%= @user.name || @user.email.split('@').first %>님
+          </h1>
+          <p class="text-sm md:text-base text-gray-600 mb-3 truncate"><%= @user.email %></p>
+          <%= link_to "프로필 수정", edit_mypage_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-sm font-medium" %>
+        </div>
+
+        <!-- 통계 -->
+        <div class="flex md:hidden gap-8 w-full justify-center pt-4 border-t border-gray-100">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-emerald-600"><%= @orders.count %></div>
+            <div class="text-sm text-gray-600">주문</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-emerald-600"><%= @liked_templates.count %></div>
+            <div class="text-sm text-gray-600">위시리스트</div>
+          </div>
+        </div>
+
+        <div class="hidden md:flex gap-8">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-emerald-600"><%= @orders.count %></div>
+            <div class="text-sm text-gray-600">주문</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-emerald-600"><%= @liked_templates.count %></div>
+            <div class="text-sm text-gray-600">위시리스트</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 탭 메뉴 -->
+    <div class="bg-white rounded-2xl shadow-sm mb-8 overflow-x-auto">
+      <div class="flex border-b border-gray-200 min-w-max md:min-w-0">
+        <%= link_to mypage_path, class: "flex-1 px-3 md:px-6 py-3 md:py-4 text-center font-medium border-b-2 border-emerald-600 text-emerald-600 text-sm md:text-base whitespace-nowrap" do %>
+          <span>대시보드</span>
+        <% end %>
+        <%= link_to mypage_orders_path, class: "flex-1 px-3 md:px-6 py-3 md:py-4 text-center font-medium text-gray-600 hover:text-emerald-600 transition text-sm md:text-base whitespace-nowrap" do %>
+          <span>주문 내역</span>
+        <% end %>
+        <%= link_to mypage_wishlist_path, class: "flex-1 px-3 md:px-6 py-3 md:py-4 text-center font-medium text-gray-600 hover:text-emerald-600 transition text-sm md:text-base whitespace-nowrap" do %>
+          <span>위시리스트</span>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 내 사이트 관리 (Agencies) -->
+    <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-gray-900">내 사이트 관리</h2>
+        <% if @user.agency_owner? || @user.agency_admin? || @user.super_admin? %>
+          <%= link_to "관리자 패널 바로가기", admin_root_path, class: "text-sm text-emerald-600 hover:text-emerald-700 font-medium font-bold" %>
+        <% end %>
+      </div>
+      
+      <% if @owned_agencies.any? %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <% @owned_agencies.each do |agency| %>
+            <div class="border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition shadow-sm bg-gradient-to-br from-white to-gray-50">
+              <div class="flex justify-between items-start mb-4">
+                <div class="px-2 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold rounded uppercase tracking-wider">
+                  <%= agency.active? ? "운영 중" : "준비 중" %>
+                </div>
+                <div class="text-xs text-gray-400"><%= agency.created_at.strftime('%Y.%m.%d') %></div>
+              </div>
+              
+              <h3 class="font-bold text-gray-900 text-lg mb-1"><%= agency.name %></h3>
+              <p class="text-emerald-600 text-sm font-medium mb-4"><%= agency.subdomain %>.designd.co.kr</p>
+              
+              <div class="flex gap-2">
+                <%= link_to "사이트 방문", "http://#{agency.subdomain}.designd.co.kr", target: "_blank", class: "flex-1 text-center py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-bold hover:bg-gray-200 transition" %>
+                <%= link_to "통계/관리", admin_agency_path(agency), class: "flex-1 text-center py-2 bg-emerald-600 text-white rounded-lg text-sm font-bold hover:bg-emerald-700 transition" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center py-10 text-gray-400 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+          <p class="mb-2">아직 보유한 사이트가 없습니다.</p>
+          <%= link_to "템플릿 둘러보기", design_templates_path, class: "text-emerald-600 font-bold hover:underline" %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- 상담 내역 -->
+    <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-gray-900">상담 내역</h2>
+      </div>
+      
+      <% if @quotes.any? %>
+        <div class="space-y-4">
+          <% @quotes.each do |quote| %>
+             <div class="border border-gray-200 rounded-lg p-4 hover:border-emerald-300 transition">
+               <div class="flex justify-between items-start">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="font-medium text-gray-900"><%= quote.project_type %></span>
+                      <span class="text-xs text-gray-300">|</span>
+                      <span class="text-sm text-gray-500"><%= quote.created_at.strftime('%Y.%m.%d') %></span>
+                    </div>
+                    <p class="text-gray-600 text-sm line-clamp-1"><%= quote.message %></p>
+                  </div>
+                  <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">
+                    <%= quote.status == 'pending' ? '접수완료' : '처리완료' %>
+                  </span>
+               </div>
+             </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center py-8 text-gray-500 bg-gray-50 rounded-lg">
+          <p>상담 내역이 없습니다.</p>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- 최근 주문 -->
+      <div class="bg-white rounded-2xl shadow-sm p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-bold text-gray-900">최근 주문</h2>
+          <%= link_to "전체보기", mypage_orders_path, class: "text-sm text-emerald-600 hover:text-emerald-700 font-medium" %>
+        </div>
+
+        <% if @orders.any? %>
+          <div class="space-y-4">
+            <% @orders.each do |order| %>
+              <div class="border border-gray-200 rounded-lg p-4 hover:border-emerald-300 transition">
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <div class="font-medium text-gray-900">주문 #<%= order.id %></div>
+                    <div class="text-sm text-gray-600"><%= order.created_at.strftime('%Y년 %m월 %d일') %></div>
+                  </div>
+                  <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
+                    <%= order.status || '완료' %>
+                  </span>
+                </div>
+                <div class="text-lg font-bold text-emerald-600">
+                  <%= number_to_currency(order.total_amount || 0, unit: '₩', precision: 0) %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-12 text-gray-500">
+            <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            </svg>
+            <p>아직 주문 내역이 없습니다</p>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- 위시리스트 -->
+      <div class="bg-white rounded-2xl shadow-sm p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-bold text-gray-900">위시리스트</h2>
+          <%= link_to "전체보기", mypage_wishlist_path, class: "text-sm text-emerald-600 hover:text-emerald-700 font-medium" %>
+        </div>
+
+        <% if @liked_templates.any? %>
+          <div class="grid grid-cols-2 gap-4">
+            <% @liked_templates.first(4).each do |template| %>
+              <div class="group relative overflow-hidden rounded-lg border border-gray-200 hover:border-emerald-300 transition">
+                <% if template.thumbnail_url.present? %>
+                  <%= image_tag template.thumbnail_url, class: "w-full h-32 object-cover" %>
+                <% else %>
+                  <div class="w-full h-32 bg-gradient-to-br from-emerald-100 to-emerald-200"></div>
+                <% end %>
+                <div class="p-3">
+                  <div class="text-sm font-medium text-gray-900 truncate"><%= template.name %></div>
+                  <div class="text-xs text-gray-600"><%= number_to_currency(template.price, unit: '₩', precision: 0) %></div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-12 text-gray-500">
+            <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+            <p>위시리스트가 비어있습니다</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 빠른 링크 -->
+    <div class="grid md:grid-cols-3 gap-6 mt-8">
+      <%= link_to design_templates_path, class: "bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition group" do %>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center group-hover:bg-emerald-200 transition">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="font-medium text-gray-900">템플릿 둘러보기</div>
+            <div class="text-sm text-gray-600">새로운 디자인 발견</div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= link_to cart_path, class: "bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition group" do %>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="font-medium text-gray-900">장바구니</div>
+            <div class="text-sm text-gray-600">담긴 상품 확인</div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= link_to contact_path, class: "bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition group" do %>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="font-medium text-gray-900">문의하기</div>
+            <div class="text-sm text-gray-600">궁금한 점 물어보기</div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

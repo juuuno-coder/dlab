@@ -1,0 +1,293 @@
+<%# Accounting Template - KICPA Style (회계법인) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+</style>
+
+<div class="font-sans text-slate-800 bg-white min-h-screen">
+
+  <!-- Top Utility Bar -->
+  <div class="bg-slate-100 border-b border-slate-200 text-[11px] text-slate-500 py-2">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="flex gap-6">
+        <span class="cursor-pointer hover:text-[#005BAC] transition">HOME</span>
+        <span class="w-[1px] h-3 bg-slate-300 my-auto"></span>
+        <span class="cursor-pointer hover:text-[#005BAC] transition">SITEMAP</span>
+        <span class="w-[1px] h-3 bg-slate-300 my-auto"></span>
+        <span class="cursor-pointer hover:text-[#005BAC] transition">CONTACT</span>
+      </div>
+      <div class="flex gap-6">
+        <span class="cursor-pointer hover:text-[#005BAC] transition font-semibold">LOGIN</span>
+        <span class="w-[1px] h-3 bg-slate-300 my-auto"></span>
+        <span class="cursor-pointer hover:text-[#005BAC] transition">JOIN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & GNB -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+    <div class="container mx-auto px-4 h-20 flex justify-between items-center">
+      <!-- Logo -->
+      <div class="flex items-center gap-2 group cursor-pointer">
+        <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 bg-[#005BAC] rounded-sm flex items-center justify-center text-white font-semibold text-xl shadow-lg group-hover:bg-[#004a8f] transition">K</div>
+        <div class="flex flex-col">
+          <span class="text-xl font-semibold text-[#005BAC] leading-none tracking-tight">K-Accounting</span>
+          <span class="text-[10px] text-slate-400 font-semibold tracking-wide uppercase mt-0.5">Certified Public Accountants</span>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <nav class="hidden lg:flex gap-14 font-semibold text-[15px] text-slate-700">
+        <a href="#" class="hover:text-[#005BAC] py-7 border-b-2 border-transparent hover:border-[#005BAC] transition">법인소개</a>
+        <a href="#" class="hover:text-[#005BAC] py-7 border-b-2 border-transparent hover:border-[#005BAC] transition">구성원</a>
+        <a href="#" class="hover:text-[#005BAC] py-7 border-b-2 border-transparent hover:border-[#005BAC] transition">업무분야</a>
+        <a href="#" class="hover:text-[#005BAC] py-7 border-b-2 border-transparent hover:border-[#005BAC] transition">정보센터</a>
+        <a href="#" class="hover:text-[#005BAC] py-7 border-b-2 border-transparent hover:border-[#005BAC] transition">상담신청</a>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+      <!-- Mobile Menu Button -->
+      <button class="lg:hidden text-slate-700 text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative h-[600px] bg-slate-900 flex items-center overflow-hidden">
+    <!-- Background Image -->
+    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1600" alt="Finance" class="absolute inset-0 w-full h-full object-cover opacity-40">
+    <div class="absolute inset-0 bg-gradient-to-r from-[#005BAC]/80 to-transparent"></div>
+
+    <div class="container mx-auto px-4 md:px-6 relative z-10 flex items-center justify-between flex-nowrap">
+      <div class="max-w-2xl text-white space-y-6">
+        <div class="inline-block px-4 py-1.5 bg-white/10 backdrop-blur border border-white/20 rounded-lg text-[12px] font-semibold tracking-wide uppercase mb-4">
+          Trusted Financial Partner
+        </div>
+        <h1 class="text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+          투명한 회계,<br>
+          <span class="text-blue-200">건강한 미래</span>를 엽니다.
+        </h1>
+        <p class="text-lg text-slate-200 font-light max-w-lg leading-relaxed">
+          기업의 가치를 높이고 경제의 투명성을 지키는 전문가 그룹.<br>
+          K-Accounting이 귀하의 성공적인 비즈니스 파트너가 되겠습니다.
+        </p>
+        <div class="pt-8 flex gap-6">
+          <button class="bg-white text-[#005BAC] px-8 py-4 rounded font-semibold hover:bg-blue-50 transition shadow-lg">
+            서비스 자세히 보기
+          </button>
+          <button class="border border-white text-white px-8 py-4 rounded font-semibold hover:bg-white/10 transition">
+            전문가 찾기
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Menu Grid (Overlap) -->
+  <section class="relative z-20 -mt-16 container mx-auto px-4 mb-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 md:grid-cols-4 bg-white shadow-2xl rounded-lg overflow-hidden divide-x divide-y md:divide-y-0 border border-slate-100">
+      
+      <!-- Item 1 -->
+      <a href="#" class="group p-8 flex flex-col items-center justify-center text-center hover:bg-[#005BAC] transition duration-300">
+        <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-[#005BAC] mb-4 group-hover:bg-white/10 group-hover:text-white transition">
+           <svg class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        </div>
+        <h3 class="font-semibold text-lg text-slate-800 group-hover:text-white mb-1">회계감사</h3>
+        <p class="text-[13px] text-slate-500 group-hover:text-blue-100">Audit & Assurance</p>
+      </a>
+
+      <!-- Item 2 -->
+      <a href="#" class="group p-8 flex flex-col items-center justify-center text-center hover:bg-[#005BAC] transition duration-300">
+        <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-[#005BAC] mb-4 group-hover:bg-white/10 group-hover:text-white transition">
+           <svg class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+        </div>
+        <h3 class="font-semibold text-lg text-slate-800 group-hover:text-white mb-1">세무자문</h3>
+        <p class="text-[13px] text-slate-500 group-hover:text-blue-100">Tax Consulting</p>
+      </a>
+
+      <!-- Item 3 -->
+      <a href="#" class="group p-8 flex flex-col items-center justify-center text-center hover:bg-[#005BAC] transition duration-300">
+        <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-[#005BAC] mb-4 group-hover:bg-white/10 group-hover:text-white transition">
+           <svg class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+        </div>
+        <h3 class="font-semibold text-lg text-slate-800 group-hover:text-white mb-1">경영컨설팅</h3>
+        <p class="text-[13px] text-slate-500 group-hover:text-blue-100">Business Advisory</p>
+      </a>
+
+      <!-- Item 4 -->
+      <a href="#" class="group p-8 flex flex-col items-center justify-center text-center hover:bg-[#005BAC] transition duration-300">
+        <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-[#005BAC] mb-4 group-hover:bg-white/10 group-hover:text-white transition">
+           <svg class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+        </div>
+        <h3 class="font-semibold text-lg text-slate-800 group-hover:text-white mb-1">구성원 찾기</h3>
+        <p class="text-[13px] text-slate-500 group-hover:text-blue-100">Find CPA</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- News & Notice Section -->
+  <section class="py-16 md:py-24 bg-slate-50">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col lg:flex-row gap-16">
+        
+        <!-- Left: Notice -->
+        <div class="lg:w-1/2">
+          <div class="flex justify-between items-end mb-6 border-b border-slate-200 pb-2">
+            <h2 class="text-2xl font-semibold text-slate-800">공지사항 <span class="text-[#005BAC]">NOTICE</span></h2>
+            <a href="#" class="text-xs font-semibold text-slate-400 hover:text-[#005BAC]">+ MORE</a>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-6 group cursor-pointer">
+              <span class="bg-[#005BAC] text-white text-[10px] px-2 py-1 font-semibold rounded mt-0.5">NOTICE</span>
+              <div class="flex-1">
+                <p class="font-medium text-slate-700 group-hover:text-[#005BAC] transition text-sm">2024년도 개정세법 해설 책자 발간 안내</p>
+                <p class="text-xs text-slate-400 mt-1">2024.12.20</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-6 group cursor-pointer">
+              <span class="bg-gray-400 text-white text-[10px] px-2 py-1 font-semibold rounded mt-0.5">NEWS</span>
+              <div class="flex-1">
+                <p class="font-medium text-slate-700 group-hover:text-[#005BAC] transition text-sm">제58회 공인회계사 자격시험 합격자 발표</p>
+                <p class="text-xs text-slate-400 mt-1">2024.12.18</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-6 group cursor-pointer">
+              <span class="bg-gray-400 text-white text-[10px] px-2 py-1 font-semibold rounded mt-0.5">NEWS</span>
+              <div class="flex-1">
+                <p class="font-medium text-slate-700 group-hover:text-[#005BAC] transition text-sm">ESG 인증포럼 개최 안내 (온라인 웨비나)</p>
+                <p class="text-xs text-slate-400 mt-1">2024.12.15</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: Promo Banner -->
+        <div class="lg:w-1/2">
+          <div class="h-full bg-slate-200 rounded-lg overflow-hidden relative group cursor-pointer shadow-lg">
+             <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=800" alt="Consulting" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
+               <span class="text-[#005BAC] font-semibold text-xs bg-white inline-block px-3 py-1 rounded-lg w-fit mb-3">FOCUS</span>
+               <h3 class="text-2xl font-semibold text-white mb-2 group-hover:underline decoration-[#005BAC] underline-offset-4">기업 감사의 새로운 표준, K-Accounting</h3>
+               <p class="text-slate-300 text-sm">데이터 분석 기반의 선진 감사 기법을 만나보세요.</p>
+             </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="py-20 md:py-32 bg-[#f8fafc] border-t border-slate-200">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div class="text-center group">
+        <p class="text-3xl lg:text-4xl font-semibold text-[#005BAC] mb-2 group-hover:scale-110 transition duration-300">50+</p>
+        <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide">Years Experience</p>
+      </div>
+      <div class="text-center group">
+        <p class="text-3xl lg:text-4xl font-semibold text-slate-800 mb-2 group-hover:scale-110 transition duration-300">1.2K</p>
+        <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide">Global Clients</p>
+      </div>
+      <div class="text-center group">
+        <p class="text-3xl lg:text-4xl font-semibold text-slate-800 mb-2 group-hover:scale-110 transition duration-300">200+</p>
+        <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide">Expert CPAs</p>
+      </div>
+      <div class="text-center group">
+        <p class="text-3xl lg:text-4xl font-semibold text-slate-800 mb-2 group-hover:scale-110 transition duration-300">99%</p>
+        <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide">Client Satisfaction</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Network -->
+  <section class="py-20 md:py-32 bg-white">
+     <div class="container mx-auto px-4 text-center">
+        <h2 class="text-2xl font-semibold text-slate-800 mb-4">Global Network</h2>
+        <p class="text-slate-500 mb-12 max-w-xl mx-auto">전 세계 150여 개국, 400여 개 오피스와의 긴밀한 네트워크를 통해<br>언제 어디서나 최상의 서비스를 제공합니다.</p>
+        <img src="https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?q=80&w=1200" alt="Map" class="w-full max-w-4xl mx-auto opacity-80 grayscale hover:grayscale-0 transition duration-700">
+     </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-white pt-20 pb-10 border-t-4 border-[#005BAC]">
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-5 gap-16 mb-16">
+        <div class="lg:col-span-2">
+           <div class="flex items-center gap-2 mb-6">
+              <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain bg-white text-[#005BAC] rounded-sm flex items-center justify-center font-semibold text-lg">K</div>
+              <span class="text-xl font-semibold">K-Accounting</span>
+           </div>
+           <p class="text-slate-400 text-sm leading-7 mb-6 pr-10">
+             본 법인은 공인회계사법 제24조에 의거하여 설립되었습니다.<br>
+             고객의 성공과 사회의 투명성을 위해 끊임없이 노력하겠습니다.
+           </p>
+           <div class="flex gap-6">
+             <a href="#" class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain rounded bg-slate-800 flex items-center justify-center hover:bg-[#005BAC] transition"><i class="fab fa-facebook-f text-sm"></i></a>
+             <a href="#" class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain rounded bg-slate-800 flex items-center justify-center hover:bg-[#005BAC] transition"><i class="fab fa-linkedin-in text-sm"></i></a>
+             <a href="#" class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain rounded bg-slate-800 flex items-center justify-center hover:bg-[#005BAC] transition"><i class="fab fa-twitter text-sm"></i></a>
+           </div>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-6 text-sm uppercase tracking-wide text-[#005BAC]">About</h4>
+          <ul class="space-y-3 text-sm text-slate-400">
+            <li><a href="#" class="hover:text-white transition">법인소개</a></li>
+            <li><a href="#" class="hover:text-white transition">연혁</a></li>
+            <li><a href="#" class="hover:text-white transition">오시는 길</a></li>
+            <li><a href="#" class="hover:text-white transition">채용정보</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-6 text-sm uppercase tracking-wide text-[#005BAC]">Service</h4>
+          <ul class="space-y-3 text-sm text-slate-400">
+            <li><a href="#" class="hover:text-white transition">회계감사</a></li>
+            <li><a href="#" class="hover:text-white transition">세무자문</a></li>
+            <li><a href="#" class="hover:text-white transition">경영컨설팅</a></li>
+            <li><a href="#" class="hover:text-white transition">국제조세</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-6 text-sm uppercase tracking-wide text-[#005BAC]">Contact</h4>
+          <ul class="space-y-3 text-sm text-slate-400">
+            <li class="flex items-start gap-3">
+              <i class="fas fa-map-marker-alt mt-1 text-[#005BAC]"></i>
+              <span>서울시 강남구 테헤란로 123<br>캐피탈타워 15층</span>
+            </li>
+            <li class="flex items-center gap-3">
+               <i class="fas fa-phone-alt text-[#005BAC]"></i>
+               <span>02-1234-5678</span>
+            </li>
+            <li class="flex items-center gap-3">
+               <i class="fas fa-envelope text-[#005BAC]"></i>
+               <span>audit@k-accounting.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-slate-800 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500">
+        <div>
+           <a href="#" class="hover:text-white mr-4">이용약관</a>
+           <a href="#" class="hover:text-white mr-4 font-semibold">개인정보처리방침</a>
+           <a href="#" class="hover:text-white">이메일무단수집거부</a>
+        </div>
+        <div>
+          &copy; 2024 K-Accounting Corp. All Rights Reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>

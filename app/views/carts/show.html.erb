@@ -1,0 +1,95 @@
+<% content_for :title, "장바구니 - 디어스" %>
+
+<div class="container" style="padding-top: 40px; padding-bottom: 80px; min-height: 60vh;">
+  <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 30px;">장바구니</h1>
+
+  <% if @items.any? %>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <!-- Item List -->
+      <div style="background: white; border-radius: 16px; border: 1px solid #eee; overflow: hidden;">
+        <% @items.each do |item| %>
+          <div style="display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #f3f4f6;">
+            <!-- Placeholder Image -->
+            <div style="width: 80px; height: 80px; background: #f3f4f6; border-radius: 8px; margin-right: 20px;"></div>
+            
+            <div style="flex: 1;">
+              <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;"><%= item.item.try(:title) || item.item.try(:name) || "상품명 없음" %></h3>
+              <p style="color: #666; font-size: 14px;"><%= number_to_currency(item.item.try(:price) || 0, unit: "원", format: "%n%u", precision: 0) %></p>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 15px;">
+              <span style="font-weight: 600;">수량: <%= item.quantity %></span>
+              <%= button_to "삭제", remove_item_cart_path(item), method: :delete, class: "btn btn-sm btn-outline", style: "border-color: #ff4d4f; color: #ff4d4f;" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Summary -->
+      <div style="background: #f9f9f9; padding: 30px; border-radius: 16px; text-align: right;">
+        <p style="font-size: 16px; color: #666; margin-bottom: 10px;">총 결제 예정 금액</p>
+        <p style="font-size: 32px; font-weight: 900; color: var(--color-primary); margin-bottom: 30px;">
+          <%= number_to_currency(@cart.total_price, unit: "원", format: "%n%u", precision: 0) %>
+        </p>
+        
+        <button onclick="requestPayment()" class="btn btn-primary btn-lg" style="width: 100%; max-width: 300px; font-size: 18px; font-weight: 800;">
+          포트원 결제하기
+        </button>
+      </div>
+    </div>
+  <% else %>
+    <div style="text-align: center; padding: 100px 0; color: #888;">
+      <p style="font-size: 18px; margin-bottom: 20px;">장바구니가 비어있습니다.</p>
+      <%= link_to "쇼핑 계속하기", products_path, class: "btn btn-outline" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  async function requestPayment() {
+    // 1. Store ID 설정 (환경변수 또는 하드코딩)
+    // 실제 운영 시에는 서버에서 storeId를 내려주거나 환경변수로 관리해야 합니다.
+    const storeId = "<%= ENV['PORTONE_STORE_ID'] || 'store-id-placeholder' %>"; 
+    const channelKey = "<%= ENV['PORTONE_CHANNEL_KEY'] || 'channel-key-placeholder' %>";
+
+    if (!storeId || storeId === 'store-id-placeholder') {
+      alert("포트원 Store ID가 설정되지 않았습니다. 관리자에게 문의하세요.");
+      return;
+    }
+
+    try {
+      // 2. 주문 번호 생성 (임시) - 실제로는 서버에서 생성해야 고유성 보장
+      const paymentId = `payment-${crypto.randomUUID()}`;
+      
+      // 3. 포트원 결제 요청
+      const response = await PortOne.requestPayment({
+        storeId: storeId,
+        channelKey: channelKey,
+        paymentId: paymentId,
+        orderName: "<%= @items.first&.product&.name %> 외 <%= @items.count - 1 %>건",
+        totalAmount: <%= @cart.total_price %>,
+        currency: "CURRENCY_KRW",
+        payMethod: "CARD", 
+        customer: {
+          fullName: "<%= current_user&.name || '방문자' %>",
+          email: "<%= current_user&.email %>",
+          phoneNumber: "010-0000-0000", // 유저 정보에 전화번호가 있다면 교체
+        },
+        redirectUrl: window.location.origin + "/orders/complete", // 모바일 환경 대비
+      });
+
+      // 4. 결제 응답 처리
+      if (response.code != null) {
+        // 결제 실패 (code가 존재하면 에러)
+        alert(`결제 실패: ${response.message}`);
+      } else {
+        // 결제 성공 (Payment ID만 반환됨) -> 서버 검증 로직 호출 필요
+        // window.location.href = `/orders/complete?paymentId=${response.paymentId}`;
+        alert("결제가 완료되었습니다! (서버 검증은 별도 구현 필요)");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("결제 요청 중 오류가 발생했습니다.");
+    }
+  }
+</script>

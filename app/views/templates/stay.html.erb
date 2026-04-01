@@ -1,0 +1,124 @@
+<%# Stay Template - 리버사이드 (RIVERSIDE) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-serif { font-family: 'Nanum Myeongjo', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 44px !important; }
+  }
+</style>
+
+<div class="bg-[#F2F1EE] text-[#1A1A1A] font-sans selection:bg-[#4A4E4D] selection:text-white min-h-screen overflow-x-hidden">
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-12 md:px-12 bg-[#F2F1EE]/60 backdrop-blur-2xl border-b border-[#1A1A1A]/5">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-10">
+         <span class="font-serif text-2xl tracking-[0.6em] font-semibold uppercase">RIVERSIDE</span>
+         <div class="hidden lg:block w-[1px] h-6 bg-[#1A1A1A]/10"></div>
+         <span class="hidden lg:block text-[9px] font-semibold tracking-[0.4em] uppercase text-[#1A1A1A]/40 uppercase">Quiet Luxury Stay</span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[10px] font-semibold uppercase tracking-[0.4em] text-[#1A1A1A]/40">
+        <a href="#about" class="hover:text-[#1A1A1A] transition">About</a>
+        <a href="#suites" class="hover:text-[#1A1A1A] transition">Suites</a>
+        <a href="#dining" class="hover:text-[#1A1A1A] transition">Dining</a>
+      </div>
+      
+      <div class="flex-nowrap shrink-0 flex gap-12 items-center">
+         <button onclick="toggleStayModal()" class="hidden md:block text-[10px] font-semibold uppercase tracking-[0.4em] text-[#1A1A1A]/40 hover:text-[#1A1A1A]" data-mobile-menu-copy="true">My Reservation</button>
+         <button class="mobile-menu-trigger md:hidden ml-2 sm:ml-4 text-2xl focus:outline-none" style="color: inherit;">
+           <i class="fas fa-bars"></i>
+         </button>
+
+         <button class="hidden md:block bg-[#1A1A1A] text-white px-10 py-3.5 rounded-none font-semibold text-[10px] tracking-[0.4em] uppercase hover:bg-[#4A4E4D] transition shadow-2xl" data-mobile-menu-copy="true">
+           Reserve
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-tr from-white to-slate-50 z-0 opacity-40 pointer-events-none"></div>
+    <div class="absolute inset-0">
+       <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#F2F1EE]"></div>
+       <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=2400" alt="Riverside" class="w-full h-full object-cover grayscale brightness-90">
+    </div>
+    
+    <div class="container mx-auto px-3 md:px-6 relative z-10 text-center space-y-12">
+      <div class="inline-flex flex-col items-center gap-10">
+         <div class="w-[1px] h-24 bg-white/40"></div>
+         <span class="text-[10px] font-semibold tracking-[0.8em] uppercase text-white/60">Nature Intertwined with Luxury</span>
+      </div>
+      
+      <h1 class="text-3xl md:text-5xl md:text-[8rem] font-serif font-semibold leading-none tracking-tight text-white mobile-title">
+         물결이 머무는,<br><span class="italic text-white/80">완벽한 고요.</span>
+      </h1>
+      
+      <p class="text-white/70 text-sm md:text-xl leading-[2] max-w-2xl mx-auto font-light mobile-desc">
+         복잡한 도심을 뒤로하고 자연의 리듬을 회복하는 시간. 리버사이드는 당신에게 가장 깊은 휴식과 잊지 못할 고요의 순간을 선사합니다.
+      </p>
+      
+      <div class="pt-10">
+         <button class="group inline-flex items-center gap-12 text-white text-[11px] font-semibold uppercase tracking-[0.6em] hover:text-[#1A1A1A] transition">
+            Explore Riverside <span class="w-12 h-[1px] bg-white group-hover:bg-[#1A1A1A] transition"></span>
+         </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="stay-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#1A1A1A]/80 backdrop-blur-2xl">
+    <div class="bg-[#F2F1EE] w-full max-w-sm p-6 md:p-16 shadow-2xl relative border border-[#1A1A1A]/5">
+      <button onclick="toggleStayModal()" class="absolute top-12 right-12 text-[#1A1A1A]/20 hover:text-[#1A1A1A] transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-12">
+        <h2 class="text-xl font-serif tracking-[0.6em] text-[#1A1A1A] mb-3 font-semibold uppercase">RESERVE_PORTAL</h2>
+        <p class="text-[9px] text-[#1A1A1A]/40 font-semibold tracking-[0.3em] uppercase">Private Guest Archive</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="space-y-3">
+           <p class="text-[9px] font-semibold text-[#1A1A1A]/20 uppercase tracking-[0.2em] ml-1">Confirmation Number</p>
+           <input type="text" placeholder="XXXX - XXXX - XXXX" class="w-full bg-white border border-[#1A1A1A]/5 py-6 px-8 outline-none focus:ring-1 focus:ring-[#1A1A1A] transition text-[12px] font-semibold tracking-wide uppercase">
+        </div>
+        <button class="w-full bg-[#1A1A1A] text-white py-6 text-[10px] tracking-[0.5em] font-semibold uppercase hover:bg-[#4A4E4D] transition shadow-xl">
+           Access Itinerary
+        </button>
+        <div class="flex justify-center gap-14 pt-4">
+           <a href="#" class="text-[9px] text-[#1A1A1A]/40 tracking-[0.3em] font-semibold uppercase hover:text-[#1A1A1A] transition">Lost Key</a>
+           <a href="#" class="text-[9px] text-[#1A1A1A]/40 tracking-[0.3em] font-semibold uppercase hover:text-[#1A1A1A] transition">E-Concierge</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-24 md:py-40 bg-[#1A1A1A] text-center px-6">
+     <div class="inline-flex items-center gap-14 mb-12">
+        <span class="font-serif text-2xl text-white tracking-[0.8em] font-semibold uppercase">RIVERSIDE</span>
+        <span class="w-[1px] h-10 bg-white/10"></span>
+        <span class="text-[10px] font-semibold text-white/30 tracking-[0.6em] uppercase">Quiet Luxury Estate</span>
+     </div>
+     <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-16 text-[#F2F1EE]/40 text-[9px] font-semibold uppercase tracking-[0.4em] mb-12 border-y border-white/5 py-20">
+        <div>360 Riverside Dr, Seoul</div>
+        <div>+82 2 1234 5678</div>
+        <div>Inquiry@Riverside.com</div>
+     </div>
+     <p class="text-[10px] text-white/10 tracking-[1em] uppercase px-6">© 2024 RIVERSIDE STAY. ALL ARTWORK BY DLAB.</p>
+  </footer>
+
+  <script>
+    function toggleStayModal() {
+      const modal = document.getElementById('stay-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

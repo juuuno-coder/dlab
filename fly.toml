@@ -1,0 +1,38 @@
+# fly.toml app configuration file generated for dlab-site on 2026-02-23T10:41:14+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'dlab-site'
+primary_region = 'nrt'
+console_command = '/rails/bin/rails console'
+
+[build]
+
+[deploy]
+  release_command = './bin/rails db:migrate'
+
+[env]
+  DATABASE_URL = 'sqlite3:///rails/storage/production.sqlite3'
+  PORT = '8080'
+
+[processes]
+  app = './bin/rails server -p 8080 -b 0.0.0.0'
+
+[[mounts]]
+  source = 'dlab_storage'
+  destination = '/rails/storage'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'off'
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 512

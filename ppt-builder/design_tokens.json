@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "project": "선원의 날 제안서",
+    "source": "3회 선원의 날 정성제안서_260311_제출용.pptx",
+    "extracted": "2026-03-11",
+    "canvas": "A4 Landscape (11.69\" × 8.27\")"
+  },
+
+  "canvas": {
+    "width_inch": 11.69,
+    "height_inch": 8.27,
+    "width_emu": 10693400,
+    "height_emu": 7562850,
+    "html_width": 1280,
+    "html_height": 907,
+    "pptxgenjs_layout": {
+      "name": "A4_LANDSCAPE",
+      "width": 11.69,
+      "height": 8.27
+    }
+  },
+
+  "colors": {
+    "primary": {
+      "navy": "002B5B",
+      "navy_hex": "#002B5B",
+      "role": "주색 — 헤더, 푸터, 섹션구분, 카드보더"
+    },
+    "accent": {
+      "red": "C8102E",
+      "gold": "FFD700",
+      "red_role": "강조1 — 전략카드, 2번째 컬럼",
+      "gold_role": "강조2 — 핵심키워드, 3번째 컬럼"
+    },
+    "neutral": {
+      "dark": "414042",
+      "black": "1A1A1A",
+      "body": "555555",
+      "sub_body": "333333",
+      "caption": "888888",
+      "check": "444444",
+      "muted": "6B7280",
+      "border": "E5E7EB",
+      "footer_border": "EEEEEE"
+    },
+    "background": {
+      "white": "FFFFFF",
+      "light": "F8F9FA",
+      "num_bg": "F3F6F9"
+    },
+    "on_navy": {
+      "text": "E5E7EB",
+      "highlight": "FFD700",
+      "white": "FFFFFF"
+    },
+    "three_column_map": [
+      { "column": 1, "icon_bg": "002B5B", "number_color": "002B5B" },
+      { "column": 2, "icon_bg": "C8102E", "number_color": "C8102E" },
+      { "column": 3, "icon_bg": "FFD700", "number_color": "FFD700" }
+    ]
+  },
+
+  "typography": {
+    "font_families": {
+      "sans": "Noto Sans KR",
+      "serif": "Noto Serif KR",
+      "label": "KoPub돋움체_Pro Light",
+      "fallback": "Arial"
+    },
+    "scale": {
+      "display":    { "size": 104, "weight": "bold", "font": "serif",  "use": "섹션구분 로마숫자" },
+      "h0_number":  { "size": 55,  "weight": "bold", "font": "sans",   "use": "3단카드 넘버 (01/02/03)" },
+      "h1_section": { "size": 48,  "weight": "bold", "font": "sans",   "use": "섹션구분 제목" },
+      "h1_sub":     { "size": 40,  "weight": "bold", "font": "sans",   "use": "섹션구분 긴 제목" },
+      "h2_slogan":  { "size": 19,  "weight": "bold", "font": "sans",   "use": "핵심 슬로건" },
+      "h3_card":    { "size": 18,  "weight": "bold", "font": "serif",  "use": "3단카드 제목" },
+      "body":       { "size": 14,  "weight": "regular", "font": "sans", "use": "본문, 푸터 키워드" },
+      "body_sm":    { "size": 12,  "weight": "regular", "font": "sans", "use": "설명 텍스트" },
+      "caption":    { "size": 10,  "weight": "regular", "font": "sans", "use": "카드설명, 본문보조" },
+      "label":      { "size": 9,   "weight": "regular", "font": "sans", "use": "체크리스트, 라벨" },
+      "page_num":   { "size": 12,  "weight": "regular", "font": "default", "use": "페이지번호" }
+    }
+  },
+
+  "components": {
+    "page_number": {
+      "x": 11.09, "y": 7.73, "w": 0.24, "h": 0.16,
+      "color": "414042", "fontSize": 12, "align": "center"
+    },
+
+    "section_divider": {
+      "navy_bg":      { "x": 0.00, "y": 0.00, "w": 4.17, "h": 8.27 },
+      "right_image":  { "x": 3.59, "y": 0.00, "w": 6.69, "h": 8.27 },
+      "project_label":{ "x": 0.58, "y": 1.08, "w": 5.39, "h": 0.36, "fontSize": 14, "font": "label" },
+      "roman_numeral":{ "x": 0.77, "y": 2.22, "w": 0.84, "h": 1.28, "fontSize": 104, "font": "serif", "bold": true, "color": "FFFFFF" },
+      "title":        { "x": 0.83, "y": 3.74, "w": 3.87, "h": 0.73, "fontSize": 48, "font": "sans", "bold": true, "color": "FFFFFF" },
+      "description":  { "x": 0.83, "y": 4.88, "w": 3.67, "h": 1.15, "fontSize": 14, "font": "sans", "color": "E5E7EB", "highlight_color": "FFD700" },
+      "sub_items":    { "x": 7.48, "y": 3.88, "w": 2.66, "h": 1.18, "fontSize": 16, "font": "fallback" }
+    },
+
+    "content_header": {
+      "part_title":   { "x": 0.78, "y": 0.49, "w": 5.65, "h": 0.49 },
+      "sub_title":    { "x": 0.78, "y": 1.26, "w": 2.99, "h": 0.25, "fontSize": 14, "font": "fallback" },
+      "divider_line": { "x": 0.59, "y": 1.60, "w": 10.51, "h": 0, "color": "414042" },
+      "accent_line":  { "x": 2.40, "y": 1.60, "w": 0, "h": 0.32, "color": "FFFFFF" },
+      "format": "Part  {roman} .  {section_name}",
+      "sub_format": "{number}.  {sub_title}"
+    },
+
+    "footer_bar": {
+      "clip_area":    { "x": 0.00, "y": 5.73, "w": 11.69, "h": 2.53 },
+      "navy_fill":    { "x": 0.01, "y": 5.92, "w": 11.69, "h": 2.34, "fill": "002B5B" },
+      "keyword_text": { "x": 0.00, "y": 7.09, "w": 11.69, "h": 0.64, "fontSize": 14, "bold": true, "color": "FFFFFF" }
+    },
+
+    "three_column_cards": {
+      "slogan":       { "x": 0.46, "y": 2.03, "w": 10.78, "h": 0.41, "fontSize": 19, "bold": true, "color": "002B5B" },
+      "columns": [
+        { "x": 0.89,  "w": 3.43 },
+        { "x": 5.00,  "w": 3.43 },
+        { "x": 9.12,  "w": 3.43 }
+      ],
+      "column_gap": 0.68,
+      "icon_circle":  { "dy": 2.35, "size": 0.73, "shape": "roundRect" },
+      "number":       { "dy": 2.20, "w": 1.39, "h": 1.04, "fontSize": 55, "bold": true },
+      "card_title":   { "dy": 3.34, "h": 0.75, "fontSize": 18, "bold": true, "font": "serif" },
+      "description":  { "dy": 4.22, "h": 0.74, "fontSize": 10, "color": "555555" },
+      "checklist_box":{ "dy": 5.16, "w": 3.33, "h": 1.09, "fill": "F8F9FA", "shape": "roundRect" },
+      "checklist_items": {
+        "dy_start": 5.32,
+        "dy_gap": 0.28,
+        "dx_offset": 0.38,
+        "fontSize": 9,
+        "color": "444444"
+      }
+    },
+
+    "cover": {
+      "project_name": { "x": 2.09, "y": 2.39, "w": 7.95, "h": 0.48 },
+      "title_text":   { "x": 2.29, "y": 3.15, "w": 7.32, "h": 0.64 },
+      "date":         { "x": 4.75, "y": 4.43, "w": 2.19, "h": 0.40 }
+    }
+  },
+
+  "patterns": {
+    "header_format": "Part  {roman} .  {section_name}",
+    "sub_title_format": "{number}.  {sub_title}",
+    "footer_keyword_format": "{kw1}({en1}) · {kw2}({en2}) · {kw3}({en3}) 전략을 통해 {goal}",
+    "highlight_rule": "네이비 배경 위 핵심 키워드는 #FFD700, 일반 텍스트는 #E5E7EB",
+    "shadow": {
+      "type": "outer",
+      "color": "000000",
+      "blur": 6,
+      "offset": 2,
+      "angle": 135,
+      "opacity": 0.08
+    }
+  }
+}

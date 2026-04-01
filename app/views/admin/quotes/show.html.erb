@@ -1,0 +1,184 @@
+<div style="max-width: 900px;">
+  <div style="margin-bottom: var(--space-8);">
+    <%= link_to "← 목록으로", admin_quotes_path, style: "color: var(--color-gray-600); text-decoration: none;" %>
+    <h1 style="font-size: var(--text-4xl); margin-top: var(--space-4); margin-bottom: var(--space-2);">문의 상세</h1>
+  </div>
+
+  <div class="card" style="padding: var(--space-8);">
+    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--space-6); padding-bottom: var(--space-6); border-bottom: 2px solid var(--color-gray-200);">
+      <div>
+        <h2 style="font-size: var(--text-3xl); margin-bottom: var(--space-2);"><%= @quote.contact_name %></h2>
+        <% if @quote.company_name.present? %>
+          <p style="color: var(--color-gray-600); font-size: var(--text-lg);"><%= @quote.company_name %></p>
+        <% end %>
+        <% if @quote.preferred_domain.present? %>
+          <p style="color: var(--color-primary); font-size: var(--text-sm); font-weight: 600; margin-top: var(--space-1);">
+            희망 도메인: <%= @quote.preferred_domain %>
+          </p>
+        <% end %>
+      </div>
+      <span style="display: inline-block; padding: var(--space-2) var(--space-4); background: <%= @quote.status == 'pending' ? 'var(--color-warning)' : 'var(--color-success)' %>; color: white; border-radius: var(--radius-lg); font-size: var(--text-sm); font-weight: 600;">
+        <%= @quote.status == 'pending' ? '대기중' : '처리완료' %>
+      </span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); margin-bottom: var(--space-8);">
+      <div>
+        <h3 style="font-size: var(--text-sm); font-weight: 700; color: var(--color-gray-500); text-transform: uppercase; margin-bottom: var(--space-3); letter-spacing: 0.05em;">연락처 정보</h3>
+        <div style="space-y: var(--space-3);">
+          <div style="margin-bottom: var(--space-3);">
+            <p style="font-size: var(--text-xs); color: var(--color-gray-500); margin-bottom: var(--space-1);">이메일</p>
+            <p style="font-size: var(--text-base); color: var(--color-gray-900);"><%= @quote.email %></p>
+          </div>
+          <div>
+            <p style="font-size: var(--text-xs); color: var(--color-gray-500); margin-bottom: var(--space-1);">전화번호</p>
+            <p style="font-size: var(--text-base); color: var(--color-gray-900);"><%= @quote.phone %></p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size: var(--text-sm); font-weight: 700; color: var(--color-gray-500); text-transform: uppercase; margin-bottom: var(--space-3); letter-spacing: 0.05em;">프로젝트 정보</h3>
+        <div style="space-y: var(--space-3);">
+          <% if @quote.project_type.present? %>
+            <div style="margin-bottom: var(--space-3);">
+              <p style="font-size: var(--text-xs); color: var(--color-gray-500); margin-bottom: var(--space-1);">프로젝트 유형</p>
+              <span style="display: inline-block; padding: var(--space-1) var(--space-3); background: var(--color-accent); color: white; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600;">
+                <%= @quote.project_type %>
+              </span>
+            </div>
+          <% end %>
+          <% if @quote.budget.present? %>
+            <div>
+              <p style="font-size: var(--text-xs); color: var(--color-gray-500); margin-bottom: var(--space-1);">예산 범위</p>
+              <p style="font-size: var(--text-base); color: var(--color-gray-900);"><%= @quote.budget %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <% if @quote.message.present? %>
+      <div style="margin-bottom: var(--space-8);">
+        <h3 style="font-size: var(--text-sm); font-weight: 700; color: var(--color-gray-500); text-transform: uppercase; margin-bottom: var(--space-3); letter-spacing: 0.05em;">문의 내용</h3>
+        <div style="background: var(--color-gray-50); padding: var(--space-6); border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary);">
+          <p style="font-size: var(--text-base); color: var(--color-gray-900); line-height: 1.8; white-space: pre-wrap;"><%= @quote.message %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <div style="padding-top: var(--space-6); border-top: 1px solid var(--color-gray-200);">
+      <p style="font-size: var(--text-sm); color: var(--color-gray-500);">
+        접수일시: <%= @quote.created_at.strftime("%Y년 %m월 %d일 %H:%M") %>
+      </p>
+    </div>
+
+    <!-- faneasy Style Workflow Timeline -->
+    <div style="margin-top: var(--space-8); padding-top: var(--space-8); border-top: 2px solid var(--color-gray-200);">
+      <h3 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-6);">프로젝트 진행 단계</h3>
+      
+      <div style="display: flex; justify-content: space-between; position: relative; margin-bottom: var(--space-10);">
+        <!-- Timeline Background Line -->
+        <div style="position: absolute; top: 20px; left: 0; right: 0; height: 2px; background: var(--color-gray-200); z-index: 1;"></div>
+        
+        <% statuses = [
+          ['received', '접수'], ['first_call', '1차상담'], ['kakao_progress', '진행안내'], 
+          ['signup_order', '회원가입'], ['payment_received', '결제완료'], ['in_progress', '작업중'], 
+          ['review', '검수'], ['completed', '완료'], ['subscription_active', '구독중']
+        ] %>
+
+        <% current_index = statuses.index { |s| s[0] == @quote.workflow_status } || 0 %>
+
+        <% statuses.each_with_index do |(status_key, label), index| %>
+          <div style="display: flex; flex-direction: column; align-items: center; z-index: 2; flex: 1;">
+            <div style="
+              width: 40px; height: 40px; border-radius: 50%; 
+              display: flex; align-items: center; justify-content: center; 
+              font-size: 14px; font-weight: 700;
+              background: <%= index <= current_index ? 'var(--color-primary)' : 'white' %>;
+              color: <%= index <= current_index ? 'white' : 'var(--color-gray-400)' %>;
+              border: 2px solid <%= index <= current_index ? 'var(--color-primary)' : 'var(--color-gray-200)' %>;
+              transition: all 0.3s ease;
+            ">
+              <%= index + 1 %>
+            </div>
+            <span style="
+              margin-top: 8px; font-size: 12px; font-weight: 600;
+              color: <%= index <= current_index ? 'var(--color-gray-900)' : 'var(--color-gray-400)' %>;
+            ">
+              <%= label %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+
+      <%= form_with model: [:admin, @quote], local: true do |f| %>
+        <div style="display: flex; align-items: center; gap: 12px; background: var(--color-gray-50); padding: 16px; border-radius: 12px;">
+          <label style="font-size: 14px; font-weight: 600; color: var(--color-gray-700);">단계 변경:</label>
+          <%= f.select :workflow_status, Quote::WORKFLOW_STATUSES.map { |s| [s.humanize, s] }, { selected: @quote.workflow_status }, 
+              class: "block rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm p-2 bg-white border", 
+              style: "flex: 1;" %>
+          <%= f.submit "단계 업데이트", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div style="background: var(--color-gray-50); padding: var(--space-6); border-radius: var(--radius-lg); margin-top: var(--space-8); border: 1px solid var(--color-gray-200);">
+      <h3 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-4);">관리자 액션</h3>
+      
+      <div style="display: flex; gap: var(--space-8); align-items: end;">
+        <%= form_with model: [:admin, @quote], local: true, style: "flex: 1;" do |f| %>
+          <div style="margin-bottom: var(--space-3);">
+            <%= f.label :status, "처리 상태 변경", style: "display: block; font-size: var(--text-sm); font-weight: 600; margin-bottom: var(--space-2); color: var(--color-gray-700);" %>
+            <div style="display: flex; gap: var(--space-2);">
+              <%= f.select :status, [['대기중', 'pending'], ['처리완료', 'completed']], {}, { style: "padding: var(--space-2) var(--space-4); border-radius: var(--radius-md); border: 1px solid var(--color-gray-300); background: white; width: 200px;" } %>
+              <%= f.submit "상태 업데이트", class: "btn btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+
+        <%= button_to admin_quote_path(@quote), method: :delete, form: { data: { turbo_confirm: "정말 삭제하시겠습니까?" } }, class: "btn btn-danger", style: "background-color: #ef4444; color: white; border: none; padding: var(--space-3) var(--space-6); border-radius: var(--radius-md); font-weight: 600; cursor: pointer;" do %>
+           삭제하기
+        <% end %>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: var(--space-4); margin-top: var(--space-8);">
+      <button onclick="window.print()" class="btn btn-outline btn-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+          <polyline points="6 9 6 2 18 2 18 9"/>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        화면 출력
+      </button>
+
+      <%= link_to admin_quote_path(@quote, format: :pdf), class: "btn btn-primary btn-lg", target: "_blank" do %>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        견적서 PDF 다운로드
+      <% end %>
+
+      <%= link_to "목록으로", admin_quotes_path, class: "btn btn-outline btn-lg", style: "margin-left: auto;" %>
+    </div>
+
+    <!-- Print Styles -->
+    <style>
+      @media print {
+        .navbar, .footer, button, .btn-outline {
+          display: none !important;
+        }
+        body {
+          background: white !important;
+        }
+        .card {
+          box-shadow: none !important;
+          border: 1px solid #ddd !important;
+        }
+      }
+    </style>
+  </div>
+</div>

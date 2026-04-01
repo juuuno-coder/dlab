@@ -1,0 +1,29 @@
+{
+  "name": "mcp-design-assets",
+  "version": "1.0.0",
+  "description": "AI 이미지 생성 + 스톡이미지 + ComfyUI 통합 MCP 서버",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-design-assets": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "start:sse": "node dist/index.js --sse --port 3100",
+    "dev": "tsx src/index.ts",
+    "dev:sse": "tsx src/index.ts --sse --port 3100"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "dotenv": "^16.4.0",
+    "ws": "^8.16.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/ws": "^8.5.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}

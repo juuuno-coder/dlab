@@ -1,0 +1,352 @@
+<div style="margin-bottom: var(--space-8);">
+  <h1 style="font-size: var(--text-4xl); margin-bottom: var(--space-2);">관리자 대시보드</h1>
+  <p class="text-gray">디어스 웹사이트 관리 현황을 한눈에 확인하세요</p>
+</div>
+
+<!-- Statistics Cards -->
+<div class="grid grid-3" style="gap: var(--space-6); margin-bottom: var(--space-12);">
+  <!-- Portfolios Card -->
+  <div class="card" style="background: linear-gradient(135deg, #00a859 0%, #00c569 100%); color: white;">
+    <div style="display: flex; justify-content: space-between; align-items: start;">
+      <div>
+        <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.9); margin-bottom: var(--space-2);">전체 포트폴리오</p>
+        <p style="font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--space-2);"><%= @portfolios_count %></p>
+        <%= link_to "관리하기 →", admin_portfolios_path, style: "color: white; text-decoration: underline; font-size: var(--text-sm);" %>
+      </div>
+      <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Design Templates Card -->
+  <div class="card" style="background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%); color: white;">
+    <div style="display: flex; justify-content: space-between; align-items: start;">
+      <div>
+        <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.9); margin-bottom: var(--space-2);">디자인 템플릿</p>
+        <div style="display: flex; align-items: baseline; gap: 8px;">
+          <p style="font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--space-2);"><%= @templates_count %></p>
+          <span style="font-size: var(--text-sm); opacity: 0.9;">(Main: <%= @featured_templates_count %>)</span>
+        </div>
+        <%= link_to "관리하기 →", admin_design_templates_path, style: "color: white; text-decoration: underline; font-size: var(--text-sm);" %>
+      </div>
+      <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Users Card -->
+  <div class="card" style="background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%); color: white;">
+    <div style="display: flex; justify-content: space-between; align-items: start;">
+      <div>
+        <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.9); margin-bottom: var(--space-2);">전체 회원</p>
+        <p style="font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--space-2);"><%= @users_count %></p>
+        <%= link_to "관리하기 →", admin_users_path, style: "color: white; text-decoration: underline; font-size: var(--text-sm);" %>
+      </div>
+      <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Orders Card -->
+  <div class="card" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%); color: white;">
+    <div style="display: flex; justify-content: space-between; align-items: start;">
+      <div>
+        <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.9); margin-bottom: var(--space-2);">전체 주문</p>
+        <div style="display: flex; align-items: baseline; gap: 8px;">
+          <p style="font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--space-2);"><%= @orders_count %></p>
+          <span style="font-size: var(--text-sm); opacity: 0.9;">(Pending: <%= @pending_orders_count %>)</span>
+        </div>
+        <%= link_to "관리하기 →", admin_orders_path, style: "color: white; text-decoration: underline; font-size: var(--text-sm);" %>
+      </div>
+      <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Quotes Card -->
+  <div class="card" style="background: linear-gradient(135deg, #00d670 0%, #33e08e 100%); color: white;">
+    <div style="display: flex; justify-content: space-between; align-items: start;">
+      <div>
+        <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.9); margin-bottom: var(--space-2);">전체 문의</p>
+        <p style="font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--space-2);"><%= @quotes_count %></p>
+        <%= link_to "관리하기 →", admin_quotes_path, style: "color: white; text-decoration: underline; font-size: var(--text-sm);" %>
+      </div>
+      <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div style="margin-bottom: var(--space-12);">
+  <h2 style="font-size: var(--text-2xl); margin-bottom: var(--space-6);">빠른 작업</h2>
+  <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
+    <%= link_to new_admin_portfolio_path, class: "btn btn-primary btn-lg" do %>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+        <line x1="12" y1="5" x2="12" y2="19"/>
+        <line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+      새 포트폴리오 추가
+    <% end %>
+    <%= link_to admin_portfolios_path, class: "btn btn-outline btn-lg" do %>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+      </svg>
+      포트폴리오 관리
+    <% end %>
+    <%= link_to admin_quotes_path, class: "btn btn-outline btn-lg" do %>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      문의 내역
+    <% end %>
+  </div>
+</div>
+
+<!-- Recent Items Grid -->
+<div class="grid grid-3" style="gap: var(--space-8);">
+  
+  <!-- Recent Orders -->
+  <div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+      <h2 style="font-size: var(--text-2xl);">최근 주문</h2>
+      <%= link_to "전체보기 →", admin_orders_path, style: "color: var(--color-primary); font-weight: 600;" %>
+    </div>
+    
+    <% if @recent_orders.any? %>
+      <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+        <% @recent_orders.each do |order| %>
+          <div class="card" style="padding: var(--space-4);">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+              <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                  <h4 style="font-size: var(--text-lg); font-weight: 700;">#<%= order.id %></h4>
+                  <% 
+                    badge_class = case order.status
+                      when 'pending' then 'bg-yellow-100 text-yellow-800'
+                      when 'paid', 'completed' then 'bg-green-100 text-green-800'
+                      when 'cancelled', 'refunded' then 'bg-red-100 text-red-800'
+                      else 'bg-gray-100 text-gray-800'
+                    end
+                  %>
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= badge_class %>">
+                    <%= order.status.upcase %>
+                  </span>
+                </div>
+                <p style="font-size: var(--text-sm); font-weight: 500; margin-bottom: var(--space-1);">
+                  <%= number_to_currency(order.total_amount, unit: "₩", precision: 0) %>
+                </p>
+                <p style="font-size: var(--text-sm); color: var(--color-gray-500);">
+                  <%= order.created_at.strftime("%Y-%m-%d %H:%M") %>
+                  <% if order.user %>
+                    <br>
+                    <span style="font-size: var(--text-xs);"><%= order.user.name || order.user.email %></span>
+                  <% end %>
+                </p>
+              </div>
+              <%= link_to "상세", admin_order_path(order), class: "btn btn-sm btn-outline" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="card text-center" style="padding: var(--space-8);">
+        <p class="text-gray">최근 주문이 없습니다</p>
+      </div>
+    <% end %>
+  </div>
+  
+  <!-- Recent Portfolios -->
+  <div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+      <h2 style="font-size: var(--text-2xl);">최근 포트폴리오</h2>
+      <%= link_to "전체보기 →", admin_portfolios_path, style: "color: var(--color-primary); font-weight: 600;" %>
+    </div>
+    
+    <% if @recent_portfolios.any? %>
+      <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+        <% @recent_portfolios.each do |portfolio| %>
+          <div class="card" style="padding: var(--space-4);">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+              <div style="flex: 1;">
+                <h4 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-1);"><%= portfolio.title %></h4>
+                <% if portfolio.category.present? %>
+                  <span style="display: inline-block; padding: var(--space-1) var(--space-2); background: var(--color-accent); color: white; border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600; margin-bottom: var(--space-2);">
+                    <%= portfolio.category %>
+                  </span>
+                <% end %>
+                <p style="font-size: var(--text-sm); color: var(--color-gray-500);">
+                  <%= portfolio.created_at.strftime("%Y-%m-%d") %>
+                </p>
+              </div>
+              <%= link_to "수정", edit_admin_portfolio_path(portfolio), class: "btn btn-sm", style: "background: var(--color-gray-100); color: var(--color-gray-700);" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="card text-center" style="padding: var(--space-8);">
+        <p class="text-gray">등록된 포트폴리오가 없습니다</p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Recent Quotes -->
+  <div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+      <h2 style="font-size: var(--text-2xl);">최근 문의</h2>
+      <%= link_to "전체보기 →", admin_quotes_path, style: "color: var(--color-primary); font-weight: 600;" %>
+    </div>
+    
+    <% if @recent_quotes.any? %>
+      <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+        <% @recent_quotes.each do |quote| %>
+          <div class="card" style="padding: var(--space-4);">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+              <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                  <h4 style="font-size: var(--text-lg); font-weight: 700;"><%= quote.contact_name %></h4>
+                  <span style="display: inline-block; padding: var(--space-1) var(--space-2); background: <%= quote.status == 'pending' ? 'var(--color-warning)' : 'var(--color-success)' %>; color: white; border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600;">
+                    <%= quote.status == 'pending' ? '대기' : '완료' %>
+                  </span>
+                </div>
+                <% if quote.project_type.present? %>
+                  <p style="font-size: var(--text-sm); color: var(--color-gray-600); margin-bottom: var(--space-1);">
+                    <%= quote.project_type %>
+                  </p>
+                <% end %>
+                <p style="font-size: var(--text-sm); color: var(--color-gray-500);">
+                  <%= quote.created_at.strftime("%Y-%m-%d %H:%M") %>
+                </p>
+              </div>
+              <%= link_to "상세", admin_quote_path(quote), class: "btn btn-sm btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="card text-center" style="padding: var(--space-8);">
+        <p class="text-gray">접수된 문의가 없습니다</p>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+</div>
+
+<!-- Analytics Chart -->
+<div class="card" style="margin-bottom: var(--space-12);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+    <h2 style="font-size: var(--text-2xl);">월별 문의 추이</h2>
+    <span style="font-size: var(--text-sm); color: var(--color-gray-500);">최근 6개월</span>
+  </div>
+  <div style="height: 350px; width: 100%;">
+    <canvas id="quotesChart"></canvas>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('quotesChart').getContext('2d');
+    
+    const labels = <%= @monthly_stats.map { |s| s[:month] }.to_json.html_safe %>;
+    const data = <%= @monthly_stats.map { |s| s[:count] }.to_json.html_safe %>;
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '문의 건수',
+          data: data,
+          borderColor: '#00a859',
+          backgroundColor: (context) => {
+            const ctx = context.chart.ctx;
+            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, 'rgba(0, 168, 89, 0.2)');
+            gradient.addColorStop(1, 'rgba(0, 168, 89, 0.0)');
+            return gradient;
+          },
+          borderWidth: 3,
+          pointBackgroundColor: '#ffffff',
+          pointBorderColor: '#00a859',
+          pointBorderWidth: 2,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            padding: 12,
+            titleFont: { size: 14 },
+            bodyFont: { size: 14 },
+            displayColors: false,
+            callbacks: {
+              label: function(context) {
+                return context.parsed.y + '건의 문의';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              borderDash: [5, 5],
+              color: 'rgba(0, 0, 0, 0.05)'
+            },
+            ticks: {
+              stepSize: 1,
+              font: { family: "'Inter', sans-serif" }
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: { family: "'Inter', sans-serif" }
+            }
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+      }
+    });
+  });
+</script>

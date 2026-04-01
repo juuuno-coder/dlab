@@ -1,0 +1,141 @@
+<%# Law Template - 법무법인 정의 (JUSTICE LAW) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-serif { font-family: 'Nanum Myeongjo', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+</style>
+
+<div class="bg-[#F9F9FB] text-[#1A1A1A] font-sans selection:bg-[#2C3E50] selection:text-white min-h-screen overflow-x-hidden">
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-6 bg-[#F9F9FB]/90 backdrop-blur-xl border-b border-[#2C3E50]/10">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-6">
+         <div class="w-8 h-8 max-h-8 max-w-[35%] shrink object-contain md:w-10 md:h-10 bg-[#2C3E50] flex items-center justify-center text-white font-serif font-semibold text-xl shadow-lg">正</div>
+         <div class="flex flex-col">
+            <span class="font-serif text-xl font-semibold tracking-tight text-[#2C3E50] leading-none">법무법인 정의</span>
+            <span class="text-[9px] font-semibold tracking-[0.2em] uppercase text-[#2C3E50]/60 mt-0.5">Justice Law Firm</span>
+         </div>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#2C3E50]/40">
+        <a href="#about" class="hover:text-[#2C3E50] transition">Practice Areas</a>
+        <a href="#attorneys" class="hover:text-[#2C3E50] transition">Attorneys</a>
+        <a href="#case" class="hover:text-[#2C3E50] transition">Case Study</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-12 items-center">
+         <button onclick="toggleLawModal()" class="hidden md:block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#2C3E50]/40 hover:text-[#2C3E50]" data-mobile-menu-copy="true">Client Access</button>
+         <button class="hidden md:inline-flex bg-[#2C3E50] text-white px-4 py-2 text-xs md:text-base md:px-8 md:py-3 whitespace-nowrap rounded-sm font-semibold text-[11px] tracking-wide uppercase hover:bg-slate-800 transition shadow-xl" data-mobile-menu-copy="true">
+           Consultation
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-20">
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-12 md:p-20 items-center">
+      <div class="space-y-12 text-center lg:text-left order-2 lg:order-1">
+        <div class="inline-flex items-center gap-6">
+           <span class="w-12 h-[2px] bg-[#2C3E50]"></span>
+           <span class="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#2C3E50]">Integrity & Trust</span>
+        </div>
+        
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-serif font-semibold leading-[1.2] tracking-tight text-[#2C3E50] mobile-title">
+           진실을 위한<br>
+           <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-[#2C3E50] to-slate-500">흔들리지 않는 기준.</span>
+        </h1>
+        
+        <p class="text-[#2C3E50]/60 text-sm md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 mobile-desc border-l-4 border-[#2C3E50]/10 pl-6">
+           법무법인 정의는 의뢰인의 권리를 지키기 위해 존재합니다. 사건 초기 대응부터 최종 판결까지, 타협하지 않는 전문성으로 함께하겠습니다.
+        </p>
+        
+        <div class="pt-6 flex flex-col sm:flex-row gap-10 justify-center lg:justify-start">
+           <button class="px-12 py-5 bg-[#2C3E50] text-white font-semibold text-[11px] tracking-wide uppercase hover:bg-slate-800 transition shadow-xl">
+              Legal Services
+           </button>
+           <button class="px-12 py-5 border border-[#2C3E50]/20 text-[#2C3E50] font-semibold text-[11px] tracking-wide uppercase hover:bg-white transition">
+              Meet Our Team
+           </button>
+        </div>
+
+        <div class="pt-10 grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#2C3E50]/10 max-w-md mx-auto lg:mx-0">
+           <div>
+              <p class="text-3xl font-serif font-semibold text-[#2C3E50]">98<span class="text-lg text-slate-400">%</span></p>
+              <p class="text-[10px] font-semibold text-[#2C3E50]/40 uppercase tracking-wide mt-1">Win Rate</p>
+           </div>
+           <div>
+              <p class="text-3xl font-serif font-semibold text-[#2C3E50]">15<span class="text-lg text-slate-400">Y+</span></p>
+              <p class="text-[10px] font-semibold text-[#2C3E50]/40 uppercase tracking-wide mt-1">Experience</p>
+           </div>
+        </div>
+      </div>
+      
+      <div class="order-1 lg:order-2 relative">
+          <div class="absolute -top-8 md:p-20 -right-20 w-80 h-80 bg-[#2C3E50]/5 rounded-full blur-[100px]"></div>
+          <div class="relative z-10">
+             <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200" alt="Law" class="w-full aspect-[4/5] object-cover filter grayscale contrast-125 shadow-2xl relative z-10 border-8 border-white">
+             <!-- Decorative Frame -->
+             <div class="absolute -bottom-6 -left-6 w-full h-full border border-[#2C3E50] z-0"></div>
+          </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="law-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#2C3E50]/80 backdrop-blur-xl">
+    <div class="bg-white w-full max-w-sm p-14 shadow-2xl relative border-t-8 border-[#2C3E50]">
+      <button onclick="toggleLawModal()" class="absolute top-8 right-8 text-[#2C3E50]/30 hover:text-[#2C3E50] transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-12">
+        <h2 class="text-xl font-serif font-semibold tracking-tight text-[#2C3E50] mb-2 uppercase">CLIENT_PORTAL</h2>
+        <p class="text-[9px] text-[#2C3E50]/60 font-semibold tracking-[0.2em] uppercase">Confidential Case Access</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="space-y-2">
+            <p class="text-[9px] font-semibold text-[#2C3E50]/40 uppercase tracking-wide ml-1">Case Number</p>
+            <input type="text" placeholder="SECURE CODE" class="w-full bg-[#F9F9FB] border border-[#2C3E50]/10 py-5 px-6 outline-none focus:border-[#2C3E50] transition text-[11px] font-semibold uppercase tracking-wide text-[#2C3E50]">
+        </div>
+        <button class="w-full bg-[#2C3E50] text-white py-5 text-[10px] tracking-[0.4em] font-semibold uppercase hover:bg-slate-800 transition shadow-xl">
+           Verify Identity
+        </button>
+        <div class="flex justify-center gap-14 pt-4">
+           <a href="#" class="text-[9px] text-[#2C3E50]/40 tracking-[0.2em] font-semibold uppercase hover:text-[#2C3E50] transition">Submit Case</a>
+           <a href="#" class="text-[9px] text-[#2C3E50]/40 tracking-[0.2em] font-semibold uppercase hover:text-[#2C3E50] transition">Support</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-20 md:py-32 bg-[#2C3E50] text-center px-6">
+     <div class="inline-flex items-center gap-10 mb-8">
+        <span class="font-serif font-semibold text-2xl text-white tracking-wide">JUSTICE</span>
+        <span class="w-12 h-[1px] bg-white/20"></span>
+        <span class="text-[10px] font-semibold text-white/40 tracking-[0.4em] uppercase">Legal Group</span>
+     </div>
+     <p class="text-[10px] text-white/20 tracking-[0.6em] uppercase px-6">© 2024 LAW FIRM JUSTICE. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleLawModal() {
+      const modal = document.getElementById('law-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

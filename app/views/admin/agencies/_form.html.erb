@@ -1,0 +1,68 @@
+<div style="max-width: 800px; margin: 0 auto;">
+  <div style="margin-bottom: var(--space-8);">
+    <%= link_to "← 목록으로", admin_agencies_path, style: "color: var(--color-gray-600); text-decoration: none;" %>
+    <h1 style="font-size: var(--text-4xl); margin-top: var(--space-4); margin-bottom: var(--space-2);">
+      <%= action_name == 'new' ? '새 에이전시 등록' : '에이전시 정보 수정' %>
+    </h1>
+  </div>
+
+  <div class="card" style="padding: var(--space-8);">
+    <%= form_with model: [:admin, @agency], local: true do |f| %>
+      <% if @agency.errors.any? %>
+        <div style="background: #fee2e2; color: #b91c1c; padding: var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-6);">
+          <h4><%= pluralize(@agency.errors.count, "error") %> prohibited this agency from being saved:</h4>
+          <ul>
+            <% @agency.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div style="margin-bottom: var(--space-6);">
+        <%= f.label :name, "에이전시 이름", style: "display: block; font-weight: 600; margin-bottom: var(--space-2);" %>
+        <%= f.text_field :name, class: "w-full p-2 border rounded", placeholder: "예: 깡대표 에이전시" %>
+      </div>
+
+      <div style="margin-bottom: var(--space-6);">
+        <%= f.label :subdomain, "서브도메인 (ID)", style: "display: block; font-weight: 600; margin-bottom: var(--space-2);" %>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <%= f.text_field :subdomain, class: "w-half p-2 border rounded", placeholder: "kkang" %>
+          <span style="color: var(--color-gray-500);">.designd.co.kr (또는 별도 도메인)</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: var(--space-6);">
+        <%= f.label :owner_id, "소유자 (Owner - 홈페이지 주인)", style: "display: block; font-weight: 600; margin-bottom: var(--space-2);" %>
+        <%= f.collection_select :owner_id, User.all.order(:email), :id, :email, { prompt: "소유자 선택" }, { class: "w-full p-2 border rounded" } %>
+        <p style="margin-top: 4px; font-size: 12px; color: var(--color-gray-500);">* 이 홈페이지의 소유주입니다. 에이전시와 관련된 모든 권한을 가집니다.</p>
+      </div>
+
+      <div style="margin-bottom: var(--space-6);">
+        <%= f.label :admin_ids, "관리자 (Admin - 운영진)", style: "display: block; font-weight: 600; margin-bottom: var(--space-2);" %>
+        <%= f.collection_select :admin_ids, User.all.order(:email), :id, :email, {}, { multiple: true, class: "w-full p-2 border rounded", style: "height: 120px;" } %>
+        <p style="margin-top: 4px; font-size: 12px; color: var(--color-gray-500);">* (다중 선택 가능) 이 홈페이지의 관리자 페이지에 접근할 수 있습니다.</p>
+      </div>
+
+      <div style="margin-bottom: var(--space-6);">
+        <%= f.label :commission_rate, "수수료율 (매출의 %)", style: "display: block; font-weight: 600; margin-bottom: var(--space-2);" %>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <%= f.number_field :commission_rate, step: 0.1, class: "w-32 p-2 border rounded" %>
+          <span>%</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: var(--space-6);">
+        <%= f.label :active, style: "display: flex; align-items: center; gap: 8px; font-weight: 600;" do %>
+          <%= f.check_box :active %>
+          <span>활성 상태 (체크 시 운영 중)</span>
+        <% end %>
+      </div>
+
+      <div style="margin-top: var(--space-8); padding-top: var(--space-8); border-top: 1px solid var(--color-gray-200); display: flex; justify-content: flex-end; gap: var(--space-4);">
+        <%= link_to "취소", admin_agencies_path, class: "btn btn-outline" %>
+        <%= f.submit "저장하기", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<%# Mobile Menu Overlay (Pure White Full Screen, Z-Index 9999) %>
+<%
+  primary_color = @theme ? @theme["primary_color"] : "#333333"
+  font_css = @theme ? @theme["font_css"] : "sans-serif"
+%>
+
+<div id="mobile-menu-overlay" class="fixed inset-0 w-screen h-screen z-[9999] bg-white hidden flex-col transition-opacity duration-300 opacity-0 pointer-events-none font-sans" style="font-family: <%= font_css %>;">
+  <!-- Close Button (Fixed Top-Right) -->
+  <button id="close-mobile-menu" class="absolute top-6 right-6 text-4xl focus:outline-none hover:opacity-70 transition p-2 z-[10000]" style="color: <%= primary_color %>;">
+    &times;
+  </button>
+
+  <!-- Links Container (Top-aligned with generous padding) -->
+  <div class="flex-1 flex flex-col items-center justify-start pt-32 space-y-6 px-6 overflow-y-auto" id="mobile-menu-links-container">
+    <!-- Links and CTAs will be populated here by JS -->
+  </div>
+</div>
+
+<script>
+  (function() {
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const closeBtn = document.getElementById('close-mobile-menu');
+    const linksContainer = document.getElementById('mobile-menu-links-container');
+    const primaryColor = "<%= primary_color %>";
+
+    function populateLinks() {
+      // Clear container first to avoid duplicates
+      linksContainer.innerHTML = '';
+
+      // 1. Scrape Nav Links (from hidden desktop nav)
+      const desktopNav = document.querySelector('nav .hidden.md\\:flex');
+      if (desktopNav) {
+        const links = desktopNav.querySelectorAll('a, span');
+        links.forEach(link => {
+          const href = link.getAttribute('href') || '#';
+          const text = link.textContent.trim();
+
+          if (text) {
+            const a = document.createElement('a');
+            a.href = href;
+            a.textContent = text;
+            // Refined Typography: text-xl, font-medium, tracking-wider (instead of 2xl/bold/widest)
+            a.className = "text-xl font-medium uppercase tracking-wider hover:opacity-50 transition mobile-menu-link block text-center mb-4";
+            a.style.color = primaryColor;
+            a.addEventListener('click', closeMenu);
+            linksContainer.appendChild(a);
+          }
+        });
+      }
+
+      // 2. Scrape CTA Buttons (marked with data-mobile-menu-copy)
+      const ctaElements = document.querySelectorAll('[data-mobile-menu-copy="true"]');
+      if (ctaElements.length > 0) {
+        // Add a refined separator
+        const separator = document.createElement('div');
+        separator.className = "w-8 h-[1px] bg-gray-200 my-8";
+        linksContainer.appendChild(separator);
+
+        ctaElements.forEach(cta => {
+          const clone = cta.cloneNode(true);
+
+          // Strip positioning/sizing classes
+          clone.classList.remove('hidden', 'md:block', 'md:flex', 'md:text-sm', 'text-xs', 'py-2', 'px-3', 'whitespace-nowrap');
+
+          // Apply mobile menu styles (Large, Clickable, Consistent)
+          // text-lg, font-semibold
+          clone.classList.add('text-lg', 'font-semibold', 'uppercase', 'tracking-wide', 'py-4', 'px-10', 'rounded-lg', 'mt-2', 'w-full', 'max-w-xs', 'text-center');
+
+          clone.style.display = 'block';
+          clone.style.margin = '0 auto 16px auto'; // Center manually
+
+          if (clone.tagName === 'A') {
+             clone.addEventListener('click', closeMenu);
+          }
+
+          linksContainer.appendChild(clone);
+        });
+      }
+    }
+
+    function openMenu() {
+      populateLinks();
+      overlay.classList.remove('hidden');
+      void overlay.offsetWidth; // Force reflow
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling background
+    }
+
+    function closeMenu() {
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        linksContainer.innerHTML = ''; // Clean up
+      }, 300);
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.mobile-menu-trigger')) {
+        openMenu();
+      }
+    });
+  })();
+</script>

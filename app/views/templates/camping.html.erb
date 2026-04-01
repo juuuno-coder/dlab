@@ -1,0 +1,140 @@
+<%# Camping Template - 와일드 캠프 (WILD CAMP) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-serif { font-family: 'Nanum Myeongjo', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .topo-pattern {
+    background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+    opacity: 0.1;
+  }
+</style>
+
+<div class="bg-[#1C1C1E] text-[#E5E5EA] font-sans selection:bg-[#FF4500] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 topo-pattern pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-12 md:px-12 bg-[#1C1C1E]/80 backdrop-blur-xl border-b border-white/5">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-6">
+         <span class="text-2xl">🔥</span>
+         <span class="font-semibold text-2xl tracking-[0.2em] uppercase text-white">Wild<span class="text-[#FF4500]">Camp</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[10px] font-semibold uppercase tracking-[0.4em] text-white/40">
+        <a href="#zones" class="hover:text-[#FF4500] transition">Basecamp</a>
+        <a href="#gear" class="hover:text-[#FF4500] transition">Gear</a>
+        <a href="#expedition" class="hover:text-[#FF4500] transition">Expedition</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-12 items-center">
+         <button onclick="toggleCampModal()" class="hidden md:block text-[10px] font-semibold uppercase tracking-[0.4em] text-white/40 hover:text-[#FF4500]" data-mobile-menu-copy="true">Explorer_ID</button>
+         <button class="hidden md:block bg-[#FF4500] text-white px-10 py-3.5 rounded-none font-semibold text-[10px] tracking-[0.4em] uppercase hover:bg-white hover:text-slate-900 transition shadow-2xl" data-mobile-menu-copy="true">
+           Join Adventure
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-20">
+    <div class="absolute inset-0 z-0">
+       <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1E] via-transparent to-[#1C1C1E]"></div>
+       <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=2400" alt="Camping" class="w-full h-full object-cover grayscale brightness-50 contrast-125">
+    </div>
+    
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-10 md:p-16 items-center">
+      <div class="space-y-12 text-center lg:text-left">
+        <div class="inline-flex items-center gap-6">
+           <span class="w-12 h-[2px] bg-[#FF4500]"></span>
+           <span class="text-[10px] font-semibold tracking-[0.6em] uppercase text-[#FF4500]">Raw Nature Experience</span>
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl md:text-[7.5rem] font-serif font-semibold leading-none tracking-tight text-white mobile-title">
+           야생의 본능,<br><span class="italic text-[#FF4500]">자유의 숨결.</span>
+        </h1>
+        
+        <p class="text-white/40 text-sm md:text-xl leading-[1.8] max-w-lg mx-auto lg:mx-0 mobile-desc">
+           도시의 소음이 멈추는 곳. 타닥거리는 장작 소리와 서늘한 밤공기만이 존재하는 와일드 캠프에서 진짜 나를 마주하십시오.
+        </p>
+        
+        <div class="pt-6 flex flex-col sm:flex-row gap-12 justify-center lg:justify-start">
+           <button class="px-14 py-6 bg-[#FF4500] text-white font-semibold text-[11px] tracking-[0.4em] uppercase hover:bg-white hover:text-slate-900 transition-all shadow-2xl">
+              Start Journey
+           </button>
+           <button class="px-14 py-6 border border-white/10 text-white font-semibold text-[11px] tracking-[0.4em] uppercase hover:bg-white/5 transition-all">
+              View Sites
+           </button>
+        </div>
+      </div>
+
+      <div class="relative hidden lg:block">
+         <div class="relative group cursor-pointer">
+            <div class="absolute -top-6 -right-6 w-full h-full border-2 border-[#FF4500]/20 pointer-events-none group-hover:top-0 group-hover:right-0 transition-all duration-500"></div>
+            <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=1200" alt="Bonfire" class="w-full aspect-square object-cover grayscale brightness-75 group-hover:grayscale-0 transition duration-1000 border border-white/10">
+            <div class="absolute bottom-10 left-10 bg-[#1C1C1E]/90 backdrop-blur-md p-8 border border-white/5">
+               <p class="text-[10px] font-semibold text-[#FF4500] uppercase tracking-[0.4em] mb-2">Into the Wild</p>
+               <h3 class="font-serif text-2xl font-semibold text-white italic">Disconnect to Reconnect.</h3>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="camp-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-950/95 backdrop-blur-2xl">
+    <div class="bg-[#2C2C2E] w-full max-w-sm p-6 md:p-16 shadow-2xl relative border border-[#FF4500]/20">
+      <div class="absolute top-0 left-0 w-full h-[2px] bg-[#FF4500]"></div>
+      <button onclick="toggleCampModal()" class="absolute top-12 right-12 text-white/20 hover:text-[#FF4500] transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl font-semibold tracking-[0.4em] text-white mb-3 uppercase italic">EXPLORER_ID</h2>
+        <p class="text-[9px] text-[#FF4500] font-semibold tracking-[0.3em] uppercase">Adventure Access Pass</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="space-y-3">
+           <p class="text-[9px] font-semibold text-white/20 uppercase tracking-[0.2em] ml-1">Reservation Code</p>
+           <input type="text" placeholder="WILD-XXXX-XXXX" class="w-full bg-[#1C1C1E] border border-white/5 py-6 px-8 outline-none focus:border-[#FF4500] transition text-[11px] font-semibold tracking-[0.2em] text-white uppercase">
+        </div>
+        <button class="w-full bg-[#FF4500] text-white py-6 text-[10px] tracking-[0.4em] font-semibold uppercase hover:bg-white hover:text-slate-900 transition shadow-xl shadow-[#FF4500]/10">
+           Enter Basecamp
+        </button>
+        <div class="flex justify-center gap-14 pt-4">
+           <a href="#" class="text-[9px] text-white/20 tracking-[0.3em] font-semibold uppercase hover:text-[#FF4500] transition">My Gear</a>
+           <a href="#" class="text-[9px] text-white/20 tracking-[0.3em] font-semibold uppercase hover:text-[#FF4500] transition">Map</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-24 md:py-40 bg-[#1C1C1E] text-center px-6 border-t border-white/5">
+     <div class="inline-flex items-center gap-14 mb-12">
+        <span class="font-semibold text-2xl text-white tracking-[0.4em] uppercase italic">WILD<span class="text-[#FF4500]">CAMP</span></span>
+        <div class="w-12 h-[1px] bg-white/10"></div>
+        <span class="text-[10px] font-semibold text-white/20 tracking-[0.6em] uppercase">Survival & Leisure</span>
+     </div>
+     <p class="text-[10px] text-white/10 tracking-[1em] uppercase px-6">© 2024 WILD CAMP. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleCampModal() {
+      const modal = document.getElementById('camp-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>

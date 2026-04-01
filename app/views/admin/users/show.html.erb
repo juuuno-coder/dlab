@@ -1,0 +1,77 @@
+<div style="margin-bottom: var(--space-6);">
+  <%= link_to "← 목록으로", admin_users_path, style: "color: var(--color-gray-500); text-decoration: none; display: inline-flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4);" %>
+  <div style="display: flex; justify-content: space-between; align-items: start;">
+    <div>
+      <h1 style="font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--space-2);"><%= @user.name || @user.email.split("@").first %></h1>
+      <p style="color: var(--color-gray-500);"><%= @user.email %></p>
+    </div>
+    <div style="display: flex; gap: var(--space-2);">
+      <%= link_to "정보 수정", edit_admin_user_path(@user), class: "btn btn-outline" %>
+      <%= button_to "회원 삭제", admin_user_path(@user), method: :delete, data: { confirm: "정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다." }, class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-6);">
+  <!-- 기본 정보 -->
+  <div class="card" style="height: fit-content;">
+    <h2 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-4);">기본 정보</h2>
+    <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+      <div>
+        <label style="display: block; font-size: var(--text-sm); color: var(--color-gray-500); margin-bottom: var(--space-1);">가입일</label>
+        <div style="font-weight: 500;"><%= @user.created_at.strftime("%Y년 %m월 %d일 %H:%M") %></div>
+      </div>
+      <div>
+        <label style="display: block; font-size: var(--text-sm); color: var(--color-gray-500); margin-bottom: var(--space-1);">마지막 로그인</label>
+        <div style="font-weight: 500;"><%= @user.last_sign_in_at&.strftime("%Y년 %m월 %d일 %H:%M") || "-" %></div>
+      </div>
+      <div>
+        <label style="display: block; font-size: var(--text-sm); color: var(--color-gray-500); margin-bottom: var(--space-1);">가입 경로</label>
+        <div style="font-weight: 500;"><%= @user.provider || "이메일" %></div>
+      </div>
+      <div>
+        <label style="display: block; font-size: var(--text-sm); color: var(--color-gray-500); margin-bottom: var(--space-1);">주문 횟수</label>
+        <div style="font-weight: 500;"><%= @orders.count %>회</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 주문 내역 -->
+  <div class="card">
+    <h2 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-4);">주문 내역</h2>
+    <% if @orders.any? %>
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--color-gray-200);">
+            <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">주문번호</th>
+            <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">일자</th>
+            <th style="text-align: left; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">상태</th>
+            <th style="text-align: right; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">금액</th>
+            <th style="text-align: right; padding: var(--space-4); color: var(--color-gray-500); font-size: var(--text-sm);">관리</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr style="border-bottom: 1px solid var(--color-gray-100);">
+              <td style="padding: var(--space-4);">#<%= order.id %></td>
+              <td style="padding: var(--space-4);"><%= order.created_at.strftime("%Y-%m-%d") %></td>
+              <td style="padding: var(--space-4);">
+                <span class="badge <%= order.status == 'paid' || order.status == 'completed' ? 'badge-success' : 'badge-secondary' %>">
+                  <%= order.status %>
+                </span>
+              </td>
+              <td style="padding: var(--space-4); text-align: right;"><%= number_to_currency(order.total_amount, unit: "₩", precision: 0) %></td>
+              <td style="padding: var(--space-4); text-align: right;">
+                <%= link_to "보기", admin_order_path(order), class: "text-primary hover:underline" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div style="padding: var(--space-8); text-align: center; color: var(--color-gray-500);">
+        주문 내역이 없습니다.
+      </div>
+    <% end %>
+  </div>
+</div>

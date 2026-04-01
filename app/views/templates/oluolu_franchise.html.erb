@@ -1,0 +1,139 @@
+<%# Dining Template - 온 다이닝 (ON DINING) %>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  
+  .font-serif { font-family: 'Nanum Myeongjo', serif; }
+  .font-sans { font-family: 'Noto Sans KR', sans-serif; }
+
+  @media (max-width: 768px) {
+    .mobile-desc { font-size: 14px !important; line-height: 1.8; }
+    .mobile-title { font-size: 40px !important; }
+  }
+
+  .linen-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/linen.png");
+    opacity: 0.1;
+  }
+</style>
+
+<div class="bg-[#18181B] text-[#E4E4E7] font-sans selection:bg-[#BE123C] selection:text-white min-h-screen overflow-x-hidden relative">
+  <div class="fixed inset-0 linen-texture pointer-events-none"></div>
+
+  <!-- Nav -->
+  <nav class="fixed w-full z-50 px-8 py-12 md:px-12 bg-[#18181B]/80 backdrop-blur-xl border-b border-white/5">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center flex-nowrap">
+      <div class="flex items-center gap-10">
+         <span class="font-serif text-2xl tracking-[0.4em] font-semibold uppercase">ON<span class="text-[#BE123C]">DINING</span></span>
+      </div>
+      
+      <div class="hidden md:flex gap-14 text-[10px] font-semibold uppercase tracking-[0.4em] text-white/40">
+        <a href="#chef" class="hover:text-[#BE123C] transition">Chef</a>
+        <a href="#course" class="hover:text-[#BE123C] transition">Signature</a>
+        <a href="#reservation" class="hover:text-[#BE123C] transition">Reservation</a>
+      </div>
+           <button class="mobile-menu-trigger md:hidden ml-auto text-2xl focus:outline-none" style="color: inherit;">
+             <i class="fas fa-bars"></i>
+           </button>
+
+      
+      <div class="flex-nowrap shrink-0 flex gap-12 items-center">
+         <button onclick="toggleDiningModal()" class="hidden md:block text-[10px] font-semibold uppercase tracking-[0.4em] text-white/40 hover:text-[#BE123C]" data-mobile-menu-copy="true">Member_Table</button>
+         <button class="hidden md:block bg-[#BE123C] text-white px-10 py-3.5 rounded-none font-semibold text-[10px] tracking-[0.4em] uppercase hover:bg-white hover:text-slate-900 transition shadow-2xl" data-mobile-menu-copy="true">
+           Book Experience
+         </button>
+      </div>
+    </div>
+
+      <%= render partial: 'templates/shared/mobile_menu_overlay' %></nav>
+
+  <!-- Hero -->
+  <header class="min-h-screen relative flex items-center justify-center pt-20">
+    <div class="absolute inset-0 z-0">
+       <div class="absolute inset-0 bg-gradient-to-t from-[#18181B] via-transparent to-[#18181B]"></div>
+       <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=2400" alt="Fine Dining" class="w-full h-full object-cover grayscale brightness-50 contrast-125">
+    </div>
+    
+    <div class="container mx-auto px-3 md:px-6 relative z-10 grid lg:grid-cols-2 gap-10 md:p-16 items-center">
+      <div class="space-y-12 text-center lg:text-left">
+        <div class="inline-flex items-center gap-6">
+           <span class="w-12 h-[2px] bg-[#BE123C]"></span>
+           <span class="text-[10px] font-semibold tracking-[0.6em] uppercase text-[#BE123C]">Contemporary Gastronomy</span>
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl md:text-[7.5rem] font-serif font-semibold leading-none tracking-tight text-white mobile-title">
+           시간을 요리하는,<br><span class="italic text-[#BE123C]">미학의 정찬.</span>
+        </h1>
+        
+        <p class="text-white/40 text-sm md:text-xl leading-[1.8] max-w-lg mx-auto lg:mx-0 mobile-desc">
+           접시 위에 피어나는 계절의 철학. 엄선된 식재료와 셰프의 집요한 탐구 정신으로 당신의 미각에 완전한 서사를 완성합니다.
+        </p>
+        
+        <div class="pt-6 flex flex-col sm:flex-row gap-12 justify-center lg:justify-start">
+           <button class="px-14 py-6 bg-[#BE123C] text-white font-semibold text-[11px] tracking-[0.4em] uppercase hover:bg-white hover:text-slate-900 transition-all shadow-2xl">
+              Explore Tasting Menu
+           </button>
+           <button class="px-14 py-6 border border-white/10 text-white font-semibold text-[11px] tracking-[0.4em] uppercase hover:bg-white/5 transition-all">
+              Private Dining
+           </button>
+        </div>
+      </div>
+
+      <div class="relative hidden lg:block">
+         <div class="relative group cursor-pointer">
+            <div class="absolute -top-6 -right-6 w-full h-full border border-[#BE123C]/30 pointer-events-none group-hover:top-0 group-hover:right-0 transition-all duration-500"></div>
+            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1200" alt="Dining Experience" class="w-full aspect-square object-cover grayscale brightness-75 group-hover:grayscale-0 transition duration-1000">
+            <div class="absolute bottom-10 -left-10 bg-[#18181B]/90 backdrop-blur-md p-10 border border-white/5 shadow-2xl">
+               <p class="text-[10px] font-semibold text-[#BE123C] uppercase tracking-[0.4em] mb-4">Michelin Guided</p>
+               <h3 class="font-serif text-2xl font-semibold text-white italic">Art on the Plate.</h3>
+            </div>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="dining-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-950/95 backdrop-blur-2xl">
+    <div class="bg-[#27272A] w-full max-w-sm p-6 md:p-16 shadow-2xl relative border border-[#BE123C]/20">
+      <div class="absolute top-0 left-0 w-full h-[2px] bg-[#BE123C]"></div>
+      <button onclick="toggleDiningModal()" class="absolute top-12 right-12 text-white/20 hover:text-[#BE123C] transition text-2xl font-light">&times;</button>
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl font-semibold tracking-[0.4em] text-white mb-3 uppercase italic">GOURMET_ID</h2>
+        <p class="text-[9px] text-[#BE123C] font-semibold tracking-[0.3em] uppercase">Private Society Access</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="space-y-3">
+           <p class="text-[9px] font-semibold text-white/20 uppercase tracking-[0.2em] ml-1">Reservation No.</p>
+           <input type="text" placeholder="DINING-CODE" class="w-full bg-[#18181B] border border-white/5 py-6 px-8 outline-none focus:border-[#BE123C] transition text-[11px] font-semibold tracking-[0.2em] text-white uppercase">
+        </div>
+        <button class="w-full bg-[#BE123C] text-white py-6 text-[10px] tracking-[0.4em] font-semibold uppercase hover:bg-white hover:text-slate-900 transition shadow-xl shadow-[#BE123C]/10">
+           Verify & Enter
+        </button>
+        <div class="flex justify-center gap-14 pt-4">
+           <a href="#" class="text-[9px] text-white/20 tracking-[0.3em] font-semibold uppercase hover:text-[#BE123C] transition">Membership</a>
+           <a href="#" class="text-[9px] text-white/20 tracking-[0.3em] font-semibold uppercase hover:text-[#BE123C] transition">Concierge</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-24 md:py-40 bg-[#18181B] text-center px-6 border-t border-white/5">
+     <div class="inline-flex items-center gap-14 mb-12">
+        <span class="font-semibold text-2xl text-white tracking-[0.4em] uppercase italic">ON<span class="text-[#BE123C]">DINING</span></span>
+        <div class="w-12 h-[1px] bg-white/10"></div>
+        <span class="text-[10px] font-semibold text-white/20 tracking-[0.6em] uppercase">The Art of Dining</span>
+     </div>
+     <p class="text-[10px] text-white/10 tracking-[1em] uppercase px-6">© 2024 ON DINING SEOUL. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    function toggleDiningModal() {
+      const modal = document.getElementById('dining-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+
+</div>
