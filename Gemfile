@@ -12,7 +12,7 @@ gem "propshaft"
 
 # Use PostgreSQL in production
 group :production do
-  gem "pg", "~> 1.1"
+  gem "pg", "~> 1.6"
   gem "puma", ">= 5.0"
   gem "activerecord-nulldb-adapter"  # Allows builds without database connection
 end
